@@ -108,8 +108,8 @@
 						<form class="form-horizontal form" role="form" >
 
 							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">基础配置</p>    <#-- 基础信息 -->
-							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">执行器<font color="red">*</font></label>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">执行器<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="jobGroup" >
 										<#list JobGroupList as group>
@@ -118,20 +118,20 @@
 									</select>
 								</div>
 
-								<label for="lastname" class="col-sm-2 control-label">任务描述<font color="red">*</font></label>
+								<label for="lastname" class="col-sm-2 col-form-label">任务描述<font color="red">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="jobDesc" placeholder="请输入任务描述" maxlength="50" ></div>
 							</div>
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">负责人<font color="red">*</font></label>
+							<div class="row mb-3">
+								<label for="lastname" class="col-sm-2 col-form-label">负责人<font color="red">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="author" placeholder="请输入负责人" maxlength="50" ></div>
-								<label for="lastname" class="col-sm-2 control-label">报警邮件<font color="black">*</font></label>
+								<label for="lastname" class="col-sm-2 col-form-label">报警邮件<font color="black">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="alarmEmail" placeholder="请输入报警邮件，多个邮件地址则逗号分隔" maxlength="100" ></div>
 							</div>
 
 							<br>
 							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">调度配置</p>    <#-- 调度 -->
-							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">调度类型<font color="red">*</font></label>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">调度类型<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control scheduleType" name="scheduleType" >
 										<#list ScheduleTypeEnum as item>
@@ -143,16 +143,16 @@
 								<input type="hidden" name="scheduleConf" />
 								<div class="schedule_conf schedule_conf_NONE" style="display: none" >
 								</div>
-								<div class="schedule_conf schedule_conf_CRON" >
-									<label for="lastname" class="col-sm-2 control-label">Cron<font color="red">*</font></label>
+								<div class="schedule_conf schedule_conf_CRON" style="display: contents" >
+									<label for="lastname" class="col-sm-2 col-form-label">Cron<font color="red">*</font></label>
 									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_CRON" placeholder="请输入Cron" maxlength="128" ></div>
 								</div>
 								<div class="schedule_conf schedule_conf_FIX_RATE" style="display: none" >
-									<label for="lastname" class="col-sm-2 control-label">固定速度<font color="red">*</font></label>
+									<label for="lastname" class="col-sm-2 col-form-label">固定速度<font color="red">*</font></label>
 									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_FIX_RATE" placeholder="请输入 （ Second ）" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
 								</div>
 								<div class="schedule_conf schedule_conf_FIX_DELAY" style="display: none" >
-									<label for="lastname" class="col-sm-2 control-label">固定延迟<font color="red">*</font></label>
+									<label for="lastname" class="col-sm-2 col-form-label">固定延迟<font color="red">*</font></label>
 									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_FIX_DELAY" placeholder="请输入 （ Second ）" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
 								</div>
 							</div>
@@ -160,8 +160,8 @@
 							<br>
 							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">任务配置</p>    <#-- 任务配置 -->
 
-							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">运行模式<font color="red">*</font></label>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">运行模式<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control glueType" name="glueType" >
 										<#list GlueTypeEnum as item>
@@ -169,12 +169,12 @@
 										</#list>
 									</select>
 								</div>
-								<label for="firstname" class="col-sm-2 control-label">JobHandler<font color="red">*</font></label>
+								<label for="firstname" class="col-sm-2 col-form-label">JobHandler<font color="red">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="executorHandler" placeholder="请输入JobHandler" maxlength="100" ></div>
 							</div>
 
-							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">任务参数<font color="black">*</font></label>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">任务参数<font color="black">*</font></label>
 								<div class="col-sm-10">
 									<textarea class="textarea form-control" name="executorParam" placeholder="请输入任务参数" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
 								</div>
@@ -183,8 +183,8 @@
 							<br>
 							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">高级配置</p>    <#-- 高级配置 -->
 
-							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">路由策略<font color="black">*</font></label>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">路由策略<font color="black">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="executorRouteStrategy" >
 										<#list ExecutorRouteStrategyEnum as item>
@@ -193,12 +193,12 @@
 									</select>
 								</div>
 
-								<label for="lastname" class="col-sm-2 control-label">子任务ID<font color="black">*</font></label>
+								<label for="lastname" class="col-sm-2 col-form-label">子任务ID<font color="black">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="childJobId" placeholder="请输入子任务的任务ID,如存在多个则逗号分隔" maxlength="100" ></div>
 							</div>
 
-							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">调度过期策略<font color="black">*</font></label>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">调度过期策略<font color="black">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="misfireStrategy" >
 										<#list MisfireStrategyEnum as item>
@@ -207,7 +207,7 @@
 									</select>
 								</div>
 
-								<label for="firstname" class="col-sm-2 control-label">阻塞处理策略<font color="black">*</font></label>
+								<label for="firstname" class="col-sm-2 col-form-label">阻塞处理策略<font color="black">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="executorBlockStrategy" >
 										<#list ExecutorBlockStrategyEnum as item>
@@ -217,16 +217,16 @@
 								</div>
 							</div>
 
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">任务超时时间<font color="black">*</font></label>
+							<div class="row mb-3">
+								<label for="lastname" class="col-sm-2 col-form-label">任务超时时间<font color="black">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="executorTimeout" placeholder="任务超时时间，单位秒，大于零时生效" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
-								<label for="lastname" class="col-sm-2 control-label">失败重试次数<font color="black">*</font></label>
+								<label for="lastname" class="col-sm-2 col-form-label">失败重试次数<font color="black">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="executorFailRetryCount" placeholder="失败重试次数，大于零时生效" maxlength="4" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
 							</div>
 
 							<hr>
-							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-6">
+							<div class="row mb-3">
+								<div class="offset-sm-3 col-sm-6">
 									<button type="submit" class="btn btn-primary"  >保存</button>
 									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 								</div>
@@ -368,8 +368,8 @@ exit 0
 						<form class="form-horizontal form" role="form" >
 
 							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">基础配置</p>    <#-- 基础信息 -->
-							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">执行器<font color="red">*</font></label>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">执行器<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="jobGroup" >
 										<#list JobGroupList as group>
@@ -378,20 +378,20 @@ exit 0
 									</select>
 								</div>
 
-								<label for="lastname" class="col-sm-2 control-label">任务描述<font color="red">*</font></label>
+								<label for="lastname" class="col-sm-2 col-form-label">任务描述<font color="red">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="jobDesc" placeholder="请输入任务描述" maxlength="50" ></div>
 							</div>
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">负责人<font color="red">*</font></label>
+							<div class="row mb-3">
+								<label for="lastname" class="col-sm-2 col-form-label">负责人<font color="red">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="author" placeholder="请输入负责人" maxlength="50" ></div>
-								<label for="lastname" class="col-sm-2 control-label">报警邮件<font color="black">*</font></label>
+								<label for="lastname" class="col-sm-2 col-form-label">报警邮件<font color="black">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="alarmEmail" placeholder="请输入报警邮件，多个邮件地址则逗号分隔" maxlength="100" ></div>
 							</div>
 
 							<br>
 							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">调度配置</p>    <#-- 调度配置 -->
-							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">调度类型<font color="red">*</font></label>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">调度类型<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control scheduleType" name="scheduleType" >
 										<#list ScheduleTypeEnum as item>
@@ -403,16 +403,16 @@ exit 0
 								<input type="hidden" name="scheduleConf" />
 								<div class="schedule_conf schedule_conf_NONE" style="display: none" >
 								</div>
-								<div class="schedule_conf schedule_conf_CRON" >
-									<label for="lastname" class="col-sm-2 control-label">Cron<font color="red">*</font></label>
+								<div class="schedule_conf schedule_conf_CRON" style="display: contents" >
+									<label for="lastname" class="col-sm-2 col-form-label">Cron<font color="red">*</font></label>
 									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_CRON" placeholder="请输入Cron" maxlength="128" ></div>
 								</div>
 								<div class="schedule_conf schedule_conf_FIX_RATE" style="display: none" >
-									<label for="lastname" class="col-sm-2 control-label">固定速度<font color="red">*</font></label>
+									<label for="lastname" class="col-sm-2 col-form-label">固定速度<font color="red">*</font></label>
 									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_FIX_RATE" placeholder="请输入 （ Second ）" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
 								</div>
 								<div class="schedule_conf schedule_conf_FIX_DELAY" style="display: none" >
-									<label for="lastname" class="col-sm-2 control-label">固定延迟<font color="red">*</font></label>
+									<label for="lastname" class="col-sm-2 col-form-label">固定延迟<font color="red">*</font></label>
 									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_FIX_DELAY" placeholder="请输入 （ Second ）" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
 								</div>
 							</div>
@@ -420,8 +420,8 @@ exit 0
 							<br>
 							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">任务配置</p>    <#-- 任务配置 -->
 
-							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">运行模式<font color="red">*</font></label>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">运行模式<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control glueType" name="glueType" disabled >
 										<#list GlueTypeEnum as item>
@@ -429,12 +429,12 @@ exit 0
 										</#list>
 									</select>
 								</div>
-								<label for="firstname" class="col-sm-2 control-label">JobHandler<font color="red">*</font></label>
+								<label for="firstname" class="col-sm-2 col-form-label">JobHandler<font color="red">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="executorHandler" placeholder="请输入JobHandler" maxlength="100" ></div>
 							</div>
 
-							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">任务参数<font color="black">*</font></label>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">任务参数<font color="black">*</font></label>
 								<div class="col-sm-10">
 									<textarea class="textarea form-control" name="executorParam" placeholder="请输入任务参数" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
 								</div>
@@ -443,8 +443,8 @@ exit 0
 							<br>
 							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">高级配置</p>    <#-- 高级配置 -->
 
-							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">路由策略<font color="red">*</font></label>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">路由策略<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="executorRouteStrategy" >
 										<#list ExecutorRouteStrategyEnum as item>
@@ -453,12 +453,12 @@ exit 0
 									</select>
 								</div>
 
-								<label for="lastname" class="col-sm-2 control-label">子任务ID<font color="black">*</font></label>
+								<label for="lastname" class="col-sm-2 col-form-label">子任务ID<font color="black">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="childJobId" placeholder="请输入子任务的任务ID,如存在多个则逗号分隔" maxlength="100" ></div>
 							</div>
 
-							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">调度过期策略<font color="black">*</font></label>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">调度过期策略<font color="black">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="misfireStrategy" >
 										<#list MisfireStrategyEnum as item>
@@ -467,7 +467,7 @@ exit 0
 									</select>
 								</div>
 
-								<label for="firstname" class="col-sm-2 control-label">阻塞处理策略<font color="red">*</font></label>
+								<label for="firstname" class="col-sm-2 col-form-label">阻塞处理策略<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="executorBlockStrategy" >
 										<#list ExecutorBlockStrategyEnum as item>
@@ -477,16 +477,16 @@ exit 0
 								</div>
 							</div>
 
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">任务超时时间<font color="black">*</font></label>
+							<div class="row mb-3">
+								<label for="lastname" class="col-sm-2 col-form-label">任务超时时间<font color="black">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="executorTimeout" placeholder="任务超时时间，单位秒，大于零时生效" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
-								<label for="lastname" class="col-sm-2 control-label">失败重试次数<font color="black">*</font></label>
+								<label for="lastname" class="col-sm-2 col-form-label">失败重试次数<font color="black">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="executorFailRetryCount" placeholder="失败重试次数，大于零时生效" maxlength="4" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
 							</div>
 
 							<hr>
-							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-6">
+							<div class="row mb-3">
+								<div class="offset-sm-3 col-sm-6">
 									<button type="submit" class="btn btn-primary"  >保存</button>
 									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 									<input type="hidden" name="id" >
@@ -508,21 +508,21 @@ exit 0
 					</div>
 					<div class="modal-body">
 						<form class="form-horizontal form" role="form" >
-							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">任务参数<font color="black">*</font></label>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">任务参数<font color="black">*</font></label>
 								<div class="col-sm-10">
 									<textarea class="textarea form-control" name="executorParam" placeholder="请输入任务参数" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">机器地址<font color="black">*</font></label>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">机器地址<font color="black">*</font></label>
 								<div class="col-sm-10">
 									<textarea class="textarea form-control" name="addressList" placeholder="请输入本次执行的机器地址，为空则从执行器获取" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
 								</div>
 							</div>
 							<hr>
-							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-6">
+							<div class="row mb-3">
+								<div class="offset-sm-3 col-sm-6">
 									<button type="button" class="btn btn-primary ok" >保存</button>
 									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 									<input type="hidden" name="id" >
@@ -1122,7 +1122,7 @@ exit 0
 		$(".scheduleType").change(function(){
 			var scheduleType = $(this).val();
 			$(this).parents("form").find(".schedule_conf").hide();
-			$(this).parents("form").find(".schedule_conf_" + scheduleType).show();
+			$(this).parents("form").find(".schedule_conf_" + scheduleType).css("display", "contents");
 
 		});
 

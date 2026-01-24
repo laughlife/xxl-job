@@ -36,7 +36,6 @@
                     <li class="dropdown">
                         <a href="javascript:" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="font-weight: bold;">
                             ${I18n.system_welcome}：${xxl_sso_user.userName!}
-                            <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li id="updatePwd" >
@@ -136,7 +135,7 @@
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i></button>
             <!-- opt -->
             <div class="btn-group roll-nav roll-right">
-                <button class="dropdown-toggle" data-bs-toggle="dropdown">${I18n.tab_opt}<span class="caret"></span></button>
+                <button class="dropdown-toggle" data-bs-toggle="dropdown">${I18n.tab_opt}</button>
                 <ul role="menu" class="dropdown-menu dropdown-menu-end">
                     <li class="tabCloseCurrent"><a class="dropdown-item">${I18n.tab_close_current}</a></li>
                     <li class="J_tabCloseOther"><a class="dropdown-item">${I18n.tab_close_other}</a></li>

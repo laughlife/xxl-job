@@ -51,7 +51,7 @@
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">${I18n.jobinfo_glue_rollback} <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">${I18n.jobinfo_glue_rollback}</a>
 							<ul class="dropdown-menu" role="menu">
 								<li <#if jobLogGlues?exists && jobLogGlues?size gt 0 >style="display: none;"</#if> >
 									<a href="javascript:;" class="source_version" version="version_now" glueType="${jobInfo.glueType}" >

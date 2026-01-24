@@ -12,13 +12,13 @@
             var cronContainer = $("<div/>", { id: "CronContainer", style: "display:none;width:300px;height:300px;" });
             var mainDiv = $("<div/>", { id: "CronGenMainDiv", style: "width:410px;height:420px;" });
             var topMenu = $("<ul/>", { "class": "nav nav-tabs", id: "CronGenTabs" });
-            $('<li/>', { 'class': 'active' }).html($('<a id="SecondlyTab" href="#Secondly">秒</a>')).appendTo(topMenu);
-            $('<li/>').html($('<a id="MinutesTab" href="#Minutes">分钟</a>')).appendTo(topMenu);
-            $('<li/>').html($('<a id="HourlyTab" href="#Hourly">小时</a>')).appendTo(topMenu);
-            $('<li/>').html($('<a id="DailyTab" href="#Daily">日</a>')).appendTo(topMenu);
-            $('<li/>').html($('<a id="MonthlyTab" href="#Monthly">月</a>')).appendTo(topMenu);
-            $('<li/>').html($('<a id="WeeklyTab" href="#Weekly">周</a>')).appendTo(topMenu);
-            $('<li/>').html($('<a id="YearlyTab" href="#Yearly">年</a>')).appendTo(topMenu);
+            $('<li/>', { 'class': 'nav-item' }).html($('<a id="SecondlyTab" class="nav-link active" href="#Secondly" data-bs-toggle="tab">秒</a>')).appendTo(topMenu);
+            $('<li/>', { 'class': 'nav-item' }).html($('<a id="MinutesTab" class="nav-link" href="#Minutes" data-bs-toggle="tab">分钟</a>')).appendTo(topMenu);
+            $('<li/>', { 'class': 'nav-item' }).html($('<a id="HourlyTab" class="nav-link" href="#Hourly" data-bs-toggle="tab">小时</a>')).appendTo(topMenu);
+            $('<li/>', { 'class': 'nav-item' }).html($('<a id="DailyTab" class="nav-link" href="#Daily" data-bs-toggle="tab">日</a>')).appendTo(topMenu);
+            $('<li/>', { 'class': 'nav-item' }).html($('<a id="MonthlyTab" class="nav-link" href="#Monthly" data-bs-toggle="tab">月</a>')).appendTo(topMenu);
+            $('<li/>', { 'class': 'nav-item' }).html($('<a id="WeeklyTab" class="nav-link" href="#Weekly" data-bs-toggle="tab">周</a>')).appendTo(topMenu);
+            $('<li/>', { 'class': 'nav-item' }).html($('<a id="YearlyTab" class="nav-link" href="#Yearly" data-bs-toggle="tab">年</a>')).appendTo(topMenu);
             $(topMenu).appendTo(mainDiv);
 
             //create what's inside the tabs
@@ -340,27 +340,27 @@
             var $i = $("<input>", { type: 'text', placeholder: 'cron表达式...', name: 'cronGen_display' }).addClass("form-control").val($(that).val());
             $i.appendTo($g);
             // Add the button
-            var $b = $("<button class=\"btn btn-default\"><i class=\"fa fa-edit\"></i></button>");
-            // Put button inside span
-            var $s = $("<span>").addClass("input-group-btn");
-            $b.appendTo($s);
-            $s.appendTo($g);
+            var $b = $("<button class=\"btn btn-secondary\" type=\"button\"><i class=\"fa fa-edit\"></i></button>");
+            $b.appendTo($g);
 
             $(this).before($g);
 
             inputElement = that;
             displayElement = $i;
 
-            $b.popover({
+            // Bootstrap 5 Popover initialization
+            var popoverInstance = new bootstrap.Popover($b[0], {
                 html: true,
+                container: $b.closest('.modal-body')[0] || 'body',
                 content: function () {
                     return $(cronContainer).html();
                 },
-                template: '<div class="popover" style="max-width:500px !important; width:425px;left:-341.656px;"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
-                sanitize:false,
+                template: '<div class="popover" style="max-width:500px !important; width:425px;"><div class="popover-arrow"></div><div class="popover-body"></div></div>',
+                sanitize: false,
                 placement: options.direction
+            });
 
-            }).on('click', function (e) {
+            $b.on('click', function (e) {
                 if (inputElement.val().trim() !== '') {
                     refreshRunTime();
                 }
@@ -379,10 +379,12 @@
 
                 $('#CronGenTabs a').click(function (e) {
                     e.preventDefault();
-                    $(this).tab('show');
+                    // Bootstrap 5 Tab activation
+                    var tabTrigger = new bootstrap.Tab(this);
+                    tabTrigger.show();
                     //generate();
                 });
-                $("#CronGenMainDiv select,input").change(function (e) {
+                $("#CronGenMainDiv select, #CronGenMainDiv input").change(function (e) {
                     generate();
                     refreshRunTime();
                 });
@@ -465,7 +467,7 @@
 
     var generate = function () {
 
-        var activeTab = $("ul#CronGenTabs li.active a").prop("id");
+        var activeTab = $("ul#CronGenTabs li a.active").prop("id");
         if (activeTab == undefined) {
             return;
         }

@@ -6892,11 +6892,11 @@
         select: 'form-control'
       },
       html: {
-        dropdownCaret: '<span class="caret"></span>',
+        dropdownCaret: '',
         icon: '<i class="%s %s"></i>',
-        inputGroup: '<div class="input-group">%s<span class="input-group-btn">%s</span></div>',
+        inputGroup: '<div class="input-group">%s%s</div>',
         pageDropdown: ['<ul class="dropdown-menu" role="menu">', '</ul>'],
-        pageDropdownItem: '<li role="menuitem" class="%s"><a href="#">%s</a></li>',
+        pageDropdownItem: '<li role="menuitem" class="%s"><a class="dropdown-item" href="#">%s</a></li>',
         pagination: ['<ul class="pagination%s">', '</ul>'],
         paginationItem: '<li class="page-item%s"><a class="page-link" aria-label="%s" href="javascript:void(0)">%s</a></li>',
         searchButton: '<button class="%s" type="button" name="search" title="%s">%s %s</button>',
@@ -6925,7 +6925,7 @@
         select: 'form-control'
       },
       html: {
-        dropdownCaret: '<span class="caret"></span>',
+        dropdownCaret: '',
         icon: '<i class="%s %s"></i>',
         inputGroup: '<div class="input-group">%s<div class="input-group-append">%s</div></div>',
         pageDropdown: ['<div class="dropdown-menu">', '</div>'],
@@ -6959,7 +6959,7 @@
       },
       html: {
         dataToggle: 'data-bs-toggle',
-        dropdownCaret: '<span class="caret"></span>',
+        dropdownCaret: '',
         icon: '<i class="%s %s"></i>',
         inputGroup: '<div class="input-group">%s%s</div>',
         pageDropdown: ['<div class="dropdown-menu">', '</div>'],
