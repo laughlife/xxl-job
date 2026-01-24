@@ -6,7 +6,8 @@
 
 	<!-- 1-style start -->
 	<@netCommon.commonStyle />
-	<link rel="stylesheet" href="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.min.css">
+	<link rel="stylesheet" href="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.css">
+	<link href="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/css/tom-select.bootstrap4.min.css" rel="stylesheet">
 	<!-- 1-style end -->
 
 </head>
@@ -21,7 +22,7 @@
 			<div class="box-body">
 				<div class="row" id="data_filter" >
 
-					<div class="col-xs-3">
+					<div class="col-3">
 						<div class="input-group">
 							<span class="input-group-addon">执行器</span>
 							<select class="form-control" id="jobGroup" >
@@ -31,7 +32,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-xs-1">
+					<div class="col-1">
 						<div class="input-group">
 							<select class="form-control" id="triggerStatus" >
 								<option value="-1" >全部</option>
@@ -40,27 +41,27 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-xs-2">
+					<div class="col-2">
 						<div class="input-group">
 							<input type="text" class="form-control" id="jobDesc" placeholder="请输入任务描述" >
 						</div>
 					</div>
-					<div class="col-xs-2">
+					<div class="col-2">
 						<div class="input-group">
 							<input type="text" class="form-control" id="executorHandler" placeholder="请输入JobHandler" >
 						</div>
 					</div>
-					<div class="col-xs-2">
+					<div class="col-2">
 						<div class="input-group">
 							<input type="text" class="form-control" id="author" placeholder="请输入负责人" >
 						</div>
 					</div>
 
-					<div class="col-xs-1">
+					<div class="col-1">
 						<button class="btn btn-block btn-primary searchBtn" >搜索</button>
 					</div>
-					<div class="col-xs-1">
-						<button class="btn btn-block btn-default resetBtn" >重置</button>
+					<div class="col-1">
+						<button class="btn btn-block btn-secondary resetBtn" >重置</button>
 					</div>
 				</div>
 			</div>
@@ -68,7 +69,7 @@
 
 		<#-- 数据表格区域 -->
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-12">
 				<div class="box">
 					<div class="box-header pull-left" id="data_operation" >
 						<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>新增</button>                        <#-- add -->
@@ -76,14 +77,14 @@
                         <button class="btn btn-sm btn-warning selectOnlyOne glue_ide" type="button">GLUE IDE</button>									        <#-- GLUE IDE：'BEAN' != row.glueType -->
 						<button class="btn btn-sm btn-danger selectOnlyOne delete" type="button"><i class="fa fa-remove "></i>删除</button>   <#-- delete -->
 						｜
-						<button class="btn btn-sm btn-default selectOnlyOne job_copy" type="button">复制</button>
+						<button class="btn btn-sm btn-secondary selectOnlyOne job_copy" type="button">复制</button>
 						<button class="btn btn-sm btn-warning selectOnlyOne job_resume" type="button">启动</button>				<#-- 启动 -->
 						<button class="btn btn-sm btn-warning selectOnlyOne job_pause" type="button">停止</button>					<#-- 停止 -->
 						｜
 						<button class="btn btn-sm btn-primary selectOnlyOne job_trigger" type="button">执行一次</button>					<#-- 执行一次 -->
 						<button class="btn btn-sm btn-primary selectOnlyOne job_log" type="button">查询日志</button>						<#-- 执行日志：base_url +'/joblog?jobId='+ row.id -->
-						<button class="btn btn-sm btn-default selectOnlyOne job_registryinfo" type="button">注册节点</button>	<#-- 注册节点 -->
-						<button class="btn btn-sm btn-default selectOnlyOne job_next_time" type="button">下次执行时间</button>			<#-- 下次执行时间：row.scheduleType == 'CRON' || row.scheduleType == 'FIX_RATE' -->
+						<button class="btn btn-sm btn-secondary selectOnlyOne job_registryinfo" type="button">注册节点</button>	<#-- 注册节点 -->
+						<button class="btn btn-sm btn-secondary selectOnlyOne job_next_time" type="button">下次执行时间</button>			<#-- 下次执行时间：row.scheduleType == 'CRON' || row.scheduleType == 'FIX_RATE' -->
 					</div>
 					<div class="box-body" >
 						<table id="data_list" class="table table-bordered table-striped" width="100%" >
@@ -227,7 +228,7 @@
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
 									<button type="submit" class="btn btn-primary"  >保存</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 								</div>
 							</div>
 
@@ -487,7 +488,7 @@ exit 0
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
 									<button type="submit" class="btn btn-primary"  >保存</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 									<input type="hidden" name="id" >
 								</div>
 							</div>
@@ -523,7 +524,7 @@ exit 0
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
 									<button type="button" class="btn btn-primary ok" >保存</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 									<input type="hidden" name="id" >
 								</div>
 							</div>
@@ -540,8 +541,8 @@ exit 0
 
 <!-- 3-script start -->
 <@netCommon.commonScript />
-<script src="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.js"></script>
+<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
 <#-- admin table -->
 <script src="${request.contextPath}/static/biz/common/admin.table.js"></script>
 <#-- admin util -->
@@ -550,8 +551,21 @@ exit 0
 <script src="${request.contextPath}/static/adminlte/bower_components/moment/moment.min.js"></script>
 <#-- cronGen -->
 <script src="${request.contextPath}/static/plugins/cronGen/cronGen.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
 <script>
 	$(function() {
+
+		// init Tom Select
+		var config = {
+			create: false,
+			sortField: { field: "text", direction: "asc" },
+			placeholder: "请选择执行器",
+			plugins: ['dropdown_input']
+		};
+
+		new TomSelect("#jobGroup", config);
+		new TomSelect("#addModal .form select[name=jobGroup]", config);
+		new TomSelect("#updateModal .form select[name=jobGroup]", config);
 
 		// ---------------------- filter ----------------------
 

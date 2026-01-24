@@ -22,7 +22,7 @@
         </a>
         <nav class="navbar navbar-static-top" role="navigation">
             <!--header left -->
-            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" style="padding:0 0 0 0px;">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -34,19 +34,19 @@
 
                     <#-- login user -->
                     <li class="dropdown">
-                        <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="font-weight: bold;">
+                        <a href="javascript:" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="font-weight: bold;">
                             ${I18n.system_welcome}：${xxl_sso_user.userName!}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li id="updatePwd" >
-                                <a href="javascript:" style="height: 30px;padding: 3px 25px;color: #777;" ><i class="fa fa-key"></i> ${I18n.change_pwd}</a>
+                                <a class="dropdown-item" href="javascript:"><i class="fa fa-key"></i> ${I18n.change_pwd}</a>
                             </li>
                             <li id="changeSkin" >
-                                <a href="javascript:" style="height: 30px;padding: 3px 25px;color: #777;" ><i class="fa fa-key"></i> ${I18n.change_skin}</a>
+                                <a class="dropdown-item" href="javascript:"><i class="fa fa-key"></i> ${I18n.change_skin}</a>
                             </li>
                             <li id="logoutBtn" >
-                                <a href="javascript:" style="height: 30px;padding: 3px 25px;color: #777;" ><i class="fa fa-sign-out"></i> ${I18n.logout_btn}</a>
+                                <a class="dropdown-item" href="javascript:"><i class="fa fa-sign-out"></i> ${I18n.logout_btn}</a>
                             </li>
                         </ul>
                     </li>
@@ -136,11 +136,11 @@
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i></button>
             <!-- opt -->
             <div class="btn-group roll-nav roll-right">
-                <button class="dropdown" data-toggle="dropdown">${I18n.tab_opt}<span class="caret"></span></button>
-                <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                    <li class="tabCloseCurrent"><a>${I18n.tab_close_current}</a></li>
-                    <li class="J_tabCloseOther"><a>${I18n.tab_close_other}</a></li>
-                    <li class="J_tabCloseAll"><a>${I18n.tab_close_all}</a></li>
+                <button class="dropdown-toggle" data-bs-toggle="dropdown">${I18n.tab_opt}<span class="caret"></span></button>
+                <ul role="menu" class="dropdown-menu dropdown-menu-end">
+                    <li class="tabCloseCurrent"><a class="dropdown-item">${I18n.tab_close_current}</a></li>
+                    <li class="J_tabCloseOther"><a class="dropdown-item">${I18n.tab_close_other}</a></li>
+                    <li class="J_tabCloseAll"><a class="dropdown-item">${I18n.tab_close_all}</a></li>
                 </ul>
             </div>
             <!-- refresh -->

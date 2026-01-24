@@ -6,7 +6,7 @@
 
 	<!-- 1-style start -->
 	<@netCommon.commonStyle />
-	<link rel="stylesheet" href="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.min.css">
+	<link rel="stylesheet" href="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.css">
 	<link rel="stylesheet" href="${request.contextPath}/static/adminlte/plugins/iCheck/square/blue.css">
 	<!-- 1-style end -->
 
@@ -22,24 +22,24 @@
 			<div class="box-body">
 				<div class="row" id="data_filter" >
 
-					<div class="col-xs-3">
+					<div class="col-3">
 						<div class="input-group">
 							<span class="input-group-addon">AppName</span>
 							<input type="text" class="form-control" id="appname" placeholder="请输入AppName" >
 						</div>
 					</div>
-					<div class="col-xs-3">
+					<div class="col-3">
 						<div class="input-group">
 							<span class="input-group-addon">名称</span>
 							<input type="text" class="form-control" id="title" placeholder="名称" >
 						</div>
 					</div>
 
-					<div class="col-xs-1">
+					<div class="col-1">
 						<button class="btn btn-block btn-primary searchBtn" >搜索</button>
 					</div>
-					<div class="col-xs-1">
-						<button class="btn btn-block btn-default resetBtn" >重置</button>
+					<div class="col-1">
+						<button class="btn btn-block btn-secondary resetBtn" >重置</button>
 					</div>
 				</div>
 			</div>
@@ -47,7 +47,7 @@
 
 		<#-- 数据表格区域 -->
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-12">
 				<div class="box">
 					<div class="box-header pull-left" id="data_operation" >
 						<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>新增</button>
@@ -77,7 +77,7 @@
 					</div>
 					<div class="modal-footer">
 						<div class="text-center" >
-							<button type="button" class="btn btn-info ok" data-dismiss="modal" >确定</button>
+							<button type="button" class="btn btn-info ok" data-bs-dismiss="modal" >确定</button>
 						</div>
 					</div>
 				</div>
@@ -119,7 +119,7 @@
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
 									<button type="submit" class="btn btn-primary"  >保存</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 								</div>
 							</div>
 						</form>
@@ -163,7 +163,7 @@
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
 									<button type="submit" class="btn btn-primary"  >保存</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 									<input type="hidden" name="id" >
 								</div>
 							</div>
@@ -180,8 +180,8 @@
 
 <!-- 3-script start -->
 <@netCommon.commonScript />
-<script src="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.js"></script>
+<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
 <script src="${request.contextPath}/static/adminlte/plugins/iCheck/icheck.min.js"></script>
 <#-- admin table -->
 <script src="${request.contextPath}/static/biz/common/admin.table.js"></script>

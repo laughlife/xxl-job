@@ -20,7 +20,7 @@
         <div class="row">
 
             <#-- 任务信息 -->
-            <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="col-md-4 col-sm-6 col-12">
                 <div class="info-box bg-aqua">
                     <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
 
@@ -37,7 +37,7 @@
             </div>
 
             <#-- 调度信息 -->
-            <div class="col-md-4 col-sm-6 col-xs-12" >
+            <div class="col-md-4 col-sm-6 col-12" >
                 <div class="info-box bg-yellow">
                     <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
 
@@ -59,7 +59,7 @@
             </div>
 
             <#-- 执行器 -->
-            <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="col-md-4 col-sm-6 col-12">
                 <div class="info-box bg-green">
                     <span class="info-box-icon"><i class="fa ion-ios-settings-strong"></i></span>
 
@@ -87,10 +87,10 @@
 
                         <!-- tools box -->
                         <div class="pull-right box-tools">
-                            <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" id="filterTime" >
+                            <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-bs-toggle="tooltip" id="filterTime" >
                                 <i class="fa fa-calendar"></i>
                             </button>
-                            <#--<button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse" data-toggle="tooltip" title="" style="margin-right: 5px;" data-original-title="Collapse">
+                            <#--<button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse" data-bs-toggle="tooltip" title="" style="margin-right: 5px;" data-original-title="Collapse">
                                 <i class="fa fa-minus"></i>
                             </button>-->
                         </div>

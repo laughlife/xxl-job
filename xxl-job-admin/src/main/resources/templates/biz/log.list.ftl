@@ -6,7 +6,7 @@
 
 	<!-- 1-style start -->
 	<@netCommon.commonStyle />
-	<link rel="stylesheet" href="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.min.css">
+	<link rel="stylesheet" href="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.css">
 	<!-- daterangepicker -->
 	<link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css">
 	<!-- 1-style end -->
@@ -23,7 +23,7 @@
 			<div class="box-body">
 				<div class="row" id="data_filter" >
 
-					<div class="col-xs-2">
+					<div class="col-2">
 						<div class="input-group">
 							<span class="input-group-addon">${I18n.jobinfo_field_jobgroup}</span>
 							<select class="form-control" id="jobGroup"  >
@@ -33,7 +33,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-xs-2">
+					<div class="col-2">
 						<div class="input-group">
 							<span class="input-group-addon">${I18n.jobinfo_job}</span>
 							<select class="form-control" id="jobId" >
@@ -47,7 +47,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-xs-2">
+					<div class="col-2">
 						<div class="input-group">
 							<span class="input-group-addon">${I18n.joblog_status}</span>
 							<select class="form-control" id="logStatus" >
@@ -58,7 +58,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-xs-4">
+					<div class="col-4">
 						<div class="input-group">
                 		<span class="input-group-addon">
 	                  		${I18n.joblog_field_triggerTime}
@@ -67,11 +67,11 @@
 						</div>
 					</div>
 
-					<div class="col-xs-1">
+					<div class="col-1">
 						<button class="btn btn-block btn-primary searchBtn" >${I18n.system_search}</button>
 					</div>
-					<div class="col-xs-1">
-						<button class="btn btn-block btn-default resetBtn" >${I18n.system_reset}</button>
+					<div class="col-1">
+						<button class="btn btn-block btn-secondary resetBtn" >${I18n.system_reset}</button>
 					</div>
 				</div>
 			</div>
@@ -79,7 +79,7 @@
 
 		<#-- 数据表格区域 -->
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-12">
 				<div class="box">
 					<div class="box-header pull-left" id="data_operation" >
 						<button class="btn btn-sm btn-warning selectOnlyOne logKill" type="button">${I18n.joblog_kill_log}</button>
@@ -144,7 +144,7 @@
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
 									<button type="button" class="btn btn-primary ok" >${I18n.system_ok}</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${I18n.system_cancel}</button>
 								</div>
 							</div>
 						</form>
@@ -160,8 +160,8 @@
 
 <!-- 3-script start -->
 <@netCommon.commonScript />
-<script src="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/<#if I18n.admin_i18n?? && I18n.admin_i18n == 'en'>bootstrap-table-en-US.min.js<#else>bootstrap-table-zh-CN.min.js</#if>"></script>
+<script src="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.js"></script>
+<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/<#if I18n.admin_i18n?? && I18n.admin_i18n == 'en'>bootstrap-table-en-US.js<#else>bootstrap-table-zh-CN.js</#if>"></script>
 <#--daterangepicker-->
 <script src="${request.contextPath}/static/adminlte/bower_components/moment/moment.min.js"></script>
 <script src="${request.contextPath}/static/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
@@ -500,7 +500,7 @@
 						'			</div>' +
 						'				<div class="modal-footer">' +
 						'				<div class="text-center" >' +
-						'					<button type="button" class="btn btn-info ok" data-dismiss="modal" >'+ I18n.system_ok +'</button>' +
+						'					<button type="button" class="btn btn-info ok" data-bs-dismiss="modal" >'+ I18n.system_ok +'</button>' +
 						'				</div>' +
 						'			</div>' +
 						'		</div>' +

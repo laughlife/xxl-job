@@ -6,7 +6,7 @@
 
 	<!-- 1-style start -->
 	<@netCommon.commonStyle />
-	<link rel="stylesheet" href="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.min.css">
+	<link rel="stylesheet" href="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.css">
 	<link rel="stylesheet" href="${request.contextPath}/static/adminlte/plugins/iCheck/square/blue.css">
 	<!-- 1-style end -->
 
@@ -22,7 +22,7 @@
 			<div class="box-body">
 				<div class="row" id="data_filter" >
 
-					<div class="col-xs-3">
+					<div class="col-3">
 						<div class="input-group">
 							<span class="input-group-addon">${I18n.user_role}</span>
 							<select class="form-control" id="role" >
@@ -32,18 +32,18 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-xs-3">
+					<div class="col-3">
 						<div class="input-group">
 							<span class="input-group-addon">${I18n.user_username}</span>
 							<input type="text" class="form-control" id="username" autocomplete="on" >
 						</div>
 					</div>
 
-					<div class="col-xs-1">
+					<div class="col-1">
 						<button class="btn btn-block btn-primary searchBtn" >${I18n.system_search}</button>
 					</div>
-					<div class="col-xs-1">
-						<button class="btn btn-block btn-default resetBtn" >${I18n.system_reset}</button>
+					<div class="col-1">
+						<button class="btn btn-block btn-secondary resetBtn" >${I18n.system_reset}</button>
 					</div>
 				</div>
 			</div>
@@ -51,7 +51,7 @@
 
 		<#-- 数据表格区域 -->
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-12">
 				<div class="box">
 					<div class="box-header pull-left" id="data_operation" >
 						<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>${I18n.system_opt_add}</button>
@@ -110,7 +110,7 @@
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
 									<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${I18n.system_cancel}</button>
 								</div>
 							</div>
 
@@ -160,7 +160,7 @@
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
 									<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${I18n.system_cancel}</button>
 									<input type="hidden" name="id" >
 								</div>
 							</div>
@@ -178,8 +178,8 @@
 
 <!-- 3-script start -->
 <@netCommon.commonScript />
-<script src="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/<#if I18n.admin_i18n?? && I18n.admin_i18n == 'en'>bootstrap-table-en-US.min.js<#else>bootstrap-table-zh-CN.min.js</#if>"></script>
+<script src="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.js"></script>
+<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/<#if I18n.admin_i18n?? && I18n.admin_i18n == 'en'>bootstrap-table-en-US.js<#else>bootstrap-table-zh-CN.js</#if>"></script>
 <script src="${request.contextPath}/static/adminlte/plugins/iCheck/icheck.min.js"></script>
 <#-- admin table -->
 <script src="${request.contextPath}/static/biz/common/admin.table.js"></script>

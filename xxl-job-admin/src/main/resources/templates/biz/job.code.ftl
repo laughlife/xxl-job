@@ -33,7 +33,7 @@
 				<#-- icon -->
 				<div class="navbar-header">
 					<a class="navbar-brand" href="javascript:void(0);" ><b>Web</b>IDE</a>
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+					<button type="button" class="navbar-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#navbar-collapse">
 						<i class="fa fa-bars"></i>
 					</button>
 				</div>
@@ -51,7 +51,7 @@
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">${I18n.jobinfo_glue_rollback} <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">${I18n.jobinfo_glue_rollback} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li <#if jobLogGlues?exists && jobLogGlues?size gt 0 >style="display: none;"</#if> >
 									<a href="javascript:;" class="source_version" version="version_now" glueType="${jobInfo.glueType}" >
@@ -112,7 +112,7 @@
 						<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-6">
 								<button type="button" class="btn btn-primary ok" >${I18n.system_save}</button>
-								<button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
+								<button type="button" class="btn btn-default" data-bs-dismiss="modal">${I18n.system_cancel}</button>
 							</div>
 						</div>
 					</div>

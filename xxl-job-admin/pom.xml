@@ -43,6 +43,14 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
+		<!-- devtools for hot reload (dev only) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+
 		<!-- mybatis-starter -->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>

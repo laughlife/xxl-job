@@ -1,0 +1,577 @@
+/**
+ * Bootstrap 5 Compatibility Layer
+ * 为了兼容 Bootstrap 3 到 Bootstrap 5 的升级
+ * 处理类名变化和样式差异
+ */
+
+/* Button 样式兼容 */
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.btn-default:hover,
+.btn-default:focus {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+.btn-default:active,
+.btn-default.active {
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+/* Float 类兼容 */
+.pull-left {
+    float: left !important;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+/* Hidden 类兼容 */
+.hidden-xs {
+    display: none !important;
+}
+
+@media (min-width: 768px) {
+    .hidden-xs {
+        display: block !important;
+    }
+}
+
+.hidden-sm {
+    display: block !important;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .hidden-sm {
+        display: none !important;
+    }
+}
+
+.hidden-md {
+    display: block !important;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .hidden-md {
+        display: none !important;
+    }
+}
+
+.hidden-lg {
+    display: block !important;
+}
+
+@media (min-width: 1200px) {
+    .hidden-lg {
+        display: none !important;
+    }
+}
+
+/* Panel 样式兼容（Bootstrap 5 移除了 panel，使用 card 替代） */
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-default {
+    border-color: #ddd;
+}
+
+.panel-default > .panel-heading {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: inherit;
+}
+
+.panel-body {
+    padding: 15px;
+}
+
+.panel-footer {
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+/* Form 控件兼容 */
+.form-control[readonly] {
+    background-color: #e9ecef;
+    opacity: 1;
+}
+
+/* Modal 样式微调 */
+.modal-dialog {
+    margin: 1.75rem auto;
+}
+
+/* Table 样式兼容 */
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
+    vertical-align: middle;
+}
+
+/* Label 兼容 */
+.label {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+.label-default {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.label-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.label-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.label-info {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+.label-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.label-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Well 兼容（Bootstrap 5 移除了 well） */
+.well {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.well-sm {
+    padding: 9px;
+    border-radius: 3px;
+}
+
+.well-lg {
+    padding: 24px;
+    border-radius: 6px;
+}
+
+/* Glyphicon 兼容提示（实际使用 FontAwesome 替代） */
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+}
+
+/* Input Group 兼容 */
+.input-group-addon {
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+}
+
+.input-group > .input-group-addon:first-child {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-right: 0;
+}
+
+.input-group > .input-group-addon:last-child {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    border-left: 0;
+}
+
+/* Navbar 微调 */
+.navbar-static-top {
+    border-width: 0 0 1px;
+}
+
+/* Badge 兼容 */
+.badge-default {
+    background-color: #6c757d;
+}
+
+.badge-primary {
+    background-color: #007bff;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-info {
+    background-color: #17a2b8;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+}
+
+/* 清除浮动 */
+.clearfix::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+/* 响应式工具类兼容 */
+@media (max-width: 767px) {
+    .visible-xs {
+        display: block !important;
+    }
+    .hidden-xs {
+        display: none !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .visible-sm {
+        display: block !important;
+    }
+    .hidden-sm {
+        display: none !important;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .visible-md {
+        display: block !important;
+    }
+    .hidden-md {
+        display: none !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .visible-lg {
+        display: block !important;
+    }
+    .hidden-lg {
+        display: none !important;
+    }
+}
+
+/* Dropdown 兼容 */
+.dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    color: #262626;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
+
+/* Caret 兼容 */
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+/* Text 对齐兼容 */
+.text-left {
+    text-align: left !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+/* Margin/Padding 兼容（保留一些常用的） */
+.m-0 {
+    margin: 0 !important;
+}
+
+.m-t-0 {
+    margin-top: 0 !important;
+}
+
+.m-r-0 {
+    margin-right: 0 !important;
+}
+
+.m-b-0 {
+    margin-bottom: 0 !important;
+}
+
+.m-l-0 {
+    margin-left: 0 !important;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+.p-t-0 {
+    padding-top: 0 !important;
+}
+
+.p-r-0 {
+    padding-right: 0 !important;
+}
+
+.p-b-0 {
+    padding-bottom: 0 !important;
+}
+
+.p-l-0 {
+    padding-left: 0 !important;
+}
+
+/* ===== AdminLTE + Bootstrap 5 兼容修复 ===== */
+
+/* 修复 AdminLTE 导航栏下拉菜单 */
+.main-header .navbar .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.main-header .navbar .dropdown-menu li {
+    list-style: none;
+}
+
+.main-header .navbar .dropdown-menu .dropdown-item {
+    display: block;
+    padding: 8px 20px;
+    color: #333;
+    text-decoration: none;
+}
+
+.main-header .navbar .dropdown-menu .dropdown-item:hover {
+    background-color: #f5f5f5;
+    color: #262626;
+}
+
+.main-header .navbar .dropdown-menu .dropdown-item i {
+    margin-right: 5px;
+}
+
+/* 修复 content-tabs 下拉菜单 */
+.content-tabs .dropdown-menu {
+    min-width: 120px;
+}
+
+.content-tabs .dropdown-menu .dropdown-item {
+    padding: 6px 15px;
+    font-size: 13px;
+    color: #333;
+    cursor: pointer;
+}
+
+.content-tabs .dropdown-menu .dropdown-item:hover {
+    background-color: #f5f5f5;
+}
+
+/* 修复下拉菜单触发按钮 */
+.content-tabs .dropdown-toggle {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    padding: 0 10px;
+    line-height: 39px;
+}
+
+.content-tabs .dropdown-toggle:hover {
+    color: #777;
+}
+
+/* 修复 AdminLTE navbar 样式 */
+.main-header .navbar {
+    transition: margin-left .3s ease-in-out;
+    margin-bottom: 0;
+    margin-left: 230px;
+    border: none;
+    height: 50px;
+    border-radius: 0;
+}
+
+.main-header .navbar .nav > li > a {
+    color: #fff;
+}
+
+.main-header .navbar .nav > li > a:hover,
+.main-header .navbar .nav > li > a:active,
+.main-header .navbar .nav > li > a:focus {
+    background: rgba(0,0,0,.1);
+    color: #f6f6f6;
+}
+
+/* 修复侧边栏切换按钮 */
+.sidebar-toggle {
+    float: left;
+    background-color: transparent;
+    background-image: none;
+    padding: 15px;
+    font-family: fontAwesome;
+}
+
+.sidebar-toggle:before {
+    content: "\f0c9";
+    font-size: 18px;
+}
+
+.sidebar-toggle .icon-bar {
+    display: none;
+}
+
+.sidebar-toggle:hover {
+    background: rgba(0,0,0,.1);
+}
+
+/* sr-only 屏幕阅读器专用 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* 修复 Bootstrap 5 移除的 .open 类 */
+.dropdown.show > .dropdown-menu,
+.btn-group.show > .dropdown-menu {
+    display: block;
+}
+
+/* 确保 navbar-nav 正确显示 */
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.navbar-nav .nav-item {
+    position: relative;
+}
+
+/* AdminLTE dropdown 需要 position relative */
+.navbar-custom-menu .dropdown {
+    position: relative;
+}
+
+/* 修复 Bootstrap 5 的 form-control 高度 */
+.input-group .form-control {
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.input-group .input-group-addon {
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+/* 修复 btn-block (Bootstrap 5 移除) */
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/* 修复 img-responsive (Bootstrap 5 改为 img-fluid) */
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+

@@ -116,35 +116,6 @@ XXL-JOB 是一个开源且免费项目，其正在进行的开发完全得益于
 - 38、审计日志：记录任务操作敏感信息，用于系统监控、审计和安全分析，可快速追溯异常行为以及定位排查问题。
 - 39、优雅停机：调度中心停机，检测时间轮非空时主动等待调度完成；客户端停机，检测存在运行中任务时，停止接收新任务并主动等待任务执行完成；
 
-## Development
-于2015年中，我在github上创建XXL-JOB项目仓库并提交第一个commit，随之进行系统结构设计，UI选型，交互设计……
-
-于2015-11月，XXL-JOB终于RELEASE了第一个大版本V1.0， 随后我将之发布到OSCHINA，XXL-JOB在OSCHINA上获得了@红薯的热门推荐，同期分别达到了OSCHINA的“热门动弹”排行第一和git.oschina的开源软件月热度排行第一，在此特别感谢红薯，感谢大家的关注和支持。
-
-于2018-12-05，XXL-JOB参与"[2018年度最受欢迎中国开源软件](https://www.oschina.net/project/top_cn_2018?sort=1)"评比，在当时已录入的一万多个开源项目中角逐，最终排名第19名。
-
-于2019-12-10，XXL-JOB参与"[2019年度最受欢迎中国开源软件](https://www.oschina.net/project/top_cn_2019)"评比，在当时已录入的一万多个开源项目中角逐，最终排名"开发框架和基础组件类"第9名。
-
-于2020-11-16，XXL-JOB参与"[2020年度最受欢迎中国开源软件](https://www.oschina.net/project/top_cn_2020)"评比，在当时已录入的一万多个开源项目中角逐，最终排名"开发框架和基础组件类"第8名。
-
-于2021-12-06，XXL-JOB参与"[2021年度OSC中国开源项目评选](https://www.oschina.net/project/top_cn_2021) "评比，在当时已录入的一万多个开源项目中角逐，最终当选"最受欢迎项目"。
-
-于2024-11-06，XXL-JOB经 GitCode 官方评审，获得 “G-Star项目毕业认证”。
-
-> 我司大众点评目前已接入XXL-JOB，内部别名《Ferrari》（Ferrari基于XXL-JOB的V1.1版本定制而成，新接入应用推荐升级最新版本）。
-据最新统计, 自2016-01-21接入至2017-12-01期间，该系统已调度约100万次，表现优异。新接入应用推荐使用最新版本，因为经过数十个版本的更新，系统的任务模型、UI交互模型以及底层调度通讯模型都有了较大的优化和提升，核心功能更加稳定高效。
-
-至今，XXL-JOB已接入多家公司的线上产品线，接入场景如电商业务，O2O业务和大数据作业等，截止最新统计时间为止，XXL-JOB已接入的公司包括不限于：
-    
-	- 1、大众点评【美团点评】
-	- 2、山东学而网络科技有限公司；
-    - ……
-
-> 更多接入的公司，欢迎在 [登记地址](https://github.com/xuxueli/xxl-job/issues/1 ) 登记，登记仅仅为了产品推广。
-
-欢迎大家的关注和使用，XXL-JOB也将拥抱变化，持续发展。
-
-
 ## Contributing
 Contributions are welcome! Open a pull request to fix a bug, or open an [Issue](https://github.com/xuxueli/xxl-job/issues/) to discuss a new feature or change.
 
@@ -158,3 +129,10 @@ This product is open source and free, and will continue to provide free communit
 - Copyright (c) 2015-present, xuxueli.
 
 产品开源免费，并且将持续提供免费的社区技术支持。个人或企业内部可自由的接入和使用。如有需要可 [邮件联系](https://www.xuxueli.com/page/community.html) 作者免费获取项目授权。
+
+##生产环境注意
+
+- 部署到生产时，改用生产 profile：
+- java -jar xxl-job-admin.jar --spring.profiles.active=prod
+
+- 或者删除/注释掉 spring.profiles.active=dev 这一行。

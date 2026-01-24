@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <#-- css -->
-<link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/bootstrap5/css/bootstrap.min.css">
 <link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/Ionicons/css/ionicons.min.css">
 <link rel="stylesheet" href="${request.contextPath}/static/adminlte/dist/css/AdminLTE.min.css">
@@ -20,6 +20,7 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 <link rel="stylesheet" href="${request.contextPath}/static/plugins/nprogress/nprogress.css">
+<link rel="stylesheet" href="${request.contextPath}/static/biz/common/bootstrap5-compat.css">
 
 </#macro>
 
@@ -27,7 +28,7 @@
 <#macro commonScript>
 
 <script src="${request.contextPath}/static/adminlte/bower_components/jquery/jquery.min.js"></script>
-<script src="${request.contextPath}/static/adminlte/bower_components/bootstrap/js/bootstrap.min.js"></script>
+<script src="${request.contextPath}/static/adminlte/bower_components/bootstrap5/js/bootstrap.bundle.min.js"></script>
 <script src="${request.contextPath}/static/adminlte/dist/js/adminlte.min.js"></script>
 <script src="${request.contextPath}/static/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="${request.contextPath}/static/adminlte/bower_components/fastclick/fastclick.js"></script>

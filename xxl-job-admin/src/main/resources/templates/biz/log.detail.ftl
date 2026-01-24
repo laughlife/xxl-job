@@ -19,7 +19,7 @@
 				<#-- icon -->
 				<div class="navbar-header">
 					<a class="navbar-brand" href="javascript:void(0);" ><b>${I18n.joblog_rolling_log}</b> Console</a>
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+					<button type="button" class="navbar-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#navbar-collapse">
 						<i class="fa fa-bars"></i>
 					</button>
 				</div>
