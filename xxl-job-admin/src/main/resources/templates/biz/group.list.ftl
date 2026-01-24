@@ -25,21 +25,21 @@
 					<div class="col-xs-3">
 						<div class="input-group">
 							<span class="input-group-addon">AppName</span>
-							<input type="text" class="form-control" id="appname" placeholder="${I18n.system_please_input}AppName" >
+							<input type="text" class="form-control" id="appname" placeholder="请输入AppName" >
 						</div>
 					</div>
 					<div class="col-xs-3">
 						<div class="input-group">
-							<span class="input-group-addon">${I18n.jobgroup_field_title}</span>
-							<input type="text" class="form-control" id="title" placeholder="${I18n.jobgroup_field_title}" >
+							<span class="input-group-addon">名称</span>
+							<input type="text" class="form-control" id="title" placeholder="名称" >
 						</div>
 					</div>
 
 					<div class="col-xs-1">
-						<button class="btn btn-block btn-primary searchBtn" >${I18n.system_search}</button>
+						<button class="btn btn-block btn-primary searchBtn" >搜索</button>
 					</div>
 					<div class="col-xs-1">
-						<button class="btn btn-block btn-default resetBtn" >${I18n.system_reset}</button>
+						<button class="btn btn-block btn-default resetBtn" >重置</button>
 					</div>
 				</div>
 			</div>
@@ -50,9 +50,9 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header pull-left" id="data_operation" >
-						<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>${I18n.system_opt_add}</button>
-						<button class="btn btn-sm btn-warning selectOnlyOne update" type="button"><i class="fa fa-edit"></i>${I18n.system_opt_edit}</button>
-						<button class="btn btn-sm btn-danger selectOnlyOne delete" type="button"><i class="fa fa-remove "></i>${I18n.system_opt_del}</button>
+						<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>新增</button>
+						<button class="btn btn-sm btn-warning selectOnlyOne update" type="button"><i class="fa fa-edit"></i>编辑</button>
+						<button class="btn btn-sm btn-danger selectOnlyOne delete" type="button"><i class="fa fa-remove "></i>删除</button>
 					</div>
 					<div class="box-body" >
 						<table id="data_list" class="table table-bordered table-striped" width="100%" >
@@ -70,14 +70,14 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" >${I18n.jobinfo_opt_registryinfo}</h4>
+						<h4 class="modal-title" >注册节点</h4>
 					</div>
 					<div class="modal-body">
 						<div class="data" style="word-wrap: break-word;"></div>
 					</div>
 					<div class="modal-footer">
 						<div class="text-center" >
-							<button type="button" class="btn btn-info ok" data-dismiss="modal" >${I18n.system_ok}</button>
+							<button type="button" class="btn btn-info ok" data-dismiss="modal" >确定</button>
 						</div>
 					</div>
 				</div>
@@ -89,37 +89,37 @@
 			<div class="modal-dialog ">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" >${I18n.jobgroup_add}</h4>
+						<h4 class="modal-title" >新增执行器</h4>
 					</div>
 					<div class="modal-body">
 						<form class="form-horizontal form" role="form" >
 							<div class="form-group">
 								<label for="lastname" class="col-sm-2 control-label">AppName<font color="red">*</font></label>
-								<div class="col-sm-10"><input type="text" class="form-control" name="appname" placeholder="${I18n.system_please_input}AppName" maxlength="64" ></div>
+								<div class="col-sm-10"><input type="text" class="form-control" name="appname" placeholder="请输入AppName" maxlength="64" ></div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobgroup_field_title}<font color="red">*</font></label>
-								<div class="col-sm-10"><input type="text" class="form-control" name="title" placeholder="${I18n.system_please_input}${I18n.jobgroup_field_title}" maxlength="12" ></div>
+								<label for="lastname" class="col-sm-2 control-label">名称<font color="red">*</font></label>
+								<div class="col-sm-10"><input type="text" class="form-control" name="title" placeholder="请输入名称" ></div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobgroup_field_addressType}<font color="red">*</font></label>
+								<label for="lastname" class="col-sm-2 control-label">注册方式<font color="red">*</font></label>
 								<div class="col-sm-10">
-									<input type="radio" name="addressType" value="0" checked />${I18n.jobgroup_field_addressType_0}
+									<input type="radio" name="addressType" value="0" checked />自动注册
 									&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="addressType" value="1" />${I18n.jobgroup_field_addressType_1}
+									<input type="radio" name="addressType" value="1" />手动录入
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobgroup_field_registryList}<font color="red">*</font></label>
+								<label for="lastname" class="col-sm-2 control-label">机器地址<font color="red">*</font></label>
 								<div class="col-sm-10">
-									<textarea class="textarea" name="addressList" maxlength="20000" placeholder="${I18n.jobgroup_field_registryList_placeholder}" readonly="readonly" style="background-color:#eee; width: 100%; height: 100px; font-size: 14px; line-height: 15px; border: 1px solid #dddddd; padding: 5px;"></textarea>
+									<textarea class="textarea" name="addressList" maxlength="20000" placeholder="请输入执行器地址列表，多地址逗号分隔" readonly="readonly" style="background-color:#eee; width: 100%; height: 100px; font-size: 14px; line-height: 15px; border: 1px solid #dddddd; padding: 5px;"></textarea>
 								</div>
 							</div>
 							<hr>
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
-									<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
+									<button type="submit" class="btn btn-primary"  >保存</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 								</div>
 							</div>
 						</form>
@@ -133,37 +133,37 @@
 			<div class="modal-dialog ">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" >${I18n.jobgroup_edit}</h4>
+						<h4 class="modal-title" >编辑执行器</h4>
 					</div>
 					<div class="modal-body">
 						<form class="form-horizontal form" role="form" >
 							<div class="form-group">
 								<label for="lastname" class="col-sm-2 control-label">AppName<font color="red">*</font></label>
-								<div class="col-sm-10"><input type="text" class="form-control" name="appname" placeholder="${I18n.system_please_input}AppName" maxlength="64" ></div>
+								<div class="col-sm-10"><input type="text" class="form-control" name="appname" placeholder="请输入AppName" maxlength="64" ></div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobgroup_field_title}<font color="red">*</font></label>
-								<div class="col-sm-10"><input type="text" class="form-control" name="title" placeholder="${I18n.system_please_input}${I18n.jobgroup_field_title}" maxlength="12" ></div>
+								<label for="lastname" class="col-sm-2 control-label">名称<font color="red">*</font></label>
+								<div class="col-sm-10"><input type="text" class="form-control" name="title" placeholder="请输入名称" maxlength="50" ></div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobgroup_field_addressType}<font color="red">*</font></label>
+								<label for="lastname" class="col-sm-2 control-label">注册方式<font color="red">*</font></label>
 								<div class="col-sm-10">
-									<input type="radio" name="addressType" value="0" />${I18n.jobgroup_field_addressType_0}
+									<input type="radio" name="addressType" value="0" />自动注册
 									&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="addressType" value="1" />${I18n.jobgroup_field_addressType_1}
+									<input type="radio" name="addressType" value="1" />手动录入
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobgroup_field_registryList}<font color="red">*</font></label>
+								<label for="lastname" class="col-sm-2 control-label">机器地址<font color="red">*</font></label>
 								<div class="col-sm-10">
-									<textarea class="textarea" name="addressList" maxlength="20000" placeholder="${I18n.jobgroup_field_registryList_placeholder}" readonly="readonly" style="background-color:#eee; width: 100%; height: 100px; font-size: 14px; line-height: 15px; border: 1px solid #dddddd; padding: 5px;"></textarea>
+									<textarea class="textarea" name="addressList" maxlength="20000" placeholder="请输入执行器地址列表，多地址逗号分隔" readonly="readonly" style="background-color:#eee; width: 100%; height: 100px; font-size: 14px; line-height: 15px; border: 1px solid #dddddd; padding: 5px;"></textarea>
 								</div>
 							</div>
 							<hr>
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
-									<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
+									<button type="submit" class="btn btn-primary"  >保存</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 									<input type="hidden" name="id" >
 								</div>
 							</div>
@@ -181,7 +181,7 @@
 <!-- 3-script start -->
 <@netCommon.commonScript />
 <script src="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/<#if I18n.admin_i18n?? && I18n.admin_i18n == 'en'>bootstrap-table-en-US.min.js<#else>bootstrap-table-zh-CN.min.js</#if>"></script>
+<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 <script src="${request.contextPath}/static/adminlte/plugins/iCheck/icheck.min.js"></script>
 <#-- admin table -->
 <script src="${request.contextPath}/static/biz/common/admin.table.js"></script>
@@ -217,32 +217,32 @@
 					widthUnit: '%',
 					align: 'left'
 				},{
-					title: I18n.jobgroup_field_title,
+					title: '名称',
 					field: 'title',
 					width: '30',
 					widthUnit: '%'
 				},{
-					title: I18n.jobgroup_field_addressType,
+					title: '注册方式',
 					field: 'addressType',
 					width: '10',
 					widthUnit: '%',
 					formatter: function(value, row, index) {
 						if (row.addressType == 0) {
-							return I18n.jobgroup_field_addressType_0;
+							return '自动注册';
 						} else {
-							return I18n.jobgroup_field_addressType_1;
+							return '手动录入';
 						}
 					}
 				},{
-					title: 'OnLine' + I18n.jobgroup_field_registryList,
+					title: 'OnLine' + '机器地址',
 					field: 'registryList',
 					width: '15',
 					widthUnit: '%',
 					formatter: function(value, row, index) {
 						tableData['key' + row.id] = row;
 						return row.registryList
-								?'<a class="show_registryList" href="javascript:;" _id="'+ row.id +'" >' + I18n.system_show +' ( ' + row.registryList.length+ ' ）</a>'
-								:I18n.system_empty;
+								?'<a class="show_registryList" href="javascript:;" _id="'+ row.id +'" >' + '查看' +' ( ' + row.registryList.length+ ' ）</a>'
+								:'无';
 					}
 				}
 			]
@@ -282,7 +282,7 @@
 			var length = value.length;
 			var valid = /^[a-z][a-zA-Z0-9-]*$/;
 			return this.optional(element) || valid.test(value);
-		}, I18n.jobgroup_field_appname_limit );
+		}, '限制以小写字母开头，由小写字母、数字和中划线组成' );
 		$.adminTable.initAdd( {
 			url: base_url + "/jobgroup/insert",
 			rules : {
@@ -298,13 +298,13 @@
 			},
 			messages : {
 				appname : {
-					required : I18n.system_please_input+"AppName",
-					rangelength: I18n.jobgroup_field_appname_length ,
-					myValid01: I18n.jobgroup_field_appname_limit
+					required : "请输入"+"AppName",
+					rangelength: "AppName长度限制为4~64" ,
+					myValid01: "限制以小写字母开头，由小写字母、数字和中划线组成"
 				},
 				title : {
-					required : I18n.system_please_input + I18n.jobgroup_field_title ,
-					rangelength: I18n.jobgroup_field_title_length
+					required : "请输入" + "名称" ,
+					rangelength: "名称长度限制为4~12"
 				}
 			},
 			writeFormData: function() {
@@ -361,13 +361,13 @@
 			},
 			messages : {
 				appname : {
-					required : I18n.system_please_input+"AppName",
-					rangelength: I18n.jobgroup_field_appname_length ,
-					myValid01: I18n.jobgroup_field_appname_limit
+					required : "请输入"+"AppName",
+					rangelength: "AppName长度限制为4~64" ,
+					myValid01: "限制以小写字母开头，由小写字母、数字和中划线组成"
 				},
 				title : {
-					required : I18n.system_please_input + I18n.jobgroup_field_title ,
-					rangelength: I18n.jobgroup_field_title_length
+					required : "请输入" + "名称" ,
+					rangelength: "名称长度限制为4~12"
 				}
 			},
 			readFormData: function() {

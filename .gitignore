@@ -5,3 +5,9 @@
 target/
 .DS_Store
 .gitattributes
+
+.vscode
+.vscode/
+
+.llm-context
+.llm-context/

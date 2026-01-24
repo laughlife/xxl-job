@@ -23,7 +23,7 @@
 
 					<div class="col-xs-3">
 						<div class="input-group">
-							<span class="input-group-addon">${I18n.jobinfo_field_jobgroup}</span>
+							<span class="input-group-addon">执行器</span>
 							<select class="form-control" id="jobGroup" >
 								<#list JobGroupList as group>
 									<option value="${group.id}" <#if jobGroup==group.id>selected</#if> >${group.title}</option>
@@ -34,33 +34,33 @@
 					<div class="col-xs-1">
 						<div class="input-group">
 							<select class="form-control" id="triggerStatus" >
-								<option value="-1" >${I18n.system_all}</option>
-								<option value="0" >${I18n.jobinfo_opt_stop}</option>
-								<option value="1" >${I18n.jobinfo_opt_start}</option>
+								<option value="-1" >全部</option>
+								<option value="0" >停止</option>
+								<option value="1" >启动</option>
 							</select>
 						</div>
 					</div>
 					<div class="col-xs-2">
 						<div class="input-group">
-							<input type="text" class="form-control" id="jobDesc" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_jobdesc}" >
+							<input type="text" class="form-control" id="jobDesc" placeholder="请输入任务描述" >
 						</div>
 					</div>
 					<div class="col-xs-2">
 						<div class="input-group">
-							<input type="text" class="form-control" id="executorHandler" placeholder="${I18n.system_please_input}JobHandler" >
+							<input type="text" class="form-control" id="executorHandler" placeholder="请输入JobHandler" >
 						</div>
 					</div>
 					<div class="col-xs-2">
 						<div class="input-group">
-							<input type="text" class="form-control" id="author" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_author}" >
+							<input type="text" class="form-control" id="author" placeholder="请输入负责人" >
 						</div>
 					</div>
 
 					<div class="col-xs-1">
-						<button class="btn btn-block btn-primary searchBtn" >${I18n.system_search}</button>
+						<button class="btn btn-block btn-primary searchBtn" >搜索</button>
 					</div>
 					<div class="col-xs-1">
-						<button class="btn btn-block btn-default resetBtn" >${I18n.system_reset}</button>
+						<button class="btn btn-block btn-default resetBtn" >重置</button>
 					</div>
 				</div>
 			</div>
@@ -71,19 +71,19 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header pull-left" id="data_operation" >
-						<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>${I18n.system_opt_add}</button>                        <#-- add -->
-						<button class="btn btn-sm btn-warning selectOnlyOne update" type="button"><i class="fa fa-edit"></i>${I18n.system_opt_edit}</button>    <#-- update -->
+						<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>新增</button>                        <#-- add -->
+						<button class="btn btn-sm btn-warning selectOnlyOne update" type="button"><i class="fa fa-edit"></i>编辑</button>    <#-- update -->
                         <button class="btn btn-sm btn-warning selectOnlyOne glue_ide" type="button">GLUE IDE</button>									        <#-- GLUE IDE：'BEAN' != row.glueType -->
-						<button class="btn btn-sm btn-danger selectOnlyOne delete" type="button"><i class="fa fa-remove "></i>${I18n.system_opt_del}</button>   <#-- delete -->
+						<button class="btn btn-sm btn-danger selectOnlyOne delete" type="button"><i class="fa fa-remove "></i>删除</button>   <#-- delete -->
 						｜
-						<button class="btn btn-sm btn-default selectOnlyOne job_copy" type="button">${I18n.system_opt_copy}</button>
-						<button class="btn btn-sm btn-warning selectOnlyOne job_resume" type="button">${I18n.jobinfo_opt_start}</button>				<#-- 启动 -->
-						<button class="btn btn-sm btn-warning selectOnlyOne job_pause" type="button">${I18n.jobinfo_opt_stop}</button>					<#-- 停止 -->
+						<button class="btn btn-sm btn-default selectOnlyOne job_copy" type="button">复制</button>
+						<button class="btn btn-sm btn-warning selectOnlyOne job_resume" type="button">启动</button>				<#-- 启动 -->
+						<button class="btn btn-sm btn-warning selectOnlyOne job_pause" type="button">停止</button>					<#-- 停止 -->
 						｜
-						<button class="btn btn-sm btn-primary selectOnlyOne job_trigger" type="button">${I18n.jobinfo_opt_run}</button>					<#-- 执行一次 -->
-						<button class="btn btn-sm btn-primary selectOnlyOne job_log" type="button">${I18n.jobinfo_opt_log}</button>						<#-- 执行日志：base_url +'/joblog?jobId='+ row.id -->
-						<button class="btn btn-sm btn-default selectOnlyOne job_registryinfo" type="button">${I18n.jobinfo_opt_registryinfo}</button>	<#-- 注册节点 -->
-						<button class="btn btn-sm btn-default selectOnlyOne job_next_time" type="button">${I18n.jobinfo_opt_next_time}</button>			<#-- 下次执行时间：row.scheduleType == 'CRON' || row.scheduleType == 'FIX_RATE' -->
+						<button class="btn btn-sm btn-primary selectOnlyOne job_trigger" type="button">执行一次</button>					<#-- 执行一次 -->
+						<button class="btn btn-sm btn-primary selectOnlyOne job_log" type="button">查询日志</button>						<#-- 执行日志：base_url +'/joblog?jobId='+ row.id -->
+						<button class="btn btn-sm btn-default selectOnlyOne job_registryinfo" type="button">注册节点</button>	<#-- 注册节点 -->
+						<button class="btn btn-sm btn-default selectOnlyOne job_next_time" type="button">下次执行时间</button>			<#-- 下次执行时间：row.scheduleType == 'CRON' || row.scheduleType == 'FIX_RATE' -->
 					</div>
 					<div class="box-body" >
 						<table id="data_list" class="table table-bordered table-striped" width="100%" >
@@ -101,14 +101,14 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" >${I18n.jobinfo_field_add}</h4>
+						<h4 class="modal-title" >新增</h4>
 					</div>
 					<div class="modal-body">
 						<form class="form-horizontal form" role="form" >
 
-							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">${I18n.jobinfo_conf_base}</p>    <#-- 基础信息 -->
+							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">基础配置</p>    <#-- 基础信息 -->
 							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_jobgroup}<font color="red">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">执行器<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="jobGroup" >
 										<#list JobGroupList as group>
@@ -117,20 +117,20 @@
 									</select>
 								</div>
 
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_jobdesc}<font color="red">*</font></label>
-								<div class="col-sm-4"><input type="text" class="form-control" name="jobDesc" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_jobdesc}" maxlength="50" ></div>
+								<label for="lastname" class="col-sm-2 control-label">任务描述<font color="red">*</font></label>
+								<div class="col-sm-4"><input type="text" class="form-control" name="jobDesc" placeholder="请输入任务描述" maxlength="50" ></div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_author}<font color="red">*</font></label>
-								<div class="col-sm-4"><input type="text" class="form-control" name="author" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_author}" maxlength="50" ></div>
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_alarmemail}<font color="black">*</font></label>
-								<div class="col-sm-4"><input type="text" class="form-control" name="alarmEmail" placeholder="${I18n.jobinfo_field_alarmemail_placeholder}" maxlength="100" ></div>
+								<label for="lastname" class="col-sm-2 control-label">负责人<font color="red">*</font></label>
+								<div class="col-sm-4"><input type="text" class="form-control" name="author" placeholder="请输入负责人" maxlength="50" ></div>
+								<label for="lastname" class="col-sm-2 control-label">报警邮件<font color="black">*</font></label>
+								<div class="col-sm-4"><input type="text" class="form-control" name="alarmEmail" placeholder="请输入报警邮件，多个邮件地址则逗号分隔" maxlength="100" ></div>
 							</div>
 
 							<br>
-							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">${I18n.jobinfo_conf_schedule}</p>    <#-- 调度 -->
+							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">调度配置</p>    <#-- 调度 -->
 							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">${I18n.schedule_type}<font color="red">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">调度类型<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control scheduleType" name="scheduleType" >
 										<#list ScheduleTypeEnum as item>
@@ -144,23 +144,23 @@
 								</div>
 								<div class="schedule_conf schedule_conf_CRON" >
 									<label for="lastname" class="col-sm-2 control-label">Cron<font color="red">*</font></label>
-									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_CRON" placeholder="${I18n.system_please_input}Cron" maxlength="128" ></div>
+									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_CRON" placeholder="请输入Cron" maxlength="128" ></div>
 								</div>
 								<div class="schedule_conf schedule_conf_FIX_RATE" style="display: none" >
-									<label for="lastname" class="col-sm-2 control-label">${I18n.schedule_type_fix_rate}<font color="red">*</font></label>
-									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_FIX_RATE" placeholder="${I18n.system_please_input} （ Second ）" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
+									<label for="lastname" class="col-sm-2 control-label">固定速度<font color="red">*</font></label>
+									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_FIX_RATE" placeholder="请输入 （ Second ）" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
 								</div>
 								<div class="schedule_conf schedule_conf_FIX_DELAY" style="display: none" >
-									<label for="lastname" class="col-sm-2 control-label">${I18n.schedule_type_fix_delay}<font color="red">*</font></label>
-									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_FIX_DELAY" placeholder="${I18n.system_please_input} （ Second ）" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
+									<label for="lastname" class="col-sm-2 control-label">固定延迟<font color="red">*</font></label>
+									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_FIX_DELAY" placeholder="请输入 （ Second ）" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
 								</div>
 							</div>
 
 							<br>
-							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">${I18n.jobinfo_conf_job}</p>    <#-- 任务配置 -->
+							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">任务配置</p>    <#-- 任务配置 -->
 
 							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_gluetype}<font color="red">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">运行模式<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control glueType" name="glueType" >
 										<#list GlueTypeEnum as item>
@@ -169,21 +169,21 @@
 									</select>
 								</div>
 								<label for="firstname" class="col-sm-2 control-label">JobHandler<font color="red">*</font></label>
-								<div class="col-sm-4"><input type="text" class="form-control" name="executorHandler" placeholder="${I18n.system_please_input}JobHandler" maxlength="100" ></div>
+								<div class="col-sm-4"><input type="text" class="form-control" name="executorHandler" placeholder="请输入JobHandler" maxlength="100" ></div>
 							</div>
 
 							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorparam}<font color="black">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">任务参数<font color="black">*</font></label>
 								<div class="col-sm-10">
-									<textarea class="textarea form-control" name="executorParam" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_executorparam}" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
+									<textarea class="textarea form-control" name="executorParam" placeholder="请输入任务参数" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
 								</div>
 							</div>
 
 							<br>
-							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">${I18n.jobinfo_conf_advanced}</p>    <#-- 高级配置 -->
+							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">高级配置</p>    <#-- 高级配置 -->
 
 							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorRouteStrategy}<font color="black">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">路由策略<font color="black">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="executorRouteStrategy" >
 										<#list ExecutorRouteStrategyEnum as item>
@@ -192,12 +192,12 @@
 									</select>
 								</div>
 
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_childJobId}<font color="black">*</font></label>
-								<div class="col-sm-4"><input type="text" class="form-control" name="childJobId" placeholder="${I18n.jobinfo_field_childJobId_placeholder}" maxlength="100" ></div>
+								<label for="lastname" class="col-sm-2 control-label">子任务ID<font color="black">*</font></label>
+								<div class="col-sm-4"><input type="text" class="form-control" name="childJobId" placeholder="请输入子任务的任务ID,如存在多个则逗号分隔" maxlength="100" ></div>
 							</div>
 
 							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">${I18n.misfire_strategy}<font color="black">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">调度过期策略<font color="black">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="misfireStrategy" >
 										<#list MisfireStrategyEnum as item>
@@ -206,7 +206,7 @@
 									</select>
 								</div>
 
-								<label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorBlockStrategy}<font color="black">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">阻塞处理策略<font color="black">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="executorBlockStrategy" >
 										<#list ExecutorBlockStrategyEnum as item>
@@ -217,17 +217,17 @@
 							</div>
 
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_timeout}<font color="black">*</font></label>
-								<div class="col-sm-4"><input type="text" class="form-control" name="executorTimeout" placeholder="${I18n.jobinfo_field_executorTimeout_placeholder}" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorFailRetryCount}<font color="black">*</font></label>
-								<div class="col-sm-4"><input type="text" class="form-control" name="executorFailRetryCount" placeholder="${I18n.jobinfo_field_executorFailRetryCount_placeholder}" maxlength="4" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
+								<label for="lastname" class="col-sm-2 control-label">任务超时时间<font color="black">*</font></label>
+								<div class="col-sm-4"><input type="text" class="form-control" name="executorTimeout" placeholder="任务超时时间，单位秒，大于零时生效" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
+								<label for="lastname" class="col-sm-2 control-label">失败重试次数<font color="black">*</font></label>
+								<div class="col-sm-4"><input type="text" class="form-control" name="executorFailRetryCount" placeholder="失败重试次数，大于零时生效" maxlength="4" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
 							</div>
 
 							<hr>
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
-									<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
+									<button type="submit" class="btn btn-primary"  >保存</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 								</div>
 							</div>
 
@@ -252,10 +252,10 @@ public class DemoGlueJobHandler extends IJobHandler {
 #!/bin/bash
 echo "xxl-job: hello shell"
 
-echo "${I18n.jobinfo_script_location}：$0"
-echo "${I18n.jobinfo_field_executorparam}：$1"
-echo "${I18n.jobinfo_shard_index} = $2"
-echo "${I18n.jobinfo_shard_total} = $3"
+echo "脚本位置：$0"
+echo "任务参数：$1"
+echo "分片序号 = $2"
+echo "分片总数 = $3"
 <#--echo "参数数量：$#"
 for param in $*
 do
@@ -274,10 +274,10 @@ import sys
 
 print("xxl-job: hello python")
 
-print("${I18n.jobinfo_script_location}：", sys.argv[0])
-print("${I18n.jobinfo_field_executorparam}：", sys.argv[1])
-print("${I18n.jobinfo_shard_index}：", sys.argv[2])
-print("${I18n.jobinfo_shard_total}：", sys.argv[3])
+print("脚本位置：", sys.argv[0])
+print("任务参数：", sys.argv[1])
+print("分片序号：", sys.argv[2])
+print("分片总数：", sys.argv[3])
 
 print("Good bye!")
 exit(0)
@@ -290,10 +290,10 @@ import sys
 
 print "xxl-job: hello python"
 
-print "${I18n.jobinfo_script_location}：", sys.argv[0]
-print "${I18n.jobinfo_field_executorparam}：", sys.argv[1]
-print "${I18n.jobinfo_shard_index}：", sys.argv[2]
-print "${I18n.jobinfo_shard_total}：", sys.argv[3]
+print "脚本位置：", sys.argv[0]
+print "任务参数：", sys.argv[1]
+print "分片序号：", sys.argv[2]
+print "分片总数：", sys.argv[3]
 <#--for i in range(1, len(sys.argv)):
 	time.sleep(1)
 	print "参数", i, sys.argv[i]-->
@@ -311,10 +311,10 @@ logging.info("脚本文件：" + sys.argv[0])
 
     echo "xxl-job: hello php  \n";
 
-    echo "${I18n.jobinfo_script_location}：$argv[0]  \n";
-    echo "${I18n.jobinfo_field_executorparam}：$argv[1]  \n";
-    echo "${I18n.jobinfo_shard_index} = $argv[2]  \n";
-    echo "${I18n.jobinfo_shard_total} = $argv[3]  \n";
+    echo "脚本位置：$argv[0]  \n";
+    echo "任务参数：$argv[1]  \n";
+    echo "分片序号 = $argv[2]  \n";
+    echo "分片总数 = $argv[3]  \n";
 
     echo "Good bye!  \n";
     exit(0);
@@ -327,10 +327,10 @@ console.log("xxl-job: hello nodejs")
 
 var arguments = process.argv
 
-console.log("${I18n.jobinfo_script_location}: " + arguments[1])
-console.log("${I18n.jobinfo_field_executorparam}: " + arguments[2])
-console.log("${I18n.jobinfo_shard_index}: " + arguments[3])
-console.log("${I18n.jobinfo_shard_total}: " + arguments[4])
+console.log("脚本位置: " + arguments[1])
+console.log("任务参数: " + arguments[2])
+console.log("分片序号: " + arguments[3])
+console.log("分片总数: " + arguments[4])
 <#--for (var i = 2; i < arguments.length; i++){
 	console.log("参数 %s = %s", (i-1), arguments[i]);
 }-->
@@ -341,11 +341,11 @@ process.exit(0)
 <textarea class="glueSource_powershell" style="display:none;" >
 Write-Host "xxl-job: hello powershell"
 
-Write-Host "${I18n.jobinfo_script_location}: " $MyInvocation.MyCommand.Definition
-Write-Host "${I18n.jobinfo_field_executorparam}: "
+Write-Host "脚本位置: " $MyInvocation.MyCommand.Definition
+Write-Host "任务参数: "
 	if ($args.Count -gt 2) { $args[0..($args.Count-3)] }
-Write-Host "${I18n.jobinfo_shard_index}: " $args[$args.Count-2]
-Write-Host "${I18n.jobinfo_shard_total}: " $args[$args.Count-1]
+Write-Host "分片序号: " $args[$args.Count-2]
+Write-Host "分片总数: " $args[$args.Count-1]
 
 Write-Host "Good bye!"
 exit 0
@@ -361,14 +361,14 @@ exit 0
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" >${I18n.jobinfo_field_update}</h4>
+						<h4 class="modal-title" >更新任务</h4>
 					</div>
 					<div class="modal-body">
 						<form class="form-horizontal form" role="form" >
 
-							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">${I18n.jobinfo_conf_base}</p>    <#-- 基础信息 -->
+							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">基础配置</p>    <#-- 基础信息 -->
 							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_jobgroup}<font color="red">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">执行器<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="jobGroup" >
 										<#list JobGroupList as group>
@@ -377,20 +377,20 @@ exit 0
 									</select>
 								</div>
 
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_jobdesc}<font color="red">*</font></label>
-								<div class="col-sm-4"><input type="text" class="form-control" name="jobDesc" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_jobdesc}" maxlength="50" ></div>
+								<label for="lastname" class="col-sm-2 control-label">任务描述<font color="red">*</font></label>
+								<div class="col-sm-4"><input type="text" class="form-control" name="jobDesc" placeholder="请输入任务描述" maxlength="50" ></div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_author}<font color="red">*</font></label>
-								<div class="col-sm-4"><input type="text" class="form-control" name="author" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_author}" maxlength="50" ></div>
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_alarmemail}<font color="black">*</font></label>
-								<div class="col-sm-4"><input type="text" class="form-control" name="alarmEmail" placeholder="${I18n.jobinfo_field_alarmemail_placeholder}" maxlength="100" ></div>
+								<label for="lastname" class="col-sm-2 control-label">负责人<font color="red">*</font></label>
+								<div class="col-sm-4"><input type="text" class="form-control" name="author" placeholder="请输入负责人" maxlength="50" ></div>
+								<label for="lastname" class="col-sm-2 control-label">报警邮件<font color="black">*</font></label>
+								<div class="col-sm-4"><input type="text" class="form-control" name="alarmEmail" placeholder="请输入报警邮件，多个邮件地址则逗号分隔" maxlength="100" ></div>
 							</div>
 
 							<br>
-							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">${I18n.jobinfo_conf_schedule}</p>    <#-- 调度配置 -->
+							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">调度配置</p>    <#-- 调度配置 -->
 							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">${I18n.schedule_type}<font color="red">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">调度类型<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control scheduleType" name="scheduleType" >
 										<#list ScheduleTypeEnum as item>
@@ -404,23 +404,23 @@ exit 0
 								</div>
 								<div class="schedule_conf schedule_conf_CRON" >
 									<label for="lastname" class="col-sm-2 control-label">Cron<font color="red">*</font></label>
-									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_CRON" placeholder="${I18n.system_please_input}Cron" maxlength="128" ></div>
+									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_CRON" placeholder="请输入Cron" maxlength="128" ></div>
 								</div>
 								<div class="schedule_conf schedule_conf_FIX_RATE" style="display: none" >
-									<label for="lastname" class="col-sm-2 control-label">${I18n.schedule_type_fix_rate}<font color="red">*</font></label>
-									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_FIX_RATE" placeholder="${I18n.system_please_input} （ Second ）" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
+									<label for="lastname" class="col-sm-2 control-label">固定速度<font color="red">*</font></label>
+									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_FIX_RATE" placeholder="请输入 （ Second ）" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
 								</div>
 								<div class="schedule_conf schedule_conf_FIX_DELAY" style="display: none" >
-									<label for="lastname" class="col-sm-2 control-label">${I18n.schedule_type_fix_delay}<font color="red">*</font></label>
-									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_FIX_DELAY" placeholder="${I18n.system_please_input} （ Second ）" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
+									<label for="lastname" class="col-sm-2 control-label">固定延迟<font color="red">*</font></label>
+									<div class="col-sm-4"><input type="text" class="form-control" name="schedule_conf_FIX_DELAY" placeholder="请输入 （ Second ）" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
 								</div>
 							</div>
 
 							<br>
-							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">${I18n.jobinfo_conf_job}</p>    <#-- 任务配置 -->
+							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">任务配置</p>    <#-- 任务配置 -->
 
 							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_gluetype}<font color="red">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">运行模式<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control glueType" name="glueType" disabled >
 										<#list GlueTypeEnum as item>
@@ -429,21 +429,21 @@ exit 0
 									</select>
 								</div>
 								<label for="firstname" class="col-sm-2 control-label">JobHandler<font color="red">*</font></label>
-								<div class="col-sm-4"><input type="text" class="form-control" name="executorHandler" placeholder="${I18n.system_please_input}JobHandler" maxlength="100" ></div>
+								<div class="col-sm-4"><input type="text" class="form-control" name="executorHandler" placeholder="请输入JobHandler" maxlength="100" ></div>
 							</div>
 
 							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorparam}<font color="black">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">任务参数<font color="black">*</font></label>
 								<div class="col-sm-10">
-									<textarea class="textarea form-control" name="executorParam" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_executorparam}" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
+									<textarea class="textarea form-control" name="executorParam" placeholder="请输入任务参数" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
 								</div>
 							</div>
 
 							<br>
-							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">${I18n.jobinfo_conf_advanced}</p>    <#-- 高级配置 -->
+							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">高级配置</p>    <#-- 高级配置 -->
 
 							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorRouteStrategy}<font color="red">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">路由策略<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="executorRouteStrategy" >
 										<#list ExecutorRouteStrategyEnum as item>
@@ -452,12 +452,12 @@ exit 0
 									</select>
 								</div>
 
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_childJobId}<font color="black">*</font></label>
-								<div class="col-sm-4"><input type="text" class="form-control" name="childJobId" placeholder="${I18n.jobinfo_field_childJobId_placeholder}" maxlength="100" ></div>
+								<label for="lastname" class="col-sm-2 control-label">子任务ID<font color="black">*</font></label>
+								<div class="col-sm-4"><input type="text" class="form-control" name="childJobId" placeholder="请输入子任务的任务ID,如存在多个则逗号分隔" maxlength="100" ></div>
 							</div>
 
 							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">${I18n.misfire_strategy}<font color="black">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">调度过期策略<font color="black">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="misfireStrategy" >
 										<#list MisfireStrategyEnum as item>
@@ -466,7 +466,7 @@ exit 0
 									</select>
 								</div>
 
-								<label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorBlockStrategy}<font color="red">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">阻塞处理策略<font color="red">*</font></label>
 								<div class="col-sm-4">
 									<select class="form-control" name="executorBlockStrategy" >
 										<#list ExecutorBlockStrategyEnum as item>
@@ -477,17 +477,17 @@ exit 0
 							</div>
 
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_timeout}<font color="black">*</font></label>
-								<div class="col-sm-4"><input type="text" class="form-control" name="executorTimeout" placeholder="${I18n.jobinfo_field_executorTimeout_placeholder}" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
-								<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorFailRetryCount}<font color="black">*</font></label>
-								<div class="col-sm-4"><input type="text" class="form-control" name="executorFailRetryCount" placeholder="${I18n.jobinfo_field_executorFailRetryCount_placeholder}" maxlength="4" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
+								<label for="lastname" class="col-sm-2 control-label">任务超时时间<font color="black">*</font></label>
+								<div class="col-sm-4"><input type="text" class="form-control" name="executorTimeout" placeholder="任务超时时间，单位秒，大于零时生效" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
+								<label for="lastname" class="col-sm-2 control-label">失败重试次数<font color="black">*</font></label>
+								<div class="col-sm-4"><input type="text" class="form-control" name="executorFailRetryCount" placeholder="失败重试次数，大于零时生效" maxlength="4" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
 							</div>
 
 							<hr>
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
-									<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
+									<button type="submit" class="btn btn-primary"  >保存</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 									<input type="hidden" name="id" >
 								</div>
 							</div>
@@ -503,27 +503,27 @@ exit 0
 			<div class="modal-dialog ">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" >${I18n.jobinfo_opt_run}</h4>
+						<h4 class="modal-title" >执行一次</h4>
 					</div>
 					<div class="modal-body">
 						<form class="form-horizontal form" role="form" >
 							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorparam}<font color="black">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">任务参数<font color="black">*</font></label>
 								<div class="col-sm-10">
-									<textarea class="textarea form-control" name="executorParam" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_executorparam}" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
+									<textarea class="textarea form-control" name="executorParam" placeholder="请输入任务参数" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="firstname" class="col-sm-2 control-label">${I18n.jobgroup_field_registryList}<font color="black">*</font></label>
+								<label for="firstname" class="col-sm-2 control-label">机器地址<font color="black">*</font></label>
 								<div class="col-sm-10">
-									<textarea class="textarea form-control" name="addressList" placeholder="${I18n.jobinfo_opt_run_tips}" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
+									<textarea class="textarea form-control" name="addressList" placeholder="请输入本次执行的机器地址，为空则从执行器获取" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
 								</div>
 							</div>
 							<hr>
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
-									<button type="button" class="btn btn-primary ok" >${I18n.system_save}</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
+									<button type="button" class="btn btn-primary ok" >保存</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 									<input type="hidden" name="id" >
 								</div>
 							</div>
@@ -541,7 +541,7 @@ exit 0
 <!-- 3-script start -->
 <@netCommon.commonScript />
 <script src="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/<#if I18n.admin_i18n?? && I18n.admin_i18n == 'en'>bootstrap-table-en-US.min.js<#else>bootstrap-table-zh-CN.min.js</#if>"></script>
+<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 <#-- admin table -->
 <script src="${request.contextPath}/static/biz/common/admin.table.js"></script>
 <#-- admin util -->
@@ -549,7 +549,7 @@ exit 0
 <#-- moment -->
 <script src="${request.contextPath}/static/adminlte/bower_components/moment/moment.min.js"></script>
 <#-- cronGen -->
-<script src="${request.contextPath}/static/plugins/cronGen/<#if I18n.admin_i18n?? && I18n.admin_i18n == 'en'>cronGen_en.js<#else>cronGen.js</#if>"></script>
+<script src="${request.contextPath}/static/plugins/cronGen/cronGen.js"></script>
 <script>
 	$(function() {
 
@@ -610,14 +610,14 @@ exit 0
 					align: 'center',
 					valign: 'middle'
 				},{
-					title: I18n.jobinfo_field_id,
+					title: '任务ID',
 					field: 'id',
 					width: '5',
 					widthUnit: '%',
 					align: 'left'
 				}
 				,{
-					title: I18n.jobinfo_field_jobdesc,
+					title: '任务描述',
 					field: 'jobDesc',
 					width: '25',
 					widthUnit: '%',
@@ -630,7 +630,7 @@ exit 0
 						}
 					}
 				},{
-					title: I18n.schedule_type,
+					title: '调度类型',
 					field: 'scheduleType',
 					width: '15',
 					widthUnit: '%',
@@ -642,7 +642,7 @@ exit 0
 						}
 					}
 				},{
-					title: I18n.jobinfo_field_gluetype,
+					title: '运行模式',
 					field: 'glueType',
 					width: '25',
 					widthUnit: '%',
@@ -663,7 +663,7 @@ exit 0
 						}
 					}
 				},{
-					title: I18n.system_status,
+					title: '状态',
 					field: 'triggerStatus',
 					width: '10',
 					widthUnit: '%',
@@ -677,7 +677,7 @@ exit 0
 						return value;
 					}
 				},{
-					title: I18n.jobinfo_field_author,
+					title: '负责人',
 					field: 'author',
 					width: '10',
 					widthUnit: '%'
@@ -700,15 +700,15 @@ exit 0
 			// find select ids
 			const selectIds = (rows && rows.length > 0) ? rows.map(row => row.id) : [];
 			if (selectIds.length !== 1) {
-				layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
+				layer.msg('请选择' + '一条' + '数据');
 				return;
 			}
 
 			// do delete
-			layer.confirm( I18n.system_ok + I18n.system_opt_del + '?', {
+			layer.confirm( '确定' + '删除' + '?', {
 				icon: 3,
-				title: I18n.system_tips ,
-				btn: [ I18n.system_ok, I18n.system_cancel ]
+				title: '系统提示' ,
+				btn: [ '确定', '取消' ]
 			}, function(index){
 				layer.close(index);
 
@@ -721,11 +721,11 @@ exit 0
 					dataType : "json",
 					success : function(data){
 						if (data.code === 200) {
-							layer.msg( I18n.system_opt_del + I18n.system_success );
+							layer.msg( '删除' + '成功' );
 							// refresh table
 							$('#data_filter .searchBtn').click();
 						} else {
-							layer.msg( data.msg || I18n.system_opt_del + I18n.system_fail );
+							layer.msg( data.msg || '删除' + '失败' );
 						}
 					},
 					error: function(xhr, status, error) {
@@ -733,7 +733,7 @@ exit 0
 						console.log("Error: " + error);
 						layer.open({
 							icon: '2',
-							content: (I18n.system_opt_del + I18n.system_fail)
+							content: ('删除' + '失败')
 						});
 					}
 				});
@@ -752,15 +752,15 @@ exit 0
 			// find select ids
 			const selectIds = (rows && rows.length > 0) ? rows.map(row => row.id) : [];
 			if (selectIds.length !== 1) {
-				layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
+				layer.msg('请选择' + '一条' + '数据');
 				return;
 			}
 
 			// invoke
-			layer.confirm( I18n.system_ok + I18n.jobinfo_opt_start + '?', {
+			layer.confirm( '确定' + '启动' + '?', {
 				icon: 3,
-				title: I18n.system_tips ,
-				btn: [ I18n.system_ok, I18n.system_cancel ]
+				title: '系统提示' ,
+				btn: [ '确定', '取消' ]
 			}, function(index){
 				layer.close(index);
 
@@ -773,11 +773,11 @@ exit 0
 					dataType : "json",
 					success : function(data){
 						if (data.code === 200) {
-							layer.msg( I18n.jobinfo_opt_start + I18n.system_success );
+							layer.msg( '启动' + '成功' );
 							// refresh table
 							$('#data_filter .searchBtn').click();
 						} else {
-							layer.msg( data.msg || I18n.jobinfo_opt_start + I18n.system_fail );
+							layer.msg( data.msg || '启动' + '失败' );
 						}
 					},
 					error: function(xhr, status, error) {
@@ -785,7 +785,7 @@ exit 0
 						console.log("Error: " + error);
 						layer.open({
 							icon: '2',
-							content: (I18n.jobinfo_opt_start + I18n.system_fail)
+							content: ('启动' + '失败')
 						});
 					}
 				});
@@ -804,15 +804,15 @@ exit 0
 			// find select ids
 			const selectIds = (rows && rows.length > 0) ? rows.map(row => row.id) : [];
 			if (selectIds.length !== 1) {
-				layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
+				layer.msg('请选择' + '一条' + '数据');
 				return;
 			}
 
 			// invoke
-			layer.confirm( I18n.system_ok + I18n.jobinfo_opt_stop + '?', {
+			layer.confirm( '确定' + '停止' + '?', {
 				icon: 3,
-				title: I18n.system_tips ,
-				btn: [ I18n.system_ok, I18n.system_cancel ]
+				title: '系统提示' ,
+				btn: [ '确定', '取消' ]
 			}, function(index){
 				layer.close(index);
 
@@ -825,11 +825,11 @@ exit 0
 					dataType : "json",
 					success : function(data){
 						if (data.code === 200) {
-							layer.msg( I18n.jobinfo_opt_stop + I18n.system_success );
+							layer.msg( '停止' + '成功' );
 							// refresh table
 							$('#data_filter .searchBtn').click();
 						} else {
-							layer.msg( data.msg || I18n.jobinfo_opt_stop + I18n.system_fail );
+							layer.msg( data.msg || '停止' + '失败' );
 						}
 					},
 					error: function(xhr, status, error) {
@@ -837,7 +837,7 @@ exit 0
 						console.log("Error: " + error);
 						layer.open({
 							icon: '2',
-							content: (I18n.jobinfo_opt_stop + I18n.system_fail)
+							content: ('停止' + '失败')
 						});
 					}
 				});
@@ -855,7 +855,7 @@ exit 0
 
 			// find select row
 			if (rows.length !== 1) {
-				layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
+				layer.msg('请选择' + '一条' + '数据');
 				return;
 			}
 			var row = rows[0];
@@ -880,9 +880,9 @@ exit 0
 					if (data.code == 200) {
 						$('#jobTriggerModal').modal('hide');
 
-						layer.msg( I18n.jobinfo_opt_run + I18n.system_success );
+						layer.msg( '执行一次' + '成功' );
 					} else {
-						layer.msg( data.msg || I18n.jobinfo_opt_run + I18n.system_fail );
+						layer.msg( data.msg || '执行一次' + '失败' );
 					}
 				}
 			});
@@ -902,7 +902,7 @@ exit 0
 
 			// find select row
 			if (rows.length !== 1) {
-				layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
+				layer.msg('请选择' + '一条' + '数据');
 				return;
 			}
 			var row = rows[0];
@@ -926,8 +926,8 @@ exit 0
 					html += '</div>';
 
 					layer.open({
-						title: I18n.jobinfo_opt_registryinfo ,
-						btn: [ I18n.system_ok ],
+						title: '注册节点' ,
+						btn: [ '确定' ],
 						content: html
 					});
 
@@ -947,14 +947,14 @@ exit 0
 
 			// find select row
 			if (rows.length !== 1) {
-				layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
+				layer.msg('请选择' + '一条' + '数据');
 				return;
 			}
 			var row = rows[0];
 
 			// open tab
 			let url = base_url +'/joblog?jobId='+ row.id;
-			openTab(url, I18n.joblog_name, false);
+			openTab(url, '调度日志', false);
 		});
 
 		// ---------------------- glue_ide ----------------------
@@ -968,14 +968,14 @@ exit 0
 
 			// find select row
 			if (rows.length !== 1) {
-				layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
+				layer.msg('请选择' + '一条' + '数据');
 				return;
 			}
 			var row = rows[0];
 
 			// valid
 			if ('BEAN' === row.glueType) {
-				layer.msg(I18n.jobinfo_glue_gluetype_unvalid);
+				layer.msg('该任务非GLUE模式');
 				return;
 			}
 
@@ -996,7 +996,7 @@ exit 0
 
 			// find select row
 			if (rows.length !== 1) {
-				layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
+				layer.msg('请选择' + '一条' + '数据');
 				return;
 			}
 			var row = rows[0];
@@ -1014,8 +1014,8 @@ exit 0
 
 					if (data.code != 200) {
 						layer.open({
-							title: I18n.jobinfo_opt_next_time ,
-							btn: [ I18n.system_ok ],
+							title: '下次执行时间' ,
+							btn: [ '确定' ],
 							content: data.msg
 						});
 					} else {
@@ -1028,8 +1028,8 @@ exit 0
 						html += '</center>';
 
 						layer.open({
-							title: I18n.jobinfo_opt_next_time ,
-							btn: [ I18n.system_ok ],
+							title: '下次执行时间' ,
+							btn: [ '确定' ],
 							content: html
 						});
 					}
@@ -1057,10 +1057,10 @@ exit 0
 			},
 			messages : {
 				jobDesc : {
-					required : I18n.system_please_input + I18n.jobinfo_field_jobdesc
+					required : '请输入' + '任务描述'
 				},
 				author : {
-					required : I18n.system_please_input + I18n.jobinfo_field_author
+					required : '请输入' + '负责人'
 				}
 			},
 			writeFormData: function() {
@@ -1166,10 +1166,10 @@ exit 0
 			},
 			messages : {
 				jobDesc : {
-					required : I18n.system_please_input + I18n.jobinfo_field_jobdesc
+					required : '请输入' + '任务描述'
 				},
 				author : {
-					required : I18n.system_please_input + I18n.jobinfo_field_author
+					required : '请输入' + '负责人'
 				}
 			},
 			writeFormData: function(row) {
@@ -1258,7 +1258,7 @@ exit 0
 
 			// find select row
 			if (rows.length !== 1) {
-				layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
+				layer.msg('请选择' + '一条' + '数据');
 				return;
 			}
 			var row = rows[0];
