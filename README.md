@@ -136,3 +136,6 @@ This product is open source and free, and will continue to provide free communit
 - java -jar xxl-job-admin.jar --spring.profiles.active=prod
 
 - 或者删除/注释掉 spring.profiles.active=dev 这一行。
+- mvn -pl xxl-job-core,xxl-job-admin -am clean install
+- cd .\xxl-job-admin\
+- mvn clean package
