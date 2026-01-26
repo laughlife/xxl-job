@@ -8,6 +8,7 @@ import com.xxl.tool.http.HttpTool;
 import com.xxl.tool.http.http.HttpResponse;
 import com.xxl.tool.http.http.enums.ContentType;
 import com.xxl.tool.http.http.enums.Method;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -33,8 +34,8 @@ import java.util.concurrent.TimeUnit;
  * @author xuxueli 2019-12-11 21:52:51
  */
 @Component
+@Slf4j
 public class SampleXxlJob {
-    private static final Logger logger = LoggerFactory.getLogger(SampleXxlJob.class);
 
     /**
      * 1、简单任务示例（Bean模式）
@@ -394,11 +395,11 @@ public class SampleXxlJob {
     }
 
     public void init() {
-        logger.info("init");
+        log.info(">>>>>>>>>>> xxl-job job execute start");
     }
 
     public void destroy() {
-        logger.info("destroy");
+        log.info(">>>>>>>>>>> xxl-job job execute stop");
     }
 
 }

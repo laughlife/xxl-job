@@ -63,6 +63,13 @@
 
 		<!-- gpg skip -->
 		<gpg.skip>true</gpg.skip>
+
+		<swagger-annotations-jakarta>2.2.42</swagger-annotations-jakarta>
+		<org.projectlombok>1.18.42</org.projectlombok>
+		<com.google.guava>33.5.0-jre</com.google.guava>
+		<cn.hutool>5.8.42</cn.hutool>
+		<com.baomidou>3.5.7</com.baomidou>
+		<org.apache.velocity>2.3</org.apache.velocity>
 	</properties>
 
 	<dependencyManagement>
