@@ -5,6 +5,7 @@ import com.xxl.job.admin.mapper.*;
 import com.xxl.job.admin.model.XxlJobGroup;
 import com.xxl.job.admin.model.XxlJobInfo;
 import com.xxl.job.admin.model.XxlJobLogReport;
+import com.xxl.job.admin.python.XxlJobPython;
 import com.xxl.job.admin.scheduler.config.XxlJobAdminBootstrap;
 import com.xxl.job.admin.scheduler.cron.CronExpression;
 import com.xxl.job.admin.scheduler.misfire.MisfireStrategyEnum;
@@ -49,6 +50,8 @@ public class XxlJobServiceImpl implements XxlJobService {
 	private XxlJobLogGlueMapper xxlJobLogGlueMapper;
 	@Resource
 	private XxlJobLogReportMapper xxlJobLogReportMapper;
+	@Resource
+	private XxlJobPythonMapper xxlJobPythonMapper;
 	
 	@Override
 	public Response<PageModel<XxlJobInfo>> pageList(int offset, int pagesize, int jobGroup, int triggerStatus, String jobDesc, String executorHandler, String author) {
@@ -104,15 +107,30 @@ public class XxlJobServiceImpl implements XxlJobService {
 		}
 
 		// valid job
-		if (GlueTypeEnum.match(jobInfo.getGlueType()) == null) {
+		GlueTypeEnum glueTypeEnum = GlueTypeEnum.match(jobInfo.getGlueType());
+		if (glueTypeEnum == null) {
 			return Response.ofFail ( (I18nUtil.getString("jobinfo_field_gluetype")+I18nUtil.getString("system_unvalid")) );
 		}
-		if (GlueTypeEnum.BEAN==GlueTypeEnum.match(jobInfo.getGlueType()) && StringTool.isBlank(jobInfo.getExecutorHandler()) ) {
+		if (GlueTypeEnum.BEAN==glueTypeEnum && StringTool.isBlank(jobInfo.getExecutorHandler()) ) {
 			return Response.ofFail ( (I18nUtil.getString("system_please_input")+"JobHandler") );
 		}
 		// 》fix "\r" in shell
-		if (GlueTypeEnum.GLUE_SHELL==GlueTypeEnum.match(jobInfo.getGlueType()) && jobInfo.getGlueSource()!=null) {
+		if (GlueTypeEnum.GLUE_SHELL==glueTypeEnum && jobInfo.getGlueSource()!=null) {
 			jobInfo.setGlueSource(jobInfo.getGlueSource().replaceAll("\r", ""));
+		}
+		if (GlueTypeEnum.GLUE_PYTHON == glueTypeEnum) {
+			if (jobInfo.getPythonId() == null) {
+				return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("python_version"));
+			}
+			XxlJobPython xxlJobPython = xxlJobPythonMapper.loadById(jobInfo.getPythonId());
+			if (xxlJobPython == null) {
+				return Response.ofFail(I18nUtil.getString("python_version") + I18nUtil.getString("system_not_found"));
+			}
+			if (StringTool.isBlank(xxlJobPython.getExecPath())) {
+				return Response.ofFail(I18nUtil.getString("system_please_input") + I18nUtil.getString("python_exec_path"));
+			}
+		} else {
+			jobInfo.setPythonId(null);
 		}
 
 		// valid advanced
@@ -269,6 +287,20 @@ public class XxlJobServiceImpl implements XxlJobService {
 		if (exists_jobInfo == null) {
 			return Response.ofFail ( (I18nUtil.getString("jobinfo_field_id")+I18nUtil.getString("system_not_found")) );
 		}
+		if (GlueTypeEnum.GLUE_PYTHON == GlueTypeEnum.match(exists_jobInfo.getGlueType())) {
+			if (jobInfo.getPythonId() == null) {
+				return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("python_version"));
+			}
+			XxlJobPython xxlJobPython = xxlJobPythonMapper.loadById(jobInfo.getPythonId());
+			if (xxlJobPython == null) {
+				return Response.ofFail(I18nUtil.getString("python_version") + I18nUtil.getString("system_not_found"));
+			}
+			if (StringTool.isBlank(xxlJobPython.getExecPath())) {
+				return Response.ofFail(I18nUtil.getString("system_please_input") + I18nUtil.getString("python_exec_path"));
+			}
+		} else {
+			jobInfo.setPythonId(null);
+		}
 
 		// next trigger time (5s后生效，避开预读周期)
 		long nextTriggerTime = exists_jobInfo.getTriggerNextTime();
@@ -290,6 +322,7 @@ public class XxlJobServiceImpl implements XxlJobService {
 
 		exists_jobInfo.setJobGroup(jobInfo.getJobGroup());
 		exists_jobInfo.setJobDesc(jobInfo.getJobDesc());
+		exists_jobInfo.setPythonId(jobInfo.getPythonId());
 		exists_jobInfo.setAuthor(jobInfo.getAuthor());
 		exists_jobInfo.setAlarmEmail(jobInfo.getAlarmEmail());
 		exists_jobInfo.setScheduleType(jobInfo.getScheduleType());

@@ -1,8 +1,10 @@
 package com.xxl.job.admin.controller.biz;
 
 import com.xxl.job.admin.mapper.XxlJobGroupMapper;
+import com.xxl.job.admin.mapper.XxlJobPythonMapper;
 import com.xxl.job.admin.model.XxlJobGroup;
 import com.xxl.job.admin.model.XxlJobInfo;
+import com.xxl.job.admin.python.XxlJobPython;
 import com.xxl.job.admin.scheduler.exception.XxlJobException;
 import com.xxl.job.admin.scheduler.misfire.MisfireStrategyEnum;
 import com.xxl.job.admin.scheduler.route.ExecutorRouteStrategyEnum;
@@ -46,6 +48,8 @@ public class JobInfoController {
 	private XxlJobGroupMapper xxlJobGroupMapper;
 	@Resource
 	private XxlJobService xxlJobService;
+	@Resource
+	private XxlJobPythonMapper xxlJobPythonMapper;
 	
 	@RequestMapping
 	public String index(HttpServletRequest request, Model model, @RequestParam(value = "jobGroup", required = false, defaultValue = "-1") int jobGroup) {
@@ -74,6 +78,9 @@ public class JobInfoController {
 
 		model.addAttribute("JobGroupList", jobGroupList);
 		model.addAttribute("jobGroup", jobGroup);
+
+		List<XxlJobPython> pythonList = xxlJobPythonMapper.findAll();
+		model.addAttribute("pythonList", pythonList);
 
 		return "biz/job.list";
 	}

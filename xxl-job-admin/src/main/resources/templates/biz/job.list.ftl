@@ -173,6 +173,20 @@
 								<div class="col-sm-4"><input type="text" class="form-control" name="executorHandler" placeholder="请输入JobHandler" maxlength="100" ></div>
 							</div>
 
+							<div class="row mb-3 python-version-row" style="display:none">
+								<label for="firstname" class="col-sm-2 col-form-label">Python版本<font color="red">*</font></label>
+								<div class="col-sm-4">
+									<select class="form-control" name="pythonId">
+										<option value="">请选择Python版本</option>
+										<#list pythonList![] as py>
+											<option value="${py.id}">${py.version} (${py.name})</option>
+										</#list>
+									</select>
+								</div>
+								<label for="firstname" class="col-sm-2 col-form-label">&nbsp;</label>
+								<div class="col-sm-4"></div>
+							</div>
+
 							<div class="row mb-3">
 								<label for="firstname" class="col-sm-2 col-form-label">任务参数<font color="black">*</font></label>
 								<div class="col-sm-10">
@@ -431,6 +445,20 @@ exit 0
 								</div>
 								<label for="firstname" class="col-sm-2 col-form-label">JobHandler<font color="red">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="executorHandler" placeholder="请输入JobHandler" maxlength="100" ></div>
+							</div>
+
+							<div class="row mb-3 python-version-row" style="display:none">
+								<label for="firstname" class="col-sm-2 col-form-label">Python版本<font color="red">*</font></label>
+								<div class="col-sm-4">
+									<select class="form-control" name="pythonId">
+										<option value="">请选择Python版本</option>
+										<#list pythonList![] as py>
+											<option value="${py.id}">${py.version} (${py.name})</option>
+										</#list>
+									</select>
+								</div>
+								<label for="firstname" class="col-sm-2 col-form-label">&nbsp;</label>
+								<div class="col-sm-4"></div>
 							</div>
 
 							<div class="row mb-3">
@@ -1128,14 +1156,21 @@ exit 0
 
 		// glueType change
 		$(".glueType").change(function(){
+			var $form = $(this).parents("form");
 			// executorHandler
-			var $executorHandler = $(this).parents("form").find("input[name='executorHandler']");
+			var $executorHandler = $form.find("input[name='executorHandler']");
 			var glueType = $(this).val();
 			if ('BEAN' != glueType) {
 				$executorHandler.val("");
 				$executorHandler.attr("readonly","readonly");
 			} else {
 				$executorHandler.removeAttr("readonly");
+			}
+			if ('GLUE_PYTHON' === glueType) {
+				$form.find(".python-version-row").show();
+			} else {
+				$form.find(".python-version-row").hide();
+				$form.find("select[name='pythonId']").val('');
 			}
 		});
 
@@ -1211,6 +1246,11 @@ exit 0
 
 				// fill job
 				$('#updateModal .form select[name=glueType] option[value='+ row.glueType +']').prop('selected', true);
+				if (row.pythonId) {
+					$("#updateModal .form select[name='pythonId']").val(row.pythonId);
+				} else {
+					$("#updateModal .form select[name='pythonId']").val('');
+				}
 				$("#updateModal .form input[name='executorHandler']").val( row.executorHandler );
 				$("#updateModal .form textarea[name='executorParam']").val( row.executorParam );
 
@@ -1302,6 +1342,11 @@ exit 0
 
 			// fill job
 			$('#addModal .form select[name=glueType] option[value='+ row.glueType +']').prop('selected', true);
+			if (row.pythonId) {
+				$("#addModal .form select[name='pythonId']").val(row.pythonId);
+			} else {
+				$("#addModal .form select[name='pythonId']").val('');
+			}
 			$("#addModal .form input[name='executorHandler']").val( row.executorHandler );
 			$("#addModal .form textarea[name='executorParam']").val( row.executorParam );
 

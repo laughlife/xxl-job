@@ -3,9 +3,11 @@ package com.xxl.job.admin.scheduler.trigger;
 import com.xxl.job.admin.mapper.XxlJobGroupMapper;
 import com.xxl.job.admin.mapper.XxlJobInfoMapper;
 import com.xxl.job.admin.mapper.XxlJobLogMapper;
+import com.xxl.job.admin.mapper.XxlJobPythonMapper;
 import com.xxl.job.admin.model.XxlJobGroup;
 import com.xxl.job.admin.model.XxlJobInfo;
 import com.xxl.job.admin.model.XxlJobLog;
+import com.xxl.job.admin.python.XxlJobPython;
 import com.xxl.job.admin.scheduler.config.XxlJobAdminBootstrap;
 import com.xxl.job.admin.scheduler.route.ExecutorRouteStrategyEnum;
 import com.xxl.job.admin.util.I18nUtil;
@@ -40,6 +42,8 @@ public class JobTrigger {
     private XxlJobGroupMapper xxlJobGroupMapper;
     @Resource
     private XxlJobLogMapper xxlJobLogMapper;
+    @Resource
+    private XxlJobPythonMapper xxlJobPythonMapper;
 
 
     /**
@@ -166,6 +170,13 @@ public class JobTrigger {
         triggerParam.setGlueUpdatetime(jobInfo.getGlueUpdatetime().getTime());
         triggerParam.setBroadcastIndex(index);
         triggerParam.setBroadcastTotal(total);
+
+        if (jobInfo.getPythonId() != null) {
+            XxlJobPython xxlJobPython = xxlJobPythonMapper.loadById(jobInfo.getPythonId());
+            if (xxlJobPython != null && StringTool.isNotBlank(xxlJobPython.getExecPath())) {
+                triggerParam.setPythonExecPath(xxlJobPython.getExecPath());
+            }
+        }
 
         // 3、init address
         String address = null;

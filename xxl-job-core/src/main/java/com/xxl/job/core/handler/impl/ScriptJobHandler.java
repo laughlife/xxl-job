@@ -18,12 +18,18 @@ public class ScriptJobHandler extends IJobHandler {
     private long glueUpdatetime;
     private String gluesource;
     private GlueTypeEnum glueType;
+    private String pythonExecPath;
 
-    public ScriptJobHandler(int jobId, long glueUpdatetime, String gluesource, GlueTypeEnum glueType){
+    public ScriptJobHandler(int jobId,
+                        long glueUpdatetime,
+                        String gluesource,
+                        GlueTypeEnum glueType,
+                        String pythonExecPath){
         this.jobId = jobId;
         this.glueUpdatetime = glueUpdatetime;
         this.gluesource = gluesource;
         this.glueType = glueType;
+        this.pythonExecPath = pythonExecPath;
 
         // clean old script file
         File glueSrcPath = new File(XxlJobFileAppender.getGlueSrcPath());
@@ -53,8 +59,10 @@ public class ScriptJobHandler extends IJobHandler {
             return;
         }
 
-        // cmd
         String cmd = glueType.getCmd();
+        if (GlueTypeEnum.GLUE_PYTHON == glueType && pythonExecPath != null && !pythonExecPath.trim().isEmpty()) {
+            cmd = pythonExecPath.trim();
+        }
 
         // make script file
         String scriptFileName = XxlJobFileAppender.getGlueSrcPath()

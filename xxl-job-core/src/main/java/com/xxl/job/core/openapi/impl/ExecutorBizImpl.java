@@ -112,9 +112,14 @@ public class ExecutorBizImpl implements ExecutorBiz {
                 jobHandler = null;
             }
 
-            // valid handler
             if (jobHandler == null) {
-                jobHandler = new ScriptJobHandler(triggerRequest.getJobId(), triggerRequest.getGlueUpdatetime(), triggerRequest.getGlueSource(), GlueTypeEnum.match(triggerRequest.getGlueType()));
+                jobHandler = new ScriptJobHandler(
+                        triggerRequest.getJobId(),
+                        triggerRequest.getGlueUpdatetime(),
+                        triggerRequest.getGlueSource(),
+                        glueTypeEnum,
+                        triggerRequest.getPythonExecPath()
+                );
             }
         } else {
             return Response.of(XxlJobContext.HANDLE_CODE_FAIL, "glueType[" + triggerRequest.getGlueType() + "] is not valid.");

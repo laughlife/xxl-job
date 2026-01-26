@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.admin.mapper.XxlJobPythonMapper">
+
+	<resultMap id="XxlJobPython" type="com.xxl.job.admin.python.XxlJobPython">
+		<result column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="version" property="version" />
+		<result column="exec_path" property="execPath" />
+		<result column="remark" property="remark" />
+		<result column="add_time" property="addTime" />
+		<result column="update_time" property="updateTime" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		t.id,
+		t.name,
+		t.version,
+		t.exec_path,
+		t.remark,
+		t.add_time,
+		t.update_time
+	</sql>
+
+	<select id="findAll" resultMap="XxlJobPython">
+		SELECT <include refid="Base_Column_List" />
+		FROM xxl_job_python AS t
+		ORDER BY t.version ASC, t.id ASC
+	</select>
+
+	<select id="pageListCount" parameterType="java.util.HashMap" resultType="int">
+		SELECT count(1)
+		FROM xxl_job_python AS t
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				AND t.name like CONCAT(CONCAT('%', #{name}), '%')
+			</if>
+			<if test="version != null and version != ''">
+				AND t.version like CONCAT(CONCAT('%', #{version}), '%')
+			</if>
+		</trim>
+	</select>
+
+	<select id="pageList" parameterType="java.util.HashMap" resultMap="XxlJobPython">
+		SELECT <include refid="Base_Column_List" />
+		FROM xxl_job_python AS t
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				AND t.name like CONCAT(CONCAT('%', #{name}), '%')
+			</if>
+			<if test="version != null and version != ''">
+				AND t.version like CONCAT(CONCAT('%', #{version}), '%')
+			</if>
+		</trim>
+		ORDER BY t.version ASC, t.id ASC
+		LIMIT #{offset}, #{pagesize}
+	</select>
+
+	<select id="loadById" parameterType="java.lang.Integer" resultMap="XxlJobPython">
+		SELECT <include refid="Base_Column_List" />
+		FROM xxl_job_python AS t
+		WHERE t.id = #{id}
+	</select>
+
+	<insert id="save" parameterType="com.xxl.job.admin.python.XxlJobPython" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO xxl_job_python (
+			`name`,
+			`version`,
+			`exec_path`,
+			`remark`,
+			`add_time`,
+			`update_time`
+		) VALUES (
+			#{name},
+			#{version},
+			#{execPath},
+			#{remark},
+			#{addTime},
+			#{updateTime}
+		);
+	</insert>
+
+	<update id="update" parameterType="com.xxl.job.admin.python.XxlJobPython">
+		UPDATE xxl_job_python
+		SET `name` = #{name},
+			`version` = #{version},
+			`exec_path` = #{execPath},
+			`remark` = #{remark},
+			`add_time` = #{addTime},
+			`update_time` = #{updateTime}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM xxl_job_python
+		WHERE id = #{id}
+	</delete>
+
+	<select id="loadByVersion" parameterType="java.lang.String" resultMap="XxlJobPython">
+		SELECT <include refid="Base_Column_List" />
+		FROM xxl_job_python AS t
+		WHERE t.version = #{version}
+	</select>
+
+</mapper>

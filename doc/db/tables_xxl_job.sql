@@ -40,6 +40,7 @@ CREATE TABLE `xxl_job_info`
     `id`                        int(11)      NOT NULL AUTO_INCREMENT,
     `job_group`                 int(11)      NOT NULL COMMENT '执行器主键ID',
     `job_desc`                  varchar(255) NOT NULL,
+    `python_id`                 int(11)               DEFAULT NULL COMMENT 'Python版本ID',
     `add_time`                  datetime              DEFAULT NULL,
     `update_time`               datetime              DEFAULT NULL,
     `author`                    varchar(64)           DEFAULT NULL COMMENT '作者',
@@ -62,6 +63,22 @@ CREATE TABLE `xxl_job_info`
     `trigger_last_time`         bigint(13)   NOT NULL DEFAULT '0' COMMENT '上次调度时间',
     `trigger_next_time`         bigint(13)   NOT NULL DEFAULT '0' COMMENT '下次调度时间',
     PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+
+## —————————————————————— python ——————————————————
+
+CREATE TABLE `xxl_job_python`
+(
+    `id`          int(11)     NOT NULL AUTO_INCREMENT,
+    `name`        varchar(64) NOT NULL COMMENT '名称',
+    `version`     varchar(32) NOT NULL COMMENT '版本号',
+    `exec_path`   varchar(255) NOT NULL COMMENT '可执行文件路径',
+    `remark`      varchar(255)         DEFAULT NULL COMMENT '备注',
+    `add_time`    datetime             DEFAULT NULL,
+    `update_time` datetime             DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `i_version` (`version`) USING BTREE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 
