@@ -25,13 +25,13 @@
                     <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">${I18n.job_dashboard_job_num}</span>
+                        <span class="info-box-text">任务数量</span>
                         <span class="info-box-number">${jobInfoCount}</span>
 
                         <div class="progress">
                             <div class="progress-bar" style="width: 100%"></div>
                         </div>
-                        <span class="progress-description">${I18n.job_dashboard_job_num_tip}</span>
+                        <span class="progress-description">调度中心运行的任务数量</span>
                     </div>
                 </div>
             </div>
@@ -42,14 +42,14 @@
                     <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">${I18n.job_dashboard_trigger_num}</span>
+                        <span class="info-box-text">调度次数</span>
                         <span class="info-box-number">${jobLogCount}</span>
 
                         <div class="progress">
                             <div class="progress-bar" style="width: 100%" ></div>
                         </div>
                         <span class="progress-description">
-                                ${I18n.job_dashboard_trigger_num_tip}
+                                调度中心触发的调度次数
                             <#--<#if jobLogCount gt 0>
                                 调度成功率：${(jobLogSuccessCount*100/jobLogCount)?string("0.00")}<small>%</small>
                             </#if>-->
@@ -64,13 +64,13 @@
                     <span class="info-box-icon"><i class="fa ion-ios-settings-strong"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">${I18n.job_dashboard_jobgroup_num}</span>
+                        <span class="info-box-text">执行器数量</span>
                         <span class="info-box-number">${executorCount}</span>
 
                         <div class="progress">
                             <div class="progress-bar" style="width: 100%"></div>
                         </div>
-                        <span class="progress-description">${I18n.job_dashboard_jobgroup_num_tip}</span>
+                        <span class="progress-description">调度中心在线的执行器机器数量</span>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">${I18n.job_dashboard_report}</h3>
+                        <h3 class="box-title">调度报表</h3>
                         <#--<input type="text" class="form-control" id="filterTime" readonly >-->
 
                         <!-- tools box -->
@@ -130,12 +130,12 @@ $(function () {
 
     // filter Time
     var rangesConf = {};
-    rangesConf[I18n.daterangepicker_ranges_today] = [moment().startOf('day'), moment().endOf('day')];
-    rangesConf[I18n.daterangepicker_ranges_yesterday] = [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')];
-    rangesConf[I18n.daterangepicker_ranges_this_month] = [moment().startOf('month'), moment().endOf('month')];
-    rangesConf[I18n.daterangepicker_ranges_last_month] = [moment().subtract(1, 'months').startOf('month'), moment().subtract(1, 'months').endOf('month')];
-    rangesConf[I18n.daterangepicker_ranges_recent_week] = [moment().subtract(1, 'weeks').startOf('day'), moment().endOf('day')];
-    rangesConf[I18n.daterangepicker_ranges_recent_month] = [moment().subtract(1, 'months').startOf('day'), moment().endOf('day')];
+    rangesConf['今日'] = [moment().startOf('day'), moment().endOf('day')];
+    rangesConf['昨日'] = [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')];
+    rangesConf['本月'] = [moment().startOf('month'), moment().endOf('month')];
+    rangesConf['上个月'] = [moment().subtract(1, 'months').startOf('month'), moment().subtract(1, 'months').endOf('month')];
+    rangesConf['最近一周'] = [moment().subtract(1, 'weeks').startOf('day'), moment().endOf('day')];
+    rangesConf['最近一月'] = [moment().subtract(1, 'months').startOf('day'), moment().endOf('day')];
 
     $('#filterTime').daterangepicker({
         autoApply:false,
@@ -149,21 +149,21 @@ $(function () {
         locale : {
             format: 'YYYY-MM-DD HH:mm:ss',
             separator : ' - ',
-            customRangeLabel : I18n.daterangepicker_custom_name ,
-            applyLabel : I18n.system_ok ,
-            cancelLabel : I18n.system_cancel ,
-            fromLabel : I18n.daterangepicker_custom_starttime ,
-            toLabel : I18n.daterangepicker_custom_endtime ,
-            daysOfWeek : I18n.daterangepicker_custom_daysofweek.split(',') ,        // '日', '一', '二', '三', '四', '五', '六'
-            monthNames : I18n.daterangepicker_custom_monthnames.split(',') ,        // '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'
+            customRangeLabel : '自定义' ,
+            applyLabel : '确定' ,
+            cancelLabel : '取消' ,
+            fromLabel : '起始时间' ,
+            toLabel : '结束时间' ,
+            daysOfWeek : '日,一,二,三,四,五,六'.split(',') ,        // '日', '一', '二', '三', '四', '五', '六'
+            monthNames : '一月,二月,三月,四月,五月,六月,七月,八月,九月,十月,十一月,十二月'.split(',') ,        // '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'
             firstDay : 1
         },
-        startDate: rangesConf[I18n.daterangepicker_ranges_recent_week][0] ,
-        endDate: rangesConf[I18n.daterangepicker_ranges_recent_week][1]
+        startDate: rangesConf['最近一周'][0] ,
+        endDate: rangesConf['最近一周'][1]
     }, function (start, end, label) {
         freshChartDate(start, end);
     });
-    freshChartDate(rangesConf[I18n.daterangepicker_ranges_recent_week][0], rangesConf[I18n.daterangepicker_ranges_recent_week][1]);
+    freshChartDate(rangesConf['最近一周'][0], rangesConf['最近一周'][1]);
 
     /**
      * fresh Chart Date
@@ -186,9 +186,9 @@ $(function () {
                     pieChartInit(data.data);
                 } else {
                     layer.open({
-                        title: I18n.system_tips ,
-                        btn: [ I18n.system_ok ],
-                        content: (data.msg || I18n.job_dashboard_report_loaddata_fail ),
+                        title: '系统提示' ,
+                        btn: [ '确定' ],
+                        content: (data.msg || '调度报表数据加载异常' ),
                         icon: '2'
                     });
                 }
@@ -202,7 +202,7 @@ $(function () {
     function lineChartInit(data) {
         var option = {
             title: {
-                text: I18n.job_dashboard_date_report
+                text: '日期分布图'
             },
             tooltip : {
                 trigger: 'axis',
@@ -214,7 +214,7 @@ $(function () {
                 }
             },
             legend: {
-                data:[I18n.joblog_status_suc, I18n.joblog_status_fail, I18n.joblog_status_running]
+                data:['成功', '失败', '进行中']
             },
             toolbox: {
                 feature: {
@@ -241,14 +241,14 @@ $(function () {
             ],
             series : [
                 {
-                    name:I18n.joblog_status_suc,
+                    name:'成功',
                     type:'line',
                     stack: 'Total',
                     areaStyle: {normal: {}},
                     data: data.triggerDayCountSucList
                 },
                 {
-                    name:I18n.joblog_status_fail,
+                    name:'失败',
                     type:'line',
                     stack: 'Total',
                     label: {
@@ -261,7 +261,7 @@ $(function () {
                     data: data.triggerDayCountFailList
                 },
                 {
-                    name:I18n.joblog_status_running,
+                    name:'进行中',
                     type:'line',
                     stack: 'Total',
                     areaStyle: {normal: {}},
@@ -281,7 +281,7 @@ $(function () {
     function pieChartInit(data) {
         var option = {
             title : {
-                text: I18n.job_dashboard_rate_report ,
+                text: '成功比例图' ,
                 /*subtext: 'subtext',*/
                 x:'center'
             },
@@ -292,7 +292,7 @@ $(function () {
             legend: {
                 orient: 'vertical',
                 left: 'left',
-                data: [I18n.joblog_status_suc, I18n.joblog_status_fail, I18n.joblog_status_running ]
+                data: ['成功', '失败', '进行中' ]
             },
             series : [
                 {
@@ -302,15 +302,15 @@ $(function () {
                     center: ['50%', '60%'],
                     data:[
                         {
-                            name:I18n.joblog_status_suc,
+                            name:'成功',
                             value:data.triggerCountSucTotal
                         },
                         {
-                            name:I18n.joblog_status_fail,
+                            name:'失败',
                             value:data.triggerCountFailTotal
                         },
                         {
-                            name:I18n.joblog_status_running,
+                            name:'进行中',
                             value:data.triggerCountRunningTotal
                         }
                     ],

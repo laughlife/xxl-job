@@ -6,7 +6,7 @@
 
     <!-- 1-style start -->
     <@netCommon.commonStyle />
-    <link rel="stylesheet" href="${request.contextPath}/static/biz/common/admin.tab.css?v=${I18n.admin_version}">
+    <link rel="stylesheet" href="${request.contextPath}/static/biz/common/admin.tab.css?v=3.4.0-SNAPSHOT">
     <!-- 1-style end -->
 
 </head>
@@ -18,7 +18,7 @@
         <!-- header logo -->
         <a href="${request.contextPath}/" class="logo">
             <span class="logo-mini"><b>XXL</b></span>
-            <span class="logo-lg"><b>${I18n.admin_name}</b></span>
+            <span class="logo-lg"><b>任务调度中心</b></span>
         </a>
         <nav class="navbar navbar-static-top" role="navigation">
             <!--header left -->
@@ -35,17 +35,17 @@
                     <#-- login user -->
                     <li class="dropdown">
                         <a href="javascript:" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="font-weight: bold;">
-                            ${I18n.system_welcome}：${xxl_sso_user.userName!}
+                            欢迎：${xxl_sso_user.userName!}
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li id="updatePwd" >
-                                <a class="dropdown-item" href="javascript:"><i class="fa fa-key"></i> ${I18n.change_pwd}</a>
+                                <a class="dropdown-item" href="javascript:"><i class="fa fa-key"></i> 修改密码</a>
                             </li>
                             <li id="changeSkin" >
-                                <a class="dropdown-item" href="javascript:"><i class="fa fa-key"></i> ${I18n.change_skin}</a>
+                                <a class="dropdown-item" href="javascript:"><i class="fa fa-key"></i> 切换主题</a>
                             </li>
                             <li id="logoutBtn" >
-                                <a class="dropdown-item" href="javascript:"><i class="fa fa-sign-out"></i> ${I18n.logout_btn}</a>
+                                <a class="dropdown-item" href="javascript:"><i class="fa fa-sign-out"></i> 注销</a>
                             </li>
                         </ul>
                     </li>
@@ -62,7 +62,7 @@
         <section class="sidebar" style="height: auto;" >
             <!-- sidebar menu -->
             <ul class="sidebar-menu" data-widget="tree" >
-                <li class="header">${I18n.system_nav}</li>
+                <li class="header">导航</li>
                 <#if resourceList?? && resourceList?size gt 0>
                     <@renderMenu resourceList />
                 </#if>
@@ -135,15 +135,15 @@
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i></button>
             <!-- opt -->
             <div class="btn-group roll-nav roll-right">
-                <button class="dropdown-toggle" data-bs-toggle="dropdown">${I18n.tab_opt}</button>
+                <button class="dropdown-toggle" data-bs-toggle="dropdown">页签操作</button>
                 <ul role="menu" class="dropdown-menu dropdown-menu-end">
-                    <li class="tabCloseCurrent"><a class="dropdown-item">${I18n.tab_close_current}</a></li>
-                    <li class="J_tabCloseOther"><a class="dropdown-item">${I18n.tab_close_other}</a></li>
-                    <li class="J_tabCloseAll"><a class="dropdown-item">${I18n.tab_close_all}</a></li>
+                    <li class="tabCloseCurrent"><a class="dropdown-item">关闭当前</a></li>
+                    <li class="J_tabCloseOther"><a class="dropdown-item">关闭其他</a></li>
+                    <li class="J_tabCloseAll"><a class="dropdown-item">全部关闭</a></li>
                 </ul>
             </div>
             <!-- refresh -->
-            <a href="#" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> ${I18n.tab_refresh}</a>
+            <a href="#" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>
             <!-- fullscreen -->
             <a href="#" class="roll-nav roll-right fullscreen" id="fullScreen"><i class="fa fa-arrows-alt"></i></a>
         </div>
@@ -158,7 +158,7 @@
 
     <!-- 5-footer start -->
     <footer class="main-footer">
-        Powered by <b>XXL-JOB</b> ${I18n.admin_version}
+        Powered by <b>XXL-JOB</b> 3.4.0-SNAPSHOT
         <div class="pull-right hidden-xs">
             <strong>Copyright &copy; 2015-${.now?string('yyyy')} &nbsp;
                 <a href="https://www.xuxueli.com/" target="_blank" >xuxueli</a>
@@ -173,8 +173,8 @@
 
 <!-- 6-script start -->
 <@netCommon.commonScript />
-<script src="${request.contextPath}/static/biz/common/admin.tab.js?v=${I18n.admin_version}"></script>
-<script src="${request.contextPath}/static/biz/common/admin.setting.js?v=${I18n.admin_version}"></script>
+<script src="${request.contextPath}/static/biz/common/admin.tab.js?v=3.4.0-SNAPSHOT"></script>
+<script src="${request.contextPath}/static/biz/common/admin.setting.js?v=3.4.0-SNAPSHOT"></script>
 <script>
     $(function () {
         // init admin tab

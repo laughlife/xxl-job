@@ -24,7 +24,7 @@
 
 					<div class="col-3">
 						<div class="input-group">
-							<span class="input-group-addon">${I18n.user_role}</span>
+							<span class="input-group-text">${I18n.user_role}</span>
 							<select class="form-control" id="role" >
 								<option value="-1" >${I18n.system_all}</option>
 								<option value="1" >${I18n.user_role_admin}</option>
@@ -34,7 +34,7 @@
 					</div>
 					<div class="col-3">
 						<div class="input-group">
-							<span class="input-group-addon">${I18n.user_username}</span>
+							<span class="input-group-text">${I18n.user_username}</span>
 							<input type="text" class="form-control" id="username" autocomplete="on" >
 						</div>
 					</div>
