@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.io;
+package com.xxl.job.executor.mybatis.util.io;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;

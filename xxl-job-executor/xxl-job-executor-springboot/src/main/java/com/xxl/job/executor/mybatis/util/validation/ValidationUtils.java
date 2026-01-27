@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.validation;
+package com.xxl.job.executor.mybatis.util.validation;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Assert;

@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.json;
+package com.xxl.job.executor.mybatis.util.json;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;

@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.string;
+package com.xxl.job.executor.mybatis.util.string;
 
 import cn.hutool.core.text.StrPool;
 import cn.hutool.core.util.ArrayUtil;

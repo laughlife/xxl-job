@@ -4,4 +4,4 @@
  *
  * ps：如果担心 Hutool 存在坑的问题，可以阅读 Hutool 的实现源码，以确保可靠性。并且，可以补充相关的单元测试。
  */
-package cn.iocoder.yudao.framework.common.util;
+package com.xxl.job.executor.mybatis.util;

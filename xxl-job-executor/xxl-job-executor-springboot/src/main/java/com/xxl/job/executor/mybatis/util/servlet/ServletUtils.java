@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.servlet;
+package com.xxl.job.executor.mybatis.util.servlet;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.JakartaServletUtil;

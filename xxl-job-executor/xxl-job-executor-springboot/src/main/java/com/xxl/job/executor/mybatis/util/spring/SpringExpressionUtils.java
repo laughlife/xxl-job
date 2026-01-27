@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.spring;
+package com.xxl.job.executor.mybatis.util.spring;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;

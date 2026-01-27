@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.monitor;
+package com.xxl.job.executor.mybatis.util.monitor;
 
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 

@@ -68,8 +68,10 @@
 		<org.projectlombok>1.18.42</org.projectlombok>
 		<com.google.guava>33.5.0-jre</com.google.guava>
 		<cn.hutool>5.8.42</cn.hutool>
-		<com.baomidou>3.5.7</com.baomidou>
 		<org.apache.velocity>2.3</org.apache.velocity>
+		<mybatis-plus-join.version>1.5.5</mybatis-plus-join.version>
+		<jakarta.validation-api>3.1.1</jakarta.validation-api>
+		<com.baomidou>4.5.0</com.baomidou>
 	</properties>
 
 	<dependencyManagement>

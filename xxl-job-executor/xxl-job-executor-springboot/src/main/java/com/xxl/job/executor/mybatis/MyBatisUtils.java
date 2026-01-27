@@ -1,12 +1,9 @@
-package cn.iocoder.yudao.framework.mybatis.core.util;
+package com.xxl.job.executor.mybatis;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.func.Func1;
 import cn.hutool.core.lang.func.LambdaUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.iocoder.yudao.framework.common.pojo.PageParam;
-import cn.iocoder.yudao.framework.common.pojo.SortingField;
-import cn.iocoder.yudao.framework.mybatis.core.enums.DbTypeEnum;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -16,6 +13,9 @@ import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xxl.job.executor.mybatis.enums.DbTypeEnum;
+import com.xxl.job.executor.mybatis.pojo.PageParam;
+import com.xxl.job.executor.mybatis.pojo.SortingField;
 import net.sf.jsqlparser.expression.Alias;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.schema.Table;

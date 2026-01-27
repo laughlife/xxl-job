@@ -1,10 +1,11 @@
-package cn.iocoder.yudao.framework.mybatis.core.util;
+package com.xxl.job.executor.mybatis;
 
-import cn.iocoder.yudao.framework.common.util.object.ObjectUtils;
-import cn.iocoder.yudao.framework.common.util.spring.SpringUtils;
-import cn.iocoder.yudao.framework.mybatis.core.enums.DbTypeEnum;
+
 import com.baomidou.dynamic.datasource.DynamicRoutingDataSource;
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.xxl.job.executor.mybatis.enums.DbTypeEnum;
+import com.xxl.job.executor.mybatis.util.object.ObjectUtils;
+import com.xxl.job.executor.mybatis.util.spring.SpringUtils;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 
 import javax.sql.DataSource;
@@ -42,7 +43,7 @@ public class JdbcUtils {
      * @return DB 类型
      */
     public static DbType getDbType(String url) {
-        return com.baomidou.mybatisplus.extension.toolkit.JdbcUtils.getDbType(url);
+        return JdbcUtils.getDbType(url);
     }
 
     /**

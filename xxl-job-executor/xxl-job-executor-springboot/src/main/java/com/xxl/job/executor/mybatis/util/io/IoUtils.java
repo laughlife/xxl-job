@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.io;
+package com.xxl.job.executor.mybatis.util.io;
 
 import cn.hutool.core.io.IORuntimeException;
 import cn.hutool.core.io.IoUtil;
@@ -7,7 +7,7 @@ import cn.hutool.core.util.StrUtil;
 import java.io.InputStream;
 
 /**
- * IO 工具类，用于 {@link cn.hutool.core.io.IoUtil} 缺失的方法
+ * IO 工具类，用于 {@link IoUtil} 缺失的方法
  *
  * @author 芋道源码
  */

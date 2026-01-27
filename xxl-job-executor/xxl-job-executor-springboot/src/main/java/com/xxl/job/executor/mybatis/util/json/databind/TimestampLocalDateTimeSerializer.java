@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.json.databind;
+package com.xxl.job.executor.mybatis.util.json.databind;
 
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.ReflectUtil;

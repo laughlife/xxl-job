@@ -1,7 +1,7 @@
-package com.xxl.job.executor.pojo.exception;
+package com.xxl.job.executor.mybatis.pojo.exception;
 
 import cn.iocoder.yudao.framework.common.exception.enums.GlobalErrorCodeConstants;
-import cn.iocoder.yudao.framework.common.exception.enums.ServiceErrorCodeRange;
+import com.xxl.job.executor.mybatis.pojo.exception.enums.ServiceErrorCodeRange;
 import lombok.Data;
 
 /**

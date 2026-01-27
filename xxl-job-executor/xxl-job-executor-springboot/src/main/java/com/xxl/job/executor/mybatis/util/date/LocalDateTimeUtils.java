@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.date;
+package com.xxl.job.executor.mybatis.util.date;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DatePattern;

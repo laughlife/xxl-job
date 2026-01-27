@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.cache;
+package com.xxl.job.executor.mybatis.util.cache;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;

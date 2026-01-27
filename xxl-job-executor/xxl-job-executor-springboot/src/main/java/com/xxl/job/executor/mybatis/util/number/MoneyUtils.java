@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.number;
+package com.xxl.job.executor.mybatis.util.number;
 
 import cn.hutool.core.math.Money;
 import cn.hutool.core.util.NumberUtil;

@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.object;
+package com.xxl.job.executor.mybatis.util.object;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;

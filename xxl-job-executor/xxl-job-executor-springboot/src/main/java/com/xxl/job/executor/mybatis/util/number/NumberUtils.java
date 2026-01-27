@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.number;
+package com.xxl.job.executor.mybatis.util.number;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.NumberUtil;
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * 数字的工具类，补全 {@link cn.hutool.core.util.NumberUtil} 的功能
+ * 数字的工具类，补全 {@link NumberUtil} 的功能
  *
  * @author 芋道源码
  */

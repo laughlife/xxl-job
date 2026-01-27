@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.mybatis.core.enums;
+package com.xxl.job.executor.mybatis.enums;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.DbType;

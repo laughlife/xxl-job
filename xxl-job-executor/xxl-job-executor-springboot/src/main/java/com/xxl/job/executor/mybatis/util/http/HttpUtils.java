@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.common.util.http;
+package com.xxl.job.executor.mybatis.util.http;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.map.TableMap;
