@@ -130,7 +130,7 @@ This product is open source and free, and will continue to provide free communit
 
 产品开源免费，并且将持续提供免费的社区技术支持。个人或企业内部可自由的接入和使用。如有需要可 [邮件联系](https://www.xuxueli.com/page/community.html) 作者免费获取项目授权。
 
-##生产环境注意
+## 生产环境注意
 
 - 部署到生产时，改用生产 profile：
 - java -jar xxl-job-admin.jar --spring.profiles.active=prod
@@ -139,3 +139,8 @@ This product is open source and free, and will continue to provide free communit
 - mvn -pl xxl-job-core,xxl-job-admin -am clean install
 - cd .\xxl-job-admin\
 - mvn clean package
+
+## xxl-job-executor 生产环境
+
+- 部署到生产时，改用生产 profile：
+- mvn -pl xxl-job-executor/xxl-job-executor-springboot -am package

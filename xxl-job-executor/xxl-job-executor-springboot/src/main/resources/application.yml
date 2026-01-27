@@ -1,38 +1,14 @@
-server:
-  port: 8081
-
-logging:
-  config: classpath:logback.xml
-
 spring:
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/ruoyi-vue-pro?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
-    username: root
-    password: Liv88625200@@
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-xxl:
-  job:
-    admin:
-      addresses: http://127.0.0.1:8080/xxl-job-admin
-      accessToken: default_token
-      timeout: 3
-    executor:
-      enabled: true
-      appname: xxl-job-executor
-      address: ""
-      ip: ""
-      port: 9999
-      logpath: /data/applogs/xxl-job/jobhandler
-      logretentiondays: 30
-      excludedpackage: ""
+  profiles:
+    default: dev
 
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 打印 SQL 日志，便于调试
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
-      logic-delete-field: deleted  # 逻辑删除字段（可选）
+      logic-delete-field: deleted
+
 hubu:
   apiurl: "https://sbappstoreapi.ziniao.com"
   appid: "202505061369339710371131392"
@@ -42,3 +18,6 @@ sellfox:
   clientId: "368027"
   clientSecret: "2951eb88-f581-48cf-8b8b-8d5c40e37e49"
   getTokenUrl: "https://openapi.sellfox.com/api/oauth/v2/token.json"
+
+logging:
+  config: classpath:logback.xml

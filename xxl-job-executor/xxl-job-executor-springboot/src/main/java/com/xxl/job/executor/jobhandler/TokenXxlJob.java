@@ -40,7 +40,7 @@ public class TokenXxlJob {
     /**
      * 示例：处理过期订单
      */
-    @XxlJob("refreshTokenJobHandler")
+    @XxlJob("refreshHubuSellfoxToken")
     public void refreshTokenJobHandler() throws Exception {
         XxlJobHelper.log("开始刷新Token信息...");
 

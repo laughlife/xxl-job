@@ -15,22 +15,22 @@
 				<div class="row" id="data_filter" >
 					<div class="col-3">
 						<div class="input-group">
-							<span class="input-group-addon">${I18n.python_name}</span>
+							<span class="input-group-addon">名称</span>
 							<input type="text" class="form-control" id="name" autocomplete="on" >
 						</div>
 					</div>
 					<div class="col-3">
 						<div class="input-group">
-							<span class="input-group-addon">${I18n.python_version}</span>
+							<span class="input-group-addon">版本</span>
 							<input type="text" class="form-control" id="version" autocomplete="on" >
 						</div>
 					</div>
 
 					<div class="col-1">
-						<button class="btn btn-block btn-primary searchBtn" >${I18n.system_search}</button>
+						<button class="btn btn-block btn-primary searchBtn" >搜索</button>
 					</div>
 					<div class="col-1">
-						<button class="btn btn-block btn-secondary resetBtn" >${I18n.system_reset}</button>
+						<button class="btn btn-block btn-secondary resetBtn" >重置</button>
 					</div>
 				</div>
 			</div>
@@ -40,10 +40,10 @@
 			<div class="col-12">
 				<div class="box">
 					<div class="box-header pull-left" id="data_operation" >
-						<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>${I18n.system_opt_add}</button>
-						<button class="btn btn-sm btn-warning selectOnlyOne update" type="button"><i class="fa fa-edit"></i>${I18n.system_opt_edit}</button>
-						<button class="btn btn-sm btn-danger selectAny delete" type="button"><i class="fa fa-remove "></i>${I18n.system_opt_del}</button>
-						<button class="btn btn-sm btn-success scan" type="button"><i class="fa fa-search"></i>${I18n.python_scan}</button>
+						<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>新增</button>
+						<button class="btn btn-sm btn-warning selectOnlyOne update" type="button"><i class="fa fa-edit"></i>编辑</button>
+						<button class="btn btn-sm btn-danger selectAny delete" type="button"><i class="fa fa-remove "></i>删除</button>
+						<button class="btn btn-sm btn-success scan" type="button"><i class="fa fa-search"></i>扫描</button>
 					</div>
 					<div class="box-body" >
 						<table id="data_list" class="table table-bordered table-striped" width="100%" >
@@ -57,35 +57,35 @@
 		</div>
 
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog"  aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" >${I18n.python_add}</h4>
+						<h4 class="modal-title" >新增</h4>
 					</div>
 					<div class="modal-body">
 						<form class="form-horizontal form" role="form" >
-							<div class="form-group">
-								<label class="col-sm-2 control-label">${I18n.python_name}<font color="red">*</font></label>
-								<div class="col-sm-8"><input type="text" class="form-control" name="name" placeholder="${I18n.system_please_input}${I18n.python_name}" maxlength="64" ></div>
+							<div class="row mb-3">
+								<label class="col-sm-3 col-form-label">名称<font color="red">*</font></label>
+								<div class="col-sm-9"><input type="text" class="form-control" name="name" placeholder="请输入名称" maxlength="64" ></div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">${I18n.python_version}<font color="red">*</font></label>
-								<div class="col-sm-8"><input type="text" class="form-control" name="version" placeholder="${I18n.system_please_input}${I18n.python_version}" maxlength="32" ></div>
+							<div class="row mb-3">
+								<label class="col-sm-3 col-form-label">版本<font color="red">*</font></label>
+								<div class="col-sm-9"><input type="text" class="form-control" name="version" placeholder="请输入版本" maxlength="32" ></div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">${I18n.python_exec_path}<font color="red">*</font></label>
-								<div class="col-sm-8"><input type="text" class="form-control" name="execPath" placeholder="${I18n.system_please_input}${I18n.python_exec_path}" maxlength="512" ></div>
+							<div class="row mb-3">
+								<label class="col-sm-3 col-form-label">执行路径<font color="red">*</font></label>
+								<div class="col-sm-9"><input type="text" class="form-control" name="execPath" placeholder="请输入执行路径" maxlength="512" ></div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">${I18n.python_remark}</label>
-								<div class="col-sm-8"><input type="text" class="form-control" name="remark" placeholder="${I18n.python_remark}" maxlength="255" ></div>
+							<div class="row mb-3">
+								<label class="col-sm-3 col-form-label">备注</label>
+								<div class="col-sm-9"><input type="text" class="form-control" name="remark" placeholder="请输入备注" maxlength="255" ></div>
 							</div>
 
 							<hr>
-							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-6">
-									<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${I18n.system_cancel}</button>
+							<div class="row mb-3">
+								<div class="offset-sm-3 col-sm-6">
+									<button type="submit" class="btn btn-primary"  >保存</button>
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 								</div>
 							</div>
 						</form>
@@ -95,35 +95,35 @@
 		</div>
 
 		<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"  aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" >${I18n.python_update}</h4>
+						<h4 class="modal-title" >编辑</h4>
 					</div>
 					<div class="modal-body">
 						<form class="form-horizontal form" role="form" >
-							<div class="form-group">
-								<label class="col-sm-2 control-label">${I18n.python_name}<font color="red">*</font></label>
-								<div class="col-sm-8"><input type="text" class="form-control" name="name" placeholder="${I18n.system_please_input}${I18n.python_name}" maxlength="64" ></div>
+							<div class="row mb-3">
+								<label class="col-sm-3 col-form-label">名称<font color="red">*</font></label>
+								<div class="col-sm-9"><input type="text" class="form-control" name="name" placeholder="请输入名称" maxlength="64" ></div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">${I18n.python_version}<font color="red">*</font></label>
-								<div class="col-sm-8"><input type="text" class="form-control" name="version" placeholder="${I18n.system_please_input}${I18n.python_version}" maxlength="32" ></div>
+							<div class="row mb-3">
+								<label class="col-sm-3 col-form-label">版本<font color="red">*</font></label>
+								<div class="col-sm-9"><input type="text" class="form-control" name="version" placeholder="请输入版本" maxlength="32" ></div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">${I18n.python_exec_path}<font color="red">*</font></label>
-								<div class="col-sm-8"><input type="text" class="form-control" name="execPath" placeholder="${I18n.system_please_input}${I18n.python_exec_path}" maxlength="512" ></div>
+							<div class="row mb-3">
+								<label class="col-sm-3 col-form-label">执行路径<font color="red">*</font></label>
+								<div class="col-sm-9"><input type="text" class="form-control" name="execPath" placeholder="请输入执行路径" maxlength="512" ></div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">${I18n.python_remark}</label>
-								<div class="col-sm-8"><input type="text" class="form-control" name="remark" placeholder="${I18n.python_remark}" maxlength="255" ></div>
+							<div class="row mb-3">
+								<label class="col-sm-3 col-form-label">备注</label>
+								<div class="col-sm-9"><input type="text" class="form-control" name="remark" placeholder="请输入备注" maxlength="255" ></div>
 							</div>
 
 							<hr>
-							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-6">
-									<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${I18n.system_cancel}</button>
+							<div class="row mb-3">
+								<div class="offset-sm-3 col-sm-6">
+									<button type="submit" class="btn btn-primary"  >保存</button>
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 									<input type="hidden" name="id" >
 								</div>
 							</div>
@@ -139,7 +139,7 @@
 
 <@netCommon.commonScript />
 <script src="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.js"></script>
-<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/<#if I18n.admin_i18n?? && I18n.admin_i18n == 'en'>bootstrap-table-en-US.js<#else>bootstrap-table-zh-CN.js</#if>"></script>
+<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
 <script src="${request.contextPath}/static/biz/common/admin.table.js"></script>
 <script>
 	$(function() {
@@ -170,19 +170,19 @@
 					widthUnit: '%',
 					align: 'left'
 				},{
-					title: I18n.python_name,
+					title: '名称',
 					field: 'name',
 					width: '15',
 					widthUnit: '%',
 					align: 'left'
 				},{
-					title: I18n.python_version,
+					title: '版本',
 					field: 'version',
 					width: '10',
 					widthUnit: '%',
 					align: 'left'
 				},{
-					title: I18n.python_exec_path,
+					title: '执行路径',
 					field: 'execPath',
 					width: '35',
 					widthUnit: '%',
@@ -194,7 +194,7 @@
 						return '<span title="' + value + '">' + value + '</span>';
 					}
 				},{
-					title: I18n.python_remark,
+					title: '备注',
 					field: 'remark',
 					width: '15',
 					widthUnit: '%',
@@ -203,7 +203,7 @@
 						return value || '';
 					}
 				},{
-					title: I18n.system_opt,
+					title: '操作',
 					field: 'opt',
 					width: '15',
 					widthUnit: '%',
@@ -228,9 +228,9 @@
 				remark: { maxlength: 255 }
 			},
 			messages: {
-				name: { required: I18n.system_please_input + I18n.python_name },
-				version: { required: I18n.system_please_input + I18n.python_version },
-				execPath: { required: I18n.system_please_input + I18n.python_exec_path }
+				name: { required: '请输入名称' },
+				version: { required: '请输入版本' },
+				execPath: { required: '请输入执行路径' }
 			},
 			readFormData: function() {
 				return $("#addModal .form").serializeArray();
@@ -252,21 +252,21 @@
 		});
 
 		$("#data_operation .scan").click(function() {
-			layer.confirm(I18n.system_ok + I18n.python_scan + '?', {
+			layer.confirm('确定扫描？', {
 				icon: 3,
-				title: I18n.system_tips ,
-				btn: [ I18n.system_ok, I18n.system_cancel ]
+				title: '提示',
+				btn: [ '确定', '取消' ]
 			}, function(index){
 				layer.close(index);
 				$.post(base_url + "/python/scan", {}, function(data) {
 					if (data.code === 200) {
-						layer.msg(I18n.system_success);
+						layer.msg('成功');
 						$('#data_filter .searchBtn').click();
 					} else {
 						layer.open({
-							title: I18n.system_tips,
-							btn: [ I18n.system_ok ],
-							content: (data.msg || I18n.system_fail),
+							title: '提示',
+							btn: [ '确定' ],
+							content: (data.msg || '失败'),
 							icon: '2'
 						});
 					}
@@ -279,4 +279,3 @@
 
 </body>
 </html>
-
