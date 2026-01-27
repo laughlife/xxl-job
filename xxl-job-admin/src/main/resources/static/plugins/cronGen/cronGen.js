@@ -371,27 +371,31 @@
                 //fillInWeekDays();
                 //fillInMonths();
 
-                $.fn.cronGen.tools.cronParse(inputElement.val());
+                // Wait for popover to be shown, then initialize
+                setTimeout(function() {
+                    $.fn.cronGen.tools.cronParse(inputElement.val());
 
-                //绑定指定事件
-                $.fn.cronGen.tools.initChangeEvent();
+                    //绑定指定事件
+                    $.fn.cronGen.tools.initChangeEvent();
 
-
-                $('#CronGenTabs a').click(function (e) {
-                    e.preventDefault();
-                    // Bootstrap 5 Tab activation
-                    var tabTrigger = new bootstrap.Tab(this);
-                    tabTrigger.show();
-                    //generate();
-                });
-                $("#CronGenMainDiv select, #CronGenMainDiv input").change(function (e) {
-                    generate();
-                    refreshRunTime();
-                });
-                $("#CronGenMainDiv input").focus(function (e) {
-                    generate();
-                });
-                //generate();
+                    // Use event delegation for tab clicks
+                    $(document).off('click.cronGenTabs').on('click.cronGenTabs', '.popover #CronGenTabs a', function (e) {
+                        e.preventDefault();
+                        // Bootstrap 5 Tab activation
+                        var tabTrigger = new bootstrap.Tab(this);
+                        tabTrigger.show();
+                    });
+                    
+                    // Use event delegation for input/select changes
+                    $(document).off('change.cronGenInput').on('change.cronGenInput', '.popover #CronGenMainDiv select, .popover #CronGenMainDiv input', function (e) {
+                        generate();
+                        refreshRunTime();
+                    });
+                    
+                    $(document).off('focus.cronGenInput').on('focus.cronGenInput', '.popover #CronGenMainDiv input', function (e) {
+                        generate();
+                    });
+                }, 100);
             });
             return;
         }
@@ -467,14 +471,14 @@
 
     var generate = function () {
 
-        var activeTab = $("ul#CronGenTabs li a.active").prop("id");
+        var activeTab = $(".popover ul#CronGenTabs li a.active").prop("id");
         if (activeTab == undefined) {
             return;
         }
         var results = "";
         switch (activeTab) {
             case "SecondlyTab":
-                switch ($("input:radio[name=second]:checked").val()) {
+                switch ($(".popover input:radio[name=second]:checked").val()) {
                     case "1":
                         $.fn.cronGen.tools.everyTime("second");
                         results = $.fn.cronGen.tools.cronResult();
@@ -494,7 +498,7 @@
                 }
                 break;
             case "MinutesTab":
-                switch ($("input:radio[name=min]:checked").val()) {
+                switch ($(".popover input:radio[name=min]:checked").val()) {
                     case "1":
                         $.fn.cronGen.tools.everyTime("min");
                         results = $.fn.cronGen.tools.cronResult();
@@ -514,7 +518,7 @@
                 }
                 break;
             case "HourlyTab":
-                switch ($("input:radio[name=hour]:checked").val()) {
+                switch ($(".popover input:radio[name=hour]:checked").val()) {
                     case "1":
                        $.fn.cronGen.tools.everyTime("hour");
                         results = $.fn.cronGen.tools.cronResult();
@@ -534,7 +538,7 @@
                 }
                 break;
             case "DailyTab":
-                switch ($("input:radio[name=day]:checked").val()) {
+                switch ($(".popover input:radio[name=day]:checked").val()) {
                     case "1":
                         $.fn.cronGen.tools.everyTime("day");
                         results = $.fn.cronGen.tools.cronResult();
@@ -566,7 +570,7 @@
                 }
                 break;
             case "WeeklyTab":
-                switch ($("input:radio[name=week]:checked").val()) {
+                switch ($(".popover input:radio[name=week]:checked").val()) {
                     case "1":
                         $.fn.cronGen.tools.everyTime("week");
                         results = $.fn.cronGen.tools.cronResult();
@@ -594,7 +598,7 @@
                 }
                 break;
             case "MonthlyTab":
-                switch ($("input:radio[name=month]:checked").val()) {
+                switch ($(".popover input:radio[name=month]:checked").val()) {
                     case "1":
                         $.fn.cronGen.tools.everyTime("month");
                         results = $.fn.cronGen.tools.cronResult();
@@ -618,7 +622,7 @@
                 }
                 break;
             case "YearlyTab":
-                switch ($("input:radio[name=year]:checked").val()) {
+                switch ($(".popover input:radio[name=year]:checked").val()) {
                     case "1":
                         $.fn.cronGen.tools.unAppoint("year");
                         results = $.fn.cronGen.tools.cronResult();
@@ -652,9 +656,9 @@
             dataType : "json",
             success : function(data){
                 if (data.code === 200) {
-                    $('#runTime').val(data.data.join("\n"));
+                    $('.popover #runTime').val(data.data.join("\n"));
                 } else {
-                    $('#runTime').val(data.msg);
+                    $('.popover #runTime').val(data.msg);
                 }
             }
         });
@@ -671,7 +675,7 @@
          * 每周期
          */
         everyTime : function(dom){
-            $("#"+dom+"Hidden").val("*");
+            $(".popover #"+dom+"Hidden").val("*");
             $.fn.cronGen.tools.clearCheckbox(dom);
         },
         /**
@@ -683,75 +687,82 @@
             {
                 val = "";
             }
-            $("#"+dom+"Hidden").val(val);
+            $(".popover #"+dom+"Hidden").val(val);
             $.fn.cronGen.tools.clearCheckbox(dom);
         },
         /**
          * 周期
          */
         cycle : function(dom){
-            var start = $("#"+dom+"Start_0").val();
-            var end = $("#"+dom+"End_0").val();
-            $("#"+dom+"Hidden").val(start + "-" + end);
+            var start = $(".popover #"+dom+"Start_0").val();
+            var end = $(".popover #"+dom+"End_0").val();
+            $(".popover #"+dom+"Hidden").val(start + "-" + end);
             $.fn.cronGen.tools.clearCheckbox(dom);
         },
         /**
          * 从开始
          */
         startOn : function(dom) {
-            var start = $("#"+dom+"Start_1").val();
-            var end = $("#"+dom+"End_1").val();
-            $("#"+dom+"Hidden").val(start + "/" + end);
+            var start = $(".popover #"+dom+"Start_1").val();
+            var end = $(".popover #"+dom+"End_1").val();
+            $(".popover #"+dom+"Hidden").val(start + "/" + end);
             $.fn.cronGen.tools.clearCheckbox(dom);
         },
         /**
          * 最后一天
          */
         lastDay : function(dom){
-            $("#"+dom+"Hidden").val("L");
+            $(".popover #"+dom+"Hidden").val("L");
             $.fn.cronGen.tools.clearCheckbox(dom);
         },
         /**
          * 每周的某一天
          */
         weekOfDay : function(dom){
-            var start = $("#"+dom+"Start_0").val();
-            var end = $("#"+dom+"End_0").val();
-            $("#"+dom+"Hidden").val(start + "#" + end);
+            var start = $(".popover #"+dom+"Start_0").val();
+            var end = $(".popover #"+dom+"End_0").val();
+            $(".popover #"+dom+"Hidden").val(start + "#" + end);
             $.fn.cronGen.tools.clearCheckbox(dom);
         },
         /**
          * 最后一周
          */
         lastWeek : function(dom){
-            var start = $("#"+dom+"Start_2").val();
-            $("#"+dom+"Hidden").val(start+"L");
+            var start = $(".popover #"+dom+"Start_2").val();
+            $(".popover #"+dom+"Hidden").val(start+"L");
             $.fn.cronGen.tools.clearCheckbox(dom);
         },
         /**
          * 工作日
          */
         workDay : function(dom) {
-            var start = $("#"+dom+"Start_2").val();
-            $("#"+dom+"Hidden").val(start + "W");
+            var start = $(".popover #"+dom+"Start_2").val();
+            $(".popover #"+dom+"Hidden").val(start + "W");
             $.fn.cronGen.tools.clearCheckbox(dom);
         },
         initChangeEvent : function(){
-            var secondList = $(".secondList").children();
-            $("#sencond_appoint").click(function(){
+            // Use event delegation on document to handle dynamically created popover content
+            $(document).off('click.cronGen change.cronGen');
+            
+            // Second appoint click - enable checkboxes when "指定" is selected
+            $(document).on('click.cronGen', '.popover #sencond_appoint', function(){
                 if (this.checked) {
-                    if ($(secondList).filter(":checked").length == 0) {
-                        $(secondList.eq(0)).attr("checked", true);
+                    // Enable all checkboxes in secondList
+                    $(".popover .secondList input[type='checkbox']").removeAttr("disabled");
+                    var secondList = $(".popover .secondList input[type='checkbox']");
+                    if (secondList.filter(":checked").length == 0) {
+                        secondList.eq(0).prop("checked", true);
                     }
-                    secondList.eq(0).change();
+                    secondList.eq(0).trigger('change');
                 }
             });
 
-            secondList.change(function() {
-                var sencond_appoint = $("#sencond_appoint").prop("checked");
+            // Second list change
+            $(document).on('change.cronGen', '.popover .secondList input[type="checkbox"]', function() {
+                var sencond_appoint = $(".popover #sencond_appoint").prop("checked");
                 if (sencond_appoint) {
                     var vals = [];
-                    secondList.each(function() {
+                    $(".popover .secondList input[type='checkbox']").each(function() {
                         if (this.checked) {
                             vals.push(this.value);
                         }
@@ -762,25 +773,29 @@
                     }else if(vals.length == 59){
                         val = "*";
                     }
-                    $("#secondHidden").val(val);
+                    $(".popover #secondHidden").val(val);
                 }
             });
 
-            var minList = $(".minList").children();
-            $("#min_appoint").click(function(){
+            // Min appoint click - enable checkboxes when "指定" is selected
+            $(document).on('click.cronGen', '.popover #min_appoint', function(){
                 if (this.checked) {
-                    if ($(minList).filter(":checked").length == 0) {
-                        $(minList.eq(0)).attr("checked", true);
+                    // Enable all checkboxes in minList
+                    $(".popover .minList input[type='checkbox']").removeAttr("disabled");
+                    var minList = $(".popover .minList input[type='checkbox']");
+                    if (minList.filter(":checked").length == 0) {
+                        minList.eq(0).prop("checked", true);
                     }
-                    minList.eq(0).change();
+                    minList.eq(0).trigger('change');
                 }
             });
 
-            minList.change(function() {
-                var min_appoint = $("#min_appoint").prop("checked");
+            // Min list change
+            $(document).on('change.cronGen', '.popover .minList input[type="checkbox"]', function() {
+                var min_appoint = $(".popover #min_appoint").prop("checked");
                 if (min_appoint) {
                     var vals = [];
-                    minList.each(function() {
+                    $(".popover .minList input[type='checkbox']").each(function() {
                         if (this.checked) {
                             vals.push(this.value);
                         }
@@ -791,25 +806,29 @@
                     }else if(vals.length == 59){
                         val = "*";
                     }
-                    $("#minHidden").val(val);
+                    $(".popover #minHidden").val(val);
                 }
             });
 
-            var hourList = $(".hourList").children();
-            $("#hour_appoint").click(function(){
+            // Hour appoint click - enable checkboxes when "指定" is selected
+            $(document).on('click.cronGen', '.popover #hour_appoint', function(){
                 if (this.checked) {
-                    if ($(hourList).filter(":checked").length == 0) {
-                        $(hourList.eq(0)).attr("checked", true);
+                    // Enable all checkboxes in hourList
+                    $(".popover .hourList input[type='checkbox']").removeAttr("disabled");
+                    var hourList = $(".popover .hourList input[type='checkbox']");
+                    if (hourList.filter(":checked").length == 0) {
+                        hourList.eq(0).prop("checked", true);
                     }
-                    hourList.eq(0).change();
+                    hourList.eq(0).trigger('change');
                 }
             });
 
-            hourList.change(function() {
-                var hour_appoint = $("#hour_appoint").prop("checked");
+            // Hour list change
+            $(document).on('change.cronGen', '.popover .hourList input[type="checkbox"]', function() {
+                var hour_appoint = $(".popover #hour_appoint").prop("checked");
                 if (hour_appoint) {
                     var vals = [];
-                    hourList.each(function() {
+                    $(".popover .hourList input[type='checkbox']").each(function() {
                         if (this.checked) {
                             vals.push(this.value);
                         }
@@ -820,25 +839,29 @@
                     }else if(vals.length == 24){
                         val = "*";
                     }
-                    $("#hourHidden").val(val);
+                    $(".popover #hourHidden").val(val);
                 }
             });
 
-            var dayList = $(".dayList").children();
-            $("#day_appoint").click(function(){
+            // Day appoint click - enable checkboxes when "指定" is selected
+            $(document).on('click.cronGen', '.popover #day_appoint', function(){
                 if (this.checked) {
-                    if ($(dayList).filter(":checked").length == 0) {
-                        $(dayList.eq(0)).attr("checked", true);
+                    // Enable all checkboxes in dayList
+                    $(".popover .dayList input[type='checkbox']").removeAttr("disabled");
+                    var dayList = $(".popover .dayList input[type='checkbox']");
+                    if (dayList.filter(":checked").length == 0) {
+                        dayList.eq(0).prop("checked", true);
                     }
-                    dayList.eq(0).change();
+                    dayList.eq(0).trigger('change');
                 }
             });
 
-            dayList.change(function() {
-                var day_appoint = $("#day_appoint").prop("checked");
+            // Day list change
+            $(document).on('change.cronGen', '.popover .dayList input[type="checkbox"]', function() {
+                var day_appoint = $(".popover #day_appoint").prop("checked");
                 if (day_appoint) {
                     var vals = [];
-                    dayList.each(function() {
+                    $(".popover .dayList input[type='checkbox']").each(function() {
                         if (this.checked) {
                             vals.push(this.value);
                         }
@@ -849,25 +872,29 @@
                     }else if(vals.length == 31){
                         val = "*";
                     }
-                   $("#dayHidden").val(val);
+                   $(".popover #dayHidden").val(val);
                 }
             });
 
-            var monthList = $(".monthList").children();
-            $("#month_appoint").click(function(){
+            // Month appoint click - enable checkboxes when "指定" is selected
+            $(document).on('click.cronGen', '.popover #month_appoint', function(){
                 if (this.checked) {
-                    if ($(monthList).filter(":checked").length == 0) {
-                        $(monthList.eq(0)).attr("checked", true);
+                    // Enable all checkboxes in monthList
+                    $(".popover .monthList input[type='checkbox']").removeAttr("disabled");
+                    var monthList = $(".popover .monthList input[type='checkbox']");
+                    if (monthList.filter(":checked").length == 0) {
+                        monthList.eq(0).prop("checked", true);
                     }
-                    monthList.eq(0).change();
+                    monthList.eq(0).trigger('change');
                 }
             });
 
-            monthList.change(function() {
-                var month_appoint = $("#month_appoint").prop("checked");
+            // Month list change
+            $(document).on('change.cronGen', '.popover .monthList input[type="checkbox"]', function() {
+                var month_appoint = $(".popover #month_appoint").prop("checked");
                 if (month_appoint) {
                     var vals = [];
-                    monthList.each(function() {
+                    $(".popover .monthList input[type='checkbox']").each(function() {
                         if (this.checked) {
                             vals.push(this.value);
                         }
@@ -878,25 +905,29 @@
                     }else if(vals.length == 12){
                         val = "*";
                     }
-                    $("#monthHidden").val(val);
+                    $(".popover #monthHidden").val(val);
                 }
             });
 
-            var weekList = $(".weekList").children();
-            $("#week_appoint").click(function(){
+            // Week appoint click - enable checkboxes when "指定" is selected
+            $(document).on('click.cronGen', '.popover #week_appoint', function(){
                 if (this.checked) {
-                    if ($(weekList).filter(":checked").length == 0) {
-                        $(weekList.eq(0)).attr("checked", true);
+                    // Enable all checkboxes in weekList
+                    $(".popover .weekList input[type='checkbox']").removeAttr("disabled");
+                    var weekList = $(".popover .weekList input[type='checkbox']");
+                    if (weekList.filter(":checked").length == 0) {
+                        weekList.eq(0).prop("checked", true);
                     }
-                    weekList.eq(0).change();
+                    weekList.eq(0).trigger('change');
                 }
             });
 
-            weekList.change(function() {
-                var week_appoint = $("#week_appoint").prop("checked");
+            // Week list change
+            $(document).on('change.cronGen', '.popover .weekList input[type="checkbox"]', function() {
+                var week_appoint = $(".popover #week_appoint").prop("checked");
                 if (week_appoint) {
                     var vals = [];
-                    weekList.each(function() {
+                    $(".popover .weekList input[type='checkbox']").each(function() {
                         if (this.checked) {
                             vals.push(this.value);
                         }
@@ -907,31 +938,31 @@
                     }else if(vals.length == 7){
                         val = "*";
                     }
-                   $("#weekHidden").val(val);
+                   $(".popover #weekHidden").val(val);
                 }
             });
         },
         initObj : function(strVal, strid){
             var ary = null;
-            var objRadio = $("input[name='" + strid + "'");
+            var objRadio = $(".popover input[name='" + strid + "']");
             if (strVal == "*") {
-                objRadio.eq(0).attr("checked", "checked");
+                objRadio.eq(0).prop("checked", true);
             } else if (strVal.split('-').length > 1) {
                 ary = strVal.split('-');
-                objRadio.eq(1).attr("checked", "checked");
-                $("#" + strid + "Start_0").val(ary[0]);
-                $("#" + strid + "End_0").val(ary[1]);
+                objRadio.eq(1).prop("checked", true);
+                $(".popover #" + strid + "Start_0").val(ary[0]);
+                $(".popover #" + strid + "End_0").val(ary[1]);
             } else if (strVal.split('/').length > 1) {
                 ary = strVal.split('/');
-                objRadio.eq(2).attr("checked", "checked");
-                $("#" + strid + "Start_1").val(ary[0]);
-                $("#" + strid + "End_1").val(ary[1]);
+                objRadio.eq(2).prop("checked", true);
+                $(".popover #" + strid + "Start_1").val(ary[0]);
+                $(".popover #" + strid + "End_1").val(ary[1]);
             } else {
-                objRadio.eq(3).attr("checked", "checked");
+                objRadio.eq(3).prop("checked", true);
                 if (strVal != "?") {
                     ary = strVal.split(",");
                     for (var i = 0; i < ary.length; i++) {
-                        $("." + strid + "List input[value='" + ary[i] + "']").attr("checked", "checked");
+                        $(".popover ." + strid + "List input[value='" + ary[i] + "']").prop("checked", true);
                     }
                     $.fn.cronGen.tools.initCheckBox(strid);
                 }
@@ -939,116 +970,116 @@
         },
         initDay : function(strVal) {
             var ary = null;
-            var objRadio = $("input[name='day'");
+            var objRadio = $(".popover input[name='day']");
             if (strVal == "*") {
-                objRadio.eq(0).attr("checked", "checked");
+                objRadio.eq(0).prop("checked", true);
             } else if (strVal == "?") {
-                objRadio.eq(1).attr("checked", "checked");
+                objRadio.eq(1).prop("checked", true);
             } else if (strVal.split('-').length > 1) {
                 ary = strVal.split('-');
-                objRadio.eq(2).attr("checked", "checked");
-                $("#dayStart_0").val(ary[0]);
-                $("#dayEnd_0").val(ary[1]);
+                objRadio.eq(2).prop("checked", true);
+                $(".popover #dayStart_0").val(ary[0]);
+                $(".popover #dayEnd_0").val(ary[1]);
             } else if (strVal.split('/').length > 1) {
                 ary = strVal.split('/');
-                objRadio.eq(3).attr("checked", "checked");
-                $("#dayStart_1").val(ary[0]);
-                $("#dayEnd_1").val(ary[1]);
+                objRadio.eq(3).prop("checked", true);
+                $(".popover #dayStart_1").val(ary[0]);
+                $(".popover #dayEnd_1").val(ary[1]);
             } else if (strVal.split('W').length > 1) {
                 ary = strVal.split('W');
-                objRadio.eq(4).attr("checked", "checked");
-                $("#dayStart_2").val(ary[0]);
+                objRadio.eq(4).prop("checked", true);
+                $(".popover #dayStart_2").val(ary[0]);
             } else if (strVal == "L") {
-                objRadio.eq(5).attr("checked", "checked");
+                objRadio.eq(5).prop("checked", true);
             } else {
-                objRadio.eq(6).attr("checked", "checked");
+                objRadio.eq(6).prop("checked", true);
                 ary = strVal.split(",");
                 for (var i = 0; i < ary.length; i++) {
-                    $(".dayList input[value='" + ary[i] + "']").attr("checked", "checked");
+                    $(".popover .dayList input[value='" + ary[i] + "']").prop("checked", true);
                 }
                 $.fn.cronGen.tools.initCheckBox("day");
             }
         },
         initMonth : function(strVal) {
             var ary = null;
-            var objRadio = $("input[name='month'");
+            var objRadio = $(".popover input[name='month']");
             if (strVal == "*") {
-                objRadio.eq(0).attr("checked", "checked");
+                objRadio.eq(0).prop("checked", true);
             } else if (strVal == "?") {
-                objRadio.eq(1).attr("checked", "checked");
+                objRadio.eq(1).prop("checked", true);
             } else if (strVal.split('-').length > 1) {
                 ary = strVal.split('-');
-                objRadio.eq(2).attr("checked", "checked");
-                $("#monthStart_0").val(ary[0]);
-                $("#monthEnd_0").val(ary[1]);
+                objRadio.eq(2).prop("checked", true);
+                $(".popover #monthStart_0").val(ary[0]);
+                $(".popover #monthEnd_0").val(ary[1]);
             } else if (strVal.split('/').length > 1) {
                 ary = strVal.split('/');
-                objRadio.eq(3).attr("checked", "checked");
-                $("#monthStart_1").val(ary[0]);
-                $("#monthEnd_1").val(ary[1]);
+                objRadio.eq(3).prop("checked", true);
+                $(".popover #monthStart_1").val(ary[0]);
+                $(".popover #monthEnd_1").val(ary[1]);
 
             } else {
-                objRadio.eq(4).attr("checked", "checked");
+                objRadio.eq(4).prop("checked", true);
 
                 ary = strVal.split(",");
                 for (var i = 0; i < ary.length; i++) {
-                    $(".monthList input[value='" + ary[i] + "']").attr("checked", "checked");
+                    $(".popover .monthList input[value='" + ary[i] + "']").prop("checked", true);
                 }
                 $.fn.cronGen.tools.initCheckBox("month");
             }
         },
         initWeek : function(strVal) {
             var ary = null;
-            var objRadio = $("input[name='week'");
+            var objRadio = $(".popover input[name='week']");
             if (strVal == "*") {
-                objRadio.eq(0).attr("checked", "checked");
+                objRadio.eq(0).prop("checked", true);
             } else if (strVal == "?") {
-                objRadio.eq(1).attr("checked", "checked");
+                objRadio.eq(1).prop("checked", true);
             } else if (strVal.split('/').length > 1) {
                 ary = strVal.split('/');
-                objRadio.eq(2).attr("checked", "checked");
-                $("#weekStart_0").val(ary[0]);
-                $("#weekEnd_0").val(ary[1]);
+                objRadio.eq(2).prop("checked", true);
+                $(".popover #weekStart_0").val(ary[0]);
+                $(".popover #weekEnd_0").val(ary[1]);
             } else if (strVal.split('-').length > 1) {
                 ary = strVal.split('-');
-                objRadio.eq(3).attr("checked", "checked");
-                $("#weekStart_1").val(ary[0]);
-                $("#weekEnd_1").val(ary[1]);
+                objRadio.eq(3).prop("checked", true);
+                $(".popover #weekStart_1").val(ary[0]);
+                $(".popover #weekEnd_1").val(ary[1]);
             } else if (strVal.split('L').length > 1) {
                 ary = strVal.split('L');
-                objRadio.eq(4).attr("checked", "checked");
-                $("#weekStart_2").val(ary[0]);
+                objRadio.eq(4).prop("checked", true);
+                $(".popover #weekStart_2").val(ary[0]);
             } else {
-                objRadio.eq(5).attr("checked", "checked");
+                objRadio.eq(5).prop("checked", true);
                 ary = strVal.split(",");
                 for (var i = 0; i < ary.length; i++) {
-                    $(".weekList input[value='" + ary[i] + "']").attr("checked", "checked");
+                    $(".popover .weekList input[value='" + ary[i] + "']").prop("checked", true);
                 }
                 $.fn.cronGen.tools.initCheckBox("week");
             }
         },
         initYear : function(strVal) {
             var ary = null;
-            var objRadio = $("input[name='year'");
+            var objRadio = $(".popover input[name='year']");
             if (strVal == "*") {
-                objRadio.eq(1).attr("checked", "checked");
+                objRadio.eq(1).prop("checked", true);
             } else if (strVal.split('-').length > 1) {
                 ary = strVal.split('-');
-                objRadio.eq(2).attr("checked", "checked");
-                $("#yearStart_0").val(ary[0]);
-                $("#yearEnd_0").val(ary[1]);
+                objRadio.eq(2).prop("checked", true);
+                $(".popover #yearStart_0").val(ary[0]);
+                $(".popover #yearEnd_0").val(ary[1]);
             }
         },
         cronParse : function(cronExpress) {
             //获取参数中表达式的值
             if (cronExpress) {
                 var regs = cronExpress.split(' ');
-                $("#secondHidden").val(regs[0]);
-                $("#minHidden").val(regs[1]);
-                $("#hourHidden").val(regs[2]);
-                $("#dayHidden").val(regs[3]);
-                $("#monthHidden").val(regs[4]);
-                $("#weekHidden").val(regs[5]);
+                $(".popover #secondHidden").val(regs[0]);
+                $(".popover #minHidden").val(regs[1]);
+                $(".popover #hourHidden").val(regs[2]);
+                $(".popover #dayHidden").val(regs[3]);
+                $(".popover #monthHidden").val(regs[4]);
+                $(".popover #weekHidden").val(regs[5]);
 
                 $.fn.cronGen.tools.initObj(regs[0], "second");
                 $.fn.cronGen.tools.initObj(regs[1], "min");
@@ -1058,26 +1089,26 @@
                 $.fn.cronGen.tools.initWeek(regs[5]);
 
                 if (regs.length > 6) {
-                    $("input[name=yearHidden]").val(regs[6]);
+                    $(".popover input[name=yearHidden]").val(regs[6]);
                     $.fn.cronGen.tools.initYear(regs[6]);
                 }
             }
     	},
         cronResult : function() {
             var result;
-            var second = $("#secondHidden").val();
+            var second = $(".popover #secondHidden").val();
             second = second== "" ? "*":second;
-            var minute = $("#minHidden").val();
+            var minute = $(".popover #minHidden").val();
             minute = minute== "" ? "*":minute;
-            var hour = $("#hourHidden").val();
+            var hour = $(".popover #hourHidden").val();
             hour = hour== "" ? "*":hour;
-            var day = $("#dayHidden").val();
+            var day = $(".popover #dayHidden").val();
             day = day== "" ? "*":day;
-            var month = $("#monthHidden").val();
+            var month = $(".popover #monthHidden").val();
             month = month== "" ? "*":month;
-            var week = $("#weekHidden").val();
+            var week = $(".popover #weekHidden").val();
             week = week== "" ? "?":week;
-            var year = $("#yearHidden").val();
+            var year = $(".popover #yearHidden").val();
             if(year!="")
             {
                 result = second+" "+minute+" "+hour+" "+day+" "+month+" "+week+" "+year;
@@ -1089,18 +1120,18 @@
         },
         clearCheckbox : function(dom){
         	//清除选中的checkbox
-            var list = $("."+dom+"List").children().filter(":checked");
+            var list = $(".popover ."+dom+"List input[type='checkbox']").filter(":checked");
             if ($(list).length > 0) {
             	$.each(list, function(index){
-            		$(this).attr("checked", false);
+            		$(this).prop("checked", false);
             		$(this).attr("disabled", "disabled");
-            		$(this).change();
+            		$(this).trigger('change');
             	});
             }
         },
         initCheckBox : function(dom) {
         	//移除checkbox禁用
-            var list = $("."+dom+"List").children();
+            var list = $(".popover ."+dom+"List input[type='checkbox']");
             if ($(list).length > 0) {
             	$.each(list, function(index){
             		$(this).removeAttr("disabled");
