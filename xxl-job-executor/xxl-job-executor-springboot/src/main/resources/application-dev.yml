@@ -16,9 +16,9 @@ xxl:
       timeout: 3
     executor:
       enabled: true
-      appname: xxl-job-executor
+      appname: sync-token
       address: ""
-      ip: ""
+      ip: "127.0.0.1"
       port: 9999
       logpath: /data/applogs/xxl-job/jobhandler
       logretentiondays: 30

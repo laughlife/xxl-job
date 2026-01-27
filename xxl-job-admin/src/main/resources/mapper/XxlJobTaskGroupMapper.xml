@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.admin.mapper.XxlJobTaskGroupMapper">
+	
+	<resultMap id="XxlJobTaskGroup" type="com.xxl.job.admin.model.XxlJobTaskGroup">
+		<result column="id" property="id" />
+		<result column="job_group_id" property="jobGroupId" />
+		<result column="group_name" property="groupName" />
+		<result column="group_desc" property="groupDesc" />
+		<result column="group_order" property="groupOrder" />
+		<result column="add_time" property="addTime" />
+		<result column="update_time" property="updateTime" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, job_group_id, group_name, group_desc, group_order, add_time, update_time
+	</sql>
+
+	<select id="findByJobGroupId" resultMap="XxlJobTaskGroup">
+		SELECT <include refid="Base_Column_List" />
+		FROM xxl_job_task_group
+		WHERE job_group_id = #{jobGroupId}
+		ORDER BY group_order ASC, id ASC
+	</select>
+
+	<select id="findById" resultMap="XxlJobTaskGroup">
+		SELECT <include refid="Base_Column_List" />
+		FROM xxl_job_task_group
+		WHERE id = #{id}
+	</select>
+
+	<insert id="insert" parameterType="com.xxl.job.admin.model.XxlJobTaskGroup" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO xxl_job_task_group (
+			job_group_id,
+			group_name,
+			group_desc,
+			group_order,
+			add_time,
+			update_time
+		) VALUES (
+			#{jobGroupId},
+			#{groupName},
+			#{groupDesc},
+			#{groupOrder},
+			NOW(),
+			NOW()
+		)
+	</insert>
+
+	<update id="update" parameterType="com.xxl.job.admin.model.XxlJobTaskGroup">
+		UPDATE xxl_job_task_group
+		SET
+			group_name = #{groupName},
+			group_desc = #{groupDesc},
+			group_order = #{groupOrder},
+			update_time = NOW()
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM xxl_job_task_group
+		WHERE id = #{id}
+	</delete>
+
+	<select id="countJobsByTaskGroupId" resultType="int">
+		SELECT COUNT(1)
+		FROM xxl_job_info
+		WHERE task_group_id = #{taskGroupId}
+	</select>
+
+</mapper>

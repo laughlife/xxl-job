@@ -19,6 +19,8 @@
         </encoder>
     </appender>
 
+    <logger name="com.xxl.job" level="DEBUG"/>
+
     <root level="info">
         <appender-ref ref="console"/>
         <!--<appender-ref ref="file"/>-->

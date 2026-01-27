@@ -17,3 +17,6 @@ target/
 
 .kiro
 .kiro/
+
+# Kiro MCP Manager - Sensitive configuration files
+.kiro/settings/

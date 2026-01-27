@@ -1,10 +1,11 @@
 package com.xxl.job.admin.mapper;
 
-import com.xxl.job.admin.model.XxlJobInfo;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
+import com.xxl.job.admin.model.XxlJobInfo;
 
 
 /**
@@ -20,14 +21,16 @@ public interface XxlJobInfoMapper {
 									 @Param("triggerStatus") int triggerStatus,
 									 @Param("jobDesc") String jobDesc,
 									 @Param("executorHandler") String executorHandler,
-									 @Param("author") String author);
+									 @Param("author") String author,
+									 @Param("taskGroupId") Integer taskGroupId);
 	public int pageListCount(@Param("offset") int offset,
 							 @Param("pagesize") int pagesize,
 							 @Param("jobGroup") int jobGroup,
 							 @Param("triggerStatus") int triggerStatus,
 							 @Param("jobDesc") String jobDesc,
 							 @Param("executorHandler") String executorHandler,
-							 @Param("author") String author);
+							 @Param("author") String author,
+							 @Param("taskGroupId") Integer taskGroupId);
 	
 	public int save(XxlJobInfo info);
 
