@@ -67,11 +67,11 @@ public class CodeGenerator {
                         "Liv88625200@@"
                 )
                 // 业务模块名
-                .module("order")
+                .module("token")
                 // 要生成的表（支持多个）
-                .tables("xxl_job_info", "xxl_job_log")
+                .tables("ruiyi_token")
                 // 表前缀（生成时去除，xxl_job_info -> Info）
-                .tablePrefixes("xxl_job_")
+                .tablePrefixes("ruiyi_")
                 // 作者
                 .author("Li Wei")
                 // 执行生成
