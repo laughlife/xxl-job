@@ -43,11 +43,10 @@
             <version>${cn.hutool}</version>
         </dependency>
 
-        <!-- MyBatis-Plus Starter -->
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.16</version>  <!-- 检查最新版 -->
+            <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
+            <version>3.5.16</version>
         </dependency>
         <dependency>
             <groupId>com.mysql</groupId>

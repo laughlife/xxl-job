@@ -132,10 +132,6 @@ This product is open source and free, and will continue to provide free communit
 
 ## 生产环境注意
 
-- 部署到生产时，改用生产 profile：
-- java -jar xxl-job-admin.jar --spring.profiles.active=prod
-
-- 或者删除/注释掉 spring.profiles.active=dev 这一行。
 - mvn -pl xxl-job-core,xxl-job-admin -am clean install
 - cd .\xxl-job-admin\
 - mvn clean package
@@ -144,3 +140,4 @@ This product is open source and free, and will continue to provide free communit
 
 - 部署到生产时，改用生产 profile：
 - mvn -pl xxl-job-executor/xxl-job-executor-springboot -am package
+- 一次部署两个包：mvn -pl xxl-job-admin,xxl-job-executor/xxl-job-executor-springboot -am clean package

@@ -3,7 +3,7 @@
 <mapper namespace="com.xxl.job.executor.biz.token.mapper.TokenMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.xxl.job.executor.biz.token.entity.Token">
+    <resultMap id="BaseResultMap" type="com.xxl.job.executor.biz.token.entity.TokenDO">
         <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="access_token" property="accessToken" />
