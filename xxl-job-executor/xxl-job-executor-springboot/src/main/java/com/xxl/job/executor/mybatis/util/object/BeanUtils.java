@@ -1,8 +1,8 @@
 package com.xxl.job.executor.mybatis.util.object;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.iocoder.yudao.framework.common.pojo.PageResult;
-import cn.iocoder.yudao.framework.common.util.collection.CollectionUtils;
+import com.xxl.job.executor.mybatis.pojo.PageResult;
+import com.xxl.job.executor.mybatis.util.collection.CollectionUtils;
 
 import java.util.List;
 import java.util.function.Consumer;

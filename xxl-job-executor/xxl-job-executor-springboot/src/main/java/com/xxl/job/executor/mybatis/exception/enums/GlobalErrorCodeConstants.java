@@ -1,6 +1,6 @@
-package com.xxl.job.executor.mybatis.pojo.exception.enums;
+package com.xxl.job.executor.mybatis.exception.enums;
 
-import com.xxl.job.executor.mybatis.pojo.exception.ErrorCode;
+import com.xxl.job.executor.mybatis.exception.ErrorCode;
 
 /**
  * 全局错误码枚举

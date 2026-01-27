@@ -6,7 +6,7 @@ import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.date.TemporalAccessorUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
-import cn.iocoder.yudao.framework.common.enums.DateIntervalEnum;
+import com.xxl.job.executor.mybatis.enums.DateIntervalEnum;
 
 import java.sql.Timestamp;
 import java.time.*;

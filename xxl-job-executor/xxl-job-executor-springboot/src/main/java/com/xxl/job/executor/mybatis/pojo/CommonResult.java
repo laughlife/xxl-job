@@ -1,11 +1,11 @@
 package com.xxl.job.executor.mybatis.pojo;
 
 import cn.hutool.core.lang.Assert;
-import com.xxl.job.executor.mybatis.pojo.exception.ErrorCode;
-import com.xxl.job.executor.mybatis.pojo.exception.ServiceException;
+import com.xxl.job.executor.mybatis.exception.ErrorCode;
+import com.xxl.job.executor.mybatis.exception.ServiceException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xxl.job.executor.mybatis.pojo.exception.enums.GlobalErrorCodeConstants;
-import com.xxl.job.executor.mybatis.pojo.exception.util.ServiceExceptionUtil;
+import com.xxl.job.executor.mybatis.exception.enums.GlobalErrorCodeConstants;
+import com.xxl.job.executor.mybatis.exception.util.ServiceExceptionUtil;
 import lombok.Data;
 
 import java.io.Serializable;

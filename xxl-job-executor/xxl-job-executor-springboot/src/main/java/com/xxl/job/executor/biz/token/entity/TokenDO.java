@@ -5,10 +5,12 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -20,8 +22,9 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 @TableName("ruiyi_token")
-public class Token implements Serializable {
+public class TokenDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -100,7 +103,7 @@ public class Token implements Serializable {
     /**
      * 是否删除
      */
-    @TableField("deleted")
     @TableLogic
+    @TableField("deleted")
     private Boolean deleted;
 }

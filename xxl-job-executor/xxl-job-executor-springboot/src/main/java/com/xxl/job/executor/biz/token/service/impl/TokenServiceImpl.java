@@ -1,6 +1,6 @@
 package com.xxl.job.executor.biz.token.service.impl;
 
-import com.xxl.job.executor.biz.token.entity.Token;
+import com.xxl.job.executor.biz.token.entity.TokenDO;
 import com.xxl.job.executor.biz.token.mapper.TokenMapper;
 import com.xxl.job.executor.biz.token.service.TokenService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2026-01-27
  */
 @Service
-public class TokenServiceImpl extends ServiceImpl<TokenMapper, Token> implements TokenService {
+public class TokenServiceImpl extends ServiceImpl<TokenMapper, TokenDO> implements TokenService {
 
 }

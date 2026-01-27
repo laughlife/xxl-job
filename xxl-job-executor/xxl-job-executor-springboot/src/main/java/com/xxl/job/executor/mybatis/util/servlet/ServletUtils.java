@@ -2,7 +2,7 @@ package com.xxl.job.executor.mybatis.util.servlet;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.JakartaServletUtil;
-import cn.iocoder.yudao.framework.common.util.json.JsonUtils;
+import com.xxl.job.executor.mybatis.util.json.JsonUtils;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,7 +29,7 @@ public class ServletUtils {
     @SuppressWarnings("deprecation") // 必须使用 APPLICATION_JSON_UTF8_VALUE，否则会乱码
     public static void writeJSON(HttpServletResponse response, Object object) {
         String content = JsonUtils.toJsonString(object);
-        JakartaServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
+        JakartaServletUtil.write(response, content, MediaType.APPLICATION_JSON_VALUE);
     }
 
     /**

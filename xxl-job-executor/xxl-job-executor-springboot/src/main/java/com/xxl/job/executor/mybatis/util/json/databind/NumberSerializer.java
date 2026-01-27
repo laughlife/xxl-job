@@ -1,8 +1,8 @@
 package com.xxl.job.executor.mybatis.util.json.databind;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.annotation.JacksonStdImpl;
 
 import java.io.IOException;
 
@@ -26,12 +26,13 @@ public class NumberSerializer extends com.fasterxml.jackson.databind.ser.std.Num
     }
 
     @Override
-    public void serialize(Number value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    public void serialize(Number value, com.fasterxml.jackson.core.JsonGenerator g, SerializerProvider provider) throws IOException {
+        super.serialize(value, g, provider);
         // 超出范围 序列化位字符串
         if (value.longValue() > MIN_SAFE_INTEGER && value.longValue() < MAX_SAFE_INTEGER) {
-            super.serialize(value, gen, serializers);
+            super.serialize(value, g, provider);
         } else {
-            gen.writeString(value.toString());
+            g.writeString(value.toString());
         }
     }
 }

@@ -1,6 +1,6 @@
-package com.xxl.job.executor.mybatis.pojo.exception;
+package com.xxl.job.executor.mybatis.exception;
 
-import com.xxl.job.executor.mybatis.pojo.exception.enums.ServiceErrorCodeRange;
+import com.xxl.job.executor.mybatis.exception.enums.ServiceErrorCodeRange;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

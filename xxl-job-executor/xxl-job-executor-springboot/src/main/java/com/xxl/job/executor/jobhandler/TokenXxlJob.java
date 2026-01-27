@@ -2,11 +2,16 @@ package com.xxl.job.executor.jobhandler;
 
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
+import com.xxl.job.executor.biz.token.entity.TokenDO;
 import com.xxl.job.executor.biz.token.mapper.TokenMapper;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import com.xxl.job.executor.biz.token.service.HubuService;
+import com.xxl.job.executor.biz.token.service.SellfoxToken;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +29,13 @@ public class TokenXxlJob {
     // @Autowired
     // private YourBusinessService yourBusinessService;
 
-    @Autowired
+    @Resource
+    HubuService hubuService;
+
+    @Resource
+    SellfoxToken sellfoxToken;
+
+    @Resource
     private TokenMapper tokenMapper;
     /**
      * 示例：处理过期订单
@@ -38,32 +49,13 @@ public class TokenXxlJob {
         // XxlJobHelper.log("任务参数: " + param);
 
         try {
-            
+            boolean hubuStatus = hubuService.getOrRefreshToken();
+            boolean sellfoxStatus = sellfoxToken.getOrRefreshToken();
+            XxlJobHelper.log("数据库任务执行完成，虎佈状态: " + hubuStatus + ", 赛狐状态: " + sellfoxStatus);
         } catch (Exception e) {
             log.error("任务执行异常", e);
             XxlJobHelper.handleFail("任务执行失败: " + e.getMessage());
         }
-    }
-
-    public boolean getOrRefreshToken() {
-        List tokens = tokenMapper.selectList("name", "虎佈");
-        int count = tokens.size();
-        if (count == 0) {
-            return fetchAndStoreToken();
-        }
-        //hierarchy
-        TokenDO token = (TokenDO) tokens.get(0);
-        long currentTime = System.currentTimeMillis();
-        if (currentTime < token.getExpiresTime() - 60 * 60 * 1000) {
-            Date date = new Date(token.getExpiresTime());
-            String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
-            log.info("虎佈token处于有效期，到期时间为:{}", format);
-            return true; // Token 仍然有效
-        }
-        TokenDO newToken = getTokenByNet();
-        log.info("更新虎佈token");
-        return newToken != null && tokenMapper.updateByName(newToken) > 0;
-        return false;
     }
 
 

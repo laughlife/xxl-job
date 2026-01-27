@@ -1,8 +1,9 @@
-package com.xxl.job.executor.mybatis.pojo.exception.util;
+package com.xxl.job.executor.mybatis.exception.util;
 
-import com.xxl.job.executor.mybatis.pojo.exception.ErrorCode;
-import com.xxl.job.executor.mybatis.pojo.exception.ServiceException;
-import com.xxl.job.executor.mybatis.pojo.exception.enums.GlobalErrorCodeConstants;
+import com.xxl.job.executor.mybatis.exception.ErrorCode;
+import com.xxl.job.executor.mybatis.exception.ServiceException;
+import com.xxl.job.executor.mybatis.exception.enums.GlobalErrorCodeConstants;
+
 import com.google.common.annotations.VisibleForTesting;
 import lombok.extern.slf4j.Slf4j;
 

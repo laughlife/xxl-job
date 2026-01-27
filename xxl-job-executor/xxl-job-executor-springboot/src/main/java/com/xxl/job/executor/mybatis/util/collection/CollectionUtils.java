@@ -3,7 +3,7 @@ package com.xxl.job.executor.mybatis.util.collection;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ArrayUtil;
-import cn.iocoder.yudao.framework.common.pojo.PageResult;
+import com.xxl.job.executor.mybatis.pojo.PageResult;
 import com.google.common.collect.ImmutableMap;
 
 import java.util.*;

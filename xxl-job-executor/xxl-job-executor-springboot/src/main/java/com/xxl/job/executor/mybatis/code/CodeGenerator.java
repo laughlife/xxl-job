@@ -35,7 +35,7 @@ import java.util.Properties;
  *       ├── mapper
  *       │   └── OrderMapper.java
  *       └── entity
- *           └── Order.java
+ *           └── OrderDO.java
  * resources/mapper/order
  *   └── OrderMapper.xml
  * </pre>
@@ -262,11 +262,14 @@ public class CodeGenerator {
                             .naming(NamingStrategy.underline_to_camel)
                             .columnNaming(NamingStrategy.underline_to_camel)
                             .logicDeleteColumnName("deleted")
-                            .logicDeletePropertyName("deleted");
+                            .logicDeletePropertyName("deleted")
+                            .formatFileName("%sDO");
 
                     // Mapper 策略
                     builder.mapperBuilder()
                             .superClass(BaseMapperX.class)
+                            .formatMapperFileName("%sMapper")
+                            .formatXmlFileName("%sMapper")
                             .enableBaseResultMap()
                             .enableBaseColumnList();
 
