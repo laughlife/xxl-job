@@ -106,19 +106,16 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>${com.fasterxml.jackson.version}</version>
         </dependency>
         <!-- Source: https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${com.fasterxml.jackson.version}</version>
         </dependency>
         <!-- Source: https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>${com.fasterxml.jackson.version}</version>
         </dependency>
         <!-- Source: https://mvnrepository.com/artifact/org.apache.skywalking/apm-toolkit-trace -->
         <dependency>

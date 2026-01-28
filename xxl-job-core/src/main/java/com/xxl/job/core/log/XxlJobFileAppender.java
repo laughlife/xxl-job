@@ -1,18 +1,22 @@
 package com.xxl.job.core.log;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.xxl.job.core.openapi.model.LogResult;
 import com.xxl.tool.core.DateTool;
 import com.xxl.tool.core.StringTool;
 import com.xxl.tool.io.FileTool;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
 
 /**
  * store trigger log in each log-file
@@ -125,39 +129,45 @@ public class XxlJobFileAppender {
 		// read data
         StringBuilder logContentBuilder = new StringBuilder();
         // num: [from, to], start as 1
-        AtomicInteger toLineNum = new AtomicInteger(0);
-        AtomicInteger currentLineNum = new AtomicInteger(0);
-        /*int readLineCount = 0;*/
+        int toLineNum = 0;
+        int currentLineNum = 0;
 
-        // do read
-        try {
-            FileTool.readLines(logFileName, new Consumer<String>() {
-                @Override
-                public void accept(String line) {
-                    // refresh line num
-                    currentLineNum.incrementAndGet();
+        // do read with charset fallback to handle encoding issues
+        try (BufferedReader reader = createRobustReader(logFileName)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // refresh line num
+                currentLineNum++;
 
-                    // valid
-                    if (currentLineNum.get() < fromLineNum) {
-                        return;
-                    }
-
-                    // Limit return less than 1000 rows per query request	// todo
-                    /*if(++readLineCount >= 1000) {
-                        break;
-                    }*/
-
-                    // collect line data
-                    toLineNum.set(currentLineNum.get());
-                    logContentBuilder.append(line).append(System.lineSeparator());      // [from, to], start as 1
+                // valid
+                if (currentLineNum < fromLineNum) {
+                    continue;
                 }
-            });
+
+                // collect line data
+                toLineNum = currentLineNum;
+                logContentBuilder.append(line).append(System.lineSeparator());
+            }
         } catch (IOException e) {
             logger.error("XxlJobFileAppender readLog error, logFileName:{}, fromLineNum:{}", logFileName, fromLineNum, e);
         }
 
         // result
-        return new LogResult(fromLineNum, toLineNum.get(), logContentBuilder.toString(), false);
+        return new LogResult(fromLineNum, toLineNum, logContentBuilder.toString(), false);
+	}
+
+	/**
+	 * Create a BufferedReader that handles encoding errors gracefully.
+	 * Uses UTF-8 with REPLACE action for malformed input to avoid MalformedInputException.
+	 */
+	private static BufferedReader createRobustReader(String logFileName) throws IOException {
+		FileInputStream fis = new FileInputStream(logFileName);
+		// Use UTF-8 decoder with REPLACE action - replaces malformed bytes with replacement character
+		InputStreamReader isr = new InputStreamReader(fis, 
+			StandardCharsets.UTF_8.newDecoder()
+				.onMalformedInput(CodingErrorAction.REPLACE)
+				.onUnmappableCharacter(CodingErrorAction.REPLACE));
+		return new BufferedReader(isr);
 	}
 
 }

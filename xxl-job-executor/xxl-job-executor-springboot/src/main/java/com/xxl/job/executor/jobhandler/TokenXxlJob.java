@@ -1,19 +1,14 @@
 package com.xxl.job.executor.jobhandler;
 
+import org.springframework.stereotype.Component;
+
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
-import com.xxl.job.executor.biz.token.entity.TokenDO;
 import com.xxl.job.executor.biz.token.mapper.TokenMapper;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
 import com.xxl.job.executor.biz.token.service.HubuService;
 import com.xxl.job.executor.biz.token.service.SellfoxToken;
+
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
 // import org.springframework.beans.factory.annotation.Autowired;
 // import com.xxl.job.executor.service.YourBusinessService;
@@ -57,7 +52,6 @@ public class TokenXxlJob {
             XxlJobHelper.handleFail("任务执行失败: " + e.getMessage());
         }
     }
-
 
 
 }

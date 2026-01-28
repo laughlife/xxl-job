@@ -1,12 +1,13 @@
 package com.xxl.job.admin.mapper;
 
-import com.xxl.job.admin.model.XxlJobLog;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import com.xxl.job.admin.model.XxlJobLog;
 
 /**
  * job log
@@ -58,5 +59,7 @@ public interface XxlJobLogMapper {
 								 @Param("newAlarmStatus") int newAlarmStatus);
 
 	public List<Long> findLostJobIds(@Param("losedTime") Date losedTime);
+
+	public int deleteByIds(@Param("ids") List<Long> ids);
 
 }

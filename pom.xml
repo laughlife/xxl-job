@@ -86,6 +86,15 @@
 				<scope>import</scope>
 			</dependency>
 
+			<!-- jackson bom - 覆盖 Spring Boot 管理的版本 -->
+			<dependency>
+				<groupId>com.fasterxml.jackson</groupId>
+				<artifactId>jackson-bom</artifactId>
+				<version>${com.fasterxml.jackson.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
 			<!-- slf4j -->
 			<dependency>
 				<groupId>org.slf4j</groupId>

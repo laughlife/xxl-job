@@ -67,7 +67,7 @@ public class CodeGenerator {
                 // 业务模块名
                 .module("fba")
                 // 要生成的表（支持多个）
-                .tables("erp_fba_spd_box")
+                .tables("erp_fba_dispatch_item")
                 // 表前缀（生成时去除，xxl_job_info -> Info）
                 .tablePrefixes("erp_")
                 // 作者

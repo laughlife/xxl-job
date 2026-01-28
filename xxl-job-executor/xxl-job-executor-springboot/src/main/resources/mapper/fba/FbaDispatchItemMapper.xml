@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.executor.biz.fba.mapper.FbaDispatchItemMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xxl.job.executor.biz.fba.entity.FbaDispatchItemDO">
+        <id column="id" property="id" />
+        <result column="dispatch_id" property="dispatchId" />
+        <result column="fba_shipment_id" property="fbaShipmentId" />
+        <result column="no" property="no" />
+        <result column="no_id" property="noId" />
+        <result column="no_type" property="noType" />
+        <result column="company_id" property="companyId" />
+        <result column="child_jobno" property="childJobno" />
+        <result column="download_urls" property="downloadUrls" />
+        <result column="idx" property="idx" />
+        <result column="analyzed" property="analyzed" />
+        <result column="synced" property="synced" />
+        <result column="isdel" property="isdel" />
+        <result column="create_datetime" property="createDatetime" />
+        <result column="create_user_name" property="createUserName" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="deleted" property="deleted" />
+        <result column="updater" property="updater" />
+        <result column="creator" property="creator" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, dispatch_id, fba_shipment_id, no, no_id, no_type, company_id, child_jobno, download_urls, idx, analyzed, synced, isdel, create_datetime, create_user_name, create_time, update_time, deleted, updater, creator
+    </sql>
+
+</mapper>

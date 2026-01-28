@@ -1,14 +1,18 @@
 package com.xxl.job.core.util;
 
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.tool.core.ArrayTool;
 import com.xxl.tool.io.FileTool;
-import com.xxl.tool.io.IOTool;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *  1、内嵌编译器如"PythonInterpreter"无法引用扩展包，因此推荐使用java调用控制台进程方式"Runtime.getRuntime().exec()"来运行脚本(shell或python)；
@@ -76,23 +80,30 @@ public class ScriptUtil {
             }
             String[] cmdarrayFinal = cmdarray.toArray(new String[0]);
 
-            // 3、process：exec
-            process = Runtime.getRuntime().exec(cmdarrayFinal);
+            // 3、process：exec with ProcessBuilder for better stream handling
+            ProcessBuilder processBuilder = new ProcessBuilder(cmdarrayFinal);
+            // Set environment to ensure Python outputs in UTF-8
+            processBuilder.environment().put("PYTHONIOENCODING", "utf-8");
+            processBuilder.environment().put("PYTHONUNBUFFERED", "1");
+            process = processBuilder.start();
             Process finalProcess = process;
 
             // 4、read script log: inputStream + errStream
             final FileOutputStream finalFileOutputStream = fileOutputStream;
+            
+            // Use system default charset for reading process output (handles Windows GBK, Linux UTF-8, etc.)
+            Charset processCharset = Charset.defaultCharset();
+            
             inputThread = new Thread(() -> {
                 try {
-                    // 数据流Copy（Input自动关闭，Output不处理）
-                    IOTool.copy(finalProcess.getInputStream(), finalFileOutputStream, true, false);
+                    copyStreamToFile(finalProcess.getInputStream(), finalFileOutputStream, processCharset);
                 } catch (IOException e) {
                     XxlJobHelper.log(e);
                 }
             });
             errorThread = new Thread(() -> {
                 try {
-                    IOTool.copy(finalProcess.getErrorStream(), finalFileOutputStream, true, false);
+                    copyStreamToFile(finalProcess.getErrorStream(), finalFileOutputStream, processCharset);
                 } catch (IOException e) {
                     XxlJobHelper.log(e);
                 }
@@ -131,6 +142,24 @@ public class ScriptUtil {
             if (process != null) {
                 process.destroy();
                 // process.destroyForcibly();
+            }
+        }
+    }
+
+    /**
+     * Copy input stream to file output stream with proper charset handling
+     * Read as text lines to ensure proper encoding conversion
+     */
+    private static void copyStreamToFile(InputStream inputStream, FileOutputStream outputStream, Charset charset) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, charset));
+             OutputStreamWriter writer = new OutputStreamWriter(outputStream, charset)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                synchronized (outputStream) {
+                    writer.write(line);
+                    writer.write(System.lineSeparator());
+                    writer.flush();
+                }
             }
         }
     }

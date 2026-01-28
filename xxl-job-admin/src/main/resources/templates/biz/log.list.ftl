@@ -25,7 +25,7 @@
 
 					<div class="col-2">
 						<div class="input-group">
-							<span class="input-group-addon">${I18n.jobinfo_field_jobgroup}</span>
+							<span class="input-group-addon">执行器</span>
 							<select class="form-control" id="jobGroup"  >
 								<#list JobGroupList as group>
 									<option value="${group.id}" <#if jobGroup==group.id>selected</#if> >${group.title}</option>
@@ -35,43 +35,43 @@
 					</div>
 					<div class="col-2">
 						<div class="input-group">
-							<span class="input-group-addon">${I18n.jobinfo_job}</span>
+							<span class="input-group-addon">任务</span>
 							<select class="form-control" id="jobId" >
 								<#if jobInfoList?size gt 0>
 									<#list jobInfoList as jobItem>
 										<option value="${jobItem.id}" >${jobItem.jobDesc}</option>
 									</#list>
 								<#else>
-									<option value="0" >${I18n.system_selected_nothing}</option>
+									<option value="0" >未选择</option>
 								</#if>
 							</select>
 						</div>
 					</div>
 					<div class="col-2">
 						<div class="input-group">
-							<span class="input-group-addon">${I18n.joblog_status}</span>
+							<span class="input-group-addon">状态</span>
 							<select class="form-control" id="logStatus" >
-								<option value="-1" >${I18n.joblog_status_all}</option>
-								<option value="1" >${I18n.joblog_status_suc}</option>
-								<option value="2" >${I18n.joblog_status_fail}</option>
-								<option value="3" >${I18n.joblog_status_running}</option>
+								<option value="-1" >全部</option>
+								<option value="1" >成功</option>
+								<option value="2" >失败</option>
+								<option value="3" >进行中</option>
 							</select>
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="input-group">
                 		<span class="input-group-addon">
-	                  		${I18n.joblog_field_triggerTime}
+	                  		调度时间
 	                	</span>
 							<input type="text" class="form-control" id="filterTime" readonly >
 						</div>
 					</div>
 
 					<div class="col-1">
-						<button class="btn btn-block btn-primary searchBtn" >${I18n.system_search}</button>
+						<button class="btn btn-block btn-primary searchBtn" >搜索</button>
 					</div>
 					<div class="col-1">
-						<button class="btn btn-block btn-secondary resetBtn" >${I18n.system_reset}</button>
+						<button class="btn btn-block btn-secondary resetBtn" >重置</button>
 					</div>
 				</div>
 			</div>
@@ -82,10 +82,11 @@
 			<div class="col-12">
 				<div class="box">
 					<div class="box-header pull-left" id="data_operation" >
-						<button class="btn btn-sm btn-warning selectOnlyOne logKill" type="button">${I18n.joblog_kill_log}</button>
-						<button class="btn btn-sm btn-danger selectAny clearLog" type="button">${I18n.joblog_clean_log}</button>
+						<button class="btn btn-sm btn-warning selectOnlyOne logKill" type="button">终止任务</button>
+						<button class="btn btn-sm btn-danger selectAny deleteSelected" type="button">删除选中</button>
+						<button class="btn btn-sm btn-danger selectAny clearLog" type="button">日志清理</button>
 						｜
-						<button class="btn btn-sm btn-primary selectOnlyOne logDetail" type="button"><#--<i class="fa fa-edit"></i>-->${I18n.joblog_rolling_log}</button>
+						<button class="btn btn-sm btn-primary selectOnlyOne logDetail" type="button">执行日志</button>
 					</div>
 					<div class="box-body" >
 						<table id="data_list" class="table table-bordered table-striped" width="100%" >
@@ -103,12 +104,12 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" >${I18n.joblog_clean_log}</h4>
+						<h4 class="modal-title" >日志清理</h4>
 					</div>
 					<div class="modal-body">
 						<form class="form-horizontal form" role="form" >
 							<div class="form-group">
-								<label class="col-sm-3 control-label">${I18n.jobinfo_field_jobgroup}：</label>
+								<label class="col-sm-3 control-label">执行器：</label>
 								<div class="col-sm-9">
 									<input type="text" class="form-control jobGroupText" readonly >
 									<input type="hidden" name="jobGroup" >
@@ -116,7 +117,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="col-sm-3 control-label">${I18n.jobinfo_job}：</label>
+								<label class="col-sm-3 control-label">任务：</label>
 								<div class="col-sm-9">
 									<input type="text" class="form-control jobIdText" readonly >
 									<input type="hidden" name="jobId" >
@@ -124,18 +125,18 @@
 							</div>
 
 							<div class="form-group">
-								<label class="col-sm-3 control-label">${I18n.joblog_clean_type}：</label>
+								<label class="col-sm-3 control-label">清理方式：</label>
 								<div class="col-sm-9">
 									<select class="form-control" name="type" >
-										<option value="1" >${I18n.joblog_clean_type_1}</option>
-										<option value="2" >${I18n.joblog_clean_type_2}</option>
-										<option value="3" >${I18n.joblog_clean_type_3}</option>
-										<option value="4" >${I18n.joblog_clean_type_4}</option>
-										<option value="5" >${I18n.joblog_clean_type_5}</option>
-										<option value="6" >${I18n.joblog_clean_type_6}</option>
-										<option value="7" >${I18n.joblog_clean_type_7}</option>
-										<option value="8" >${I18n.joblog_clean_type_8}</option>
-										<option value="9" >${I18n.joblog_clean_type_9}</option>
+										<option value="1" >清理一个月之前日志数据</option>
+										<option value="2" >清理三个月之前日志数据</option>
+										<option value="3" >清理六个月之前日志数据</option>
+										<option value="4" >清理一年之前日志数据</option>
+										<option value="5" >清理一千条以前日志数据</option>
+										<option value="6" >清理一万条以前日志数据</option>
+										<option value="7" >清理三万条以前日志数据</option>
+										<option value="8" >清理十万条以前日志数据</option>
+										<option value="9" >清理所有日志数据</option>
 									</select>
 								</div>
 							</div>
@@ -143,8 +144,8 @@
 							<hr>
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
-									<button type="button" class="btn btn-primary ok" >${I18n.system_ok}</button>
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${I18n.system_cancel}</button>
+									<button type="button" class="btn btn-primary ok" >确定</button>
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 								</div>
 							</div>
 						</form>
@@ -161,7 +162,7 @@
 <!-- 3-script start -->
 <@netCommon.commonScript />
 <script src="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.js"></script>
-<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/<#if I18n.admin_i18n?? && I18n.admin_i18n == 'en'>bootstrap-table-en-US.js<#else>bootstrap-table-zh-CN.js</#if>"></script>
+<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
 <#--daterangepicker-->
 <script src="${request.contextPath}/static/adminlte/bower_components/moment/moment.min.js"></script>
 <script src="${request.contextPath}/static/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.min.js"></script>
@@ -185,12 +186,12 @@
 		 * filter Time
 		 */
 		var rangesConf = {};
-		rangesConf[I18n.daterangepicker_ranges_today] = [moment().startOf('day'), moment().endOf('day')];
-		rangesConf[I18n.daterangepicker_ranges_yesterday] = [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')];
-		rangesConf[I18n.daterangepicker_ranges_this_month] = [moment().startOf('month'), moment().endOf('month')];
-		rangesConf[I18n.daterangepicker_ranges_last_month] = [moment().subtract(1, 'months').startOf('month'), moment().subtract(1, 'months').endOf('month')];
-		rangesConf[I18n.daterangepicker_ranges_recent_week] = [moment().subtract(1, 'weeks').startOf('day'), moment().endOf('day')];
-		rangesConf[I18n.daterangepicker_ranges_recent_month] = [moment().subtract(1, 'months').startOf('day'), moment().endOf('day')];
+		rangesConf['今日'] = [moment().startOf('day'), moment().endOf('day')];
+		rangesConf['昨日'] = [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')];
+		rangesConf['本月'] = [moment().startOf('month'), moment().endOf('month')];
+		rangesConf['上个月'] = [moment().subtract(1, 'months').startOf('month'), moment().subtract(1, 'months').endOf('month')];
+		rangesConf['最近一周'] = [moment().subtract(1, 'weeks').startOf('day'), moment().endOf('day')];
+		rangesConf['最近一月'] = [moment().subtract(1, 'months').startOf('day'), moment().endOf('day')];
 
 		$('#filterTime').daterangepicker({
 			autoApply:false,
@@ -204,25 +205,23 @@
 			locale : {
 				format: 'YYYY-MM-DD HH:mm:ss',
 				separator : ' - ',
-				customRangeLabel : I18n.daterangepicker_custom_name ,
-				applyLabel : I18n.system_ok ,
-				cancelLabel : I18n.system_cancel ,
-				fromLabel : I18n.daterangepicker_custom_starttime ,
-				toLabel : I18n.daterangepicker_custom_endtime ,
-				daysOfWeek : I18n.daterangepicker_custom_daysofweek.split(',') ,        // '日', '一', '二', '三', '四', '五', '六'
-				monthNames : I18n.daterangepicker_custom_monthnames.split(',') ,        // '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'
+				customRangeLabel : '自定义' ,
+				applyLabel : '确定' ,
+				cancelLabel : '取消' ,
+				fromLabel : '起始时间' ,
+				toLabel : '结束时间' ,
+				daysOfWeek : ['日', '一', '二', '三', '四', '五', '六'] ,
+				monthNames : ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'] ,
 				firstDay : 1
-			}/*,
-			startDate: rangesConf[I18n.daterangepicker_ranges_today][0],
-			endDate: rangesConf[I18n.daterangepicker_ranges_today][1]*/
+			}
 		});
 
 		// init filter
 		var jobGroup = '${jobGroup}';
 		var jobId = '${jobId}';
 		function resetFilter(){
-			$('#filterTime').data("daterangepicker").setStartDate( rangesConf[I18n.daterangepicker_ranges_recent_week][0] );
-			$('#filterTime').data("daterangepicker").setEndDate( rangesConf[I18n.daterangepicker_ranges_recent_week][1] );
+			$('#filterTime').data("daterangepicker").setStartDate( rangesConf['最近一周'][0] );
+			$('#filterTime').data("daterangepicker").setEndDate( rangesConf['最近一周'][1] );
 
 			$("#jobGroup").val( jobGroup );
 			$("#jobId").val( jobId );
@@ -262,14 +261,14 @@
 					valign: 'middle'
 				},
                 {
-                    title: I18n.joblog_name + 'ID',
+                    title: '调度日志ID',
                     field: 'id',
                     width: '10',
                     widthUnit: '%',
                     align: 'left'
                 },
                 {
-					title: I18n.jobinfo_job,
+					title: '任务',
 					field: 'jobId',
 					width: '15',
 					widthUnit: '%',
@@ -288,7 +287,7 @@
 						return jobShow;
 					}
 				},{
-					title: I18n.joblog_field_triggerTime,
+					title: '调度时间',
 					field: 'triggerTime',
 					width: '15',
 					widthUnit: '%',
@@ -296,31 +295,31 @@
 						return value?moment(value).format("YYYY-MM-DD HH:mm:ss"):"";
 					}
 				},{
-					title: I18n.joblog_field_triggerCode,
+					title: '调度结果',
 					field: 'triggerCode',
 					width: '10',
 					widthUnit: '%',
 					formatter: function(value, row, index) {
 						var html = value;
 						if (value == 200) {			// 200, success
-							html = '<span style="color: green">'+ I18n.system_success +'</span>';
+							html = '<span style="color: green">成功</span>';
 						} else if (value > 0) {		// >0 or 500, fail
-							html = '<span style="color: red">'+ I18n.system_fail +'</span>';
+							html = '<span style="color: red">失败</span>';
 						} else if (value == 0) {		// 0, original pass
 							html = '';
 						}
 						return html;
 					}
 				},{
-					title: I18n.joblog_field_triggerMsg,
+					title: '调度备注',
 					field: 'triggerMsg',
 					width: '10',
 					widthUnit: '%',
 					formatter: function(value, row, index) {
-						return value?'<a class="logTips" href="javascript:;" >'+ I18n.system_show +'<span style="display:none;">'+ value +'</span></a>':I18n.system_empty;
+						return value?'<a class="logTips" href="javascript:;" >查看<span style="display:none;">'+ value +'</span></a>':'无';
 					}
 				},{
-					title: I18n.joblog_field_handleTime,
+					title: '执行时间',
 					field: 'handleTime',
 					width: '15',
 					widthUnit: '%',
@@ -328,30 +327,30 @@
 						return value?moment(value).format("YYYY-MM-DD HH:mm:ss"):"";
 					}
 				},{
-					title: I18n.joblog_field_handleCode,
+					title: '执行结果',
 					field: 'handleCode',
 					width: '10',
 					widthUnit: '%',
 					formatter: function(value, row, index) {
 						var html = value;
 						if (value == 200) {			// 200, success
-							html = '<span style="color: green">'+ I18n.joblog_handleCode_200 +'</span>';
+							html = '<span style="color: green">成功</span>';
 						} else if (value == 502) {	// 502, timeout
-							html = '<span style="color: red">'+ I18n.joblog_handleCode_502 +'</span>';
+							html = '<span style="color: red">失败(超时)</span>';
 						} else if (value > 0) {		// >0 or 500, fail
-							html = '<span style="color: red">'+ I18n.joblog_handleCode_500 +'</span>';
+							html = '<span style="color: red">失败</span>';
 						} else if (value == 0) {		// 0, original pass
 							html = '';
 						}
 						return html;
 					}
 				},{
-					title: I18n.joblog_field_handleMsg,
+					title: '执行备注',
 					field: 'handleMsg',
 					width: '10',
 					widthUnit: '%',
 					formatter: function(value, row, index) {
-						return value?'<a class="logTips" href="javascript:;" >'+ I18n.system_show +'<span style="display:none;">'+ value +'</span></a>':I18n.system_empty;
+						return value?'<a class="logTips" href="javascript:;" >查看<span style="display:none;">'+ value +'</span></a>':'无';
 					}
 				}
 			]
@@ -366,7 +365,7 @@
 
 			// find select row
 			if (rows.length !== 1) {
-				layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
+				layer.msg('请选择一条数据');
 				return;
 			}
 			var row = rows[0];
@@ -383,16 +382,16 @@
 
 			// find select row
 			if (rows.length !== 1) {
-				layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
+				layer.msg('请选择一条数据');
 				return;
 			}
 			var row = rows[0];
 
 			// do kill
-			layer.confirm( (I18n.system_ok + I18n.joblog_kill_log + '?'), {
+			layer.confirm( '确定终止任务?', {
 				icon: 3,
-				title: I18n.system_tips ,
-				btn: [ I18n.system_ok, I18n.system_cancel ]
+				title: '系统提示' ,
+				btn: [ '确定', '取消' ]
 			}, function(index){
 				layer.close(index);
 
@@ -406,9 +405,9 @@
 					success : function(data){
 						if (data.code == 200) {
 							layer.open({
-								title: I18n.system_tips,
-								btn: [ I18n.system_ok ],
-								content: I18n.system_opt_suc ,
+								title: '系统提示',
+								btn: [ '确定' ],
+								content: '操作成功' ,
 								icon: '1',
 								end: function(layero, index){
 									// refresh table
@@ -417,9 +416,69 @@
 							});
 						} else {
 							layer.open({
-								title: I18n.system_tips,
-								btn: [ I18n.system_ok ],
-								content: (data.msg || I18n.system_opt_fail ),
+								title: '系统提示',
+								btn: [ '确定' ],
+								content: (data.msg || '操作失败' ),
+								icon: '2'
+							});
+						}
+					},
+				});
+			});
+
+		});
+
+		/**
+		 * delete selected logs
+		 */
+		$('#data_operation').on('click', '.deleteSelected', function(){
+			// get select rows
+			var rows = $.adminTable.table.bootstrapTable('getSelections');
+
+			// find select row
+			if (rows.length < 1) {
+				layer.msg('请选择至少一条数据');
+				return;
+			}
+
+			// collect ids
+			var ids = [];
+			for (var i = 0; i < rows.length; i++) {
+				ids.push(rows[i].id);
+			}
+
+			// do delete
+			layer.confirm( '确定删除选中的 ' + rows.length + ' 条日志?', {
+				icon: 3,
+				title: '系统提示' ,
+				btn: [ '确定', '取消' ]
+			}, function(index){
+				layer.close(index);
+
+				$.ajax({
+					type : 'POST',
+					url : base_url + '/joblog/deleteSelected',
+					data : {
+						"ids": ids.join(',')
+					},
+					dataType : "json",
+					success : function(data){
+						if (data.code == 200) {
+							layer.open({
+								title: '系统提示',
+								btn: [ '确定' ],
+								content: '删除成功' ,
+								icon: '1',
+								end: function(layero, index){
+									// refresh table
+									$('#data_filter .searchBtn').click();
+								}
+							});
+						} else {
+							layer.open({
+								title: '系统提示',
+								btn: [ '确定' ],
+								content: (data.msg || '删除失败' ),
 								icon: '2'
 							});
 						}
@@ -454,9 +513,9 @@
 				if (data.code == "200") {
 					$('#clearLogModal').modal('hide');
 					layer.open({
-						title: I18n.system_tips ,
-						btn: [ I18n.system_ok ],
-						content: (I18n.joblog_clean_log + I18n.system_success) ,
+						title: '系统提示' ,
+						btn: [ '确定' ],
+						content: '日志清理成功' ,
 						icon: '1',
 						end: function(layero, index){
 							// refresh table
@@ -465,9 +524,9 @@
 					});
 				} else {
 					layer.open({
-						title: I18n.system_tips ,
-						btn: [ I18n.system_ok ],
-						content: (data.msg || (I18n.joblog_clean_log + I18n.system_fail) ),
+						title: '系统提示' ,
+						btn: [ '确定' ],
+						content: (data.msg || '日志清理失败' ),
 						icon: '2'
 					});
 				}
@@ -500,7 +559,7 @@
 						'			</div>' +
 						'				<div class="modal-footer">' +
 						'				<div class="text-center" >' +
-						'					<button type="button" class="btn btn-info ok" data-bs-dismiss="modal" >'+ I18n.system_ok +'</button>' +
+						'					<button type="button" class="btn btn-info ok" data-bs-dismiss="modal" >确定</button>' +
 						'				</div>' +
 						'			</div>' +
 						'		</div>' +

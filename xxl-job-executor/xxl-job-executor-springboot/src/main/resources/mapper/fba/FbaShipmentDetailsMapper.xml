@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.executor.biz.fba.mapper.FbaShipmentDetailsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xxl.job.executor.biz.fba.entity.FbaShipmentDetailsDO">
+        <id column="id" property="id" />
+        <result column="source" property="source" />
+        <result column="job_no" property="jobNo" />
+        <result column="raw_json" property="rawJson" />
+        <result column="analyzed" property="analyzed" />
+        <result column="synced" property="synced" />
+        <result column="pcs" property="pcs" />
+        <result column="vol" property="vol" />
+        <result column="weig" property="weig" />
+        <result column="re_tel" property="reTel" />
+        <result column="re_zip" property="reZip" />
+        <result column="refno" property="refno" />
+        <result column="actual" property="actual" />
+        <result column="re_name" property="reName" />
+        <result column="remark" property="remark" />
+        <result column="sd_date" property="sdDate" />
+        <result column="div_size" property="divSize" />
+        <result column="hub_type" property="hubType" />
+        <result column="sign_pcs" property="signPcs" />
+        <result column="cust_name" property="custName" />
+        <result column="dec_value" property="decValue" />
+        <result column="dest_name" property="destName" />
+        <result column="pack_type" property="packType" />
+        <result column="goods_type" property="goodsType" />
+        <result column="hub_in_code" property="hubInCode" />
+        <result column="hub_in_name" property="hubInName" />
+        <result column="isfaraway" property="isfaraway" />
+        <result column="re_company" property="reCompany" />
+        <result column="address_type" property="addressType" />
+        <result column="dec_value_cur" property="decValueCur" />
+        <result column="hub_type_name" property="hubTypeName" />
+        <result column="problem_type" property="problemType" />
+        <result column="referenceno" property="referenceno" />
+        <result column="unlock_state" property="unlockState" />
+        <result column="category_type" property="categoryType" />
+        <result column="cocustom_type" property="cocustomType" />
+        <result column="goods_type_name" property="goodsTypeName" />
+        <result column="chargestandard" property="chargestandard" />
+        <result column="last_scan_remark" property="lastScanRemark" />
+        <result column="address_type_name" property="addressTypeName" />
+        <result column="last_scan_station" property="lastScanStation" />
+        <result column="category_type_name" property="categoryTypeName" />
+        <result column="cocustom_type_name" property="cocustomTypeName" />
+        <result column="last_scan_status_name" property="lastScanStatusName" />
+        <result column="manifest_status_name" property="manifestStatusName" />
+        <result column="creator" property="creator" />
+        <result column="updater" property="updater" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="deleted" property="deleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, source, job_no, raw_json, analyzed, synced, pcs, vol, weig, re_tel, re_zip, refno, actual, re_name, remark, sd_date, div_size, hub_type, sign_pcs, cust_name, dec_value, dest_name, pack_type, goods_type, hub_in_code, hub_in_name, isfaraway, re_company, address_type, dec_value_cur, hub_type_name, problem_type, referenceno, unlock_state, category_type, cocustom_type, goods_type_name, chargestandard, last_scan_remark, address_type_name, last_scan_station, category_type_name, cocustom_type_name, last_scan_status_name, manifest_status_name, creator, updater, create_time, update_time, deleted
+    </sql>
+
+</mapper>

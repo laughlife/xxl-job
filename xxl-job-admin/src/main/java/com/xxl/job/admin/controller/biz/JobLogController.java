@@ -276,6 +276,44 @@ public class JobLogController {
 		return Response.ofSuccess();
 	}
 
+	@RequestMapping("/deleteSelected")
+	@ResponseBody
+	public Response<String> deleteSelected(HttpServletRequest request,
+										   @RequestParam("ids") String ids){
+		// valid param
+		if (StringTool.isBlank(ids)) {
+			return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("system_data"));
+		}
+
+		// parse ids
+		String[] idArr = ids.split(",");
+		List<Long> idList = new java.util.ArrayList<>();
+		for (String idStr : idArr) {
+			try {
+				idList.add(Long.parseLong(idStr.trim()));
+			} catch (NumberFormatException e) {
+				return Response.ofFail(I18nUtil.getString("joblog_logid_unvalid"));
+			}
+		}
+
+		if (idList.isEmpty()) {
+			return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("system_data"));
+		}
+
+		// valid permission for each log
+		for (Long logId : idList) {
+			XxlJobLog log = xxlJobLogMapper.load(logId);
+			if (log != null) {
+				JobGroupPermissionUtil.validJobGroupPermission(request, log.getJobGroup());
+			}
+		}
+
+		// delete
+		xxlJobLogMapper.deleteByIds(idList);
+
+		return Response.ofSuccess();
+	}
+
 	@RequestMapping("/logDetailPage")
 	public String logDetailPage(HttpServletRequest request, @RequestParam("id") long id, Model model){
 

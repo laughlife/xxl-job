@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.executor.biz.fba.mapper.FbaDispatchMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xxl.job.executor.biz.fba.entity.FbaDispatchDO">
+        <id column="id" property="id" />
+        <result column="raw_json" property="rawJson" />
+        <result column="synced" property="synced" />
+        <result column="source" property="source" />
+        <result column="analyzed" property="analyzed" />
+        <result column="fba_shipment_id" property="fbaShipmentId" />
+        <result column="job_no" property="jobNo" />
+        <result column="transfer_order_no" property="transferOrderNo" />
+        <result column="pcs" property="pcs" />
+        <result column="qty" property="qty" />
+        <result column="vol" property="vol" />
+        <result column="weig" property="weig" />
+        <result column="rweig" property="rweig" />
+        <result column="actual" property="actual" />
+        <result column="pay_weig" property="payWeig" />
+        <result column="isfaraway" property="isfaraway" />
+        <result column="re_tel" property="reTel" />
+        <result column="re_zip" property="reZip" />
+        <result column="re_name" property="reName" />
+        <result column="re_company" property="reCompany" />
+        <result column="re_addr" property="reAddr" />
+        <result column="re_city" property="reCity" />
+        <result column="re_addr2" property="reAddr2" />
+        <result column="re_addr3" property="reAddr3" />
+        <result column="re_state" property="reState" />
+        <result column="re_country" property="reCountry" />
+        <result column="refno" property="refno" />
+        <result column="cust_no" property="custNo" />
+        <result column="oawb_id" property="oawbId" />
+        <result column="re_code" property="reCode" />
+        <result column="referenceno" property="referenceno" />
+        <result column="batch_no" property="batchNo" />
+        <result column="cust_name" property="custName" />
+        <result column="dest_code" property="destCode" />
+        <result column="dest_name" property="destName" />
+        <result column="cc_charge" property="ccCharge" />
+        <result column="dec_value" property="decValue" />
+        <result column="fee_count" property="feeCount" />
+        <result column="cod_charge" property="codCharge" />
+        <result column="chargestandard" property="chargestandard" />
+        <result column="pack_type" property="packType" />
+        <result column="goods_type" property="goodsType" />
+        <result column="goods_type_name" property="goodsTypeName" />
+        <result column="descr_name" property="descrName" />
+        <result column="descr_name_en" property="descrNameEn" />
+        <result column="hub_in_code" property="hubInCode" />
+        <result column="hub_in_name" property="hubInName" />
+        <result column="hub_out_code" property="hubOutCode" />
+        <result column="hub_out_name" property="hubOutName" />
+        <result column="sd_date" property="sdDate" />
+        <result column="sd_station" property="sdStation" />
+        <result column="cc_payment" property="ccPayment" />
+        <result column="cc_charge_cur" property="ccChargeCur" />
+        <result column="dec_value_cur" property="decValueCur" />
+        <result column="cod_charge_cur" property="codChargeCur" />
+        <result column="cctax_payment" property="cctaxPayment" />
+        <result column="chargestandard_cur" property="chargestandardCur" />
+        <result column="cocustom_type" property="cocustomType" />
+        <result column="cocustom_type_name" property="cocustomTypeName" />
+        <result column="flip_rule_name" property="flipRuleName" />
+        <result column="remark" property="remark" />
+        <result column="file_list" property="fileList" />
+        <result column="manifest_pcs" property="manifestPcs" />
+        <result column="common_invoice" property="commonInvoice" />
+        <result column="customs_file_list" property="customsFileList" />
+        <result column="manifest_child_list" property="manifestChildList" />
+        <result column="problem_info_dto_list" property="problemInfoDtoList" />
+        <result column="manifest_settle_dto_list" property="manifestSettleDtoList" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="deleted" property="deleted" />
+        <result column="updater" property="updater" />
+        <result column="creator" property="creator" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, raw_json, synced, source, analyzed, fba_shipment_id, job_no, transfer_order_no, pcs, qty, vol, weig, rweig, actual, pay_weig, isfaraway, re_tel, re_zip, re_name, re_company, re_addr, re_city, re_addr2, re_addr3, re_state, re_country, refno, cust_no, oawb_id, re_code, referenceno, batch_no, cust_name, dest_code, dest_name, cc_charge, dec_value, fee_count, cod_charge, chargestandard, pack_type, goods_type, goods_type_name, descr_name, descr_name_en, hub_in_code, hub_in_name, hub_out_code, hub_out_name, sd_date, sd_station, cc_payment, cc_charge_cur, dec_value_cur, cod_charge_cur, cctax_payment, chargestandard_cur, cocustom_type, cocustom_type_name, flip_rule_name, remark, file_list, manifest_pcs, common_invoice, customs_file_list, manifest_child_list, problem_info_dto_list, manifest_settle_dto_list, create_time, update_time, deleted, updater, creator
+    </sql>
+
+</mapper>

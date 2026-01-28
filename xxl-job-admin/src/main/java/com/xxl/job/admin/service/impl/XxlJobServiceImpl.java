@@ -348,6 +348,8 @@ public class XxlJobServiceImpl implements XxlJobService {
 		}
 
 		exists_jobInfo.setJobGroup(jobInfo.getJobGroup());
+		exists_jobInfo.setTaskGroupId(jobInfo.getTaskGroupId());
+		exists_jobInfo.setTaskOrder(jobInfo.getTaskOrder());
 		exists_jobInfo.setJobDesc(jobInfo.getJobDesc());
 		exists_jobInfo.setPythonId(jobInfo.getPythonId());
 		exists_jobInfo.setAuthor(jobInfo.getAuthor());
