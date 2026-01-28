@@ -1,14 +1,16 @@
 package com.xxl.job.core.log;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -101,9 +103,13 @@ public class XxlJobFileAppender {
 			return;
 		}
 
-		// append log
-        try {
-            FileTool.writeLines(logFileName, List.of(appendLog), true);
+		// append log with UTF-8 encoding to avoid garbled text
+        try (FileOutputStream fos = new FileOutputStream(logFileName, true);
+             OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+             BufferedWriter writer = new BufferedWriter(osw)) {
+            writer.write(appendLog);
+            writer.newLine();
+            writer.flush();
         } catch (IOException e) {
             throw new RuntimeException("XxlJobFileAppender appendLog error, logFileName:"+ logFileName, e);
         }

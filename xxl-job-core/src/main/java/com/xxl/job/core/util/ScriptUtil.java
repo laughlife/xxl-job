@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,8 +92,8 @@ public class ScriptUtil {
             // 4、read script log: inputStream + errStream
             final FileOutputStream finalFileOutputStream = fileOutputStream;
             
-            // Use system default charset for reading process output (handles Windows GBK, Linux UTF-8, etc.)
-            Charset processCharset = Charset.defaultCharset();
+            // Use UTF-8 charset for reading process output to avoid garbled text
+            Charset processCharset = StandardCharsets.UTF_8;
             
             inputThread = new Thread(() -> {
                 try {
