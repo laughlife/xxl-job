@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.executor.biz.fba.mapper.FbaShipmentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xxl.job.executor.biz.fba.entity.FbaShipmentDO">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="selling_partner_id" property="sellingPartnerId" />
+        <result column="region" property="region" />
+        <result column="shop_id" property="shopId" />
+        <result column="shop_name" property="shopName" />
+        <result column="marketplace_id" property="marketplaceId" />
+        <result column="marketplace_name" property="marketplaceName" />
+        <result column="inbound_plan_id" property="inboundPlanId" />
+        <result column="sta_shipment_id" property="staShipmentId" />
+        <result column="amazon_shipment_id" property="amazonShipmentId" />
+        <result column="transfer_order_no" property="transferOrderNo" />
+        <result column="shipment_status" property="shipmentStatus" />
+        <result column="fulfillment_center_id" property="fulfillmentCenterId" />
+        <result column="reference_id" property="referenceId" />
+        <result column="remark" property="remark" />
+        <result column="mobile" property="mobile" />
+        <result column="quantity" property="quantity" />
+        <result column="quantity_received" property="quantityReceived" />
+        <result column="box_quantity" property="boxQuantity" />
+        <result column="carton_num" property="cartonNum" />
+        <result column="quantity_from_ship_order" property="quantityFromShipOrder" />
+        <result column="quantity_difference" property="quantityDifference" />
+        <result column="received_difference" property="receivedDifference" />
+        <result column="qua_rec_difference" property="quaRecDifference" />
+        <result column="batch_sn" property="batchSn" />
+        <result column="carrier_name" property="carrierName" />
+        <result column="transportation_option_id" property="transportationOptionId" />
+        <result column="delivery_window_option_id" property="deliveryWindowOptionId" />
+        <result column="shipped_date" property="shippedDate" />
+        <result column="expect_arrival_start" property="expectArrivalStart" />
+        <result column="expect_arrival_end" property="expectArrivalEnd" />
+        <result column="has_overdue" property="hasOverdue" />
+        <result column="shipping_mode" property="shippingMode" />
+        <result column="shipping_solution" property="shippingSolution" />
+        <result column="shipment_type" property="shipmentType" />
+        <result column="shipping_order_flag" property="shippingOrderFlag" />
+        <result column="factory_direct_delivery" property="factoryDirectDelivery" />
+        <result column="transit_status" property="transitStatus" />
+        <result column="transit_status_for_ship_order" property="transitStatusForShipOrder" />
+        <result column="receiving_time" property="receivingTime" />
+        <result column="ltl_bill_of_lading_number" property="ltlBillOfLadingNumber" />
+        <result column="ltl_freight_bill_number" property="ltlFreightBillNumber" />
+        <result column="source_addr_id" property="sourceAddrId" />
+        <result column="dest_addr_id" property="destAddrId" />
+        <result column="postal_code" property="postalCode" />
+        <result column="email" property="email" />
+        <result column="is_outdated_ful_center" property="isOutdatedFulCenter" />
+        <result column="create_name" property="createName" />
+        <result column="synced" property="synced" />
+        <result column="raw_json" property="rawJson" />
+        <result column="creator" property="creator" />
+        <result column="create_time" property="createTime" />
+        <result column="updater" property="updater" />
+        <result column="update_time" property="updateTime" />
+        <result column="deleted" property="deleted" />
+        <result column="dept_id" property="deptId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, selling_partner_id, region, shop_id, shop_name, marketplace_id, marketplace_name, inbound_plan_id, sta_shipment_id, amazon_shipment_id, transfer_order_no, shipment_status, fulfillment_center_id, reference_id, remark, mobile, quantity, quantity_received, box_quantity, carton_num, quantity_from_ship_order, quantity_difference, received_difference, qua_rec_difference, batch_sn, carrier_name, transportation_option_id, delivery_window_option_id, shipped_date, expect_arrival_start, expect_arrival_end, has_overdue, shipping_mode, shipping_solution, shipment_type, shipping_order_flag, factory_direct_delivery, transit_status, transit_status_for_ship_order, receiving_time, ltl_bill_of_lading_number, ltl_freight_bill_number, source_addr_id, dest_addr_id, postal_code, email, is_outdated_ful_center, create_name, synced, raw_json, creator, create_time, updater, update_time, deleted, dept_id
+    </sql>
+
+</mapper>

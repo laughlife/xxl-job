@@ -735,7 +735,7 @@ exit 0
 				},{
 					title: '任务ID',
 					field: 'id',
-					width: '5',
+					width: '2',
 					widthUnit: '%',
 					align: 'left'
 				},{
@@ -763,7 +763,7 @@ exit 0
 				},{
 					title: '排序',
 					field: 'taskOrder',
-					width: '5',
+					width: '2',
 					widthUnit: '%',
 					align: 'center',
 					formatter: function(value, row, index) {

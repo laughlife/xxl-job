@@ -1,12 +1,5 @@
 package com.xxl.job.executor.mybatis.code;
 
-import com.baomidou.mybatisplus.generator.FastAutoGenerator;
-import com.baomidou.mybatisplus.generator.config.OutputFile;
-import com.baomidou.mybatisplus.generator.config.rules.DateType;
-import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
-import com.xxl.job.executor.mybatis.mapper.BaseMapperX;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,16 +11,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.baomidou.mybatisplus.generator.FastAutoGenerator;
+import com.baomidou.mybatisplus.generator.config.OutputFile;
+import com.baomidou.mybatisplus.generator.config.rules.DateType;
+import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
+import com.xxl.job.executor.mybatis.mapper.BaseMapperX;
+
 /**
  * MyBatis-Plus 代码生成器
  * <p>
- * 支持按业务模块分包生成 Controller/Service/Mapper/Entity
+ * 支持按业务模块分包生成 Service/Mapper/Entity（不生成 Controller）
  * 目录结构示例（业务包名为 order）：
  * <pre>
  * com.xxl.job.executor.biz
  *   └── order
- *       ├── controller
- *       │   └── OrderController.java
  *       ├── service
  *       │   ├── OrderService.java
  *       │   └── impl
@@ -51,14 +49,13 @@ public class CodeGenerator {
      */
     public static void main(String[] args) {
         /*
-         * 示例1：生成 order 业务模块
-         * 会在以下路径生成代码：
-         * - com.xxl.job.executor.biz.order.controller
-         * - com.xxl.job.executor.biz.order.service
-         * - com.xxl.job.executor.biz.order.service.impl
-         * - com.xxl.job.executor.biz.order.mapper
-         * - com.xxl.job.executor.biz.order.entity
-         * - resources/mapper/order/*.xml
+         * 示例1：生成 fba 业务模块
+         * 会在以下路径生成代码（不生成 Controller）：
+         * - com.xxl.job.executor.biz.fba.service
+         * - com.xxl.job.executor.biz.fba.service.impl
+         * - com.xxl.job.executor.biz.fba.mapper
+         * - com.xxl.job.executor.biz.fba.entity
+         * - resources/mapper/fba/*.xml
          */
         CodeGenerator.create()
                 // 数据库配置（如果 application.properties 中已配置，可省略）
@@ -68,11 +65,11 @@ public class CodeGenerator {
                         "Liv88625200@@"
                 )
                 // 业务模块名
-                .module("token")
+                .module("fba")
                 // 要生成的表（支持多个）
-                .tables("ruiyi_token")
+                .tables("erp_fba_spd_box")
                 // 表前缀（生成时去除，xxl_job_info -> Info）
-                .tablePrefixes("ruiyi_")
+                .tablePrefixes("erp_")
                 // 作者
                 .author("Li Wei")
                 // 执行生成
@@ -205,17 +202,21 @@ public class CodeGenerator {
         // 完整包名（包含业务模块）
         String fullPackage = basePackage + "." + moduleName;
 
-        // 配置各层输出路径
+        // 配置各层输出路径（不包含 controller）
+        // 关键：必须显式设置 controller 路径为空字符串，防止生成
         Map<OutputFile, String> pathInfo = new HashMap<>();
         pathInfo.put(OutputFile.entity, javaOutputDir + "/" + packageToPath(fullPackage + ".entity"));
         pathInfo.put(OutputFile.mapper, javaOutputDir + "/" + packageToPath(fullPackage + ".mapper"));
         pathInfo.put(OutputFile.service, javaOutputDir + "/" + packageToPath(fullPackage + ".service"));
         pathInfo.put(OutputFile.serviceImpl, javaOutputDir + "/" + packageToPath(fullPackage + ".service.impl"));
-        pathInfo.put(OutputFile.controller, javaOutputDir + "/" + packageToPath(fullPackage + ".controller"));
         pathInfo.put(OutputFile.xml, mapperXmlOutputDir);
+        // 关键：将 controller 输出路径设为空，彻底阻止生成
+        pathInfo.put(OutputFile.controller, "");
 
-        // 确保所有输出目录存在
-        pathInfo.values().forEach(this::ensureDirectoryExists);
+        // 确保所有输出目录存在（排除空路径）
+        pathInfo.entrySet().stream()
+                .filter(e -> e.getValue() != null && !e.getValue().isEmpty())
+                .forEach(e -> ensureDirectoryExists(e.getValue()));
 
         System.out.println("========== 代码生成配置 ==========");
         System.out.println("项目路径: " + projectPath);
@@ -224,6 +225,7 @@ public class CodeGenerator {
         System.out.println("生成表: " + String.join(", ", tableNames));
         System.out.println("Java输出: " + javaOutputDir);
         System.out.println("Mapper XML输出: " + mapperXmlOutputDir);
+        System.out.println("Controller生成: 已禁用");
         System.out.println("==================================");
 
         // 执行生成
@@ -243,7 +245,6 @@ public class CodeGenerator {
                         .mapper("mapper")
                         .service("service")
                         .serviceImpl("service.impl")
-                        .controller("controller")
                         .pathInfo(pathInfo)
                 )
                 // 策略配置
@@ -278,10 +279,9 @@ public class CodeGenerator {
                             .formatServiceFileName("%sService")
                             .formatServiceImplFileName("%sServiceImpl");
 
-                    // Controller 策略
+                    // Controller 策略：禁用生成 - 这是 3.5.x 版本禁用 controller 的正确方式
                     builder.controllerBuilder()
-                            .enableRestStyle()
-                            .enableHyphenStyle();
+                            .disable();
                 })
                 // 模板引擎
                 .templateEngine(new VelocityTemplateEngine())

@@ -23,7 +23,7 @@ xxl:
       # 执行器IP[选填]：执行器所在服务器的IP地址，为空则自动获取本机IP
       # 用于生成注册地址，调度中心通过该IP调用执行器
       # 多网卡环境建议手动指定，确保调度中心可访问
-      ip: "192.168.100.112"
+      ip: "127.0.0.1"
       port: 9999
       logpath: /data/applogs/xxl-job/jobhandler
       logretentiondays: 30

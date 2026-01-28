@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan(basePackages = {
-        "com.xxl.job.executor.biz.token.mapper"
+        "com.xxl.job.executor.biz.**.mapper"
 })
 public class XxlJobExecutorApplication {
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.executor.biz.fba.mapper.FbaSpdBoxMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xxl.job.executor.biz.fba.entity.FbaSpdBoxDO">
+        <id column="id" property="id" />
+        <result column="shipment_id" property="shipmentId" />
+        <result column="box_id" property="boxId" />
+        <result column="tracking_id" property="trackingId" />
+        <result column="tracking_number_validation_status" property="trackingNumberValidationStatus" />
+        <result column="idx" property="idx" />
+        <result column="need_sync" property="needSync" />
+        <result column="synced" property="synced" />
+        <result column="weight" property="weight" />
+        <result column="weight_unit" property="weightUnit" />
+        <result column="actual_weight" property="actualWeight" />
+        <result column="charge_weight" property="chargeWeight" />
+        <result column="volume" property="volume" />
+        <result column="length" property="length" />
+        <result column="length_unit" property="lengthUnit" />
+        <result column="width" property="width" />
+        <result column="height" property="height" />
+        <result column="circ_length" property="circLength" />
+        <result column="creator" property="creator" />
+        <result column="create_time" property="createTime" />
+        <result column="updater" property="updater" />
+        <result column="update_time" property="updateTime" />
+        <result column="deleted" property="deleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, shipment_id, box_id, tracking_id, tracking_number_validation_status, idx, need_sync, synced, weight, weight_unit, actual_weight, charge_weight, volume, length, length_unit, width, height, circ_length, creator, create_time, updater, update_time, deleted
+    </sql>
+
+</mapper>

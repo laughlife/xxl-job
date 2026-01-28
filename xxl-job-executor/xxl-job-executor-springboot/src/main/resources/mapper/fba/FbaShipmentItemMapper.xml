@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.executor.biz.fba.mapper.FbaShipmentItemMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xxl.job.executor.biz.fba.entity.FbaShipmentItemDO">
+        <id column="id" property="id" />
+        <result column="shipment_id" property="shipmentId" />
+        <result column="marketplace_id" property="marketplaceId" />
+        <result column="plan_id" property="planId" />
+        <result column="plan_sn" property="planSn" />
+        <result column="product_id" property="productId" />
+        <result column="asin" property="asin" />
+        <result column="msku" property="msku" />
+        <result column="fn_sku" property="fnSku" />
+        <result column="commodity_id" property="commodityId" />
+        <result column="commodity_sku" property="commoditySku" />
+        <result column="commodity_name" property="commodityName" />
+        <result column="title" property="title" />
+        <result column="main_image" property="mainImage" />
+        <result column="is_group" property="isGroup" />
+        <result column="child_sku" property="childSku" />
+        <result column="commodity_size_id" property="commoditySizeId" />
+        <result column="commodity_size_template_name" property="commoditySizeTemplateName" />
+        <result column="label_owner" property="labelOwner" />
+        <result column="prep_owner" property="prepOwner" />
+        <result column="prep_category" property="prepCategory" />
+        <result column="prep_type" property="prepType" />
+        <result column="are_cases_required" property="areCasesRequired" />
+        <result column="outer_box_length" property="outerBoxLength" />
+        <result column="outer_box_width" property="outerBoxWidth" />
+        <result column="outer_box_height" property="outerBoxHeight" />
+        <result column="outer_box_weight" property="outerBoxWeight" />
+        <result column="expiration_date" property="expirationDate" />
+        <result column="quantity" property="quantity" />
+        <result column="box_quantity" property="boxQuantity" />
+        <result column="quantity_received" property="quantityReceived" />
+        <result column="ship_count" property="shipCount" />
+        <result column="case_num" property="caseNum" />
+        <result column="quantity_in_case" property="quantityInCase" />
+        <result column="declare_quantity" property="declareQuantity" />
+        <result column="transparency_print_count" property="transparencyPrintCount" />
+        <result column="transparency_product_flag" property="transparencyProductFlag" />
+        <result column="packing_task_sn" property="packingTaskSn" />
+        <result column="total_task_num" property="totalTaskNum" />
+        <result column="weight" property="weight" />
+        <result column="material_weight" property="materialWeight" />
+        <result column="billing_weight" property="billingWeight" />
+        <result column="volume" property="volume" />
+        <result column="circ_length" property="circLength" />
+        <result column="online_status" property="onlineStatus" />
+        <result column="prep_instruction_list" property="prepInstructionList" />
+        <result column="ship_sn_list" property="shipSnList" />
+        <result column="carton_list" property="cartonList" />
+        <result column="raw_json" property="rawJson" />
+        <result column="creator" property="creator" />
+        <result column="create_time" property="createTime" />
+        <result column="updater" property="updater" />
+        <result column="update_time" property="updateTime" />
+        <result column="deleted" property="deleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, shipment_id, marketplace_id, plan_id, plan_sn, product_id, asin, msku, fn_sku, commodity_id, commodity_sku, commodity_name, title, main_image, is_group, child_sku, commodity_size_id, commodity_size_template_name, label_owner, prep_owner, prep_category, prep_type, are_cases_required, outer_box_length, outer_box_width, outer_box_height, outer_box_weight, expiration_date, quantity, box_quantity, quantity_received, ship_count, case_num, quantity_in_case, declare_quantity, transparency_print_count, transparency_product_flag, packing_task_sn, total_task_num, weight, material_weight, billing_weight, volume, circ_length, online_status, prep_instruction_list, ship_sn_list, carton_list, raw_json, creator, create_time, updater, update_time, deleted
+    </sql>
+
+</mapper>
