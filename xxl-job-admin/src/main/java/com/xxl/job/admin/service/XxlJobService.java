@@ -1,12 +1,12 @@
 package com.xxl.job.admin.service;
 
+import java.util.Date;
+import java.util.Map;
+
 import com.xxl.job.admin.model.XxlJobInfo;
 import com.xxl.sso.core.model.LoginInfo;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
-
-import java.util.Date;
-import java.util.Map;
 
 /**
  * core job action for xxl-job
@@ -18,7 +18,7 @@ public interface XxlJobService {
 	/**
 	 * page list
 	 */
-	public Response<PageModel<XxlJobInfo>> pageList(int offset, int pagesize, int jobGroup, int triggerStatus, String jobDesc, String executorHandler, String author);
+	public Response<PageModel<XxlJobInfo>> pageList(int offset, int pagesize, int jobGroup, int triggerStatus, String jobDesc, String executorHandler, String author, Integer taskGroupId);
 
 	/**
 	 * add job

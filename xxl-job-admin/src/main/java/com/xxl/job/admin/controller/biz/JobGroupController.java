@@ -1,12 +1,24 @@
 package com.xxl.job.admin.controller.biz;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.xxl.job.admin.constant.Consts;
-import com.xxl.job.admin.model.XxlJobGroup;
-import com.xxl.job.admin.model.XxlJobRegistry;
-import com.xxl.job.admin.util.I18nUtil;
 import com.xxl.job.admin.mapper.XxlJobGroupMapper;
 import com.xxl.job.admin.mapper.XxlJobInfoMapper;
 import com.xxl.job.admin.mapper.XxlJobRegistryMapper;
+import com.xxl.job.admin.model.XxlJobGroup;
+import com.xxl.job.admin.model.XxlJobRegistry;
+import com.xxl.job.admin.util.I18nUtil;
 import com.xxl.job.core.constant.Const;
 import com.xxl.job.core.constant.RegistType;
 import com.xxl.sso.core.annotation.XxlSso;
@@ -15,14 +27,8 @@ import com.xxl.tool.core.StringTool;
 import com.xxl.tool.http.HttpTool;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
-import jakarta.annotation.Resource;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.*;
+import jakarta.annotation.Resource;
 
 /**
  * job group controller
@@ -196,7 +202,7 @@ public class JobGroupController {
         }
 
 		// whether exists job
-		int count = xxlJobInfoMapper.pageListCount(0, 10, id, -1,  null, null, null);
+		int count = xxlJobInfoMapper.pageListCount(0, 10, id, -1,  null, null, null, null);
 		if (count > 0) {
 			return Response.ofFail( I18nUtil.getString("jobgroup_del_limit_0") );
 		}

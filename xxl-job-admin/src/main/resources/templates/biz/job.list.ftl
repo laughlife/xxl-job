@@ -22,13 +22,21 @@
 			<div class="box-body">
 				<div class="row" id="data_filter" >
 
-					<div class="col-3">
+					<div class="col-2">
 						<div class="input-group">
 							<span class="input-group-addon">执行器</span>
 							<select class="form-control" id="jobGroup" >
 								<#list JobGroupList as group>
 									<option value="${group.id}" <#if jobGroup==group.id>selected</#if> >${group.title}</option>
 								</#list>
+							</select>
+						</div>
+					</div>
+					<div class="col-2">
+						<div class="input-group">
+							<span class="input-group-addon">任务组</span>
+							<select class="form-control" id="taskGroupId" >
+								<option value="">全部</option>
 							</select>
 						</div>
 					</div>
@@ -51,9 +59,9 @@
 							<input type="text" class="form-control" id="executorHandler" placeholder="请输入JobHandler" >
 						</div>
 					</div>
-					<div class="col-2">
+					<div class="col-1">
 						<div class="input-group">
-							<input type="text" class="form-control" id="author" placeholder="请输入负责人" >
+							<input type="text" class="form-control" id="author" placeholder="负责人" >
 						</div>
 					</div>
 
@@ -126,6 +134,16 @@
 								<div class="col-sm-4"><input type="text" class="form-control" name="author" placeholder="请输入负责人" maxlength="50" ></div>
 								<label for="lastname" class="col-sm-2 col-form-label">报警邮件<font color="black">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="alarmEmail" placeholder="请输入报警邮件，多个邮件地址则逗号分隔" maxlength="100" ></div>
+							</div>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">任务组</label>
+								<div class="col-sm-4">
+									<select class="form-control" name="taskGroupId">
+										<option value="">无</option>
+									</select>
+								</div>
+								<label for="lastname" class="col-sm-2 col-form-label">组内排序</label>
+								<div class="col-sm-4"><input type="number" class="form-control" name="taskOrder" placeholder="数字越小越靠前" value="0" min="0" ></div>
 							</div>
 
 							<br>
@@ -401,6 +419,16 @@ exit 0
 								<label for="lastname" class="col-sm-2 col-form-label">报警邮件<font color="black">*</font></label>
 								<div class="col-sm-4"><input type="text" class="form-control" name="alarmEmail" placeholder="请输入报警邮件，多个邮件地址则逗号分隔" maxlength="100" ></div>
 							</div>
+							<div class="row mb-3">
+								<label for="firstname" class="col-sm-2 col-form-label">任务组</label>
+								<div class="col-sm-4">
+									<select class="form-control" name="taskGroupId">
+										<option value="">无</option>
+									</select>
+								</div>
+								<label for="lastname" class="col-sm-2 col-form-label">组内排序</label>
+								<div class="col-sm-4"><input type="number" class="form-control" name="taskOrder" placeholder="数字越小越靠前" value="0" min="0" ></div>
+							</div>
 
 							<br>
 							<p style="margin: 0 0 10px;text-align: left;border-bottom: 1px solid #e5e5e5;color: gray;">调度配置</p>    <#-- 调度配置 -->
@@ -601,10 +629,62 @@ exit 0
 		 * jobGroup change
 		 */
 		$('#jobGroup').on('change', function(){
-			//reload
 			var jobGroup = $('#jobGroup').val();
+			
+			// 加载任务组列表
+			loadTaskGroupList(jobGroup, '#taskGroupId', '');
+			
+			//reload
 			window.location.href = base_url + "/jobinfo?jobGroup=" + jobGroup;
 		});
+
+		/**
+		 * 加载任务组列表
+		 */
+		function loadTaskGroupList(jobGroupId, selectId, selectedValue) {
+			$.ajax({
+				url: base_url + "/taskgroup/list",
+				data: { jobGroupId: jobGroupId },
+				dataType: "json",
+				success: function(data) {
+					var html = '<option value="">全部</option>';
+					if (data.code === 200 && data.data) {
+						$.each(data.data, function(i, item) {
+							var selected = (selectedValue && selectedValue == item.id) ? 'selected' : '';
+							html += '<option value="' + item.id + '" ' + selected + '>' + item.groupName + '</option>';
+						});
+					}
+					$(selectId).html(html);
+				}
+			});
+		}
+
+		/**
+		 * 加载任务组列表（用于表单）
+		 */
+		function loadTaskGroupListForForm(jobGroupId, selectSelector, selectedValue) {
+			$.ajax({
+				url: base_url + "/taskgroup/list",
+				data: { jobGroupId: jobGroupId },
+				dataType: "json",
+				success: function(data) {
+					var html = '<option value="">无</option>';
+					if (data.code === 200 && data.data) {
+						$.each(data.data, function(i, item) {
+							var selected = (selectedValue && selectedValue == item.id) ? 'selected' : '';
+							html += '<option value="' + item.id + '" ' + selected + '>' + item.groupName + '</option>';
+						});
+					}
+					$(selectSelector).html(html);
+				}
+			});
+		}
+
+		// 页面加载时，加载当前执行器的任务组列表
+		var currentJobGroup = $('#jobGroup').val();
+		if (currentJobGroup) {
+			loadTaskGroupList(currentJobGroup, '#taskGroupId', '');
+		}
 
 		// reset filter
 		var jobGroup = '${jobGroup}';
@@ -626,6 +706,7 @@ exit 0
 			queryParams: function (params) {
 				var obj = {};
 				obj.jobGroup = $('#jobGroup').val();
+				obj.taskGroupId = $('#taskGroupId').val();
 				obj.triggerStatus = $('#triggerStatus').val();
 				obj.jobDesc = $('#jobDesc').val();
 				obj.executorHandler = $('#executorHandler').val();
@@ -1115,6 +1196,10 @@ exit 0
 
 				// 》init glueType
 				$("#addModal .form select[name=glueType]").change();
+
+				// 》init taskGroup - 加载当前执行器的任务组
+				var jobGroupId = $("#addModal .form select[name=jobGroup]").val();
+				loadTaskGroupListForForm(jobGroupId, "#addModal .form select[name=taskGroupId]", '');
 			},
 			readFormData: function() {
 
@@ -1152,6 +1237,16 @@ exit 0
 			$(this).parents("form").find(".schedule_conf").hide();
 			$(this).parents("form").find(".schedule_conf_" + scheduleType).css("display", "contents");
 
+		});
+
+		// 执行器改变时，重新加载任务组列表（新增/编辑表单）
+		$("#addModal .form select[name=jobGroup]").change(function(){
+			var jobGroupId = $(this).val();
+			loadTaskGroupListForForm(jobGroupId, "#addModal .form select[name=taskGroupId]", '');
+		});
+		$("#updateModal .form select[name=jobGroup]").change(function(){
+			var jobGroupId = $(this).val();
+			loadTaskGroupListForForm(jobGroupId, "#updateModal .form select[name=taskGroupId]", '');
 		});
 
 		// glueType change
@@ -1229,6 +1324,10 @@ exit 0
 				$("#updateModal .form input[name='jobDesc']").val( row.jobDesc );
 				$("#updateModal .form input[name='author']").val( row.author );
 				$("#updateModal .form input[name='alarmEmail']").val( row.alarmEmail );
+
+				// fill taskGroup - 加载任务组并设置选中值
+				loadTaskGroupListForForm(row.jobGroup, "#updateModal .form select[name=taskGroupId]", row.taskGroupId);
+				$("#updateModal .form input[name='taskOrder']").val( row.taskOrder || 0 );
 
 				// fill trigger
 				$('#updateModal .form select[name=scheduleType] option[value='+ row.scheduleType +']').prop('selected', true);
@@ -1325,6 +1424,10 @@ exit 0
 			$("#addModal .form input[name='jobDesc']").val( row.jobDesc );
 			$("#addModal .form input[name='author']").val( row.author );
 			$("#addModal .form input[name='alarmEmail']").val( row.alarmEmail );
+
+			// fill taskGroup - 加载任务组并设置选中值
+			loadTaskGroupListForForm(row.jobGroup, "#addModal .form select[name=taskGroupId]", row.taskGroupId);
+			$("#addModal .form input[name='taskOrder']").val( row.taskOrder || 0 );
 
 			// fill trigger
 			$('#addModal .form select[name=scheduleType] option[value='+ row.scheduleType +']').prop('selected', true);

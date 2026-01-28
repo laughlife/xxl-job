@@ -16,6 +16,20 @@ import com.xxl.job.admin.model.XxlJobTaskGroup;
 public interface XxlJobTaskGroupMapper {
 
     /**
+     * 分页查询任务组列表
+     */
+    List<XxlJobTaskGroup> pageList(@Param("jobGroupId") int jobGroupId,
+                                    @Param("groupName") String groupName,
+                                    @Param("offset") int offset,
+                                    @Param("pagesize") int pagesize);
+
+    /**
+     * 分页查询任务组数量
+     */
+    int pageListCount(@Param("jobGroupId") int jobGroupId,
+                      @Param("groupName") String groupName);
+
+    /**
      * 查询执行器下的所有任务组
      */
     List<XxlJobTaskGroup> findByJobGroupId(@Param("jobGroupId") int jobGroupId);

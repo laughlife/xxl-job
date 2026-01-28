@@ -1,17 +1,13 @@
 package com.xxl.job.admin.controller.base;
 
-import com.xxl.job.admin.constant.Consts;
-import com.xxl.job.admin.model.dto.XxlBootResourceDTO;
-import com.xxl.job.admin.service.XxlJobService;
-import com.xxl.job.admin.util.I18nUtil;
-import com.xxl.sso.core.annotation.XxlSso;
-import com.xxl.sso.core.helper.XxlSsoHelper;
-import com.xxl.sso.core.model.LoginInfo;
-import com.xxl.tool.core.StringTool;
-import com.xxl.tool.response.Response;
-import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +18,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
+import com.xxl.job.admin.constant.Consts;
+import com.xxl.job.admin.model.dto.XxlBootResourceDTO;
+import com.xxl.job.admin.service.XxlJobService;
+import com.xxl.sso.core.annotation.XxlSso;
+import com.xxl.sso.core.helper.XxlSsoHelper;
+import com.xxl.sso.core.model.LoginInfo;
+import com.xxl.tool.core.StringTool;
+import com.xxl.tool.response.Response;
+
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * index controller
@@ -59,13 +64,14 @@ public class IndexController {
 		Response<LoginInfo> loginInfoResponse = XxlSsoHelper.loginCheckWithAttr(request);
 		// init menu-list
 		List<XxlBootResourceDTO> resourceDTOList = Arrays.asList(
-				new XxlBootResourceDTO(1, 0, I18nUtil.getString("job_dashboard_name"),1, "", "/dashboard", "fa-home", 1, 0, null),
-				new XxlBootResourceDTO(2, 0, I18nUtil.getString("jobinfo_name"),1, "", "/jobinfo", " fa-clock-o", 2, 0, null),
-				new XxlBootResourceDTO(3, 0, I18nUtil.getString("joblog_name"),1, "", "/joblog", " fa-database", 3, 0, null),
-				new XxlBootResourceDTO(4, 0, I18nUtil.getString("jobgroup_name"),1, Consts.ADMIN_ROLE, "/jobgroup", " fa-cloud", 4, 0,null),
-				new XxlBootResourceDTO(5, 0, I18nUtil.getString("user_manage"),1, Consts.ADMIN_ROLE, "/user", "fa-users", 5, 0, null),
-				new XxlBootResourceDTO(6, 0, I18nUtil.getString("python_manage"),1, Consts.ADMIN_ROLE, "/python", "fa-code", 6, 0, null),
-				new XxlBootResourceDTO(9, 0, I18nUtil.getString("admin_help"),1, "", "/help", "fa-book", 7, 0, null)
+				new XxlBootResourceDTO(1, 0, "运行报表",1, "", "/dashboard", "fa-home", 1, 0, null),
+				new XxlBootResourceDTO(2, 0, "任务管理",1, "", "/jobinfo", " fa-clock-o", 2, 0, null),
+				new XxlBootResourceDTO(4, 0, "执行器管理",1, Consts.ADMIN_ROLE, "/jobgroup", " fa-cloud", 5, 0,null),
+				new XxlBootResourceDTO(7, 0, "任务组管理",1, "", "/taskgroup", "fa-folder-o", 3, 0, null),
+				new XxlBootResourceDTO(3, 0, "调度日志",1, "", "/joblog", " fa-database", 4, 0, null),
+				new XxlBootResourceDTO(5, 0, "用户管理",1, Consts.ADMIN_ROLE, "/user", "fa-users", 6, 0, null),
+				new XxlBootResourceDTO(6, 0, "Python维护",1, Consts.ADMIN_ROLE, "/python", "fa-code", 7, 0, null),
+				new XxlBootResourceDTO(9, 0, "使用教程",1, "", "/help", "fa-book", 8, 0, null)
 		);
 
 		// filter by role

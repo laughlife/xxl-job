@@ -11,11 +11,33 @@
 		<result column="group_order" property="groupOrder" />
 		<result column="add_time" property="addTime" />
 		<result column="update_time" property="updateTime" />
+		<result column="job_count" property="jobCount" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
 		id, job_group_id, group_name, group_desc, group_order, add_time, update_time
 	</sql>
+
+	<select id="pageList" resultMap="XxlJobTaskGroup">
+		SELECT t.id, t.job_group_id, t.group_name, t.group_desc, t.group_order, t.add_time, t.update_time,
+			   (SELECT COUNT(1) FROM xxl_job_info WHERE task_group_id = t.id) as job_count
+		FROM xxl_job_task_group t
+		WHERE t.job_group_id = #{jobGroupId}
+		<if test="groupName != null and groupName != ''">
+			AND t.group_name LIKE CONCAT('%', #{groupName}, '%')
+		</if>
+		ORDER BY t.group_order ASC, t.id ASC
+		LIMIT #{offset}, #{pagesize}
+	</select>
+
+	<select id="pageListCount" resultType="int">
+		SELECT COUNT(1)
+		FROM xxl_job_task_group t
+		WHERE t.job_group_id = #{jobGroupId}
+		<if test="groupName != null and groupName != ''">
+			AND t.group_name LIKE CONCAT('%', #{groupName}, '%')
+		</if>
+	</select>
 
 	<select id="findByJobGroupId" resultMap="XxlJobTaskGroup">
 		SELECT <include refid="Base_Column_List" />

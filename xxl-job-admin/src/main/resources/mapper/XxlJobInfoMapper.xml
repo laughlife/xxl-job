@@ -7,6 +7,8 @@
 		<result column="id" property="id" />
 
 		<result column="job_group" property="jobGroup" />
+		<result column="task_group_id" property="taskGroupId" />
+		<result column="task_order" property="taskOrder" />
 	    <result column="job_desc" property="jobDesc" />
 		<result column="python_id" property="pythonId" />
 
@@ -42,6 +44,8 @@
 	<sql id="Base_Column_List">
 		t.id,
 		t.job_group,
+		t.task_group_id,
+		t.task_order,
 		t.job_desc,
 		t.python_id,
 		t.add_time,
@@ -74,6 +78,9 @@
 			<if test="jobGroup gt 0">
 				AND t.job_group = #{jobGroup}
 			</if>
+			<if test="taskGroupId != null">
+				AND t.task_group_id = #{taskGroupId}
+			</if>
             <if test="triggerStatus gte 0">
                 AND t.trigger_status = #{triggerStatus}
             </if>
@@ -98,6 +105,9 @@
 			<if test="jobGroup gt 0">
 				AND t.job_group = #{jobGroup}
 			</if>
+			<if test="taskGroupId != null">
+				AND t.task_group_id = #{taskGroupId}
+			</if>
             <if test="triggerStatus gte 0">
                 AND t.trigger_status = #{triggerStatus}
             </if>
@@ -116,6 +126,8 @@
 	<insert id="save" parameterType="com.xxl.job.admin.model.XxlJobInfo" useGeneratedKeys="true" keyProperty="id" >
 		INSERT INTO xxl_job_info (
 			job_group,
+			task_group_id,
+			task_order,
 			job_desc,
 			python_id,
 			add_time,
@@ -141,6 +153,8 @@
 			trigger_next_time
 		) VALUES (
 			#{jobGroup},
+			#{taskGroupId},
+			#{taskOrder},
 			#{jobDesc},
 			#{pythonId},
 			#{addTime},
@@ -181,6 +195,8 @@
 		UPDATE xxl_job_info
 		SET
 			job_group = #{jobGroup},
+			task_group_id = #{taskGroupId},
+			task_order = #{taskOrder},
 			job_desc = #{jobDesc},
 			python_id = #{pythonId},
 			update_time = #{updateTime},

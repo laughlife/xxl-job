@@ -20,4 +20,7 @@ public class XxlJobTaskGroup {
     private Date addTime;           // 创建时间
     private Date updateTime;        // 更新时间
     
+    // 非数据库字段，用于页面展示
+    private int jobCount;           // 任务数量
+    
 }
