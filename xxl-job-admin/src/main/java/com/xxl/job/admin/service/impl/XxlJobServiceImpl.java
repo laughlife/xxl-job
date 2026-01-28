@@ -52,6 +52,8 @@ public class XxlJobServiceImpl implements XxlJobService {
 	private XxlJobLogReportMapper xxlJobLogReportMapper;
 	@Resource
 	private XxlJobPythonMapper xxlJobPythonMapper;
+	@Resource
+	private XxlJobTaskGroupMapper xxlJobTaskGroupMapper;
 	
 	@Override
 	public Response<PageModel<XxlJobInfo>> pageList(int offset, int pagesize, int jobGroup, int triggerStatus, String jobDesc, String executorHandler, String author, Integer taskGroupId) {
@@ -59,6 +61,31 @@ public class XxlJobServiceImpl implements XxlJobService {
 		// page list
 		List<XxlJobInfo> list = xxlJobInfoMapper.pageList(offset, pagesize, jobGroup, triggerStatus, jobDesc, executorHandler, author, taskGroupId);
 		int list_count = xxlJobInfoMapper.pageListCount(offset, pagesize, jobGroup, triggerStatus, jobDesc, executorHandler, author, taskGroupId);
+
+		// 填充任务组名称
+		if (list != null && !list.isEmpty()) {
+			// 收集所有任务组ID
+			Set<Integer> taskGroupIds = new HashSet<>();
+			for (XxlJobInfo job : list) {
+				if (job.getTaskGroupId() != null && job.getTaskGroupId() > 0) {
+					taskGroupIds.add(job.getTaskGroupId());
+				}
+			}
+			// 批量查询任务组名称
+			Map<Integer, String> taskGroupNameMap = new HashMap<>();
+			for (Integer tgId : taskGroupIds) {
+				com.xxl.job.admin.model.XxlJobTaskGroup taskGroup = xxlJobTaskGroupMapper.findById(tgId);
+				if (taskGroup != null) {
+					taskGroupNameMap.put(tgId, taskGroup.getGroupName());
+				}
+			}
+			// 填充任务组名称
+			for (XxlJobInfo job : list) {
+				if (job.getTaskGroupId() != null && job.getTaskGroupId() > 0) {
+					job.setTaskGroupName(taskGroupNameMap.get(job.getTaskGroupId()));
+				}
+			}
+		}
 
 		// package result
 		PageModel<XxlJobInfo> pageModel = new PageModel<>();

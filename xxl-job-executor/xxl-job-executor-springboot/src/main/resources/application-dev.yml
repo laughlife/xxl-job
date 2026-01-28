@@ -16,8 +16,13 @@ xxl:
       timeout: 3
     executor:
       enabled: true
-      appname: sync-token
+      appname: xxl-job-executor
+      # 执行器注册地址[选填]：优先使用该配置作为注册地址，为空时使用内嵌服务 "IP:PORT" 作为注册地址
+      # 从而更灵活的支持容器类型执行器动态IP和动态映射端口问题
       address: ""
+      # 执行器IP[选填]：执行器所在服务器的IP地址，为空则自动获取本机IP
+      # 用于生成注册地址，调度中心通过该IP调用执行器
+      # 多网卡环境建议手动指定，确保调度中心可访问
       ip: "127.0.0.1"
       port: 9999
       logpath: /data/applogs/xxl-job/jobhandler

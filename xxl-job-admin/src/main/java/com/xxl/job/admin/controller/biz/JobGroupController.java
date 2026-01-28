@@ -89,6 +89,9 @@ public class JobGroupController {
 		if (StringTool.isBlank(xxlJobGroup.getTitle())) {
 			return Response.ofFail((I18nUtil.getString("system_please_input") + I18nUtil.getString("jobgroup_field_title")) );
 		}
+		if (xxlJobGroup.getTitle().length()<4 || xxlJobGroup.getTitle().length()>50) {
+			return Response.ofFail( I18nUtil.getString("jobgroup_field_title_length") );
+		}
 		if (xxlJobGroup.getTitle().contains(">") || xxlJobGroup.getTitle().contains("<")) {
 			return Response.ofFail(I18nUtil.getString("jobgroup_field_title")+I18nUtil.getString("system_unvalid") );
 		}
@@ -131,6 +134,9 @@ public class JobGroupController {
 		}
 		if (StringTool.isBlank(xxlJobGroup.getTitle())) {
 			return Response.ofFail( (I18nUtil.getString("system_please_input") + I18nUtil.getString("jobgroup_field_title")) );
+		}
+		if (xxlJobGroup.getTitle().length()<4 || xxlJobGroup.getTitle().length()>50) {
+			return Response.ofFail( I18nUtil.getString("jobgroup_field_title_length") );
 		}
 		if (xxlJobGroup.getAddressType() == 0) {
 			// 0=自动注册

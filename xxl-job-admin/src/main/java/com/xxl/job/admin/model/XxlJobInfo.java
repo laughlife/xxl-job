@@ -18,6 +18,7 @@ public class XxlJobInfo {
 	private int jobGroup;		// 执行器主键ID
 	private Integer taskGroupId;	// 任务组ID
 	private int taskOrder;		// 任务组内排序
+	private String taskGroupName;	// 任务组名称（非数据库字段，用于展示）
 	private String jobDesc;
 	private Integer pythonId;
 	

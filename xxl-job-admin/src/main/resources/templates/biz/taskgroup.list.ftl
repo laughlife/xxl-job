@@ -73,15 +73,15 @@
 
 		<!-- 新增.模态框 -->
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog"  aria-hidden="true">
-			<div class="modal-dialog ">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" >新增任务组</h4>
 					</div>
 					<div class="modal-body">
-						<form class="form-horizontal form" role="form" >
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">执行器<font color="red">*</font></label>
+						<form class="form" role="form" >
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label text-end">执行器<font color="red">*</font></label>
 								<div class="col-sm-10">
 									<select class="form-control" name="jobGroupId" >
 										<#list JobGroupList as group>
@@ -90,21 +90,27 @@
 									</select>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">任务组名称<font color="red">*</font></label>
-								<div class="col-sm-10"><input type="text" class="form-control" name="groupName" placeholder="请输入任务组名称" maxlength="100" ></div>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label text-end">任务组名称<font color="red">*</font></label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="groupName" placeholder="请输入任务组名称" maxlength="100" >
+								</div>
 							</div>
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">任务组描述</label>
-								<div class="col-sm-10"><input type="text" class="form-control" name="groupDesc" placeholder="请输入任务组描述" maxlength="255" ></div>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label text-end">任务组描述</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="groupDesc" placeholder="请输入任务组描述" maxlength="255" >
+								</div>
 							</div>
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">排序</label>
-								<div class="col-sm-10"><input type="number" class="form-control" name="groupOrder" placeholder="数字越小越靠前" value="0" min="0" ></div>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label text-end">排序</label>
+								<div class="col-sm-10">
+									<input type="number" class="form-control" name="groupOrder" placeholder="数字越小越靠前" value="0" min="0" >
+								</div>
 							</div>
 							<hr>
-							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-6">
+							<div class="row">
+								<div class="col-sm-10 offset-sm-2">
 									<button type="submit" class="btn btn-primary"  >保存</button>
 									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 								</div>
@@ -117,15 +123,15 @@
 
 		<!-- 更新.模态框 -->
 		<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"  aria-hidden="true">
-			<div class="modal-dialog ">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" >编辑任务组</h4>
 					</div>
 					<div class="modal-body">
-						<form class="form-horizontal form" role="form" >
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">执行器<font color="red">*</font></label>
+						<form class="form" role="form" >
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label text-end">执行器<font color="red">*</font></label>
 								<div class="col-sm-10">
 									<select class="form-control" name="jobGroupId" disabled >
 										<#list JobGroupList as group>
@@ -135,21 +141,27 @@
 									<input type="hidden" name="jobGroupId" />
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">任务组名称<font color="red">*</font></label>
-								<div class="col-sm-10"><input type="text" class="form-control" name="groupName" placeholder="请输入任务组名称" maxlength="100" ></div>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label text-end">任务组名称<font color="red">*</font></label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="groupName" placeholder="请输入任务组名称" maxlength="100" >
+								</div>
 							</div>
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">任务组描述</label>
-								<div class="col-sm-10"><input type="text" class="form-control" name="groupDesc" placeholder="请输入任务组描述" maxlength="255" ></div>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label text-end">任务组描述</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="groupDesc" placeholder="请输入任务组描述" maxlength="255" >
+								</div>
 							</div>
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">排序</label>
-								<div class="col-sm-10"><input type="number" class="form-control" name="groupOrder" placeholder="数字越小越靠前" value="0" min="0" ></div>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label text-end">排序</label>
+								<div class="col-sm-10">
+									<input type="number" class="form-control" name="groupOrder" placeholder="数字越小越靠前" value="0" min="0" >
+								</div>
 							</div>
 							<hr>
-							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-6">
+							<div class="row">
+								<div class="col-sm-10 offset-sm-2">
 									<button type="submit" class="btn btn-primary"  >保存</button>
 									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 									<input type="hidden" name="id" >

@@ -66,61 +66,62 @@
 		</div>
 
 		<!-- 注册列表查看.模态框 -->
-		<div class="modal fade" id="showRegistryListModal" tabindex="-1" role="dialog"  aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title" >注册节点</h4>
+		<div class="modal fade" id="showRegistryListModal" tabindex="-1" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content shadow">
+					<div class="modal-header bg-success text-white">
+						<h5 class="modal-title"><i class="fa fa-server me-2"></i>注册节点</h5>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
 						<div class="data" style="word-wrap: break-word;"></div>
 					</div>
 					<div class="modal-footer">
-						<div class="text-center" >
-							<button type="button" class="btn btn-info ok" data-bs-dismiss="modal" >确定</button>
-						</div>
+						<button type="button" class="btn btn-success ok" data-bs-dismiss="modal">确定</button>
 					</div>
 				</div>
 			</div>
 		</div>
 
 		<!-- 新增.模态框 -->
-		<div class="modal fade" id="addModal" tabindex="-1" role="dialog"  aria-hidden="true">
-			<div class="modal-dialog ">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title" >新增执行器</h4>
+		<div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
+			<div class="modal-dialog modal-lg modal-dialog-centered">
+				<div class="modal-content shadow">
+					<div class="modal-header bg-info text-white">
+						<h5 class="modal-title"><i class="fa fa-plus me-2"></i>新增执行器</h5>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
-					<div class="modal-body">
-						<form class="form-horizontal form" role="form" >
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">AppName<font color="red">*</font></label>
-								<div class="col-sm-10"><input type="text" class="form-control" name="appname" placeholder="请输入AppName" maxlength="64" ></div>
+					<div class="modal-body p-4">
+						<form class="form" role="form">
+							<div class="mb-3">
+								<label class="form-label fw-bold">AppName <span class="text-danger">*</span></label>
+								<input type="text" class="form-control" name="appname" placeholder="请输入AppName" maxlength="64">
 							</div>
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">名称<font color="red">*</font></label>
-								<div class="col-sm-10"><input type="text" class="form-control" name="title" placeholder="请输入名称" ></div>
+							<div class="mb-3">
+								<label class="form-label fw-bold">名称 <span class="text-danger">*</span></label>
+								<input type="text" class="form-control" name="title" placeholder="请输入名称" maxlength="50">
 							</div>
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">注册方式<font color="red">*</font></label>
-								<div class="col-sm-10">
-									<input type="radio" name="addressType" value="0" checked />自动注册
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="addressType" value="1" />手动录入
+							<div class="mb-3">
+								<label class="form-label fw-bold">注册方式 <span class="text-danger">*</span></label>
+								<div class="d-flex gap-4 mt-2">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="addressType" value="0" checked>
+										<label class="form-check-label">自动注册</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="addressType" value="1">
+										<label class="form-check-label">手动录入</label>
+									</div>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">机器地址<font color="red">*</font></label>
-								<div class="col-sm-10">
-									<textarea class="textarea" name="addressList" maxlength="20000" placeholder="请输入执行器地址列表，多地址逗号分隔" readonly="readonly" style="background-color:#eee; width: 100%; height: 100px; font-size: 14px; line-height: 15px; border: 1px solid #dddddd; padding: 5px;"></textarea>
-								</div>
+							<div class="mb-3">
+								<label class="form-label fw-bold">机器地址 <span class="text-danger">*</span></label>
+								<textarea class="form-control" name="addressList" rows="4" maxlength="20000" placeholder="请输入执行器地址列表，多地址逗号分隔" readonly style="background-color:#eee;"></textarea>
 							</div>
 							<hr>
-							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-6">
-									<button type="submit" class="btn btn-primary"  >保存</button>
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-								</div>
+							<div class="d-flex justify-content-end gap-2">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+								<button type="submit" class="btn btn-primary">保存</button>
 							</div>
 						</form>
 					</div>
@@ -129,43 +130,45 @@
 		</div>
 
 		<!-- 更新.模态框 -->
-		<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"  aria-hidden="true">
-			<div class="modal-dialog ">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title" >编辑执行器</h4>
+		<div class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
+			<div class="modal-dialog modal-lg modal-dialog-centered">
+				<div class="modal-content shadow">
+					<div class="modal-header bg-warning">
+						<h5 class="modal-title"><i class="fa fa-edit me-2"></i>编辑执行器</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
-					<div class="modal-body">
-						<form class="form-horizontal form" role="form" >
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">AppName<font color="red">*</font></label>
-								<div class="col-sm-10"><input type="text" class="form-control" name="appname" placeholder="请输入AppName" maxlength="64" ></div>
+					<div class="modal-body p-4">
+						<form class="form" role="form">
+							<div class="mb-3">
+								<label class="form-label fw-bold">AppName <span class="text-danger">*</span></label>
+								<input type="text" class="form-control" name="appname" placeholder="请输入AppName" maxlength="64">
 							</div>
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">名称<font color="red">*</font></label>
-								<div class="col-sm-10"><input type="text" class="form-control" name="title" placeholder="请输入名称" maxlength="50" ></div>
+							<div class="mb-3">
+								<label class="form-label fw-bold">名称 <span class="text-danger">*</span></label>
+								<input type="text" class="form-control" name="title" placeholder="请输入名称" maxlength="50">
 							</div>
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">注册方式<font color="red">*</font></label>
-								<div class="col-sm-10">
-									<input type="radio" name="addressType" value="0" />自动注册
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="addressType" value="1" />手动录入
+							<div class="mb-3">
+								<label class="form-label fw-bold">注册方式 <span class="text-danger">*</span></label>
+								<div class="d-flex gap-4 mt-2">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="addressType" value="0">
+										<label class="form-check-label">自动注册</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="addressType" value="1">
+										<label class="form-check-label">手动录入</label>
+									</div>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">机器地址<font color="red">*</font></label>
-								<div class="col-sm-10">
-									<textarea class="textarea" name="addressList" maxlength="20000" placeholder="请输入执行器地址列表，多地址逗号分隔" readonly="readonly" style="background-color:#eee; width: 100%; height: 100px; font-size: 14px; line-height: 15px; border: 1px solid #dddddd; padding: 5px;"></textarea>
-								</div>
+							<div class="mb-3">
+								<label class="form-label fw-bold">机器地址 <span class="text-danger">*</span></label>
+								<textarea class="form-control" name="addressList" rows="4" maxlength="20000" placeholder="请输入执行器地址列表，多地址逗号分隔" readonly style="background-color:#eee;"></textarea>
 							</div>
 							<hr>
-							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-6">
-									<button type="submit" class="btn btn-primary"  >保存</button>
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-									<input type="hidden" name="id" >
-								</div>
+							<div class="d-flex justify-content-end gap-2">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+								<button type="submit" class="btn btn-primary">保存</button>
+								<input type="hidden" name="id">
 							</div>
 						</form>
 					</div>
@@ -293,7 +296,7 @@
 				},
 				title : {
 					required : true,
-					rangelength:[4, 12]
+					rangelength:[4, 50]
 				}
 			},
 			messages : {
@@ -304,7 +307,7 @@
 				},
 				title : {
 					required : "请输入" + "名称" ,
-					rangelength: "名称长度限制为4~12"
+					rangelength: "名称长度限制为4~50"
 				}
 			},
 			writeFormData: function() {
@@ -356,7 +359,7 @@
 				},
 				title : {
 					required : true,
-					rangelength:[4, 12]
+					rangelength:[4, 50]
 				}
 			},
 			messages : {
@@ -367,7 +370,7 @@
 				},
 				title : {
 					required : "请输入" + "名称" ,
-					rangelength: "名称长度限制为4~12"
+					rangelength: "名称长度限制为4~50"
 				}
 			},
 			readFormData: function() {

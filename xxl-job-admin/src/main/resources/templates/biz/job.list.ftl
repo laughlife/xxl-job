@@ -728,7 +728,7 @@ exit 0
 				{
 					checkbox: true,
 					field: 'state',
-					width: '5',
+					width: '3',
 					widthUnit: '%',
 					align: 'center',
 					valign: 'middle'
@@ -738,11 +738,19 @@ exit 0
 					width: '5',
 					widthUnit: '%',
 					align: 'left'
+				},{
+					title: '任务组',
+					field: 'taskGroupName',
+					width: '8',
+					widthUnit: '%',
+					formatter: function(value, row, index) {
+						return value ? value : '-';
+					}
 				}
 				,{
 					title: '任务描述',
 					field: 'jobDesc',
-					width: '25',
+					width: '15',
 					widthUnit: '%',
 					align: 'left',
 					formatter: function(value, row, index) {
@@ -753,9 +761,18 @@ exit 0
 						}
 					}
 				},{
+					title: '排序',
+					field: 'taskOrder',
+					width: '5',
+					widthUnit: '%',
+					align: 'center',
+					formatter: function(value, row, index) {
+						return value != null ? value : '-';
+					}
+				},{
 					title: '调度类型',
 					field: 'scheduleType',
-					width: '15',
+					width: '12',
 					widthUnit: '%',
 					formatter: function(value, row, index) {
 						if (row.scheduleConf) {
@@ -767,7 +784,7 @@ exit 0
 				},{
 					title: '运行模式',
 					field: 'glueType',
-					width: '25',
+					width: '15',
 					widthUnit: '%',
 					formatter: function(value, row, index) {
 						// find glueType title
@@ -788,7 +805,7 @@ exit 0
 				},{
 					title: '状态',
 					field: 'triggerStatus',
-					width: '10',
+					width: '6',
 					widthUnit: '%',
 					formatter: function(value, row, index) {
 						// 调度状态：0-停止，1-运行
@@ -800,9 +817,21 @@ exit 0
 						return value;
 					}
 				},{
+					title: '报警邮件',
+					field: 'alarmEmail',
+					width: '12',
+					widthUnit: '%',
+					formatter: function(value, row, index) {
+						if (value && value.length > 15) {
+							return '<span title="' + value + '">' + value.substr(0, 15) + '...</span>';
+						} else {
+							return value ? value : '-';
+						}
+					}
+				},{
 					title: '负责人',
 					field: 'author',
-					width: '10',
+					width: '8',
 					widthUnit: '%'
 				}
 			]
