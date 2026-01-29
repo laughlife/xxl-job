@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.executor.biz.amazon.mapper.OrderProductExtMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xxl.job.executor.biz.amazon.entity.OrderProductExtDO">
+        <id column="id" property="id" />
+        <result column="amazon_order_id" property="amazonOrderId" />
+        <result column="fnsku" property="fnsku" />
+        <result column="ioss_number" property="iossNumber" />
+        <result column="promotion_ids" property="promotionIds" />
+        <result column="withheld_tax_amount" property="withheldTaxAmount" />
+        <result column="shipping_charge_amount" property="shippingChargeAmount" />
+        <result column="shipping_tax_amount" property="shippingTaxAmount" />
+        <result column="gift_wrap_amount" property="giftWrapAmount" />
+        <result column="gift_wrap_tax_amount" property="giftWrapTaxAmount" />
+        <result column="promotion_discount_currency" property="promotionDiscountCurrency" />
+        <result column="promotion_discount_amount" property="promotionDiscountAmount" />
+        <result column="other_amount" property="otherAmount" />
+        <result column="fba_per_unit_fulfillment_fee" property="fbaPerUnitFulfillmentFee" />
+        <result column="commission" property="commission" />
+        <result column="carrier" property="carrier" />
+        <result column="track_no" property="trackNo" />
+        <result column="shipment_date" property="shipmentDate" />
+        <result column="estimated_arrival_date" property="estimatedArrivalDate" />
+        <result column="raw_json" property="rawJson" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="deleted" property="deleted" />
+        <result column="updater" property="updater" />
+        <result column="creator" property="creator" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, amazon_order_id, fnsku, ioss_number, promotion_ids, withheld_tax_amount, shipping_charge_amount, shipping_tax_amount, gift_wrap_amount, gift_wrap_tax_amount, promotion_discount_currency, promotion_discount_amount, other_amount, fba_per_unit_fulfillment_fee, commission, carrier, track_no, shipment_date, estimated_arrival_date, raw_json, create_time, update_time, deleted, updater, creator
+    </sql>
+
+</mapper>

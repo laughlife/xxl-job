@@ -17,6 +17,7 @@ import com.alibaba.fastjson2.JSONException;
 /**
  * Python -> Java (fastjson2)
  */
+@SuppressWarnings("unchecked")
 public class Md5Utils {
 
     // 等价 Python: _SIGN_SALT
@@ -37,7 +38,7 @@ public class Md5Utils {
         return Base64.getEncoder().encodeToString(raw);
     }
 
-    /** 等价 Python: js_base64_decode（含“过滤非 Base64 字符”行为） */
+    /** 等价 Python: js_base64_decode（含"过滤非 Base64 字符"行为） */
     public static String jsBase64Decode(String b64Text) {
         if (b64Text == null || b64Text.isEmpty()) return "";
 
@@ -53,6 +54,7 @@ public class Md5Utils {
         byte[] decoded = Base64.getDecoder().decode(cleaned.toString());
         return new String(decoded, StandardCharsets.UTF_8);
     }
+
 
     // =========================
     // 2) 混淆字符编码/解码（等价 JS 的 encodeMixChar / decodeMixChar）
@@ -108,7 +110,7 @@ public class Md5Utils {
         }
         try {
             // fastjson2 parse 成 Map
-            return JSON.parseObject(plain, Map.class);
+            return (Map<String, Object>) JSON.parseObject(plain, Map.class);
         } catch (JSONException e) {
             // 如果不是 JSON，就返回原文包装一下，便于排查
             Map<String, Object> fallback = new LinkedHashMap<>();
@@ -116,6 +118,7 @@ public class Md5Utils {
             return fallback;
         }
     }
+
 
     // =========================
     // 4) md5 + sign（等价 JS 的 md5 / getSign）
@@ -169,15 +172,15 @@ public class Md5Utils {
             return true;
         }
 
-        if (v instanceof Boolean) {
+        if (v instanceof Boolean b) {
             // JS 中 true/false：true 会参与，false 也会参与吗？
             // Python 逻辑是 (v or v==0)，对 false 会跳过。
-            // 这里按“JS truthy”更贴近：false 跳过。
-            return (Boolean) v;
+            // 这里按"JS truthy"更贴近：false 跳过。
+            return b;
         }
 
-        if (v instanceof CharSequence) {
-            return ((CharSequence) v).length() > 0;
+        if (v instanceof CharSequence cs) {
+            return cs.length() > 0;
         }
 
         // 其它对象：有值就参与（类似 JS truthy 但更宽松）
@@ -202,7 +205,5 @@ public class Md5Utils {
         // 示例：解密 token
         Map<String, Object> obj = decryptTokenToObj("V0VVUDA1");
         System.out.println("decrypted_obj: " + obj);
-
     }
 }
-

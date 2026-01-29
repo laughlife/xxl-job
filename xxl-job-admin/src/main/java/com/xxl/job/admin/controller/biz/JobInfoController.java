@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +33,7 @@ import com.xxl.tool.response.Response;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * index controller
@@ -42,8 +41,8 @@ import jakarta.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/jobinfo")
+@Slf4j
 public class JobInfoController {
-	private static Logger logger = LoggerFactory.getLogger(JobInfoController.class);
 
 	@Resource
 	private XxlJobGroupMapper xxlJobGroupMapper;
@@ -210,7 +209,7 @@ public class JobInfoController {
 				}
 			}
 		} catch (Exception e) {
-			logger.error(">>>>>>>>>>> nextTriggerTime error. scheduleType = {}, scheduleConf= {}, error:{} ", scheduleType, scheduleConf, e.getMessage());
+			log.error(">>>>>>>>>>> nextTriggerTime error. scheduleType = {}, scheduleConf= {}, error:{} ", scheduleType, scheduleConf, e.getMessage());
 			return Response.ofFail(("调度类型"+"非法") + e.getMessage());
 		}
 		return Response.ofSuccess(result);

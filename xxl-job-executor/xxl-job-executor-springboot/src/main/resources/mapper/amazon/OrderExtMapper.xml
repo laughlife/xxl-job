@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.executor.biz.amazon.mapper.OrderExtMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xxl.job.executor.biz.amazon.entity.OrderExtDO">
+        <id column="id" property="id" />
+        <result column="amazon_order_id" property="amazonOrderId" />
+        <result column="last_update_date" property="lastUpdateDate" />
+        <result column="captured_at" property="capturedAt" />
+        <result column="comment" property="comment" />
+        <result column="comment_color" property="commentColor" />
+        <result column="earliest_ship_date" property="earliestShipDate" />
+        <result column="latest_ship_date" property="latestShipDate" />
+        <result column="earliest_delivery_date" property="earliestDeliveryDate" />
+        <result column="latest_delivery_date" property="latestDeliveryDate" />
+        <result column="refund_status" property="refundStatus" />
+        <result column="refund_date" property="refundDate" />
+        <result column="is_buyer_requested_cancel" property="isBuyerRequestedCancel" />
+        <result column="is_replacement_order" property="isReplacementOrder" />
+        <result column="replaced_order_id" property="replacedOrderId" />
+        <result column="is_vine_order" property="isVineOrder" />
+        <result column="custom_order" property="customOrder" />
+        <result column="promotion_flag" property="promotionFlag" />
+        <result column="promotion_ids" property="promotionIds" />
+        <result column="order_flag" property="orderFlag" />
+        <result column="order_review_status" property="orderReviewStatus" />
+        <result column="upload_feed_status" property="uploadFeedStatus" />
+        <result column="invoice_status_description" property="invoiceStatusDescription" />
+        <result column="payment_method_details" property="paymentMethodDetails" />
+        <result column="raw_json" property="rawJson" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="deleted" property="deleted" />
+        <result column="updater" property="updater" />
+        <result column="creator" property="creator" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, amazon_order_id, last_update_date, captured_at, comment, comment_color, earliest_ship_date, latest_ship_date, earliest_delivery_date, latest_delivery_date, refund_status, refund_date, is_buyer_requested_cancel, is_replacement_order, replaced_order_id, is_vine_order, custom_order, promotion_flag, promotion_ids, order_flag, order_review_status, upload_feed_status, invoice_status_description, payment_method_details, raw_json, create_time, update_time, deleted, updater, creator
+    </sql>
+
+</mapper>
