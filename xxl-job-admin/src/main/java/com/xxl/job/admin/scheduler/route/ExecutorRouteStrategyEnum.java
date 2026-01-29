@@ -1,23 +1,30 @@
 package com.xxl.job.admin.scheduler.route;
 
-import com.xxl.job.admin.scheduler.route.strategy.*;
-import com.xxl.job.admin.util.I18nUtil;
+import com.xxl.job.admin.scheduler.route.strategy.ExecutorRouteBusyover;
+import com.xxl.job.admin.scheduler.route.strategy.ExecutorRouteConsistentHash;
+import com.xxl.job.admin.scheduler.route.strategy.ExecutorRouteFailover;
+import com.xxl.job.admin.scheduler.route.strategy.ExecutorRouteFirst;
+import com.xxl.job.admin.scheduler.route.strategy.ExecutorRouteLFU;
+import com.xxl.job.admin.scheduler.route.strategy.ExecutorRouteLRU;
+import com.xxl.job.admin.scheduler.route.strategy.ExecutorRouteLast;
+import com.xxl.job.admin.scheduler.route.strategy.ExecutorRouteRandom;
+import com.xxl.job.admin.scheduler.route.strategy.ExecutorRouteRound;
 
 /**
  * Created by xuxueli on 17/3/10.
  */
 public enum ExecutorRouteStrategyEnum {
 
-    FIRST(I18nUtil.getString("jobconf_route_first"), new ExecutorRouteFirst()),
-    LAST(I18nUtil.getString("jobconf_route_last"), new ExecutorRouteLast()),
-    ROUND(I18nUtil.getString("jobconf_route_round"), new ExecutorRouteRound()),
-    RANDOM(I18nUtil.getString("jobconf_route_random"), new ExecutorRouteRandom()),
-    CONSISTENT_HASH(I18nUtil.getString("jobconf_route_consistenthash"), new ExecutorRouteConsistentHash()),
-    LEAST_FREQUENTLY_USED(I18nUtil.getString("jobconf_route_lfu"), new ExecutorRouteLFU()),
-    LEAST_RECENTLY_USED(I18nUtil.getString("jobconf_route_lru"), new ExecutorRouteLRU()),
-    FAILOVER(I18nUtil.getString("jobconf_route_failover"), new ExecutorRouteFailover()),
-    BUSYOVER(I18nUtil.getString("jobconf_route_busyover"), new ExecutorRouteBusyover()),
-    SHARDING_BROADCAST(I18nUtil.getString("jobconf_route_shard"), null);
+    FIRST("第一个", new ExecutorRouteFirst()),
+    LAST("最后一个", new ExecutorRouteLast()),
+    ROUND("轮询", new ExecutorRouteRound()),
+    RANDOM("随机", new ExecutorRouteRandom()),
+    CONSISTENT_HASH("一致性HASH", new ExecutorRouteConsistentHash()),
+    LEAST_FREQUENTLY_USED("最不经常使用", new ExecutorRouteLFU()),
+    LEAST_RECENTLY_USED("最近最久未使用", new ExecutorRouteLRU()),
+    FAILOVER("故障转移", new ExecutorRouteFailover()),
+    BUSYOVER("忙碌转移", new ExecutorRouteBusyover()),
+    SHARDING_BROADCAST("分片广播", null);
 
     ExecutorRouteStrategyEnum(String title, ExecutorRouter router) {
         this.title = title;

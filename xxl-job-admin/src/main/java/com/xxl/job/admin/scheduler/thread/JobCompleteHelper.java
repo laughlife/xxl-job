@@ -2,7 +2,6 @@ package com.xxl.job.admin.scheduler.thread;
 
 import com.xxl.job.admin.model.XxlJobLog;
 import com.xxl.job.admin.scheduler.config.XxlJobAdminBootstrap;
-import com.xxl.job.admin.util.I18nUtil;
 import com.xxl.job.core.openapi.model.CallbackRequest;
 import com.xxl.job.core.context.XxlJobContext;
 import com.xxl.tool.core.DateTool;
@@ -85,7 +84,7 @@ public class JobCompleteHelper {
 
 								jobLog.setHandleTime(new Date());
 								jobLog.setHandleCode(XxlJobContext.HANDLE_CODE_FAIL);
-								jobLog.setHandleMsg( I18nUtil.getString("joblog_lost_fail") );
+								jobLog.setHandleMsg( "任务结果丢失，标记失败" );
 
 								XxlJobAdminBootstrap.getInstance().getJobCompleter().complete(jobLog);
 							}

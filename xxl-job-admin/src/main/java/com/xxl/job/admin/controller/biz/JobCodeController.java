@@ -1,18 +1,8 @@
 package com.xxl.job.admin.controller.biz;
 
-import com.xxl.job.admin.mapper.XxlJobInfoMapper;
-import com.xxl.job.admin.mapper.XxlJobLogGlueMapper;
-import com.xxl.job.admin.model.XxlJobInfo;
-import com.xxl.job.admin.model.XxlJobLogGlue;
-import com.xxl.job.admin.util.I18nUtil;
-import com.xxl.job.admin.util.JobGroupPermissionUtil;
-import com.xxl.job.core.glue.GlueTypeEnum;
-import com.xxl.sso.core.model.LoginInfo;
-import com.xxl.tool.core.StringTool;
-import com.xxl.tool.json.GsonTool;
-import com.xxl.tool.response.Response;
-import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -21,8 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
-import java.util.List;
+import com.xxl.job.admin.mapper.XxlJobInfoMapper;
+import com.xxl.job.admin.mapper.XxlJobLogGlueMapper;
+import com.xxl.job.admin.model.XxlJobInfo;
+import com.xxl.job.admin.model.XxlJobLogGlue;
+import com.xxl.job.admin.util.JobGroupPermissionUtil;
+import com.xxl.job.core.glue.GlueTypeEnum;
+import com.xxl.sso.core.model.LoginInfo;
+import com.xxl.tool.core.StringTool;
+import com.xxl.tool.json.GsonTool;
+import com.xxl.tool.response.Response;
+
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * job code controller
@@ -44,10 +45,10 @@ public class JobCodeController {
 		List<XxlJobLogGlue> jobLogGlues = xxlJobLogGlueMapper.findByJobId(jobId);
 
 		if (jobInfo == null) {
-			throw new RuntimeException(I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+			throw new RuntimeException("任务ID非法");
 		}
 		if (GlueTypeEnum.BEAN == GlueTypeEnum.match(jobInfo.getGlueType())) {
-			throw new RuntimeException(I18nUtil.getString("jobinfo_glue_gluetype_unvalid"));
+			throw new RuntimeException("该任务非GLUE模式");
 		}
 
 		// valid jobGroup permission
@@ -70,17 +71,17 @@ public class JobCodeController {
 
 		// valid
 		if (StringTool.isBlank(glueSource)) {
-			return Response.ofFail( (I18nUtil.getString("system_please_input") + I18nUtil.getString("jobinfo_glue_source")) );
+			return Response.ofFail( ("请输入" + "GLUE源码") );
 		}
 		if (glueRemark==null) {
-			return Response.ofFail( (I18nUtil.getString("system_please_input") + I18nUtil.getString("jobinfo_glue_remark")) );
+			return Response.ofFail( ("请输入" + "源码备注") );
 		}
 		if (glueRemark.length()<4 || glueRemark.length()>100) {
-			return Response.ofFail(I18nUtil.getString("jobinfo_glue_remark_limit"));
+			return Response.ofFail("源码备注长度限制为4~100");
 		}
 		XxlJobInfo existsJobInfo = xxlJobInfoMapper.loadById(id);
 		if (existsJobInfo == null) {
-			return Response.ofFail( I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+			return Response.ofFail( "任务ID非法");
 		}
 
 		// valid jobGroup permission

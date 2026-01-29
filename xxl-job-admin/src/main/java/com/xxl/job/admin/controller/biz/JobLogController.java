@@ -9,7 +9,6 @@ import com.xxl.job.admin.model.XxlJobLog;
 import com.xxl.job.admin.scheduler.config.XxlJobAdminBootstrap;
 import com.xxl.job.admin.scheduler.exception.XxlJobException;
 import com.xxl.job.admin.service.XxlJobService;
-import com.xxl.job.admin.util.I18nUtil;
 import com.xxl.job.admin.util.JobGroupPermissionUtil;
 import com.xxl.job.core.context.XxlJobContext;
 import com.xxl.job.core.openapi.ExecutorBiz;
@@ -68,7 +67,7 @@ public class JobLogController {
 		// filter JobGroupList
 		List<XxlJobGroup> jobGroupList = JobGroupPermissionUtil.filterJobGroupByPermission(request, jobGroupListTotal);
 		if (CollectionTool.isEmpty(jobGroupList)) {
-			throw new XxlJobException(I18nUtil.getString("jobgroup_empty"));
+			throw new XxlJobException("不存在有效执行器,请联系管理员");
 		}
 
 		// parse jobGroup
@@ -77,7 +76,7 @@ public class JobLogController {
 			XxlJobInfo jobInfo = xxlJobInfoMapper.loadById(jobId);
 			if (jobInfo == null) {
 				// jobId not exist, inteceptor
-				throw new RuntimeException(I18nUtil.getString("jobinfo_field_id") + I18nUtil.getString("system_unvalid"));
+				throw new RuntimeException("任务ID" + "非法");
 			}
 			jobGroup = jobInfo.getJobGroup();
 		} else if (jobGroup > 0) {
@@ -134,7 +133,7 @@ public class JobLogController {
 
 		// valid jobId
 		if (jobId < 1) {
-			return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("jobinfo_job"));
+			return Response.ofFail("请选择" + "任务");
 		}
 
 		// parse param
@@ -196,10 +195,10 @@ public class JobLogController {
 		XxlJobLog log = xxlJobLogMapper.load(id);
 		XxlJobInfo jobInfo = xxlJobInfoMapper.loadById(log.getJobId());
 		if (jobInfo==null) {
-			return Response.ofFail(I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+			return Response.ofFail("任务ID非法");
 		}
 		if (XxlJobContext.HANDLE_CODE_SUCCESS != log.getTriggerCode()) {
-			return Response.ofFail( I18nUtil.getString("joblog_kill_log_limit"));
+			return Response.ofFail( "调度失败，无法终止日志");
 		}
 
 		// valid JobGroup permission
@@ -217,7 +216,7 @@ public class JobLogController {
 
 		if (XxlJobContext.HANDLE_CODE_SUCCESS == runResult.getCode()) {
 			log.setHandleCode(XxlJobContext.HANDLE_CODE_FAIL);
-			log.setHandleMsg( I18nUtil.getString("joblog_kill_log_byman")+":" + (runResult.getMsg()!=null?runResult.getMsg():""));
+			log.setHandleMsg( "人为操作，主动终止"+":" + (runResult.getMsg()!=null?runResult.getMsg():""));
 			log.setHandleTime(new Date());
 			XxlJobAdminBootstrap.getInstance().getJobCompleter().complete(log);
 			return Response.ofSuccess(runResult.getMsg());
@@ -237,7 +236,7 @@ public class JobLogController {
 
 		// valid jobId
 		if (jobId < 1) {
-			return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("jobinfo_job"));
+			return Response.ofFail("请选择" + "任务");
 		}
 
 		// opt
@@ -262,7 +261,7 @@ public class JobLogController {
 		} else if (type == 9) {
 			clearBeforeNum = 0;			// 清理所有日志数据
 		} else {
-			return Response.ofFail(I18nUtil.getString("joblog_clean_type_unvalid"));
+			return Response.ofFail("清理类型参数异常");
 		}
 
 		List<Long> logIds = null;
@@ -282,7 +281,7 @@ public class JobLogController {
 										   @RequestParam("ids") String ids){
 		// valid param
 		if (StringTool.isBlank(ids)) {
-			return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("system_data"));
+			return Response.ofFail("请选择" + "数据");
 		}
 
 		// parse ids
@@ -292,12 +291,12 @@ public class JobLogController {
 			try {
 				idList.add(Long.parseLong(idStr.trim()));
 			} catch (NumberFormatException e) {
-				return Response.ofFail(I18nUtil.getString("joblog_logid_unvalid"));
+				return Response.ofFail("日志ID非法");
 			}
 		}
 
 		if (idList.isEmpty()) {
-			return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("system_data"));
+			return Response.ofFail("请选择" + "数据");
 		}
 
 		// valid permission for each log
@@ -320,7 +319,7 @@ public class JobLogController {
 		// base check
 		XxlJobLog jobLog = xxlJobLogMapper.load(id);
 		if (jobLog == null) {
-			throw new RuntimeException(I18nUtil.getString("joblog_logid_unvalid"));
+			throw new RuntimeException("日志ID非法");
 		}
 
 		// valid permission
@@ -344,7 +343,7 @@ public class JobLogController {
 			// valid
 			XxlJobLog jobLog = xxlJobLogMapper.load(logId);	// todo, need to improve performance
 			if (jobLog == null) {
-				return Response.ofFail(I18nUtil.getString("joblog_logid_unvalid"));
+				return Response.ofFail("日志ID非法");
 			}
 
 			// log cat

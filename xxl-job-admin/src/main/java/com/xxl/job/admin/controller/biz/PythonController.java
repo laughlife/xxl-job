@@ -1,21 +1,5 @@
 package com.xxl.job.admin.controller.biz;
 
-import com.xxl.job.admin.constant.Consts;
-import com.xxl.job.admin.mapper.XxlJobPythonMapper;
-import com.xxl.job.admin.python.XxlJobPython;
-import com.xxl.job.admin.util.I18nUtil;
-import com.xxl.sso.core.annotation.XxlSso;
-import com.xxl.tool.core.CollectionTool;
-import com.xxl.tool.core.StringTool;
-import com.xxl.tool.response.PageModel;
-import com.xxl.tool.response.Response;
-import jakarta.annotation.Resource;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -25,6 +9,23 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.xxl.job.admin.constant.Consts;
+import com.xxl.job.admin.mapper.XxlJobPythonMapper;
+import com.xxl.job.admin.python.XxlJobPython;
+import com.xxl.sso.core.annotation.XxlSso;
+import com.xxl.tool.core.CollectionTool;
+import com.xxl.tool.core.StringTool;
+import com.xxl.tool.response.PageModel;
+import com.xxl.tool.response.Response;
+
+import jakarta.annotation.Resource;
 
 @Controller
 @RequestMapping("/python")
@@ -66,7 +67,7 @@ public class PythonController {
         }
 
         if (xxlJobPythonMapper.loadByVersion(xxlJobPython.getVersion().trim()) != null) {
-            return Response.ofFail(I18nUtil.getString("system_unvalid"));
+            return Response.ofFail("非法");
         }
 
         Date now = new Date();
@@ -94,14 +95,14 @@ public class PythonController {
 
         XxlJobPython exist = xxlJobPythonMapper.loadById(xxlJobPython.getId());
         if (exist == null) {
-            return Response.ofFail(I18nUtil.getString("system_unvalid"));
+            return Response.ofFail("非法");
         }
 
         String newVersion = xxlJobPython.getVersion().trim();
         if (!newVersion.equals(exist.getVersion())) {
             XxlJobPython sameVersion = xxlJobPythonMapper.loadByVersion(newVersion);
             if (sameVersion != null && sameVersion.getId() != exist.getId()) {
-                return Response.ofFail(I18nUtil.getString("system_unvalid"));
+                return Response.ofFail("非法");
             }
         }
 
@@ -120,7 +121,7 @@ public class PythonController {
     @XxlSso(role = Consts.ADMIN_ROLE)
     public Response<String> delete(@RequestParam("ids[]") List<Integer> ids) {
         if (CollectionTool.isEmpty(ids) || ids.size() != 1) {
-            return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("system_one") + I18nUtil.getString("system_data"));
+            return Response.ofFail("请选择" + "一条" + "数据");
         }
         int ret = xxlJobPythonMapper.delete(ids.get(0));
         return ret > 0 ? Response.ofSuccess() : Response.ofFail();
@@ -134,7 +135,7 @@ public class PythonController {
         try {
             Set<String> execPaths = new LinkedHashSet<>(scanCandidatePythonExecPaths());
             if (execPaths.isEmpty()) {
-                return Response.ofFail(I18nUtil.getString("system_fail"));
+                return Response.ofFail("失败");
             }
 
             Date now = new Date();
@@ -168,31 +169,31 @@ public class PythonController {
 
     private Response<String> validItem(XxlJobPython item, boolean checkId) {
         if (item == null) {
-            return Response.ofFail(I18nUtil.getString("system_unvalid"));
+            return Response.ofFail("非法");
         }
         if (checkId && item.getId() <= 0) {
-            return Response.ofFail(I18nUtil.getString("system_unvalid"));
+            return Response.ofFail("非法");
         }
         if (StringTool.isBlank(item.getName())) {
-            return Response.ofFail(I18nUtil.getString("system_please_input") + I18nUtil.getString("python_name"));
+            return Response.ofFail("请输入" + "名称");
         }
         if (StringTool.isBlank(item.getVersion())) {
-            return Response.ofFail(I18nUtil.getString("system_please_input") + I18nUtil.getString("python_version"));
+            return Response.ofFail("请输入" + "版本");
         }
         if (StringTool.isBlank(item.getExecPath())) {
-            return Response.ofFail(I18nUtil.getString("system_please_input") + I18nUtil.getString("python_exec_path"));
+            return Response.ofFail("请输入" + "可执行路径");
         }
         if (item.getName().trim().length() > 64) {
-            return Response.ofFail(I18nUtil.getString("system_lengh_limit") + "[1-64]");
+            return Response.ofFail("长度限制" + "[1-64]");
         }
         if (item.getVersion().trim().length() > 32) {
-            return Response.ofFail(I18nUtil.getString("system_lengh_limit") + "[1-32]");
+            return Response.ofFail("长度限制" + "[1-32]");
         }
         if (item.getExecPath().trim().length() > 512) {
-            return Response.ofFail(I18nUtil.getString("system_lengh_limit") + "[1-512]");
+            return Response.ofFail("长度限制" + "[1-512]");
         }
         if (StringTool.isNotBlank(item.getRemark()) && item.getRemark().trim().length() > 255) {
-            return Response.ofFail(I18nUtil.getString("system_lengh_limit") + "[0-255]");
+            return Response.ofFail("长度限制" + "[0-255]");
         }
         return Response.ofSuccess();
     }
@@ -280,4 +281,3 @@ public class PythonController {
         return sb.toString();
     }
 }
-

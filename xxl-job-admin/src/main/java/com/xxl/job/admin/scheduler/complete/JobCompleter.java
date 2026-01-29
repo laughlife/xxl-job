@@ -1,21 +1,22 @@
 package com.xxl.job.admin.scheduler.complete;
 
+import java.text.MessageFormat;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
 import com.xxl.job.admin.mapper.XxlJobInfoMapper;
 import com.xxl.job.admin.mapper.XxlJobLogMapper;
 import com.xxl.job.admin.model.XxlJobInfo;
 import com.xxl.job.admin.model.XxlJobLog;
 import com.xxl.job.admin.scheduler.config.XxlJobAdminBootstrap;
 import com.xxl.job.admin.scheduler.trigger.TriggerTypeEnum;
-import com.xxl.job.admin.util.I18nUtil;
 import com.xxl.job.core.context.XxlJobContext;
 import com.xxl.tool.core.StringTool;
 import com.xxl.tool.response.Response;
-import jakarta.annotation.Resource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-import java.text.MessageFormat;
+import jakarta.annotation.Resource;
 
 /**
  * xxl-job job log complete
@@ -66,7 +67,7 @@ public class JobCompleter {
 
             // process child job
             if (xxlJobInfo!=null && StringTool.isNotBlank(xxlJobInfo.getChildJobId())) {
-                triggerChildMsg = "<br><br><span style=\"color:#00c0ef;\" > >>>>>>>>>>>"+ I18nUtil.getString("jobconf_trigger_child_run") +"<<<<<<<<<<< </span><br>";
+                triggerChildMsg = "<br><br><span style=\"color:#00c0ef;\" > >>>>>>>>>>>"+ "触发子任务" +"<<<<<<<<<<< </span><br>";
                 String[] childJobIds = xxlJobInfo.getChildJobId().split(",");
                 for (int i = 0; i < childJobIds.length; i++) {
 
@@ -86,14 +87,14 @@ public class JobCompleter {
                         Response<String> triggerChildResult = Response.ofSuccess();
 
                         // add msg
-                        triggerChildMsg += MessageFormat.format(I18nUtil.getString("jobconf_callback_child_msg1"),
+                        triggerChildMsg += MessageFormat.format("{0}/{1} [任务ID={2}], 触发{3}, 触发备注: {4} <br>",
                                 (i+1),
                                 childJobIds.length,
                                 childJobIds[i],
-                                (triggerChildResult.isSuccess()?I18nUtil.getString("system_success"):I18nUtil.getString("system_fail")),
+                                (triggerChildResult.isSuccess()?"成功":"失败"),
                                 triggerChildResult.getMsg());
                     } else {
-                        triggerChildMsg += MessageFormat.format(I18nUtil.getString("jobconf_callback_child_msg2"),
+                        triggerChildMsg += MessageFormat.format("{0}/{1} [任务ID={2}], 触发失败, 触发备注: 任务ID格式错误 <br>",
                                 (i+1),
                                 childJobIds.length,
                                 childJobIds[i]);

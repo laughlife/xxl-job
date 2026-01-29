@@ -24,26 +24,26 @@
 
 					<div class="col-3">
 						<div class="input-group">
-							<span class="input-group-text">${I18n.user_role}</span>
+							<span class="input-group-text">角色</span>
 							<select class="form-control" id="role" >
-								<option value="-1" >${I18n.system_all}</option>
-								<option value="1" >${I18n.user_role_admin}</option>
-								<option value="0" >${I18n.user_role_normal}</option>
+								<option value="-1" >全部</option>
+								<option value="1" >管理员</option>
+								<option value="0" >普通用户</option>
 							</select>
 						</div>
 					</div>
 					<div class="col-3">
 						<div class="input-group">
-							<span class="input-group-text">${I18n.user_username}</span>
+							<span class="input-group-text">账号</span>
 							<input type="text" class="form-control" id="username" autocomplete="on" >
 						</div>
 					</div>
 
 					<div class="col-1">
-						<button class="btn btn-block btn-primary searchBtn" >${I18n.system_search}</button>
+						<button class="btn btn-block btn-primary searchBtn" >搜索</button>
 					</div>
 					<div class="col-1">
-						<button class="btn btn-block btn-secondary resetBtn" >${I18n.system_reset}</button>
+						<button class="btn btn-block btn-secondary resetBtn" >重置</button>
 					</div>
 				</div>
 			</div>
@@ -54,9 +54,9 @@
 			<div class="col-12">
 				<div class="box">
 					<div class="box-header pull-left" id="data_operation" >
-						<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>${I18n.system_opt_add}</button>
-						<button class="btn btn-sm btn-warning selectOnlyOne update" type="button"><i class="fa fa-edit"></i>${I18n.system_opt_edit}</button>
-						<button class="btn btn-sm btn-danger selectAny delete" type="button"><i class="fa fa-remove "></i>${I18n.system_opt_del}</button>
+						<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>新增</button>
+						<button class="btn btn-sm btn-warning selectOnlyOne update" type="button"><i class="fa fa-edit"></i>编辑</button>
+						<button class="btn btn-sm btn-danger selectAny delete" type="button"><i class="fa fa-remove "></i>删除</button>
 					</div>
 					<div class="box-body" >
 						<table id="data_list" class="table table-bordered table-striped" width="100%" >
@@ -74,28 +74,28 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" >${I18n.user_add}</h4>
+						<h4 class="modal-title" >新增用户</h4>
 					</div>
 					<div class="modal-body">
 						<form class="form-horizontal form" role="form" >
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.user_username}<font color="red">*</font></label>
-								<div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="${I18n.system_please_input}${I18n.user_username}" maxlength="20" ></div>
+								<label for="lastname" class="col-sm-2 control-label">账号<font color="red">*</font></label>
+								<div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="请输入账号" maxlength="20" ></div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.user_password}<font color="red">*</font></label>
-								<div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="${I18n.system_please_input}${I18n.user_password}" maxlength="20" ></div>
+								<label for="lastname" class="col-sm-2 control-label">密码<font color="red">*</font></label>
+								<div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="请输入密码" maxlength="20" ></div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.user_role}<font color="red">*</font></label>
+								<label for="lastname" class="col-sm-2 control-label">角色<font color="red">*</font></label>
 								<div class="col-sm-10">
-									<input type="radio" name="role" value="0" checked />${I18n.user_role_normal}
+									<input type="radio" name="role" value="0" checked />普通用户
 									&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="role" value="1" />${I18n.user_role_admin}
+									<input type="radio" name="role" value="1" />管理员
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.user_permission}<font color="black">*</font></label>
+								<label for="lastname" class="col-sm-2 control-label">权限<font color="black">*</font></label>
 								<div class="col-sm-10">
 									<#if groupList?exists && groupList?size gt 0>
 										<#list groupList as item>
@@ -109,8 +109,8 @@
 							<hr>
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
-									<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${I18n.system_cancel}</button>
+									<button type="submit" class="btn btn-primary"  >保存</button>
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 								</div>
 							</div>
 
@@ -125,28 +125,28 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" >${I18n.user_update}</h4>
+						<h4 class="modal-title" >更新用户</h4>
 					</div>
 					<div class="modal-body">
 						<form class="form-horizontal form" role="form" >
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.user_username}<font color="red">*</font></label>
-								<div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="${I18n.system_please_input}${I18n.user_username}" maxlength="20" readonly ></div>
+								<label for="lastname" class="col-sm-2 control-label">账号<font color="red">*</font></label>
+								<div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="请输入账号" maxlength="20" readonly ></div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.user_password}<font color="red">*</font></label>
-								<div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="${I18n.user_password_update_placeholder}" maxlength="20" ></div>
+								<label for="lastname" class="col-sm-2 control-label">密码<font color="red">*</font></label>
+								<div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="请输入新密码，为空则不更新密码" maxlength="20" ></div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.user_role}<font color="red">*</font></label>
+								<label for="lastname" class="col-sm-2 control-label">角色<font color="red">*</font></label>
 								<div class="col-sm-10">
-									<input type="radio" name="role" value="0" />${I18n.user_role_normal}
+									<input type="radio" name="role" value="0" />普通用户
 									&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="role" value="1" />${I18n.user_role_admin}
+									<input type="radio" name="role" value="1" />管理员
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-2 control-label">${I18n.user_permission}<font color="black">*</font></label>
+								<label for="lastname" class="col-sm-2 control-label">权限<font color="black">*</font></label>
 								<div class="col-sm-10">
 									<#if groupList?exists && groupList?size gt 0>
 										<#list groupList as item>
@@ -159,8 +159,8 @@
 							<hr>
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-6">
-									<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${I18n.system_cancel}</button>
+									<button type="submit" class="btn btn-primary"  >保存</button>
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 									<input type="hidden" name="id" >
 								</div>
 							</div>
@@ -179,7 +179,7 @@
 <!-- 3-script start -->
 <@netCommon.commonScript />
 <script src="${request.contextPath}/static/plugins/bootstrap-table/bootstrap-table.js"></script>
-<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/<#if I18n.admin_i18n?? && I18n.admin_i18n == 'en'>bootstrap-table-en-US.js<#else>bootstrap-table-zh-CN.js</#if>"></script>
+<script src="${request.contextPath}/static/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
 <script src="${request.contextPath}/static/adminlte/plugins/iCheck/icheck.min.js"></script>
 <#-- admin table -->
 <script src="${request.contextPath}/static/biz/common/admin.table.js"></script>
@@ -209,13 +209,13 @@
 					align: 'center',
 					valign: 'middle'
 				},{
-					title: I18n.user_username,
+					title: '账号',
 					field: 'username',
 					width: '20',
 					widthUnit: '%',
 					align: 'left'
 				},{
-					title: I18n.user_password,
+					title: '密码',
 					field: 'password',
 					width: '20',
 					widthUnit: '%',
@@ -223,7 +223,7 @@
 						return '******';
 					}
 				},{
-					title: I18n.user_role,
+					title: '角色',
 					field: 'role',
 					width: '10',
 					widthUnit: '%',
@@ -255,7 +255,7 @@
 			var length = value.length;
 			var valid = /^[a-z][a-z0-9]*$/;
 			return this.optional(element) || valid.test(value);
-		}, I18n.user_username_valid );
+		}, '限制以小写字母开头，由小写字母、数字组成' );
 		$.adminTable.initAdd( {
 			url: base_url + "/user/insert",
 			rules : {
@@ -271,12 +271,12 @@
 			},
 			messages : {
 				username : {
-					required : I18n.system_please_input + I18n.user_username,
-					rangelength: I18n.system_lengh_limit + "[4-20]"
+					required : '请输入' + '账号',
+					rangelength: '长度限制' + "[4-20]"
 				},
 				password : {
-					required : I18n.system_please_input + I18n.user_password,
-					rangelength: I18n.system_lengh_limit + "[4-20]"
+					required : '请输入' + '密码',
+					rangelength: '长度限制' + "[4-20]"
 				}
 			},
 			writeFormData: function() {

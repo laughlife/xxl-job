@@ -1,8 +1,14 @@
 package com.xxl.job.admin.controller.base;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
 import com.xxl.job.admin.mapper.XxlJobUserMapper;
 import com.xxl.job.admin.model.XxlJobUser;
-import com.xxl.job.admin.util.I18nUtil;
 import com.xxl.sso.core.annotation.XxlSso;
 import com.xxl.sso.core.helper.XxlSsoHelper;
 import com.xxl.sso.core.model.LoginInfo;
@@ -10,15 +16,10 @@ import com.xxl.tool.core.StringTool;
 import com.xxl.tool.crypto.Sha256Tool;
 import com.xxl.tool.id.UUIDTool;
 import com.xxl.tool.response.Response;
+
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * index controller
@@ -53,19 +54,19 @@ public class LoginController {
 		// param
 		boolean ifRem = StringTool.isNotBlank(ifRemember) && "on".equals(ifRemember);
 		if (StringTool.isBlank(userName) || StringTool.isBlank(password)){
-			return Response.ofFail( I18nUtil.getString("login_param_empty") );
+			return Response.ofFail( "账号或密码为空" );
 		}
 
 		// valid user、status
 		XxlJobUser xxlJobUser = xxlJobUserMapper.loadByUserName(userName);
 		if (xxlJobUser == null) {
-			return Response.ofFail( I18nUtil.getString("login_param_unvalid") );
+			return Response.ofFail( "账号或密码错误" );
 		}
 
 		// valid passowrd
 		String passwordHash = Sha256Tool.sha256(password);
 		if (!passwordHash.equals(xxlJobUser.getPassword())) {
-			return Response.ofFail( I18nUtil.getString("login_param_unvalid") );
+			return Response.ofFail( "账号或密码错误" );
 		}
 
 		// xxl-sso, do login
@@ -93,14 +94,14 @@ public class LoginController {
 
 		// valid
 		if (oldPassword==null || oldPassword.trim().isEmpty()){
-			return Response.ofFail(I18nUtil.getString("system_please_input") + I18nUtil.getString("change_pwd_field_oldpwd"));
+			return Response.ofFail("请输入" + "旧密码");
 		}
 		if (password==null || password.trim().isEmpty()){
-			return Response.ofFail(I18nUtil.getString("system_please_input") + I18nUtil.getString("change_pwd_field_oldpwd"));
+			return Response.ofFail("请输入" + "旧密码");
 		}
 		password = password.trim();
 		if (!(password.length()>=4 && password.length()<=20)) {
-			return Response.ofFail(I18nUtil.getString("system_lengh_limit")+"[4-20]" );
+			return Response.ofFail("长度限制"+"[4-20]" );
 		}
 
 		// md5 password
@@ -111,7 +112,7 @@ public class LoginController {
 		Response<LoginInfo> loginInfoResponse = XxlSsoHelper.loginCheckWithAttr(request);
 		XxlJobUser existUser = xxlJobUserMapper.loadByUserName(loginInfoResponse.getData().getUserName());
 		if (!oldPasswordHash.equals(existUser.getPassword())) {
-			return Response.ofFail(I18nUtil.getString("change_pwd_field_oldpwd") + I18nUtil.getString("system_unvalid"));
+			return Response.ofFail("旧密码" + "非法");
 		}
 
 		// write new

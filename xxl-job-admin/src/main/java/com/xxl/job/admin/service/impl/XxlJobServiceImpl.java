@@ -14,7 +14,7 @@ import com.xxl.job.admin.scheduler.thread.JobScheduleHelper;
 import com.xxl.job.admin.scheduler.trigger.TriggerTypeEnum;
 import com.xxl.job.admin.scheduler.type.ScheduleTypeEnum;
 import com.xxl.job.admin.service.XxlJobService;
-import com.xxl.job.admin.util.I18nUtil;
+
 import com.xxl.job.admin.util.JobGroupPermissionUtil;
 import com.xxl.job.core.constant.ExecutorBlockStrategyEnum;
 import com.xxl.job.core.glue.GlueTypeEnum;
@@ -101,45 +101,45 @@ public class XxlJobServiceImpl implements XxlJobService {
 		// valid base
 		XxlJobGroup group = xxlJobGroupMapper.load(jobInfo.getJobGroup());
 		if (group == null) {
-			return Response.ofFail (I18nUtil.getString("system_please_choose")+I18nUtil.getString("jobinfo_field_jobgroup"));
+			return Response.ofFail ("请选择"+"执行器");
 		}
 		if (StringTool.isBlank(jobInfo.getJobDesc())) {
-			return Response.ofFail ( (I18nUtil.getString("system_please_input")+I18nUtil.getString("jobinfo_field_jobdesc")) );
+			return Response.ofFail ( ("请输入"+"任务描述") );
 		}
 		if (StringTool.isBlank(jobInfo.getAuthor())) {
-			return Response.ofFail ( (I18nUtil.getString("system_please_input")+I18nUtil.getString("jobinfo_field_author")) );
+			return Response.ofFail ( ("请输入"+"负责人") );
 		}
 
 		// valid trigger
 		ScheduleTypeEnum scheduleTypeEnum = ScheduleTypeEnum.match(jobInfo.getScheduleType(), null);
 		if (scheduleTypeEnum == null) {
-			return Response.ofFail ( (I18nUtil.getString("schedule_type")+I18nUtil.getString("system_unvalid")) );
+			return Response.ofFail ( ("调度类型"+"非法") );
 		}
 		if (scheduleTypeEnum == ScheduleTypeEnum.CRON) {
 			if (jobInfo.getScheduleConf()==null || !CronExpression.isValidExpression(jobInfo.getScheduleConf())) {
-				return Response.ofFail ( "Cron"+I18nUtil.getString("system_unvalid"));
+				return Response.ofFail ( "Cron"+"非法");
 			}
 		} else if (scheduleTypeEnum == ScheduleTypeEnum.FIX_RATE/* || scheduleTypeEnum == ScheduleTypeEnum.FIX_DELAY*/) {
 			if (jobInfo.getScheduleConf() == null) {
-				return Response.ofFail ( (I18nUtil.getString("schedule_type")) );
+				return Response.ofFail ( ("调度类型") );
 			}
 			try {
 				int fixSecond = Integer.parseInt(jobInfo.getScheduleConf());
 				if (fixSecond < 1) {
-					return Response.ofFail ( (I18nUtil.getString("schedule_type")+I18nUtil.getString("system_unvalid")) );
+					return Response.ofFail ( ("调度类型"+"非法") );
 				}
 			} catch (Exception e) {
-				return Response.ofFail ( (I18nUtil.getString("schedule_type")+I18nUtil.getString("system_unvalid")) );
+				return Response.ofFail ( ("调度类型"+"非法") );
 			}
 		}
 
 		// valid job
 		GlueTypeEnum glueTypeEnum = GlueTypeEnum.match(jobInfo.getGlueType());
 		if (glueTypeEnum == null) {
-			return Response.ofFail ( (I18nUtil.getString("jobinfo_field_gluetype")+I18nUtil.getString("system_unvalid")) );
+			return Response.ofFail ( ("运行模式"+"非法") );
 		}
 		if (GlueTypeEnum.BEAN==glueTypeEnum && StringTool.isBlank(jobInfo.getExecutorHandler()) ) {
-			return Response.ofFail ( (I18nUtil.getString("system_please_input")+"JobHandler") );
+			return Response.ofFail ( ("请输入"+"JobHandler") );
 		}
 		// 》fix "\r" in shell
 		if (GlueTypeEnum.GLUE_SHELL==glueTypeEnum && jobInfo.getGlueSource()!=null) {
@@ -147,14 +147,14 @@ public class XxlJobServiceImpl implements XxlJobService {
 		}
 		if (GlueTypeEnum.GLUE_PYTHON == glueTypeEnum) {
 			if (jobInfo.getPythonId() == null) {
-				return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("python_version"));
+				return Response.ofFail("请选择" + "版本");
 			}
 			XxlJobPython xxlJobPython = xxlJobPythonMapper.loadById(jobInfo.getPythonId());
 			if (xxlJobPython == null) {
-				return Response.ofFail(I18nUtil.getString("python_version") + I18nUtil.getString("system_not_found"));
+				return Response.ofFail("版本" + "不存在");
 			}
 			if (StringTool.isBlank(xxlJobPython.getExecPath())) {
-				return Response.ofFail(I18nUtil.getString("system_please_input") + I18nUtil.getString("python_exec_path"));
+				return Response.ofFail("请输入" + "可执行路径");
 			}
 		} else {
 			jobInfo.setPythonId(null);
@@ -162,13 +162,13 @@ public class XxlJobServiceImpl implements XxlJobService {
 
 		// valid advanced
 		if (ExecutorRouteStrategyEnum.match(jobInfo.getExecutorRouteStrategy(), null) == null) {
-			return Response.ofFail ( (I18nUtil.getString("jobinfo_field_executorRouteStrategy")+I18nUtil.getString("system_unvalid")) );
+			return Response.ofFail ( ("路由策略"+"非法") );
 		}
 		if (MisfireStrategyEnum.match(jobInfo.getMisfireStrategy(), null) == null) {
-			return Response.ofFail ( (I18nUtil.getString("misfire_strategy")+I18nUtil.getString("system_unvalid")) );
+			return Response.ofFail ( ("调度过期策略"+"非法") );
 		}
 		if (ExecutorBlockStrategyEnum.match(jobInfo.getExecutorBlockStrategy(), null) == null) {
-			return Response.ofFail ( (I18nUtil.getString("jobinfo_field_executorBlockStrategy")+I18nUtil.getString("system_unvalid")) );
+			return Response.ofFail ( ("阻塞处理策略"+"非法") );
 		}
 
 		// 》ChildJobId valid
@@ -179,16 +179,16 @@ public class XxlJobServiceImpl implements XxlJobService {
 					XxlJobInfo childJobInfo = xxlJobInfoMapper.loadById(Integer.parseInt(childJobIdItem));
 					if (childJobInfo==null) {
 						return Response.ofFail (
-								MessageFormat.format((I18nUtil.getString("jobinfo_field_childJobId")+"({0})"+I18nUtil.getString("system_not_found")), childJobIdItem));
+								MessageFormat.format(("子任务ID"+"({0})"+"不存在"), childJobIdItem));
 					}
 					// valid jobGroup permission
 					if (!JobGroupPermissionUtil.hasJobGroupPermission(loginInfo, childJobInfo.getJobGroup())) {
 						return Response.ofFail (
-								MessageFormat.format((I18nUtil.getString("jobinfo_field_childJobId")+"({0})"+I18nUtil.getString("system_permission_limit")), childJobIdItem));
+								MessageFormat.format(("子任务ID"+"({0})"+"权限拦截"), childJobIdItem));
 					}
 				} else {
 					return Response.ofFail (
-							MessageFormat.format((I18nUtil.getString("jobinfo_field_childJobId")+"({0})"+I18nUtil.getString("system_unvalid")), childJobIdItem));
+							MessageFormat.format(("子任务ID"+"({0})"+"非法"), childJobIdItem));
 				}
 			}
 
@@ -210,7 +210,7 @@ public class XxlJobServiceImpl implements XxlJobService {
 		jobInfo.setExecutorHandler(jobInfo.getExecutorHandler().trim());
 		xxlJobInfoMapper.save(jobInfo);
 		if (jobInfo.getId() < 1) {
-			return Response.ofFail ( (I18nUtil.getString("jobinfo_field_add")+I18nUtil.getString("system_fail")) );
+			return Response.ofFail ( ("新增"+"失败") );
 		}
 
 		// write operation log
@@ -225,44 +225,44 @@ public class XxlJobServiceImpl implements XxlJobService {
 
 		// valid base
 		if (StringTool.isBlank(jobInfo.getJobDesc())) {
-			return Response.ofFail ( (I18nUtil.getString("system_please_input")+I18nUtil.getString("jobinfo_field_jobdesc")) );
+			return Response.ofFail ( ("请输入"+"任务描述") );
 		}
 		if (StringTool.isBlank(jobInfo.getAuthor())) {
-			return Response.ofFail ( (I18nUtil.getString("system_please_input")+I18nUtil.getString("jobinfo_field_author")) );
+			return Response.ofFail ( ("请输入"+"负责人") );
 		}
 
 		// valid trigger
 		ScheduleTypeEnum scheduleTypeEnum = ScheduleTypeEnum.match(jobInfo.getScheduleType(), null);
 		if (scheduleTypeEnum == null) {
-			return Response.ofFail ( (I18nUtil.getString("schedule_type")+I18nUtil.getString("system_unvalid")) );
+			return Response.ofFail ( ("调度类型"+"非法") );
 		}
 		if (scheduleTypeEnum == ScheduleTypeEnum.CRON) {
 			if (jobInfo.getScheduleConf()==null || !CronExpression.isValidExpression(jobInfo.getScheduleConf())) {
-				return Response.ofFail ( "Cron"+I18nUtil.getString("system_unvalid") );
+				return Response.ofFail ( "Cron"+"非法" );
 			}
 		} else if (scheduleTypeEnum == ScheduleTypeEnum.FIX_RATE /*|| scheduleTypeEnum == ScheduleTypeEnum.FIX_DELAY*/) {
 			if (jobInfo.getScheduleConf() == null) {
-				return Response.ofFail ( (I18nUtil.getString("schedule_type")+I18nUtil.getString("system_unvalid")) );
+				return Response.ofFail ( ("调度类型"+"非法") );
 			}
 			try {
 				int fixSecond = Integer.parseInt(jobInfo.getScheduleConf());
 				if (fixSecond < 1) {
-					return Response.ofFail ( (I18nUtil.getString("schedule_type")+I18nUtil.getString("system_unvalid")) );
+					return Response.ofFail ( ("调度类型"+"非法") );
 				}
 			} catch (Exception e) {
-				return Response.ofFail ( (I18nUtil.getString("schedule_type")+I18nUtil.getString("system_unvalid")) );
+				return Response.ofFail ( ("调度类型"+"非法") );
 			}
 		}
 
 		// valid advanced
 		if (ExecutorRouteStrategyEnum.match(jobInfo.getExecutorRouteStrategy(), null) == null) {
-			return Response.ofFail ( (I18nUtil.getString("jobinfo_field_executorRouteStrategy")+I18nUtil.getString("system_unvalid")) );
+			return Response.ofFail ( ("路由策略"+"非法") );
 		}
 		if (MisfireStrategyEnum.match(jobInfo.getMisfireStrategy(), null) == null) {
-			return Response.ofFail ( (I18nUtil.getString("misfire_strategy")+I18nUtil.getString("system_unvalid")) );
+			return Response.ofFail ( ("调度过期策略"+"非法") );
 		}
 		if (ExecutorBlockStrategyEnum.match(jobInfo.getExecutorBlockStrategy(), null) == null) {
-			return Response.ofFail ( (I18nUtil.getString("jobinfo_field_executorBlockStrategy")+I18nUtil.getString("system_unvalid")) );
+			return Response.ofFail ( ("阻塞处理策略"+"非法") );
 		}
 
 		// 》ChildJobId valid
@@ -273,23 +273,23 @@ public class XxlJobServiceImpl implements XxlJobService {
 					// parse child
 					int childJobId = Integer.parseInt(childJobIdItem);
 					if (childJobId == jobInfo.getId()) {
-						return Response.ofFail ( (I18nUtil.getString("jobinfo_field_childJobId")+"("+childJobId+")"+I18nUtil.getString("system_unvalid")) );
+						return Response.ofFail ( ("子任务ID"+"("+childJobId+")"+"非法") );
 					}
 
 					// valid child
 					XxlJobInfo childJobInfo = xxlJobInfoMapper.loadById(childJobId);
 					if (childJobInfo==null) {
 						return Response.ofFail (
-								MessageFormat.format((I18nUtil.getString("jobinfo_field_childJobId")+"({0})"+I18nUtil.getString("system_not_found")), childJobIdItem));
+								MessageFormat.format(("子任务ID"+"({0})"+"不存在"), childJobIdItem));
 					}
 					// valid jobGroup permission
 					if (!JobGroupPermissionUtil.hasJobGroupPermission(loginInfo, childJobInfo.getJobGroup())) {
 						return Response.ofFail (
-								MessageFormat.format((I18nUtil.getString("jobinfo_field_childJobId")+"({0})"+I18nUtil.getString("system_permission_limit")), childJobIdItem));
+								MessageFormat.format(("子任务ID"+"({0})"+"权限拦截"), childJobIdItem));
 					}
 				} else {
 					return Response.ofFail (
-							MessageFormat.format((I18nUtil.getString("jobinfo_field_childJobId")+"({0})"+I18nUtil.getString("system_unvalid")), childJobIdItem));
+							MessageFormat.format(("子任务ID"+"({0})"+"非法"), childJobIdItem));
 				}
 			}
 
@@ -306,24 +306,24 @@ public class XxlJobServiceImpl implements XxlJobService {
 		// group valid
 		XxlJobGroup jobGroup = xxlJobGroupMapper.load(jobInfo.getJobGroup());
 		if (jobGroup == null) {
-			return Response.ofFail ( (I18nUtil.getString("jobinfo_field_jobgroup")+I18nUtil.getString("system_unvalid")) );
+			return Response.ofFail ( ("执行器"+"非法") );
 		}
 
 		// stage job info
 		XxlJobInfo exists_jobInfo = xxlJobInfoMapper.loadById(jobInfo.getId());
 		if (exists_jobInfo == null) {
-			return Response.ofFail ( (I18nUtil.getString("jobinfo_field_id")+I18nUtil.getString("system_not_found")) );
+			return Response.ofFail ( ("任务ID"+"不存在") );
 		}
 		if (GlueTypeEnum.GLUE_PYTHON == GlueTypeEnum.match(exists_jobInfo.getGlueType())) {
 			if (jobInfo.getPythonId() == null) {
-				return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("python_version"));
+				return Response.ofFail("请选择" + "版本");
 			}
 			XxlJobPython xxlJobPython = xxlJobPythonMapper.loadById(jobInfo.getPythonId());
 			if (xxlJobPython == null) {
-				return Response.ofFail(I18nUtil.getString("python_version") + I18nUtil.getString("system_not_found"));
+				return Response.ofFail("版本" + "不存在");
 			}
 			if (StringTool.isBlank(xxlJobPython.getExecPath())) {
-				return Response.ofFail(I18nUtil.getString("system_please_input") + I18nUtil.getString("python_exec_path"));
+				return Response.ofFail("请输入" + "可执行路径");
 			}
 		} else {
 			jobInfo.setPythonId(null);
@@ -338,12 +338,12 @@ public class XxlJobServiceImpl implements XxlJobService {
 				// generate next trigger time
 				Date nextValidTime = scheduleTypeEnum.getScheduleType().generateNextTriggerTime(jobInfo, new Date(System.currentTimeMillis() + JobScheduleHelper.PRE_READ_MS));
 				if (nextValidTime == null) {
-					return Response.ofFail ( (I18nUtil.getString("schedule_type")+I18nUtil.getString("system_unvalid")) );
+					return Response.ofFail ( ("调度类型"+"非法") );
 				}
 				nextTriggerTime = nextValidTime.getTime();
 			} catch (Exception e) {
 				logger.error(e.getMessage(), e);
-				return Response.ofFail ( (I18nUtil.getString("schedule_type")+I18nUtil.getString("system_unvalid")) );
+				return Response.ofFail ( ("调度类型"+"非法") );
 			}
 		}
 
@@ -387,7 +387,7 @@ public class XxlJobServiceImpl implements XxlJobService {
 
 		// valid jobGroup permission
 		if (!JobGroupPermissionUtil.hasJobGroupPermission(loginInfo, xxlJobInfo.getJobGroup())) {
-			return Response.ofFail(I18nUtil.getString("system_permission_limit"));
+			return Response.ofFail("权限拦截");
 		}
 
 		xxlJobInfoMapper.delete(id);
@@ -406,18 +406,18 @@ public class XxlJobServiceImpl implements XxlJobService {
 		// load and valid
 		XxlJobInfo xxlJobInfo = xxlJobInfoMapper.loadById(id);
 		if (xxlJobInfo == null) {
-			return Response.ofFail(I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+			return Response.ofFail("任务ID非法");
 		}
 
 		// valid jobGroup permission
 		if (!JobGroupPermissionUtil.hasJobGroupPermission(loginInfo, xxlJobInfo.getJobGroup())) {
-			return Response.ofFail(I18nUtil.getString("system_permission_limit"));
+			return Response.ofFail("权限拦截");
 		}
 
 		// valid ScheduleType: can not be none
 		ScheduleTypeEnum scheduleTypeEnum = ScheduleTypeEnum.match(xxlJobInfo.getScheduleType(), ScheduleTypeEnum.NONE);
 		if (ScheduleTypeEnum.NONE == scheduleTypeEnum) {
-			return Response.ofFail(I18nUtil.getString("schedule_type_none_limit_start"));
+			return Response.ofFail("当前调度类型禁止启动");
 		}
 
 		// next trigger time (5s后生效，避开预读周期)
@@ -427,12 +427,12 @@ public class XxlJobServiceImpl implements XxlJobService {
 			Date nextValidTime = scheduleTypeEnum.getScheduleType().generateNextTriggerTime(xxlJobInfo, new Date(System.currentTimeMillis() + JobScheduleHelper.PRE_READ_MS));
 
 			if (nextValidTime == null) {
-				return Response.ofFail ( (I18nUtil.getString("schedule_type")+I18nUtil.getString("system_unvalid")) );
+				return Response.ofFail ( ("调度类型"+"非法") );
 			}
 			nextTriggerTime = nextValidTime.getTime();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			return Response.ofFail ( (I18nUtil.getString("schedule_type")+I18nUtil.getString("system_unvalid")) );
+			return Response.ofFail ( ("调度类型"+"非法") );
 		}
 
 		xxlJobInfo.setTriggerStatus(TriggerStatus.RUNNING.getValue());
@@ -454,12 +454,12 @@ public class XxlJobServiceImpl implements XxlJobService {
 		// load and valid
         XxlJobInfo xxlJobInfo = xxlJobInfoMapper.loadById(id);
 		if (xxlJobInfo == null) {
-			return Response.ofFail(I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+			return Response.ofFail("任务ID非法");
 		}
 
 		// valid jobGroup permission
 		if (!JobGroupPermissionUtil.hasJobGroupPermission(loginInfo, xxlJobInfo.getJobGroup())) {
-			return Response.ofFail(I18nUtil.getString("system_permission_limit"));
+			return Response.ofFail("权限拦截");
 		}
 
 		// stop
@@ -482,12 +482,12 @@ public class XxlJobServiceImpl implements XxlJobService {
 		// valid job
 		XxlJobInfo xxlJobInfo = xxlJobInfoMapper.loadById(jobId);
 		if (xxlJobInfo == null) {
-			return Response.ofFail(I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+			return Response.ofFail("任务ID非法");
 		}
 
 		// valid jobGroup permission
 		if (!JobGroupPermissionUtil.hasJobGroupPermission(loginInfo, xxlJobInfo.getJobGroup())) {
-			return Response.ofFail(I18nUtil.getString("system_permission_limit"));
+			return Response.ofFail("权限拦截");
 		}
 
 		// force cover job param

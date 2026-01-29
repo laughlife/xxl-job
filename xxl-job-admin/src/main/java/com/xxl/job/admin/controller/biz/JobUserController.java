@@ -1,11 +1,18 @@
 package com.xxl.job.admin.controller.biz;
 
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.xxl.job.admin.constant.Consts;
 import com.xxl.job.admin.mapper.XxlJobGroupMapper;
 import com.xxl.job.admin.mapper.XxlJobUserMapper;
 import com.xxl.job.admin.model.XxlJobGroup;
 import com.xxl.job.admin.model.XxlJobUser;
-import com.xxl.job.admin.util.I18nUtil;
 import com.xxl.sso.core.annotation.XxlSso;
 import com.xxl.sso.core.helper.XxlSsoHelper;
 import com.xxl.sso.core.model.LoginInfo;
@@ -14,17 +21,9 @@ import com.xxl.tool.core.StringTool;
 import com.xxl.tool.crypto.Sha256Tool;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
+
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author xuxueli 2019-05-04 16:39:50
@@ -83,19 +82,19 @@ public class JobUserController {
 
         // valid username
         if (StringTool.isBlank(xxlJobUser.getUsername())) {
-            return Response.ofFail(I18nUtil.getString("system_please_input")+I18nUtil.getString("user_username") );
+            return Response.ofFail("请输入"+"账号" );
         }
         xxlJobUser.setUsername(xxlJobUser.getUsername().trim());
         if (!(xxlJobUser.getUsername().length()>=4 && xxlJobUser.getUsername().length()<=20)) {
-            return Response.ofFail(I18nUtil.getString("system_lengh_limit")+"[4-20]" );
+            return Response.ofFail("长度限制"+"[4-20]" );
         }
         // valid password
         if (StringTool.isBlank(xxlJobUser.getPassword())) {
-            return Response.ofFail(I18nUtil.getString("system_please_input")+I18nUtil.getString("user_password") );
+            return Response.ofFail("请输入"+"密码" );
         }
         xxlJobUser.setPassword(xxlJobUser.getPassword().trim());
         if (!(xxlJobUser.getPassword().length()>=4 && xxlJobUser.getPassword().length()<=20)) {
-            return Response.ofFail(I18nUtil.getString("system_lengh_limit")+"[4-20]" );
+            return Response.ofFail("长度限制"+"[4-20]" );
         }
         // md5 password
         String passwordHash = Sha256Tool.sha256(xxlJobUser.getPassword());
@@ -104,7 +103,7 @@ public class JobUserController {
         // check repeat
         XxlJobUser existUser = xxlJobUserMapper.loadByUserName(xxlJobUser.getUsername());
         if (existUser != null) {
-            return Response.ofFail( I18nUtil.getString("user_username_repeat") );
+            return Response.ofFail( "账号重复" );
         }
 
         // write
@@ -120,14 +119,14 @@ public class JobUserController {
         // avoid opt login seft
         Response<LoginInfo> loginInfoResponse = XxlSsoHelper.loginCheckWithAttr(request);
         if (loginInfoResponse.getData().getUserName().equals(xxlJobUser.getUsername())) {
-            return Response.ofFail(I18nUtil.getString("user_update_loginuser_limit"));
+            return Response.ofFail("禁止操作当前登录账号");
         }
 
         // valid password
         if (StringTool.isNotBlank(xxlJobUser.getPassword())) {
             xxlJobUser.setPassword(xxlJobUser.getPassword().trim());
             if (!(xxlJobUser.getPassword().length()>=4 && xxlJobUser.getPassword().length()<=20)) {
-                return Response.ofFail(I18nUtil.getString("system_lengh_limit")+"[4-20]" );
+                return Response.ofFail("长度限制"+"[4-20]" );
             }
             // md5 password
             String passwordHash = Sha256Tool.sha256(xxlJobUser.getPassword());
@@ -148,13 +147,13 @@ public class JobUserController {
 
         // valid
         if (CollectionTool.isEmpty(ids) || ids.size()!=1) {
-            return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("system_one") + I18nUtil.getString("system_data"));
+            return Response.ofFail("请选择" + "一条" + "数据");
         }
 
         // avoid opt login seft
         Response<LoginInfo> loginInfoResponse = XxlSsoHelper.loginCheckWithAttr(request);
         if (ids.contains(Integer.parseInt(loginInfoResponse.getData().getUserId()))) {
-            return Response.ofFail(I18nUtil.getString("user_update_loginuser_limit"));
+            return Response.ofFail("禁止操作当前登录账号");
         }
 
         xxlJobUserMapper.delete(ids.get(0));
@@ -169,14 +168,14 @@ public class JobUserController {
 
         // valid
         if (oldPassword==null || oldPassword.trim().isEmpty()){
-            return Response.ofFail(I18nUtil.getString("system_please_input") + I18nUtil.getString("change_pwd_field_oldpwd"));
+            return Response.ofFail(“请输入” + “旧密码”);
         }
         if (password==null || password.trim().isEmpty()){
-            return Response.ofFail(I18nUtil.getString("system_please_input") + I18nUtil.getString("change_pwd_field_oldpwd"));
+            return Response.ofFail(“请输入” + “旧密码”);
         }
         password = password.trim();
         if (!(password.length()>=4 && password.length()<=20)) {
-            return Response.ofFail(I18nUtil.getString("system_lengh_limit")+"[4-20]" );
+            return Response.ofFail("长度限制"+"[4-20]" );
         }
 
         // md5 password
@@ -187,7 +186,7 @@ public class JobUserController {
         Response<LoginInfo> loginInfoResponse = XxlSsoHelper.loginCheckWithAttr(request);
         XxlJobUser existUser = xxlJobUserMapper.loadByUserName(loginInfoResponse.getData().getUserName());
         if (!oldPasswordHash.equals(existUser.getPassword())) {
-            return Response.ofFail(I18nUtil.getString("change_pwd_field_oldpwd") + I18nUtil.getString("system_unvalid"));
+            return Response.ofFail(“旧密码” + "长度限制");
         }
 
         // write new

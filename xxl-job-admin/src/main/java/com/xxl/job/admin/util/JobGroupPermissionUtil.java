@@ -1,15 +1,16 @@
 package com.xxl.job.admin.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.xxl.job.admin.constant.Consts;
 import com.xxl.job.admin.model.XxlJobGroup;
 import com.xxl.sso.core.helper.XxlSsoHelper;
 import com.xxl.sso.core.model.LoginInfo;
 import com.xxl.tool.core.StringTool;
 import com.xxl.tool.response.Response;
-import jakarta.servlet.http.HttpServletRequest;
 
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * jobGroup permission util
@@ -37,7 +38,7 @@ public class JobGroupPermissionUtil {
     public static LoginInfo validJobGroupPermission(HttpServletRequest request, int jobGroup) {
         Response<LoginInfo> loginInfoResponse = XxlSsoHelper.loginCheckWithAttr(request);
         if (!(loginInfoResponse.isSuccess() && hasJobGroupPermission(loginInfoResponse.getData(), jobGroup))) {
-            throw new RuntimeException(I18nUtil.getString("system_permission_limit") + "[username="+ loginInfoResponse.getData().getUserName() +"]");
+            throw new RuntimeException("权限拦截" + "[username="+ loginInfoResponse.getData().getUserName() +"]");
         }
         return loginInfoResponse.getData();
     }

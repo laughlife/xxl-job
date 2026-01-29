@@ -8,7 +8,7 @@
 	<@netCommon.commonStyle />
 	<link rel="stylesheet" href="${request.contextPath}/static/plugins/codemirror/lib/codemirror.css">
 	<link rel="stylesheet" href="${request.contextPath}/static/plugins/codemirror/addon/hint/show-hint.css">
-	<title>${I18n.admin_name}</title>
+	<title>任务调度中心</title>
 	<style type="text/css" >
 		.CodeMirror {
 			font-size:16px;
@@ -42,7 +42,7 @@
 				<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li class="active" >
-							<a href="javascript:;">${I18n.jobinfo_job}：${jobInfo.jobDesc} ｜<#list GlueTypeEnum as item><#if item == jobInfo.glueType>${item.desc}</#if></#list></a>
+							<a href="javascript:;">任务：${jobInfo.jobDesc} ｜<#list GlueTypeEnum as item><#if item == jobInfo.glueType>${item.desc}</#if></#list></a>
 						</li>
 					</ul>
 				</div>
@@ -51,7 +51,7 @@
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">${I18n.jobinfo_glue_rollback}</a>
+							<a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">版本回溯</a>
 							<ul class="dropdown-menu" role="menu">
 								<li <#if jobLogGlues?exists && jobLogGlues?size gt 0 >style="display: none;"</#if> >
 									<a href="javascript:;" class="source_version" version="version_now" glueType="${jobInfo.glueType}" >
@@ -74,13 +74,13 @@
 						<li id="save" >
 							<a href="javascript:;" >
 								<i class="fa fa-fw fa-save" ></i>
-								${I18n.system_save}
+								保存
 							</a>
 						</li>
 						<li>
 							<a href="javascript:window.close();" >
 								<i class="fa fa-fw fa-close" ></i>
-								${I18n.system_close}
+								关闭
 							</a>
 						</li>
 					</ul>
@@ -100,19 +100,19 @@
 		<div class="modal-dialog ">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" ><i class="fa fa-fw fa-save"></i>${I18n.system_save}</h4>
+					<h4 class="modal-title" ><i class="fa fa-fw fa-save"></i>保存</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-horizontal form" role="form" >
 						<div class="form-group">
-							<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_glue_remark}<font color="red">*</font></label>
-							<div class="col-sm-10"><input type="text" class="form-control" id="glueRemark" placeholder="${I18n.system_please_input}${I18n.jobinfo_glue_remark}" maxlength="64" ></div>
+							<label for="lastname" class="col-sm-2 control-label">源码备注<font color="red">*</font></label>
+							<div class="col-sm-10"><input type="text" class="form-control" id="glueRemark" placeholder="请输入源码备注" maxlength="64" ></div>
 						</div>
 						<hr>
 						<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-6">
-								<button type="button" class="btn btn-primary ok" >${I18n.system_save}</button>
-								<button type="button" class="btn btn-default" data-bs-dismiss="modal">${I18n.system_cancel}</button>
+								<button type="button" class="btn btn-primary ok" >保存</button>
+								<button type="button" class="btn btn-default" data-bs-dismiss="modal">取消</button>
 							</div>
 						</div>
 					</div>
@@ -124,7 +124,7 @@
 
 	<!-- 4-footer start -->
 	<footer class="main-footer">
-		Powered by <b>XXL-JOB</b> ${I18n.admin_version}
+		Powered by <b>XXL-JOB</b> 3.4.0-SNAPSHOT
 		<div class="pull-right hidden-xs">
 			<strong>Copyright &copy; 2015-${.now?string('yyyy')} &nbsp;
 				<a href="https://www.xuxueli.com/" target="_blank" >xuxueli</a>
@@ -168,7 +168,7 @@
 
 <#-- script -->
 <@netCommon.commonScript />
-<script src="${request.contextPath}/static/biz/common/admin.setting.js?v=${I18n.admin_version}"></script>
+<script src="${request.contextPath}/static/biz/common/admin.setting.js?v=3.4.0-SNAPSHOT"></script>
 <#-- glue ide -->
 <script src="${request.contextPath}/static/plugins/codemirror/lib/codemirror.js"></script>
 <script src="${glueTypeModeSrc}"></script>
@@ -221,18 +221,18 @@
 
 			if (!glueRemark) {
 				layer.open({
-					title: I18n.system_tips,
-					btn: [ I18n.system_ok],
-					content: I18n.system_please_input + I18n.jobinfo_glue_remark ,
+					title: '系统提示',
+					btn: [ '确定'],
+					content: '请输入' + '源码备注' ,
 					icon: '2'
 				});
 				return;
 			}
 			if (glueRemark.length <4 || glueRemark.length > 100) {
 				layer.open({
-					title: I18n.system_tips ,
-					btn: [ I18n.system_ok ],
-					content: I18n.jobinfo_glue_remark_limit ,
+					title: '系统提示' ,
+					btn: [ '确定' ],
+					content: '源码备注长度限制为4~100' ,
 					icon: '2'
 				});
 				return;
@@ -250,9 +250,9 @@
 				success : function(data){
 					if (data.code == 200) {
 						layer.open({
-							title: I18n.system_tips,
-							btn: [ I18n.system_ok ],
-							content: (I18n.system_save + I18n.system_success) ,
+							title: '系统提示',
+							btn: [ '确定' ],
+							content: ('保存' + '成功') ,
 							icon: '1',
 							end: function(layero, index){
 								//$(window).unbind('beforeunload');
@@ -261,9 +261,9 @@
 						});
 					} else {
 						layer.open({
-							title: I18n.system_tips,
-							btn: [ I18n.system_ok ],
-							content: (data.msg || (I18n.system_save + I18n.system_fail) ),
+							title: '系统提示',
+							btn: [ '确定' ],
+							content: (data.msg || ('保存' + '失败') ),
 							icon: '2'
 						});
 					}

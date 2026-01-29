@@ -1,39 +1,24 @@
 package com.xxl.job.admin.util;
 
-import com.xxl.job.core.constant.ExecutorBlockStrategyEnum;
-import com.xxl.tool.core.PropTool;
-import com.xxl.tool.freemarker.FtlTool;
-import com.xxl.tool.json.GsonTool;
-import freemarker.template.Configuration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
-import java.text.MessageFormat;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
+
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.xxl.tool.freemarker.FtlTool;
+import com.xxl.tool.json.GsonTool;
+
+import freemarker.template.Configuration;
 
 /**
- * i18n util
+ * i18n util - 简化版，直接返回中文
  *
  * @author xuxueli 2018-01-17 20:39:06
  */
 @Component
 public class I18nUtil implements InitializingBean {
-    private static Logger logger = LoggerFactory.getLogger(I18nUtil.class);
-
-    // ---------------------- for i18n config ----------------------
-
-    /**
-     * i18n config
-     */
-    @Value("${xxl.job.i18n}")
-    private String i18n;
 
     /**
      * freemarker config
@@ -45,43 +30,312 @@ public class I18nUtil implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         // init freemarker shared variable
         configuration.setSharedVariable("I18nUtil", FtlTool.generateStaticModel(I18nUtil.class.getName()));
-        // init single
-        single = this;
-
-        // init i18n-enum
-        initI18nEnum();
     }
 
-    /**
-     * get i18n
-     */
-    public String getI18n() {
-        if (!Arrays.asList("zh_CN", "zh_TC", "en").contains(i18n)) {
-            return "zh_CN";
-        }
-        return i18n;
-    }
+    // ---------------------- 中文字符串映射 ----------------------
 
-    private static I18nUtil single = null;
-    private static I18nUtil getSingle() {
-        return single;
+    private static final Map<String, String> i18nMap = new HashMap<>();
+    static {
+        // admin
+        i18nMap.put("admin_name", "任务调度中心");
+        i18nMap.put("admin_name_full", "分布式任务调度平台｜XXL-JOB");
+        i18nMap.put("admin_version", "3.4.0-SNAPSHOT");
+        i18nMap.put("admin_i18n", "");
+        
+        // system
+        i18nMap.put("system_tips", "系统提示");
+        i18nMap.put("system_ok", "确定");
+        i18nMap.put("system_close", "关闭");
+        i18nMap.put("system_save", "保存");
+        i18nMap.put("system_cancel", "取消");
+        i18nMap.put("system_search", "搜索");
+        i18nMap.put("system_reset", "重置");
+        i18nMap.put("system_status", "状态");
+        i18nMap.put("system_opt", "操作");
+        i18nMap.put("system_opt_add", "新增");
+        i18nMap.put("system_please_input", "请输入");
+        i18nMap.put("system_please_choose", "请选择");
+        i18nMap.put("system_success", "成功");
+        i18nMap.put("system_fail", "失败");
+        i18nMap.put("system_error", "错误");
+        i18nMap.put("system_all", "全部");
+        i18nMap.put("system_show", "查看");
+        i18nMap.put("system_empty", "无");
+        i18nMap.put("system_opt_suc", "操作成功");
+        i18nMap.put("system_opt_fail", "操作失败");
+        i18nMap.put("system_opt_edit", "编辑");
+        i18nMap.put("system_opt_del", "删除");
+        i18nMap.put("system_opt_copy", "复制");
+        i18nMap.put("system_unvalid", "非法");
+        i18nMap.put("system_not_found", "不存在");
+        i18nMap.put("system_nav", "导航");
+        i18nMap.put("system_digits", "整数");
+        i18nMap.put("system_lengh_limit", "长度限制");
+        i18nMap.put("system_permission_limit", "权限拦截");
+        i18nMap.put("system_welcome", "欢迎");
+        i18nMap.put("system_num_range", "数值范围限制");
+        i18nMap.put("system_one", "一条");
+        i18nMap.put("system_data", "数据");
+        i18nMap.put("system_selected_nothing", "未选择");
+
+        // tab
+        i18nMap.put("tab_opt", "页签操作");
+        i18nMap.put("tab_close_current", "关闭当前");
+        i18nMap.put("tab_close_other", "关闭其他");
+        i18nMap.put("tab_close_all", "全部关闭");
+        i18nMap.put("tab_refresh", "刷新");
+        
+        // daterangepicker
+        i18nMap.put("daterangepicker_ranges_today", "今日");
+        i18nMap.put("daterangepicker_ranges_yesterday", "昨日");
+        i18nMap.put("daterangepicker_ranges_this_month", "本月");
+        i18nMap.put("daterangepicker_ranges_last_month", "上个月");
+        i18nMap.put("daterangepicker_ranges_recent_week", "最近一周");
+        i18nMap.put("daterangepicker_ranges_recent_month", "最近一月");
+        i18nMap.put("daterangepicker_custom_name", "自定义");
+        i18nMap.put("daterangepicker_custom_starttime", "起始时间");
+        i18nMap.put("daterangepicker_custom_endtime", "结束时间");
+        i18nMap.put("daterangepicker_custom_daysofweek", "日,一,二,三,四,五,六");
+        i18nMap.put("daterangepicker_custom_monthnames", "一月,二月,三月,四月,五月,六月,七月,八月,九月,十月,十一月,十二月");
+        
+        // login
+        i18nMap.put("login_btn", "登录");
+        i18nMap.put("login_remember_me", "记住密码");
+        i18nMap.put("login_username_placeholder", "请输入登录账号");
+        i18nMap.put("login_password_placeholder", "请输入登录密码");
+        i18nMap.put("login_username_empty", "请输入登录账号");
+        i18nMap.put("login_username_lt_4", "登录账号不应低于4位");
+        i18nMap.put("login_password_empty", "请输入登录密码");
+        i18nMap.put("login_password_lt_4", "登录密码不应低于4位");
+        i18nMap.put("login_success", "登录成功");
+        i18nMap.put("login_fail", "登录失败");
+        i18nMap.put("login_param_empty", "账号或密码为空");
+        i18nMap.put("login_param_unvalid", "账号或密码错误");
+        
+        // logout
+        i18nMap.put("logout_btn", "注销");
+        i18nMap.put("logout_confirm", "确认注销登录?");
+        i18nMap.put("logout_success", "注销成功");
+        i18nMap.put("logout_fail", "注销失败");
+        
+        // change pwd
+        i18nMap.put("change_pwd", "修改密码");
+        i18nMap.put("change_pwd_suc_to_logout", "修改密码成功，即将注销登陆");
+        i18nMap.put("change_pwd_field_oldpwd", "旧密码");
+        i18nMap.put("change_pwd_field_newpwd", "新密码");
+        
+        // change skin
+        i18nMap.put("change_skin", "切换主题");
+        
+        // help
+        i18nMap.put("admin_help", "使用教程");
+        i18nMap.put("admin_help_document", "官方文档");
+        
+        // dashboard
+        i18nMap.put("job_dashboard_name", "运行报表");
+        i18nMap.put("job_dashboard_job_num", "任务数量");
+        i18nMap.put("job_dashboard_job_num_tip", "调度中心运行的任务数量");
+        i18nMap.put("job_dashboard_trigger_num", "调度次数");
+        i18nMap.put("job_dashboard_trigger_num_tip", "调度中心触发的调度次数");
+        i18nMap.put("job_dashboard_jobgroup_num", "执行器数量");
+        i18nMap.put("job_dashboard_jobgroup_num_tip", "调度中心在线的执行器机器数量");
+        i18nMap.put("job_dashboard_report", "调度报表");
+        i18nMap.put("job_dashboard_report_loaddata_fail", "调度报表数据加载异常");
+        i18nMap.put("job_dashboard_date_report", "日期分布图");
+        i18nMap.put("job_dashboard_rate_report", "成功比例图");
+
+        // job info
+        i18nMap.put("jobinfo_name", "任务管理");
+        i18nMap.put("jobinfo_job", "任务");
+        i18nMap.put("jobinfo_field_add", "新增");
+        i18nMap.put("jobinfo_field_update", "更新任务");
+        i18nMap.put("jobinfo_field_id", "任务ID");
+        i18nMap.put("jobinfo_field_jobgroup", "执行器");
+        i18nMap.put("jobinfo_field_jobdesc", "任务描述");
+        i18nMap.put("jobinfo_field_gluetype", "运行模式");
+        i18nMap.put("jobinfo_field_executorparam", "任务参数");
+        i18nMap.put("jobinfo_field_author", "负责人");
+        i18nMap.put("jobinfo_field_timeout", "任务超时时间");
+        i18nMap.put("jobinfo_field_alarmemail", "报警邮件");
+        i18nMap.put("jobinfo_field_alarmemail_placeholder", "请输入报警邮件，多个邮件地址则逗号分隔");
+        i18nMap.put("jobinfo_field_executorRouteStrategy", "路由策略");
+        i18nMap.put("jobinfo_field_childJobId", "子任务ID");
+        i18nMap.put("jobinfo_field_childJobId_placeholder", "请输入子任务的任务ID,如存在多个则逗号分隔");
+        i18nMap.put("jobinfo_field_executorBlockStrategy", "阻塞处理策略");
+        i18nMap.put("jobinfo_field_executorFailRetryCount", "失败重试次数");
+        i18nMap.put("jobinfo_field_executorFailRetryCount_placeholder", "失败重试次数，大于零时生效");
+        i18nMap.put("jobinfo_script_location", "脚本位置");
+        i18nMap.put("jobinfo_shard_index", "分片序号");
+        i18nMap.put("jobinfo_shard_total", "分片总数");
+        i18nMap.put("jobinfo_opt_stop", "停止");
+        i18nMap.put("jobinfo_opt_start", "启动");
+        i18nMap.put("jobinfo_opt_log", "查询日志");
+        i18nMap.put("jobinfo_opt_run", "执行一次");
+        i18nMap.put("jobinfo_opt_run_tips", "请输入本次执行的机器地址，为空则从执行器获取");
+        i18nMap.put("jobinfo_opt_registryinfo", "注册节点");
+        i18nMap.put("jobinfo_opt_next_time", "下次执行时间");
+        i18nMap.put("jobinfo_glue_source", "GLUE源码");
+        i18nMap.put("jobinfo_glue_remark", "源码备注");
+        i18nMap.put("jobinfo_glue_remark_limit", "源码备注长度限制为4~100");
+        i18nMap.put("jobinfo_glue_rollback", "版本回溯");
+        i18nMap.put("jobinfo_glue_jobid_unvalid", "任务ID非法");
+        i18nMap.put("jobinfo_glue_gluetype_unvalid", "该任务非GLUE模式");
+        i18nMap.put("jobinfo_field_executorTimeout_placeholder", "任务超时时间，单位秒，大于零时生效");
+        i18nMap.put("schedule_type", "调度类型");
+        i18nMap.put("schedule_type_none", "无");
+        i18nMap.put("schedule_type_cron", "CRON");
+        i18nMap.put("schedule_type_fix_rate", "固定速度");
+        i18nMap.put("schedule_type_fix_delay", "固定延迟");
+        i18nMap.put("schedule_type_none_limit_start", "当前调度类型禁止启动");
+        i18nMap.put("misfire_strategy", "调度过期策略");
+        i18nMap.put("misfire_strategy_do_nothing", "忽略");
+        i18nMap.put("misfire_strategy_fire_once_now", "立即执行一次");
+        i18nMap.put("jobinfo_conf_base", "基础配置");
+        i18nMap.put("jobinfo_conf_schedule", "调度配置");
+        i18nMap.put("jobinfo_conf_job", "任务配置");
+        i18nMap.put("jobinfo_conf_advanced", "高级配置");
+
+        // job log
+        i18nMap.put("joblog_name", "调度日志");
+        i18nMap.put("joblog_status", "状态");
+        i18nMap.put("joblog_status_all", "全部");
+        i18nMap.put("joblog_status_suc", "成功");
+        i18nMap.put("joblog_status_fail", "失败");
+        i18nMap.put("joblog_status_running", "进行中");
+        i18nMap.put("joblog_field_triggerTime", "调度时间");
+        i18nMap.put("joblog_field_triggerCode", "调度结果");
+        i18nMap.put("joblog_field_triggerMsg", "调度备注");
+        i18nMap.put("joblog_field_handleTime", "执行时间");
+        i18nMap.put("joblog_field_handleCode", "执行结果");
+        i18nMap.put("joblog_field_handleMsg", "执行备注");
+        i18nMap.put("joblog_field_executorAddress", "执行器地址");
+        i18nMap.put("joblog_clean", "清理");
+        i18nMap.put("joblog_clean_log", "日志清理");
+        i18nMap.put("joblog_clean_type", "清理方式");
+        i18nMap.put("joblog_clean_type_1", "清理一个月之前日志数据");
+        i18nMap.put("joblog_clean_type_2", "清理三个月之前日志数据");
+        i18nMap.put("joblog_clean_type_3", "清理六个月之前日志数据");
+        i18nMap.put("joblog_clean_type_4", "清理一年之前日志数据");
+        i18nMap.put("joblog_clean_type_5", "清理一千条以前日志数据");
+        i18nMap.put("joblog_clean_type_6", "清理一万条以前日志数据");
+        i18nMap.put("joblog_clean_type_7", "清理三万条以前日志数据");
+        i18nMap.put("joblog_clean_type_8", "清理十万条以前日志数据");
+        i18nMap.put("joblog_clean_type_9", "清理所有日志数据");
+        i18nMap.put("joblog_clean_type_unvalid", "清理类型参数异常");
+        i18nMap.put("joblog_handleCode_200", "成功");
+        i18nMap.put("joblog_handleCode_500", "失败");
+        i18nMap.put("joblog_handleCode_502", "失败(超时)");
+        i18nMap.put("joblog_kill_log", "终止任务");
+        i18nMap.put("joblog_kill_log_limit", "调度失败，无法终止日志");
+        i18nMap.put("joblog_kill_log_byman", "人为操作，主动终止");
+        i18nMap.put("joblog_lost_fail", "任务结果丢失，标记失败");
+        i18nMap.put("joblog_rolling_log", "执行日志");
+        i18nMap.put("joblog_rolling_log_refresh", "刷新");
+        i18nMap.put("joblog_rolling_log_triggerfail", "任务发起调度失败，无法查看执行日志");
+        i18nMap.put("joblog_rolling_log_failoften", "终止请求Rolling日志,请求失败次数超上限,可刷新页面重新加载日志");
+        i18nMap.put("joblog_logid_unvalid", "日志ID非法");
+        
+        // job group
+        i18nMap.put("jobgroup_name", "执行器管理");
+        i18nMap.put("jobgroup_list", "执行器列表");
+        i18nMap.put("jobgroup_add", "新增执行器");
+        i18nMap.put("jobgroup_edit", "编辑执行器");
+        i18nMap.put("jobgroup_del", "删除执行器");
+        i18nMap.put("jobgroup_field_title", "名称");
+        i18nMap.put("jobgroup_field_addressType", "注册方式");
+        i18nMap.put("jobgroup_field_addressType_0", "自动注册");
+        i18nMap.put("jobgroup_field_addressType_1", "手动录入");
+        i18nMap.put("jobgroup_field_addressType_limit", "手动录入注册方式，机器地址不可为空");
+        i18nMap.put("jobgroup_field_registryList", "机器地址");
+        i18nMap.put("jobgroup_field_registryList_unvalid", "机器地址格式非法");
+        i18nMap.put("jobgroup_field_registryList_placeholder", "请输入执行器地址列表，多地址逗号分隔");
+        i18nMap.put("jobgroup_field_appname_limit", "限制以小写字母开头，由小写字母、数字和中划线组成");
+        i18nMap.put("jobgroup_field_appname_length", "AppName长度限制为4~64");
+        i18nMap.put("jobgroup_field_title_length", "名称长度限制为4~50");
+        i18nMap.put("jobgroup_field_order_digits", "请输入整数");
+        i18nMap.put("jobgroup_field_orderrange", "取值范围为1~1000");
+        i18nMap.put("jobgroup_del_limit_0", "拒绝删除，该执行器使用中");
+        i18nMap.put("jobgroup_del_limit_1", "拒绝删除, 系统至少保留一个执行器");
+        i18nMap.put("jobgroup_empty", "不存在有效执行器,请联系管理员");
+
+        // job conf
+        i18nMap.put("jobconf_block_SERIAL_EXECUTION", "单机串行");
+        i18nMap.put("jobconf_block_DISCARD_LATER", "丢弃后续调度");
+        i18nMap.put("jobconf_block_COVER_EARLY", "覆盖之前调度");
+        i18nMap.put("jobconf_route_first", "第一个");
+        i18nMap.put("jobconf_route_last", "最后一个");
+        i18nMap.put("jobconf_route_round", "轮询");
+        i18nMap.put("jobconf_route_random", "随机");
+        i18nMap.put("jobconf_route_consistenthash", "一致性HASH");
+        i18nMap.put("jobconf_route_lfu", "最不经常使用");
+        i18nMap.put("jobconf_route_lru", "最近最久未使用");
+        i18nMap.put("jobconf_route_failover", "故障转移");
+        i18nMap.put("jobconf_route_busyover", "忙碌转移");
+        i18nMap.put("jobconf_route_shard", "分片广播");
+        i18nMap.put("jobconf_idleBeat", "空闲检测");
+        i18nMap.put("jobconf_beat", "心跳检测");
+        i18nMap.put("jobconf_monitor", "任务调度中心监控报警");
+        i18nMap.put("jobconf_monitor_detail", "监控告警明细");
+        i18nMap.put("jobconf_monitor_alarm_title", "告警类型");
+        i18nMap.put("jobconf_monitor_alarm_type", "调度失败");
+        i18nMap.put("jobconf_monitor_alarm_content", "告警内容");
+        i18nMap.put("jobconf_trigger_admin_adress", "调度机器");
+        i18nMap.put("jobconf_trigger_exe_regtype", "执行器-注册方式");
+        i18nMap.put("jobconf_trigger_exe_regaddress", "执行器-地址列表");
+        i18nMap.put("jobconf_trigger_address_empty", "调度失败：执行器地址为空");
+        i18nMap.put("jobconf_trigger_run", "触发调度");
+        i18nMap.put("jobconf_trigger_child_run", "触发子任务");
+        i18nMap.put("jobconf_callback_child_msg1", "{0}/{1} [任务ID={2}], 触发{3}, 触发备注: {4} <br>");
+        i18nMap.put("jobconf_callback_child_msg2", "{0}/{1} [任务ID={2}], 触发失败, 触发备注: 任务ID格式错误 <br>");
+        i18nMap.put("jobconf_trigger_type", "任务触发类型");
+        i18nMap.put("jobconf_trigger_type_cron", "Cron触发");
+        i18nMap.put("jobconf_trigger_type_manual", "手动触发");
+        i18nMap.put("jobconf_trigger_type_parent", "父任务触发");
+        i18nMap.put("jobconf_trigger_type_api", "API触发");
+        i18nMap.put("jobconf_trigger_type_retry", "失败重试触发");
+        i18nMap.put("jobconf_trigger_type_misfire", "调度过期补偿");
+        
+        // user
+        i18nMap.put("user_manage", "用户管理");
+        i18nMap.put("user_username", "账号");
+        i18nMap.put("user_password", "密码");
+        i18nMap.put("user_role", "角色");
+        i18nMap.put("user_role_admin", "管理员");
+        i18nMap.put("user_role_normal", "普通用户");
+        i18nMap.put("user_permission", "权限");
+        i18nMap.put("user_add", "新增用户");
+        i18nMap.put("user_update", "更新用户");
+        i18nMap.put("user_username_repeat", "账号重复");
+        i18nMap.put("user_username_valid", "限制以小写字母开头，由小写字母、数字组成");
+        i18nMap.put("user_password_update_placeholder", "请输入新密码，为空则不更新密码");
+        i18nMap.put("user_update_loginuser_limit", "禁止操作当前登录账号");
+        
+        // python
+        i18nMap.put("python_manage", "Python维护");
+        i18nMap.put("python_name", "名称");
+        i18nMap.put("python_version", "版本");
+        i18nMap.put("python_exec_path", "可执行路径");
+        i18nMap.put("python_remark", "备注");
+        i18nMap.put("python_add", "新增Python");
+        i18nMap.put("python_update", "更新Python");
+        i18nMap.put("python_scan", "扫描本机Python");
+        
+        // task group
+        i18nMap.put("taskgroup_name", "任务组管理");
+        i18nMap.put("taskgroup_add", "新增任务组");
+        i18nMap.put("taskgroup_update", "编辑任务组");
+        i18nMap.put("taskgroup_del", "删除任务组");
+        i18nMap.put("taskgroup_field_groupname", "任务组名称");
+        i18nMap.put("taskgroup_field_groupdesc", "任务组描述");
+        i18nMap.put("taskgroup_field_grouporder", "排序");
+        i18nMap.put("taskgroup_field_jobgroup", "所属执行器");
+        i18nMap.put("taskgroup_execute", "执行任务组");
+        i18nMap.put("taskgroup_execute_confirm", "确认执行该任务组下的所有任务？");
+        i18nMap.put("taskgroup_del_confirm", "确认删除该任务组？");
+        i18nMap.put("taskgroup_del_limit", "拒绝删除，该任务组下存在任务");
     }
 
     // ---------------------- tool ----------------------
-
-    private static Properties prop = null;
-    public static Properties loadI18nProp(){
-        if (prop != null) {
-            return prop;
-        }
-        // build i18n filepath
-        String i18n = getSingle().getI18n();
-        String i18nFile = MessageFormat.format("i18n/message_{0}.properties", i18n);
-
-        // load prop
-        prop = PropTool.loadProp(i18nFile);
-        return prop;
-    }
 
     /**
      * get val of i18n key
@@ -90,7 +344,7 @@ public class I18nUtil implements InitializingBean {
      * @return
      */
     public static String getString(String key) {
-        return loadI18nProp().getProperty(key);
+        return i18nMap.getOrDefault(key, key);
     }
 
     /**
@@ -102,30 +356,15 @@ public class I18nUtil implements InitializingBean {
     public static String getMultString(String... keys) {
         Map<String, String> map = new HashMap<>();
 
-        Properties prop = loadI18nProp();
-        if (keys!=null && keys.length>0) {
-            for (String key: keys) {
-                map.put(key, prop.getProperty(key));
+        if (keys != null && keys.length > 0) {
+            for (String key : keys) {
+                map.put(key, i18nMap.getOrDefault(key, key));
             }
         } else {
-            for (String key: prop.stringPropertyNames()) {
-                map.put(key, prop.getProperty(key));
-            }
+            map.putAll(i18nMap);
         }
 
         return GsonTool.toJson(map);
-    }
-
-
-    // ---------------------- init I18n-enum ----------------------
-
-    /**
-     * init i18n-enum
-     */
-    private void initI18nEnum(){
-        for (ExecutorBlockStrategyEnum item : ExecutorBlockStrategyEnum.values()) {
-            item.setTitle(I18nUtil.getString("jobconf_block_".concat(item.name())));
-        }
     }
 
 }

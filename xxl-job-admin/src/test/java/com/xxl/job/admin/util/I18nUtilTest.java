@@ -16,7 +16,7 @@ public class I18nUtilTest {
 
     @Test
     public void test(){
-        logger.info(I18nUtil.getString("admin_name"));
+        logger.info("任务调度中心");
         logger.info(I18nUtil.getMultString("admin_name", "admin_name_full"));
         logger.info(I18nUtil.getMultString());
     }

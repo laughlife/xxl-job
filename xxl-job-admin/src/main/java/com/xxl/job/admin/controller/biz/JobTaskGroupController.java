@@ -14,7 +14,6 @@ import com.xxl.job.admin.model.XxlJobGroup;
 import com.xxl.job.admin.model.XxlJobTaskGroup;
 import com.xxl.job.admin.scheduler.exception.XxlJobException;
 import com.xxl.job.admin.service.XxlJobTaskGroupService;
-import com.xxl.job.admin.util.I18nUtil;
 import com.xxl.job.admin.util.JobGroupPermissionUtil;
 import com.xxl.tool.core.CollectionTool;
 import com.xxl.tool.response.PageModel;
@@ -48,7 +47,7 @@ public class JobTaskGroupController {
         // filter group
         List<XxlJobGroup> jobGroupList = JobGroupPermissionUtil.filterJobGroupByPermission(request, jobGroupListTotal);
         if (CollectionTool.isEmpty(jobGroupList)) {
-            throw new XxlJobException(I18nUtil.getString("jobgroup_empty"));
+            throw new XxlJobException("不存在有效执行器,请联系管理员");
         }
 
         model.addAttribute("JobGroupList", jobGroupList);

@@ -18,7 +18,6 @@ import com.xxl.job.admin.mapper.XxlJobInfoMapper;
 import com.xxl.job.admin.mapper.XxlJobRegistryMapper;
 import com.xxl.job.admin.model.XxlJobGroup;
 import com.xxl.job.admin.model.XxlJobRegistry;
-import com.xxl.job.admin.util.I18nUtil;
 import com.xxl.job.core.constant.Const;
 import com.xxl.job.core.constant.RegistType;
 import com.xxl.sso.core.annotation.XxlSso;
@@ -78,38 +77,38 @@ public class JobGroupController {
 
 		// valid
 		if (StringTool.isBlank(xxlJobGroup.getAppname())) {
-			return Response.ofFail((I18nUtil.getString("system_please_input")+"AppName") );
+			return Response.ofFail(("请输入"+"AppName") );
 		}
 		if (xxlJobGroup.getAppname().length()<4 || xxlJobGroup.getAppname().length()>64) {
-			return Response.ofFail( I18nUtil.getString("jobgroup_field_appname_length") );
+			return Response.ofFail( "AppName长度限制为4~64" );
 		}
 		if (xxlJobGroup.getAppname().contains(">") || xxlJobGroup.getAppname().contains("<")) {
-			return Response.ofFail( "AppName"+I18nUtil.getString("system_unvalid") );
+			return Response.ofFail( "AppName"+"非法" );
 		}
 		if (StringTool.isBlank(xxlJobGroup.getTitle())) {
-			return Response.ofFail((I18nUtil.getString("system_please_input") + I18nUtil.getString("jobgroup_field_title")) );
+			return Response.ofFail(("请输入" + "名称") );
 		}
 		if (xxlJobGroup.getTitle().length()<4 || xxlJobGroup.getTitle().length()>50) {
-			return Response.ofFail( I18nUtil.getString("jobgroup_field_title_length") );
+			return Response.ofFail( "名称长度限制为4~50" );
 		}
 		if (xxlJobGroup.getTitle().contains(">") || xxlJobGroup.getTitle().contains("<")) {
-			return Response.ofFail(I18nUtil.getString("jobgroup_field_title")+I18nUtil.getString("system_unvalid") );
+			return Response.ofFail("名称"+"非法" );
 		}
 		if (xxlJobGroup.getAddressType()!=0) {
 			if (StringTool.isBlank(xxlJobGroup.getAddressList())) {
-				return Response.ofFail( I18nUtil.getString("jobgroup_field_addressType_limit") );
+				return Response.ofFail( "手动录入注册方式，机器地址不可为空" );
 			}
 			if (xxlJobGroup.getAddressList().contains(">") || xxlJobGroup.getAddressList().contains("<")) {
-				return Response.ofFail(I18nUtil.getString("jobgroup_field_registryList")+I18nUtil.getString("system_unvalid") );
+				return Response.ofFail("机器地址"+"非法" );
 			}
 
 			String[] addresss = xxlJobGroup.getAddressList().split(",");
 			for (String item: addresss) {
 				if (StringTool.isBlank(item)) {
-					return Response.ofFail( I18nUtil.getString("jobgroup_field_registryList_unvalid") );
+					return Response.ofFail( "机器地址格式非法" );
 				}
                 if (!(HttpTool.isHttp(item) || HttpTool.isHttps(item))) {
-                    return Response.ofFail( I18nUtil.getString("jobgroup_field_registryList_unvalid")+"[2]" );
+                    return Response.ofFail( "机器地址格式非法"+"[2]" );
                 }
 			}
 		}
@@ -127,16 +126,16 @@ public class JobGroupController {
 	public Response<String> update(XxlJobGroup xxlJobGroup){
 		// valid
 		if (StringTool.isBlank(xxlJobGroup.getAppname())) {
-			return Response.ofFail((I18nUtil.getString("system_please_input")+"AppName") );
+			return Response.ofFail(("请输入"+"AppName") );
 		}
 		if (xxlJobGroup.getAppname().length()<4 || xxlJobGroup.getAppname().length()>64) {
-			return Response.ofFail( I18nUtil.getString("jobgroup_field_appname_length") );
+			return Response.ofFail( "AppName长度限制为4~64" );
 		}
 		if (StringTool.isBlank(xxlJobGroup.getTitle())) {
-			return Response.ofFail( (I18nUtil.getString("system_please_input") + I18nUtil.getString("jobgroup_field_title")) );
+			return Response.ofFail( ("请输入" + "名称") );
 		}
 		if (xxlJobGroup.getTitle().length()<4 || xxlJobGroup.getTitle().length()>50) {
-			return Response.ofFail( I18nUtil.getString("jobgroup_field_title_length") );
+			return Response.ofFail( "名称长度限制为4~50" );
 		}
 		if (xxlJobGroup.getAddressType() == 0) {
 			// 0=自动注册
@@ -150,15 +149,15 @@ public class JobGroupController {
 		} else {
 			// 1=手动录入
 			if (StringTool.isBlank(xxlJobGroup.getAddressList())) {
-				return Response.ofFail( I18nUtil.getString("jobgroup_field_addressType_limit") );
+				return Response.ofFail( "手动录入注册方式，机器地址不可为空" );
 			}
 			String[] addresss = xxlJobGroup.getAddressList().split(",");
 			for (String item: addresss) {
 				if (StringTool.isBlank(item)) {
-					return Response.ofFail(I18nUtil.getString("jobgroup_field_registryList_unvalid") );
+					return Response.ofFail("机器地址格式非法" );
 				}
                 if (!(HttpTool.isHttp(item) || HttpTool.isHttps(item))) {
-                    return Response.ofFail( I18nUtil.getString("jobgroup_field_registryList_unvalid")+"[2]" );
+                    return Response.ofFail( "机器地址格式非法"+"[2]" );
                 }
 			}
 		}
@@ -197,7 +196,7 @@ public class JobGroupController {
 
 		// parse id
 		if (CollectionTool.isEmpty(ids) || ids.size()!=1) {
-			return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("system_one") + I18nUtil.getString("system_data"));
+			return Response.ofFail("请选择" + "一条" + "数据");
 		}
 		int id = ids.get(0);
 
@@ -210,13 +209,13 @@ public class JobGroupController {
 		// whether exists job
 		int count = xxlJobInfoMapper.pageListCount(0, 10, id, -1,  null, null, null, null);
 		if (count > 0) {
-			return Response.ofFail( I18nUtil.getString("jobgroup_del_limit_0") );
+			return Response.ofFail( "拒绝删除，该执行器使用中" );
 		}
 
         // whether only exists one group
 		List<XxlJobGroup> allList = xxlJobGroupMapper.findAll();
 		if (allList.size() == 1) {
-			return Response.ofFail( I18nUtil.getString("jobgroup_del_limit_1") );
+			return Response.ofFail( "拒绝删除, 系统至少保留一个执行器" );
 		}
 
         // remove group

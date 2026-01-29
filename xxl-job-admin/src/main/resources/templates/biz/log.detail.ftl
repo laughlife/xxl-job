@@ -18,7 +18,7 @@
 			<div class="container">
 				<#-- icon -->
 				<div class="navbar-header">
-					<a class="navbar-brand" href="javascript:void(0);" ><b>${I18n.joblog_rolling_log}</b> Console</a>
+					<a class="navbar-brand" href="javascript:void(0);" ><b>执行日志</b> Console</a>
 					<button type="button" class="navbar-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#navbar-collapse">
 						<i class="fa fa-bars"></i>
 					</button>
@@ -28,7 +28,7 @@
 				<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li class="active" >
-							<a href="javascript:;">${I18n.jobinfo_job}：${jobInfo.jobDesc}</a>
+							<a href="javascript:;">任务：${jobInfo.jobDesc}</a>
 						</li>
 					</ul>
 				</div>
@@ -39,13 +39,13 @@
 						<li>
 							<a href="javascript:window.location.reload();" >
 								<i class="fa fa-fw fa-refresh" ></i>
-								${I18n.joblog_rolling_log_refresh}
+								刷新
 							</a>
 						</li>
 						<li>
 							<a href="javascript:window.close();" >
 								<i class="fa fa-fw fa-close" ></i>
-								${I18n.system_close}
+								关闭
 							</a>
 						</li>
 					</ul>
@@ -70,7 +70,7 @@
 
 	<!-- 4-footer start -->
 	<footer class="main-footer">
-		Powered by <b>XXL-JOB</b> ${I18n.admin_version}
+		Powered by <b>XXL-JOB</b> 3.4.0-SNAPSHOT
 		<div class="pull-right hidden-xs">
 			<strong>Copyright &copy; 2015-${.now?string('yyyy')} &nbsp;
 				<a href="https://www.xuxueli.com/" target="_blank" >xuxueli</a>
@@ -85,7 +85,7 @@
 
 <!-- 5-script start -->
 <@netCommon.commonScript />
-<script src="${request.contextPath}/static/biz/common/admin.setting.js?v=${I18n.admin_version}"></script>
+<script src="${request.contextPath}/static/biz/common/admin.setting.js?v=3.4.0-SNAPSHOT"></script>
 <script>
 	$(function() {
 
@@ -97,7 +97,7 @@
 		// trigger fail and not handle
         if (triggerCode != 200 && handleCode == 0) {
 			$('#logConsoleRunning').hide();
-			$('#logConsole').append('<span style="color: red;">['+ I18n.joblog_rolling_log_triggerfail +']</span>');
+			$('#logConsole').append('<span style="color: red;">['+ '任务发起调度失败，无法查看执行日志' +']</span>');
 			return;
 		}
 
@@ -109,7 +109,7 @@
 		function pullLog() {
             // limit max pull-fail count, max=20
 			if (pullFailCount++ > 20) {
-				logRunStop('<span style="color: red;">['+ I18n.joblog_rolling_log_failoften +']</span>');
+				logRunStop('<span style="color: red;">['+ '终止请求Rolling日志,请求失败次数超上限,可刷新页面重新加载日志' +']</span>');
 				return;
 			}
 

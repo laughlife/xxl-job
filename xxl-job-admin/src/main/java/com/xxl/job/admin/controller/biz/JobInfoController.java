@@ -1,5 +1,17 @@
 package com.xxl.job.admin.controller.biz;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.xxl.job.admin.mapper.XxlJobGroupMapper;
 import com.xxl.job.admin.mapper.XxlJobPythonMapper;
 import com.xxl.job.admin.model.XxlJobGroup;
@@ -10,7 +22,6 @@ import com.xxl.job.admin.scheduler.misfire.MisfireStrategyEnum;
 import com.xxl.job.admin.scheduler.route.ExecutorRouteStrategyEnum;
 import com.xxl.job.admin.scheduler.type.ScheduleTypeEnum;
 import com.xxl.job.admin.service.XxlJobService;
-import com.xxl.job.admin.util.I18nUtil;
 import com.xxl.job.admin.util.JobGroupPermissionUtil;
 import com.xxl.job.core.constant.ExecutorBlockStrategyEnum;
 import com.xxl.job.core.glue.GlueTypeEnum;
@@ -21,19 +32,9 @@ import com.xxl.tool.core.DateTool;
 import com.xxl.tool.core.StringTool;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
+
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * index controller
@@ -67,7 +68,7 @@ public class JobInfoController {
 		// filter group
 		List<XxlJobGroup> jobGroupList = JobGroupPermissionUtil.filterJobGroupByPermission(request, jobGroupListTotal);
 		if (CollectionTool.isEmpty(jobGroupList)) {
-			throw new XxlJobException(I18nUtil.getString("jobgroup_empty"));
+			throw new XxlJobException("不存在有效执行器,请联系管理员");
 		}
 
 		// parse jobGroup
@@ -130,7 +131,7 @@ public class JobInfoController {
 
 		// valid
 		if (CollectionTool.isEmpty(ids) || ids.size()!=1) {
-			return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("system_one") + I18nUtil.getString("system_data"));
+			return Response.ofFail("请选择" + "一条" + "数据");
 		}
 
 		// invoke
@@ -144,7 +145,7 @@ public class JobInfoController {
 
 		// valid
 		if (CollectionTool.isEmpty(ids) || ids.size()!=1) {
-			return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("system_one") + I18nUtil.getString("system_data"));
+			return Response.ofFail("请选择" + "一条" + "数据");
 		}
 
 		// invoke
@@ -158,7 +159,7 @@ public class JobInfoController {
 
 		// valid
 		if (CollectionTool.isEmpty(ids) || ids.size()!=1) {
-			return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("system_one") + I18nUtil.getString("system_data"));
+			return Response.ofFail("请选择" + "一条" + "数据");
 		}
 
 		// invoke
@@ -210,7 +211,7 @@ public class JobInfoController {
 			}
 		} catch (Exception e) {
 			logger.error(">>>>>>>>>>> nextTriggerTime error. scheduleType = {}, scheduleConf= {}, error:{} ", scheduleType, scheduleConf, e.getMessage());
-			return Response.ofFail((I18nUtil.getString("schedule_type")+I18nUtil.getString("system_unvalid")) + e.getMessage());
+			return Response.ofFail(("调度类型"+"非法") + e.getMessage());
 		}
 		return Response.ofSuccess(result);
 
