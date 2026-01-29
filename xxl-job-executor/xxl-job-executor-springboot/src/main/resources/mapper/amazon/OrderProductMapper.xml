@@ -7,6 +7,7 @@
         <id column="id" property="id" />
         <result column="amazon_order_id" property="amazonOrderId" />
         <result column="source_item_id" property="sourceItemId" />
+        <result column="order_item_id" property="orderItemId" />
         <result column="puid" property="puid" />
         <result column="shop_id" property="shopId" />
         <result column="commodity_id" property="commodityId" />
@@ -33,7 +34,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, amazon_order_id, source_item_id, puid, shop_id, commodity_id, commodity_sku, commodity_name, asin, parent_asin, seller_sku, listing_id, title, image_url, asin_url, quantity_ordered, quantity_shipped, item_price_currency, item_price_amount, item_tax_amount, create_time, update_time, deleted, updater, creator
+        id, amazon_order_id, source_item_id, order_item_id, puid, shop_id, commodity_id, commodity_sku, commodity_name, asin, parent_asin, seller_sku, listing_id, title, image_url, asin_url, quantity_ordered, quantity_shipped, item_price_currency, item_price_amount, item_tax_amount, create_time, update_time, deleted, updater, creator
     </sql>
 
 </mapper>

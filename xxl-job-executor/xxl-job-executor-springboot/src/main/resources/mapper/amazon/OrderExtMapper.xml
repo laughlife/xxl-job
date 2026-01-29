@@ -29,6 +29,16 @@
         <result column="invoice_status_description" property="invoiceStatusDescription" />
         <result column="payment_method_details" property="paymentMethodDetails" />
         <result column="raw_json" property="rawJson" />
+        <result column="is_history" property="isHistory" />
+        <result column="is_calculating" property="isCalculating" />
+        <result column="low_cost_store" property="lowCostStore" />
+        <result column="tax_number" property="taxNumber" />
+        <result column="capital_currency" property="capitalCurrency" />
+        <result column="commission_currency" property="commissionCurrency" />
+        <result column="capital_date" property="capitalDate" />
+        <result column="commission_date" property="commissionDate" />
+        <result column="fbm_cost_origin" property="fbmCostOrigin" />
+        <result column="fbm_cost" property="fbmCost" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
         <result column="deleted" property="deleted" />
@@ -38,7 +48,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, amazon_order_id, last_update_date, captured_at, comment, comment_color, earliest_ship_date, latest_ship_date, earliest_delivery_date, latest_delivery_date, refund_status, refund_date, is_buyer_requested_cancel, is_replacement_order, replaced_order_id, is_vine_order, custom_order, promotion_flag, promotion_ids, order_flag, order_review_status, upload_feed_status, invoice_status_description, payment_method_details, raw_json, create_time, update_time, deleted, updater, creator
+        id, amazon_order_id, last_update_date, captured_at, comment, comment_color, earliest_ship_date, latest_ship_date, earliest_delivery_date, latest_delivery_date, refund_status, refund_date, is_buyer_requested_cancel, is_replacement_order, replaced_order_id, is_vine_order, custom_order, promotion_flag, promotion_ids, order_flag, order_review_status, upload_feed_status, invoice_status_description, payment_method_details, raw_json, is_history, is_calculating, low_cost_store, tax_number, capital_currency, commission_currency, capital_date, commission_date, fbm_cost_origin, fbm_cost, create_time, update_time, deleted, updater, creator
     </sql>
 
 </mapper>

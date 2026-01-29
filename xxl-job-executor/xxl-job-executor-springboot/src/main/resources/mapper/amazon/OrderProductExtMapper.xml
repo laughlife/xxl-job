@@ -19,6 +19,18 @@
         <result column="other_amount" property="otherAmount" />
         <result column="fba_per_unit_fulfillment_fee" property="fbaPerUnitFulfillmentFee" />
         <result column="commission" property="commission" />
+        <result column="promotion_discount" property="promotionDiscount" />
+        <result column="amazon_back_to_article" property="amazonBackToArticle" />
+        <result column="merge_purchase_cost" property="mergePurchaseCost" />
+        <result column="purchase_cost" property="purchaseCost" />
+        <result column="head_trip_cost" property="headTripCost" />
+        <result column="head_trip_share" property="headTripShare" />
+        <result column="fbm_ship_cost" property="fbmShipCost" />
+        <result column="capital_currency" property="capitalCurrency" />
+        <result column="capital_date" property="capitalDate" />
+        <result column="commission_currency" property="commissionCurrency" />
+        <result column="commission_date" property="commissionDate" />
+        <result column="evaluation" property="evaluation" />
         <result column="carrier" property="carrier" />
         <result column="track_no" property="trackNo" />
         <result column="shipment_date" property="shipmentDate" />
@@ -33,7 +45,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, amazon_order_id, fnsku, ioss_number, promotion_ids, withheld_tax_amount, shipping_charge_amount, shipping_tax_amount, gift_wrap_amount, gift_wrap_tax_amount, promotion_discount_currency, promotion_discount_amount, other_amount, fba_per_unit_fulfillment_fee, commission, carrier, track_no, shipment_date, estimated_arrival_date, raw_json, create_time, update_time, deleted, updater, creator
+        id, amazon_order_id, fnsku, ioss_number, promotion_ids, withheld_tax_amount, shipping_charge_amount, shipping_tax_amount, gift_wrap_amount, gift_wrap_tax_amount, promotion_discount_currency, promotion_discount_amount, other_amount, fba_per_unit_fulfillment_fee, commission, promotion_discount, amazon_back_to_article, merge_purchase_cost, purchase_cost, head_trip_cost, head_trip_share, fbm_ship_cost, capital_currency, capital_date, commission_currency, commission_date, evaluation, carrier, track_no, shipment_date, estimated_arrival_date, raw_json, create_time, update_time, deleted, updater, creator
     </sql>
 
 </mapper>

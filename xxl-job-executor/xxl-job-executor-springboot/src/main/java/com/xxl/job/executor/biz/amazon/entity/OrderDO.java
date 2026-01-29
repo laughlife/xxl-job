@@ -1,16 +1,18 @@
 package com.xxl.job.executor.biz.amazon.entity;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -31,14 +33,26 @@ public class OrderDO implements Serializable {
     /**
      * ID
      */
-    @TableId("id")
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
+    /**
+     * Sellfox系统订单ID
+     */
+    @TableField("source_id")
+    private Long sourceId;
 
     /**
      * Amazon订单号
      */
     @TableField("amazon_order_id")
     private String amazonOrderId;
+
+    /**
+     * 买家ID，关联amazon_buyer表
+     */
+    @TableField("buyer_id")
+    private Long buyerId;
 
     /**
      * 业务PUID

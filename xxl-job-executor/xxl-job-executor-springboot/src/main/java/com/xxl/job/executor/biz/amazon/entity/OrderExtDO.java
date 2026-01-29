@@ -1,15 +1,17 @@
 package com.xxl.job.executor.biz.amazon.entity;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -30,7 +32,7 @@ public class OrderExtDO implements Serializable {
     /**
      * 订单ID
      */
-    @TableId("id")
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
@@ -176,6 +178,66 @@ public class OrderExtDO implements Serializable {
      */
     @TableField("raw_json")
     private String rawJson;
+
+    /**
+     * 是否历史订单
+     */
+    @TableField("is_history")
+    private Boolean isHistory;
+
+    /**
+     * 是否正在计算中
+     */
+    @TableField("is_calculating")
+    private Boolean isCalculating;
+
+    /**
+     * 低成本店铺标记
+     */
+    @TableField("low_cost_store")
+    private Boolean lowCostStore;
+
+    /**
+     * 税号
+     */
+    @TableField("tax_number")
+    private String taxNumber;
+
+    /**
+     * 资金币种
+     */
+    @TableField("capital_currency")
+    private String capitalCurrency;
+
+    /**
+     * 佣金币种
+     */
+    @TableField("commission_currency")
+    private String commissionCurrency;
+
+    /**
+     * 资金日期
+     */
+    @TableField("capital_date")
+    private LocalDateTime capitalDate;
+
+    /**
+     * 佣金日期
+     */
+    @TableField("commission_date")
+    private LocalDateTime commissionDate;
+
+    /**
+     * FBM原始成本
+     */
+    @TableField("fbm_cost_origin")
+    private java.math.BigDecimal fbmCostOrigin;
+
+    /**
+     * FBM成本
+     */
+    @TableField("fbm_cost")
+    private java.math.BigDecimal fbmCost;
 
     /**
      * 创建时间

@@ -1,16 +1,18 @@
 package com.xxl.job.executor.biz.amazon.entity;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -31,7 +33,7 @@ public class OrderProductExtDO implements Serializable {
     /**
      * ID
      */
-    @TableId("id")
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
@@ -39,6 +41,12 @@ public class OrderProductExtDO implements Serializable {
      */
     @TableField("amazon_order_id")
     private String amazonOrderId;
+
+    /**
+     * Sellfox系统商品明细ID
+     */
+    @TableField("source_item_id")
+    private Long sourceItemId;
 
     /**
      * FNSKU
@@ -117,6 +125,78 @@ public class OrderProductExtDO implements Serializable {
      */
     @TableField("commission")
     private BigDecimal commission;
+
+    /**
+     * 促销折扣
+     */
+    @TableField("promotion_discount")
+    private BigDecimal promotionDiscount;
+
+    /**
+     * 亚马逊退款
+     */
+    @TableField("amazon_back_to_article")
+    private BigDecimal amazonBackToArticle;
+
+    /**
+     * 合并采购成本
+     */
+    @TableField("merge_purchase_cost")
+    private BigDecimal mergePurchaseCost;
+
+    /**
+     * 采购成本
+     */
+    @TableField("purchase_cost")
+    private BigDecimal purchaseCost;
+
+    /**
+     * 头程费用
+     */
+    @TableField("head_trip_cost")
+    private BigDecimal headTripCost;
+
+    /**
+     * 头程分摊
+     */
+    @TableField("head_trip_share")
+    private Boolean headTripShare;
+
+    /**
+     * FBM运费
+     */
+    @TableField("fbm_ship_cost")
+    private BigDecimal fbmShipCost;
+
+    /**
+     * 资金币种
+     */
+    @TableField("capital_currency")
+    private String capitalCurrency;
+
+    /**
+     * 资金日期
+     */
+    @TableField("capital_date")
+    private LocalDateTime capitalDate;
+
+    /**
+     * 佣金币种
+     */
+    @TableField("commission_currency")
+    private String commissionCurrency;
+
+    /**
+     * 佣金日期
+     */
+    @TableField("commission_date")
+    private LocalDateTime commissionDate;
+
+    /**
+     * 评价数
+     */
+    @TableField("evaluation")
+    private Integer evaluation;
 
     /**
      * 承运商

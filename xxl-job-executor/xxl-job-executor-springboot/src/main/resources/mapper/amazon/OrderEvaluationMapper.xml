@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.executor.biz.amazon.mapper.OrderEvaluationMapper">
+
+    <resultMap id="BaseResultMap" type="com.xxl.job.executor.biz.amazon.entity.OrderEvaluationDO">
+        <id column="id" property="id" />
+        <result column="amazon_order_id" property="amazonOrderId" />
+        <result column="evaluation" property="evaluation" />
+        <result column="evaluation_cost" property="evaluationCost" />
+        <result column="evaluation_currency" property="evaluationCurrency" />
+        <result column="evaluation_capital" property="evaluationCapital" />
+        <result column="evaluation_commission" property="evaluationCommission" />
+        <result column="evaluation_ids" property="evaluationIds" />
+        <result column="evaluation_pay_status" property="evaluationPayStatus" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, amazon_order_id, evaluation, evaluation_cost, evaluation_currency, 
+        evaluation_capital, evaluation_commission, evaluation_ids, evaluation_pay_status, 
+        create_time, update_time
+    </sql>
+
+</mapper>

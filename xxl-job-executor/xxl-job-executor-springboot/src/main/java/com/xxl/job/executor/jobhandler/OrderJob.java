@@ -29,6 +29,10 @@ public class OrderJob {
         
         LocalDate endDate = LocalDate.now();
         LocalDate startDate = endDate.minusDays(1);
+        // starDate 设置为2025-01-01
+        
+        startDate = LocalDate.of(2025, 1, 1);
+        endDate = LocalDate.of(2025,2,1);
 
         boolean syncStatus = orderService.getAmazonOrderByTime(startDate,endDate);
         if(syncStatus){

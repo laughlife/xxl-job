@@ -5,7 +5,9 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xxl.job.executor.biz.amazon.entity.OrderDO">
         <id column="id" property="id" />
+        <result column="source_id" property="sourceId" />
         <result column="amazon_order_id" property="amazonOrderId" />
+        <result column="buyer_id" property="buyerId" />
         <result column="puid" property="puid" />
         <result column="shop_id" property="shopId" />
         <result column="shop_name" property="shopName" />
@@ -34,7 +36,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, amazon_order_id, puid, shop_id, shop_name, marketplace_id, marketplace_cn, purchase_date, last_update_date, payments_date, order_status, order_type, fulfillment_channel, order_total_currency, order_total_amount, order_profit, profit, profit_rate, is_return_order, is_business_order, is_prime, create_time, update_time, deleted, updater, creator
+        id, source_id, amazon_order_id, buyer_id, puid, shop_id, shop_name, marketplace_id, marketplace_cn, purchase_date, last_update_date, payments_date, order_status, order_type, fulfillment_channel, order_total_currency, order_total_amount, order_profit, profit, profit_rate, is_return_order, is_business_order, is_prime, create_time, update_time, deleted, updater, creator
     </sql>
 
 </mapper>

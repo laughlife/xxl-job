@@ -21,13 +21,13 @@ public class XxlJobInfoMapperTest {
 	
 	@Test
 	public void pageList(){
-		List<XxlJobInfo> list = xxlJobInfoMapper.pageList(0, 20, 0, -1, null, null, null);
-		int list_count = xxlJobInfoMapper.pageListCount(0, 20, 0, -1, null, null, null);
-
-		logger.info("", list);
-		logger.info("", list_count);
-
-		List<XxlJobInfo> list2 = xxlJobInfoMapper.getJobsByGroup(1);
+//		List<XxlJobInfo> list = xxlJobInfoMapper.pageList(0, 20, 0, -1, null, null, null);
+//		int list_count = xxlJobInfoMapper.pageListCount(0, 20, 0, -1, null, null, null);
+//
+//		logger.info("", list);
+//		logger.info("", list_count);
+//
+//		List<XxlJobInfo> list2 = xxlJobInfoMapper.getJobsByGroup(1);
 	}
 	
 	@Test

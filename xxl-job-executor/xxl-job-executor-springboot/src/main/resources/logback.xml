@@ -3,6 +3,7 @@
 
     <contextName>logback</contextName>
     <property name="log.path" value="${LOG_HOME:-/data/applogs}/xxl-job/xxl-job-executor-sample-springboot.log" />
+    
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
@@ -21,8 +22,28 @@
         </encoder>
     </appender>
 
-    <logger name="com.xxl.job" level="info"/>
+    <!-- 项目业务日志级别 -->
+    <logger name="com.xxl.job.executor" level="info"/>
+    
+    <!-- MyBatis-Plus 日志级别 - 只显示错误 -->
+    <logger name="com.baomidou.mybatisplus" level="error"/>
+    
+    <!-- MyBatis 日志级别 - 只显示错误 -->
+    <logger name="org.apache.ibatis" level="error"/>
+    
+    <!-- Spring 框架日志级别 - 只显示警告和错误 -->
+    <logger name="org.springframework" level="warn"/>
+    
+    <!-- Hibernate Validator 日志级别 - 只显示错误 -->
+    <logger name="org.hibernate.validator" level="error"/>
+    
+    <!-- HikariCP 连接池日志级别 - 只显示警告 -->
+    <logger name="com.zaxxer.hikari" level="warn"/>
+    
+    <!-- OkHttp 日志级别 - 只显示警告 -->
+    <logger name="okhttp3" level="warn"/>
 
+    <!-- 根日志级别 -->
     <root level="info">
         <appender-ref ref="console"/>
         <!--<appender-ref ref="file"/>-->
