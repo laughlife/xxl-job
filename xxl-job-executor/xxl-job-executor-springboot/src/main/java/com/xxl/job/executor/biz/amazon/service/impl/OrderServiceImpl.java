@@ -196,11 +196,21 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderDO> implemen
         List<OrderExtDO> extsToUpdate = new ArrayList<>();
         List<OrderEvaluationDO> evalsToInsert = new ArrayList<>();
         List<OrderEvaluationDO> evalsToUpdate = new ArrayList<>();
+        
+        // 用于去重：记录本批次已处理的订单号
+        java.util.Set<String> processedOrderIds = new java.util.HashSet<>();
 
         // 6. 遍历处理每条订单
         for (int i = 0; i < list.size(); i++) {
             JSONObject item = list.getJSONObject(i);
             String amazonOrderId = item.getString("amazonOrderId");
+            
+            // 跳过本批次已处理的订单（去重）
+            if (processedOrderIds.contains(amazonOrderId)) {
+                continue;
+            }
+            processedOrderIds.add(amazonOrderId);
+            
             LocalDateTime lastUpdateDate = parseDateTime(item.getString("lastUpdateDate"));
 
             // 检查订单是否需要更新
@@ -280,24 +290,26 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderDO> implemen
             }
         }
 
-        // 9. 批量插入和更新
-        if (!ordersToInsert.isEmpty()) {
-            saveBatch(ordersToInsert);
+        // 9. 批量插入和更新（使用saveOrUpdateBatch处理可能的重复）
+        List<OrderDO> allOrders = new ArrayList<>();
+        allOrders.addAll(ordersToInsert);
+        allOrders.addAll(ordersToUpdate);
+        if (!allOrders.isEmpty()) {
+            saveOrUpdateBatch(allOrders);
         }
-        if (!ordersToUpdate.isEmpty()) {
-            updateBatchById(ordersToUpdate);
+        
+        List<OrderExtDO> allExts = new ArrayList<>();
+        allExts.addAll(extsToInsert);
+        allExts.addAll(extsToUpdate);
+        if (!allExts.isEmpty()) {
+            orderExtService.saveOrUpdateBatch(allExts);
         }
-        if (!extsToInsert.isEmpty()) {
-            orderExtService.saveBatch(extsToInsert);
-        }
-        if (!extsToUpdate.isEmpty()) {
-            orderExtService.updateBatchById(extsToUpdate);
-        }
-        if (!evalsToInsert.isEmpty()) {
-            orderEvaluationService.saveBatch(evalsToInsert);
-        }
-        if (!evalsToUpdate.isEmpty()) {
-            orderEvaluationService.updateBatchById(evalsToUpdate);
+        
+        List<OrderEvaluationDO> allEvals = new ArrayList<>();
+        allEvals.addAll(evalsToInsert);
+        allEvals.addAll(evalsToUpdate);
+        if (!allEvals.isEmpty()) {
+            orderEvaluationService.saveOrUpdateBatch(allEvals);
         }
 
         // 10. 批量处理订单商品
@@ -382,18 +394,19 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderDO> implemen
             }
         }
 
-        // 批量保存
-        if (!productsToInsert.isEmpty()) {
-            orderProductService.saveBatch(productsToInsert);
+        // 批量保存（使用saveOrUpdateBatch处理可能的重复）
+        List<OrderProductDO> allProducts = new ArrayList<>();
+        allProducts.addAll(productsToInsert);
+        allProducts.addAll(productsToUpdate);
+        if (!allProducts.isEmpty()) {
+            orderProductService.saveOrUpdateBatch(allProducts);
         }
-        if (!productsToUpdate.isEmpty()) {
-            orderProductService.updateBatchById(productsToUpdate);
-        }
-        if (!productExtsToInsert.isEmpty()) {
-            orderProductExtService.saveBatch(productExtsToInsert);
-        }
-        if (!productExtsToUpdate.isEmpty()) {
-            orderProductExtService.updateBatchById(productExtsToUpdate);
+        
+        List<OrderProductExtDO> allProductExts = new ArrayList<>();
+        allProductExts.addAll(productExtsToInsert);
+        allProductExts.addAll(productExtsToUpdate);
+        if (!allProductExts.isEmpty()) {
+            orderProductExtService.saveOrUpdateBatch(allProductExts);
         }
     }
 
@@ -448,6 +461,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderDO> implemen
         ext.setLowCostStore(parseBoolean(item.get("lowCostStore")));
         ext.setCapitalDate(parseDateTime(item.getString("capitalDate")));
         ext.setCommissionDate(parseDateTime(item.getString("commissionDate")));
+        // JSON字段特殊处理：空字符串转null
+        ext.setPromotionIds(parseJsonString(item.getString("promotionIds")));
         ext.setRawJson(item.toString());
         ext.setUpdateTime(LocalDateTime.now());
         if (existing == null) {
@@ -520,6 +535,22 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderDO> implemen
     }
 
     // ==================== 工具方法 ====================
+
+    /**
+     * 解析JSON字符串，空串或非法JSON返回null
+     */
+    private String parseJsonString(String jsonStr) {
+        if (StringUtils.isBlank(jsonStr)) {
+            return null;
+        }
+        // 检查是否是有效的JSON格式（数组或对象）
+        String trimmed = jsonStr.trim();
+        if ((trimmed.startsWith("[") && trimmed.endsWith("]")) 
+                || (trimmed.startsWith("{") && trimmed.endsWith("}"))) {
+            return jsonStr;
+        }
+        return null;
+    }
 
     /**
      * 解析日期时间字符串，空串返回null

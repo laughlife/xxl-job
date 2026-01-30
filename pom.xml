@@ -21,8 +21,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-		<maven.compiler.source>21</maven.compiler.source>
-		<maven.compiler.target>21</maven.compiler.target>
+		<maven.compiler.release>21</maven.compiler.release>
 		<maven.test.skip>true</maven.test.skip>
 		<!-- plugin -->
 		<maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
@@ -38,8 +37,8 @@
 		<jakarta.annotation-api.version>3.0.0</jakarta.annotation-api.version>
 
 		<!-- spring -->
-		<spring-boot.version>4.0.1</spring-boot.version>
-		<spring.version>7.0.2</spring.version>
+		<spring-boot.version>4.0.2</spring-boot.version>
+		<spring.version>7.0.3</spring.version>
 		<!-- mybatis & db -->
 		<mybatis-spring-boot-starter.version>4.0.1</mybatis-spring-boot-starter.version>
 		<mysql-connector-j.version>9.5.0</mysql-connector-j.version>
@@ -239,8 +238,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
+					<release>${maven.compiler.release}</release>
 					<encoding>UTF-8</encoding>
 					<parameters>true</parameters>
 					<annotationProcessorPaths>
@@ -273,8 +271,7 @@
 						<artifactId>maven-compiler-plugin</artifactId>
 						<version>${maven-compiler-plugin.version}</version>
 						<configuration>
-							<source>${maven.compiler.source}</source>
-							<target>${maven.compiler.target}</target>
+							<release>${maven.compiler.release}</release>
 							<parameters>true</parameters>
 						</configuration>
 					</plugin>
