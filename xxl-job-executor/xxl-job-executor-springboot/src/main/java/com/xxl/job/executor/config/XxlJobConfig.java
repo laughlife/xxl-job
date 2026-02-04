@@ -1,11 +1,13 @@
 package com.xxl.job.executor.config;
 
-import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 
 /**
  * xxl-job config
@@ -67,6 +69,11 @@ public class XxlJobConfig {
         xxlJobSpringExecutor.setExcludedPackage(excludedPackage);
 
         return xxlJobSpringExecutor;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     /**

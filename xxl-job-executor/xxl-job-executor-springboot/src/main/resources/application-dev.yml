@@ -1,7 +1,12 @@
 server:
   port: 8081
 
+# 热部署：dev 环境启用，修改代码后自动重启
 spring:
+  devtools:
+    restart:
+      enabled: true
+
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/ruoyi-vue-pro?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
     username: root

@@ -1,0 +1,62 @@
+{
+  "getOrderNoApi": {
+    "description": "从赛狐中快递单号的api",
+    "url": "https://www.sellfox.com/api/orderLogisticsProfit/listPage.json",
+    "sourceType": 1,
+    "shopIds": "",
+    "statuses": -1,
+    "buyerCountrys": "",
+    "providerAuthDetailIds": "",
+    "timeType": "shipTime",
+    "startTime": "",
+    "endTime": "",
+    "searchType": "",
+    "searchContent": "",
+    "platformTypes": [],
+    "orderBy": "shipTime",
+    "desc": true,
+    "pageNo": 1,
+    "pageSize": 200
+  },
+  "getYwOrderDetailApi":{
+    "description": "根据订单号获取燕文详细物流信息的api,listNumber现在只能放亚马逊订单号",
+    "url": "https://www.sellfox.com/api/orderLogisticsProfit/listPage.json",
+    "pageNum": 1,
+    "pageSize": 1000,
+    "status": "-2",
+    "userId": "50006908",
+    "channelId": "",
+    "countryId": "",
+    "receiverName": "",
+    "listNumber": []
+  },
+  "getSellFoxShipApi":{
+    "description": "获取从赛狐发货的订单",
+    "url": "https://www.sellfox.com/api/packageShip/getPackagePage.json",
+    "packageStatus": "has_shipped",
+    "searchTimeType": "orderTime",
+    "searchType": "orderId",
+    "searchMode": "exact",
+    "useAdvanced": "1",
+    "isPrint": "1",
+    "pageNo": 1,
+    "pageSize": 200,
+    "timeStart": "2025-06-09 00:00:00",
+    "timeEnd": "2025-12-08 23:59:59",
+    "orderBy": "orderTime",
+    "desc": true
+  },
+  "getSellfoxAccount":{
+    "description": "获取赛狐账号与站点",
+    "url": "https://www.sellfox.com/shop/authList.json",
+    "countryList": null,
+    "marketplaceId": "",
+    "shopId": "",
+    "regionName": "",
+    "spStatus": "",
+    "adStatus": "",
+    "emailStatus": "",
+    "searchType": "sellerId",
+    "searchContent": ""
+  }
+}

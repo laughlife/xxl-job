@@ -16,10 +16,10 @@ import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xxl.job.executor.biz.sellfox.entity.SellfoxUserDO;
+import com.xxl.job.executor.biz.sellfox.mapper.SellfoxUserMapper;
 import com.xxl.job.executor.biz.system.entity.DeptDO;
 import com.xxl.job.executor.biz.system.entity.SystemUsersDO;
-import com.xxl.job.executor.biz.sellfox.mapper.SellfoxUserMapper;
-import com.xxl.job.executor.biz.sellfox.entity.SellfoxUserDO;
 import com.xxl.job.executor.biz.system.mapper.DeptMapper;
 import com.xxl.job.executor.biz.system.mapper.SystemUsersMapper;
 import com.xxl.job.executor.biz.system.service.DeptService;
@@ -291,7 +291,6 @@ public class SystemUsersServiceImpl extends ServiceImpl<SystemUsersMapper, Syste
         userDO.setStatus((byte) 0);
         userDO.setDingtalkId(userId);
       }
-      log.error("userDO:{}", userDO.getNickname());
       usersMapper.insertOrUpdate(userDO);
     });
   }

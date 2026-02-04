@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson2.JSONObject;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 public class SellfoxParamConfig {
     /** 内存缓存：key -> 配置模板 */
@@ -22,6 +25,10 @@ public class SellfoxParamConfig {
     private void loadConfig() {
         try {
             ClassPathResource resource = new ClassPathResource("getDataParams.json");
+            if (!resource.exists()) {
+                log.warn("getDataParams.json 不存在，跳过加载，使用空配置");
+                return;
+            }
             try (InputStream is = resource.getInputStream()) {
                 String json = new String(is.readAllBytes(), StandardCharsets.UTF_8);
                 JSONObject root = JSONObject.parseObject(json);
