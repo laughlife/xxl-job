@@ -46,11 +46,16 @@ public class SellfoxUserServiceImpl extends ServiceImpl<SellfoxUserMapper, Sellf
 
 
     @Override
-    public void syncSellfoxUser() {
+    public String syncSellfoxUser() {
         // 首先清空表
         sellfoxUserMapper.truncateTable();
 
         String accessToken = getSellfoxAccessToken();
+        if (StringUtils.isBlank(accessToken)) {
+            return "同步赛狐用户失败：未获取到 accessToken";
+        }
+
+        int totalCount = 0;
         int pageNo = 1, pageSize = 100;
         while (true) {
             JSONObject req = new JSONObject();
@@ -58,8 +63,9 @@ public class SellfoxUserServiceImpl extends ServiceImpl<SellfoxUserMapper, Sellf
             req.put("pageSize", pageSize);
             req.put("state", 1);
 
-            boolean hasNext = fetchAndPersistSellfoxUser(accessToken, req, SellfoxConfig.getSellfoxUserUrl);
-            if (!hasNext) break;
+            BatchResult result = fetchAndPersistSellfoxUser(accessToken, req, SellfoxConfig.getSellfoxUserUrl);
+            totalCount += result.count();
+            if (!result.hasNext()) break;
 
             pageNo++;
             try {
@@ -67,21 +73,24 @@ public class SellfoxUserServiceImpl extends ServiceImpl<SellfoxUserMapper, Sellf
             } catch (InterruptedException ignored) {
             }
         }
+        return String.format("同步赛狐用户成功，共同步 %d 条", totalCount);
     }
 
-    private boolean fetchAndPersistSellfoxUser(String accessToken, JSONObject req, String request_url) {
+    private record BatchResult(int count, boolean hasNext) {}
+
+    private BatchResult fetchAndPersistSellfoxUser(String accessToken, JSONObject req, String request_url) {
         HttpUrl url = SellfoxConfig.buildSignedUrl(request_url, accessToken);
         try {
             String respBody = SellfoxConfig.postJson(url, req);
             return analyzeResponse(respBody);
         } catch (IOException e) {
             log.error("赛狐接口异常，url={}", url, e);
-            return false;
+            return new BatchResult(0, false);
         }
     }
 
-    private boolean analyzeResponse(String respBody) {
-        if (StringUtils.isBlank(respBody)) return false;
+    private BatchResult analyzeResponse(String respBody) {
+        if (StringUtils.isBlank(respBody)) return new BatchResult(0, false);
 
         JSONObject resp = JSONObject.parseObject(respBody);
         String code = resp.getString("code");
@@ -89,13 +98,13 @@ public class SellfoxUserServiceImpl extends ServiceImpl<SellfoxUserMapper, Sellf
         JSONObject data = resp.getJSONObject("data");
         if (!"0".equals(code)) {
             log.warn("赛狐返回非成功：code={}, msg={}", code, msg);
-            return false;
+            return new BatchResult(0, false);
         }
 
-
-        if (data == null) return false;
+        if (data == null) return new BatchResult(0, false);
 
         JSONArray rows = data.getJSONArray("rows");
+        int count = (rows != null) ? rows.size() : 0;
         if (rows != null) {
             rows.forEach(row -> {
                 JSONObject rowObj = (JSONObject) row;
@@ -106,13 +115,12 @@ public class SellfoxUserServiceImpl extends ServiceImpl<SellfoxUserMapper, Sellf
                 JSONArray roleNamesArr = rowObj.getJSONArray("roleNames");
 
                 // 转换为用分号分隔的字符串
-                String roleIds = roleIdsArr.stream()
+                String roleIds = roleIdsArr != null ? roleIdsArr.stream()
                         .map(Object::toString)
-                        .collect(Collectors.joining(";"));
-
-                String roleNames = roleNamesArr.stream()
+                        .collect(Collectors.joining(";")) : "";
+                String roleNames = roleNamesArr != null ? roleNamesArr.stream()
                         .map(Object::toString)
-                        .collect(Collectors.joining(";"));
+                        .collect(Collectors.joining(";")) : "";
 
                 sellfoxUser.setRoleIds(roleIds);
                 sellfoxUser.setRoleNames(roleNames);
@@ -123,7 +131,7 @@ public class SellfoxUserServiceImpl extends ServiceImpl<SellfoxUserMapper, Sellf
 
         int pageNo = data.getIntValue("pageNo");
         int totalPage = data.getIntValue("totalPage");
-        return pageNo < totalPage;
+        return new BatchResult(count, pageNo < totalPage);
     }
 
 

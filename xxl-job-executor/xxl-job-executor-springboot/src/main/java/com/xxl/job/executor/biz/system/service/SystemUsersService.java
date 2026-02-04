@@ -27,4 +27,10 @@ public interface SystemUsersService extends IService<SystemUsersDO> {
      */
     String syncDingTalkUsers();
 
+    /**
+     * 检查用户赛狐ID
+     * @return
+     */
+    public String checkUserSellfoxId();
+
 }

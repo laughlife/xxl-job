@@ -12,5 +12,5 @@ import com.xxl.job.executor.biz.sellfox.entity.SellfoxUserDO;
  * @since 2026-02-04
  */
 public interface SellfoxUserService extends IService<SellfoxUserDO> {
-    void syncSellfoxUser();
+    String syncSellfoxUser();
 }
