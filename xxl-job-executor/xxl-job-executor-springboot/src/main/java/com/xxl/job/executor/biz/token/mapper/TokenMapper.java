@@ -1,11 +1,12 @@
 package com.xxl.job.executor.biz.token.mapper;
 
-import com.xxl.job.executor.biz.token.entity.TokenDO;
-import com.xxl.job.executor.mybatis.mapper.BaseMapperX;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import com.xxl.job.executor.biz.token.entity.TokenDO;
+import com.xxl.job.executor.mybatis.mapper.BaseMapperX;
 
 /**
  * <p>
@@ -23,4 +24,5 @@ public interface TokenMapper extends BaseMapperX<TokenDO> {
 
     @Select("select access_token from ruiyi_token where name = #{name} ")
     String getAccessTokenByName(@Param("name")String name);
+    
 }

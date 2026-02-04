@@ -65,11 +65,11 @@ public class CodeGenerator {
                         "Liv88625200@@"
                 )
                 // 业务模块名
-                .module("amazon")
+                .module("system")
                 // 要生成的表（支持多个）
-                .tables("amazon_buyer","amazon_order_ext","amazon_order_product","amazon_order_product_ext")
+                .tables("system_dept")
                 // 表前缀（生成时去除，xxl_job_info -> Info）
-                .tablePrefixes("amazon_")
+                .tablePrefixes("system_")
                 // 作者
                 .author("Li Wei")
                 // 执行生成

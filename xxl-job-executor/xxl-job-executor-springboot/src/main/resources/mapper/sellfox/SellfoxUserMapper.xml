@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.executor.biz.sellfox.mapper.SellfoxUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xxl.job.executor.biz.sellfox.entity.SellfoxUserDO">
+        <id column="id" property="id" />
+        <result column="account" property="account" />
+        <result column="mobile" property="mobile" />
+        <result column="nickname" property="nickname" />
+        <result column="status" property="status" />
+        <result column="role_ids" property="roleIds" />
+        <result column="role_names" property="roleNames" />
+        <result column="login_ip" property="loginIp" />
+        <result column="login_num" property="loginNum" />
+        <result column="login_time" property="loginTime" />
+        <result column="creator" property="creator" />
+        <result column="create_time" property="createTime" />
+        <result column="updater" property="updater" />
+        <result column="update_time" property="updateTime" />
+        <result column="deleted" property="deleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, account, mobile, nickname, status, role_ids, role_names, login_ip, login_num, login_time, creator, create_time, updater, update_time, deleted
+    </sql>
+
+</mapper>

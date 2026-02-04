@@ -72,6 +72,7 @@
 		<jakarta.validation-api>3.1.1</jakarta.validation-api>
 		<com.baomidou>4.5.0</com.baomidou>
 		<com.fasterxml.jackson.version>2.21.0</com.fasterxml.jackson.version>
+		<commons-lang3.version>3.20.0</commons-lang3.version>
 	</properties>
 
 	<dependencyManagement>
