@@ -197,6 +197,7 @@
 |--------|------|------|
 | id | BIGINT | 主键ID |
 | amazon_order_id | VARCHAR(32) | Amazon订单号 |
+| source_item_id | BIGINT | 源系统商品明细ID |
 | fnsku | VARCHAR(16) | FNSKU |
 | ioss_number | VARCHAR(32) | IOSS号 |
 | promotion_ids | VARCHAR(256) | 促销ID字符串 |

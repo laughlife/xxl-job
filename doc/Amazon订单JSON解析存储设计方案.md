@@ -127,6 +127,7 @@
 
 | JSON字段 | JSON类型 | DB字段 | DB类型 | 状态 |
 |----------|----------|--------|--------|------|
+| id | Long | source_item_id | BIGINT | ✅已有 |
 | fnsku | String | fnsku | VARCHAR(16) | ✅已有 |
 | promotionIds | String | promotion_ids | VARCHAR(256) | ✅已有 |
 | withheldTaxAmount | Decimal | withheld_tax_amount | DECIMAL(12,4) | ✅已有 |
@@ -310,6 +311,7 @@ ALTER TABLE amazon_order_product ADD UNIQUE INDEX uk_order_item (amazon_order_id
 
 ```sql
 ALTER TABLE amazon_order_product_ext 
+ADD COLUMN source_item_id BIGINT COMMENT 'Sellfox系统商品明细ID',
 ADD COLUMN promotion_discount DECIMAL(12,4) DEFAULT 0 COMMENT '促销折扣',
 ADD COLUMN amazon_back_to_article DECIMAL(12,4) DEFAULT 0 COMMENT '亚马逊退款',
 ADD COLUMN merge_purchase_cost DECIMAL(12,4) DEFAULT 0 COMMENT '合并采购成本',

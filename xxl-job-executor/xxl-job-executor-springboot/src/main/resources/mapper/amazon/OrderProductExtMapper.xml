@@ -6,6 +6,7 @@
     <resultMap id="BaseResultMap" type="com.xxl.job.executor.biz.amazon.entity.OrderProductExtDO">
         <id column="id" property="id" />
         <result column="amazon_order_id" property="amazonOrderId" />
+        <result column="source_item_id" property="sourceItemId" />
         <result column="fnsku" property="fnsku" />
         <result column="ioss_number" property="iossNumber" />
         <result column="promotion_ids" property="promotionIds" />
@@ -45,7 +46,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, amazon_order_id, fnsku, ioss_number, promotion_ids, withheld_tax_amount, shipping_charge_amount, shipping_tax_amount, gift_wrap_amount, gift_wrap_tax_amount, promotion_discount_currency, promotion_discount_amount, other_amount, fba_per_unit_fulfillment_fee, commission, promotion_discount, amazon_back_to_article, merge_purchase_cost, purchase_cost, head_trip_cost, head_trip_share, fbm_ship_cost, capital_currency, capital_date, commission_currency, commission_date, evaluation, carrier, track_no, shipment_date, estimated_arrival_date, raw_json, create_time, update_time, deleted, updater, creator
+        id, amazon_order_id, source_item_id, fnsku, ioss_number, promotion_ids, withheld_tax_amount, shipping_charge_amount, shipping_tax_amount, gift_wrap_amount, gift_wrap_tax_amount, promotion_discount_currency, promotion_discount_amount, other_amount, fba_per_unit_fulfillment_fee, commission, promotion_discount, amazon_back_to_article, merge_purchase_cost, purchase_cost, head_trip_cost, head_trip_share, fbm_ship_cost, capital_currency, capital_date, commission_currency, commission_date, evaluation, carrier, track_no, shipment_date, estimated_arrival_date, raw_json, create_time, update_time, deleted, updater, creator
     </sql>
 
 </mapper>
